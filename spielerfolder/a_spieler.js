@@ -4,17 +4,17 @@ const players = {
 
         name: "Stun",
         image: "spielerfolder/Stun.png",
-        role: "L4D2 Veteran",
+        role: "Alter Sack",
         trophies: 2,
-        quote: "Ein guter Plan überlebt den Kontakt mit dem Tank nicht.",
+        quote: "Scheiß Jockey alter, kein Bock mehr auf des scheiß Spiel.",
 
-        campaign: "Todeszoll",
-        survivor: "Nick",
+        campaign: "Sumpffieber",
+        survivor: "Bill",
         weapon: "AK-47",
-        enemy: "Charger",
+        enemy: "Jockey",
 
         moment:
-            "Letzte Sekunde auf Dachflucht gerettet",
+            "OG Sharks",
 
         wins: [
         
@@ -38,17 +38,17 @@ const players = {
 
         name: "Psytech",
         image: "spielerfolder/Psytech.png",
-        role: "Taktiker",
+        role: "",
         trophies: 0,
-        quote: "Wer rusht, stirbt zuerst.",
+        quote: "",
 
-        campaign: "Die Brücke",
-        survivor: "Coach",
-        weapon: "M16",
-        enemy: "Hunter",
+        campaign: "",
+        survivor: "",
+        weapon: "",
+        enemy: "",
 
         moment:
-            "Tank Solo gekitet",
+            "",
         
             wins: [
 
@@ -60,17 +60,17 @@ const players = {
 
         name: "Jabawoozee",
         image: "spielerfolder/Jabawoozee.png",
-        role: "Damage Dealer",
+        role: "",
         trophies: 2,
-        quote: "Immer nach vorne.",
+        quote: "",
 
-        campaign: "Dunkler Karneval",
-        survivor: "Ellis",
-        weapon: "AK-47",
-        enemy: "Smoker",
+        campaign: "",
+        survivor: "",
+        weapon: "",
+        enemy: "",
 
         moment:
-            "Allein bis zum Safehouse",
+            "",
 
         wins: [
 
@@ -140,17 +140,17 @@ const players = {
 
         name: "Joker",
         image: "spielerfolder/Alex.png",
-        role: "L4D2 Veteran",
+        role: "",
         trophies: 1,
-        quote: "Ein guter Plan überlebt den Kontakt mit dem Tank nicht.",
+        quote: "",
 
-        campaign: "Todeszoll",
-        survivor: "Nick",
-        weapon: "AK-47",
-        enemy: "Charger",
+        campaign: "",
+        survivor: "",
+        weapon: "",
+        enemy: "",
 
         moment:
-            "Letzte Sekunde auf Dachflucht gerettet",
+            "",
 
         wins: [
 
@@ -167,18 +167,18 @@ const players = {
     chester: {
 
         name: "Chester244",
-        image: "spielerfolder/chester244.png",
-        role: "L4D2 Veteran",
+        image: "spielerfolder/Chester244.png",
+        role: "",
         trophies: 3,
-        quote: "Ein guter Plan überlebt den Kontakt mit dem Tank nicht.",
+        quote: "",
 
-        campaign: "Todeszoll",
-        survivor: "Nick",
-        weapon: "AK-47",
-        enemy: "Charger",
+        campaign: "",
+        survivor: "",
+        weapon: "",
+        enemy: "",
 
         moment:
-            "Letzte Sekunde auf Dachflucht gerettet",
+            "",
 
         wins: [
 
@@ -207,18 +207,18 @@ const players = {
     schokk: {
 
         name: "Schokk",
-        image: "spielerfolder/Schokk.png",
-        role: "L4D2 Veteran",
+        image: "spielerfolder/SchoKK.png",
+        role: "",
         trophies: 0,
-        quote: "Ein guter Plan überlebt den Kontakt mit dem Tank nicht.",
+        quote: "",
 
-        campaign: "Todeszoll",
-        survivor: "Nick",
-        weapon: "AK-47",
-        enemy: "Charger",
+        campaign: "",
+        survivor: "",
+        weapon: "",
+        enemy: "",
 
         moment:
-            "Letzte Sekunde auf Dachflucht gerettet",
+            "",
 
         wins: [
 
@@ -230,17 +230,17 @@ const players = {
 
         name: "Salomon Sunday",
         image: "spielerfolder/Salomon.png",
-        role: "L4D2 Veteran",
+        role: "",
         trophies: 4,
-        quote: "Ein guter Plan überlebt den Kontakt mit dem Tank nicht.",
+        quote: "",
 
-        campaign: "Todeszoll",
-        survivor: "Nick",
-        weapon: "AK-47",
-        enemy: "Charger",
+        campaign: "",
+        survivor: "Coach",
+        weapon: "",
+        enemy: "",
 
         moment:
-            "Letzte Sekunde auf Dachflucht gerettet",
+            "",
 
         wins: [
 
@@ -275,18 +275,18 @@ const players = {
     cete: {
 
         name: "Cete",
-        image: "spielerfolder/cete.png",
-        role: "L4D2 Veteran",
+        image: "spielerfolder/Cete.png",
+        role: "",
         trophies: 4,
-        quote: "Ein guter Plan überlebt den Kontakt mit dem Tank nicht.",
+        quote: "",
 
-        campaign: "Todeszoll",
-        survivor: "Nick",
-        weapon: "AK-47",
-        enemy: "Charger",
+        campaign: "",
+        survivor: "",
+        weapon: "",
+        enemy: "",
 
         moment:
-            "Letzte Sekunde auf Dachflucht gerettet",
+            "",
 
         wins: [
 
@@ -322,17 +322,17 @@ const players = {
 
         name: "Serbia4Life88",
         image: "spielerfolder/serbia4life88.png",
-        role: "L4D2 Veteran",
+        role: "",
         trophies: 0,
-        quote: "Ein guter Plan überlebt den Kontakt mit dem Tank nicht.",
+        quote: "",
 
-        campaign: "Todeszoll",
-        survivor: "Nick",
-        weapon: "AK-47",
-        enemy: "Charger",
+        campaign: "",
+        survivor: "",
+        weapon: "",
+        enemy: "",
 
         moment:
-            "Letzte Sekunde auf Dachflucht gerettet",
+            "",
 
         wins: [
 
