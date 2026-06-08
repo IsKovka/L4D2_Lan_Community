@@ -328,14 +328,14 @@ totalCampaignWins > 0
     document.getElementById(
         "campaignPercentEagles"
     ).textContent =
-        "Eagles " +
+        "" +
         campaignPercentEagles.toFixed(0) +
         "%";
 
     document.getElementById(
         "campaignPercentChicks"
     ).textContent =
-        "Chicks " +
+        "" +
         campaignPercentChicks.toFixed(0) +
         "%";
 
@@ -366,33 +366,35 @@ totalChapterWins > 0
     document.getElementById(
         "chapterPercentEagles"
     ).textContent =
-        "Eagles " +
+        "" +
         chapterPercentEagles.toFixed(0) +
         "%";
 
     document.getElementById(
         "chapterPercentChicks"
     ).textContent =
-        "Chicks " +
+        "" +
         chapterPercentChicks.toFixed(0) +
         "%";
 
       const totalCampaigns = campaignCount;
 const totalChapters = chapterCount;
 
-    document.getElementById(
-        "campaignSubtitle"
-    ).textContent =    
-    "von " +
-        totalCampaigns +
-        " Kampagnen";
+    const isMobile = window.innerWidth <= 768;
 
-    document.getElementById(
-        "chapterSubtitle"
-    ).textContent =
-        "von " +
-        totalChapters +
-        " Kapiteln";
+document.getElementById(
+    "campaignSubtitle"
+).textContent =
+    isMobile
+        ? ""
+        : "von " + totalCampaigns + " Kampagnen";
+
+document.getElementById(
+    "chapterSubtitle"
+).textContent =
+    isMobile
+        ? ""
+        : "von " + totalChapters + " Kapiteln";
 
     const rawDiff =
     totalEagles -
@@ -455,7 +457,7 @@ const percent =
    if (rawDiff > 0) {
 
     leader.textContent =
-        "Eagles führen aktuell";
+        "Eagles führen";
 
     differenceValue.style.color =
         "#0066b9";
@@ -468,7 +470,7 @@ const percent =
 else if (rawDiff < 0) {
 
     leader.textContent =
-        "Chicks führen aktuell";
+        "Chicks führen";
 
     differenceValue.style.color =
         "#8a0000";
