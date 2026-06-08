@@ -777,6 +777,9 @@ footer {
     }
 
 }
+/* ===================================
+   RESPONSIVE 650px
+=================================== */
 
     @media (max-width:650px){
 
@@ -907,22 +910,11 @@ footer {
         padding:1.5rem;
     }
 
-}
-
-/* ===================================
-   RESPONSIVE 650px
-=================================== */
-
 .player-detail{
 
     padding:1rem;
 
     gap:1.25rem;
-}
-
-.fact-box{
-
-    padding:.75rem;
 }
 
 .player-info p{
@@ -931,8 +923,27 @@ footer {
 }
 
 .player-facts{
+    grid-template-columns:1fr;
+    min-width:0;
+}
 
-    gap:.75rem;
+.fact-box{
+    min-width:0;
+}
+
+.wins-slider{
+    display:flex;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    overflow-y:hidden;
+    width:100%;
+    max-width:100%;
+    -webkit-overflow-scrolling:touch;
+}
+
+.win-card{
+    flex:0 0 150px;
+}
 }
 
 /* ===================================
