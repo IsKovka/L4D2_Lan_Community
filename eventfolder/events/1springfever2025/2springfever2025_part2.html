@@ -1,0 +1,713 @@
+<!DOCTYPE html> 
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Springfever 2025 Part 2</title>
+  <link rel="stylesheet" href="../0allgemein/old_event_design.css">
+  <style>
+    table { border-collapse: collapse; width: 60%; margin: 20px; }
+    th, td { border: 1px solid #333; padding: 8px; text-align: center; }
+    input { width: 60px; text-align: center; }
+    .highlight { font-weight: bold; color: darkred; }
+  </style>
+</head>
+<body>
+
+    <nav>
+<ul>
+<li><a href="../../../index.html">Startseite</a></li>
+<li><a href="../../../events.html" class="active">Events</a></li>
+<li><a href="../../../spieler.html">Spieler</a></li>
+</ul>
+</nav>
+
+<h1>Springfever 2025 Part 2</h1>
+
+<div class="versus">
+  <div class="team left">
+    <h2>Wolves</h2>
+    <div class="players">
+      <div class="player">
+        <p>Chester244</p>
+        <img src="../../../spielerfolder/Chester244.png" alt="Chester244">
+      </div>
+      <div class="player">
+        <p>Is_Kovka</p>
+        <img src="../../../spielerfolder/Is_Kovka.png" alt="Is_Kovka">
+      </div>
+      <div class="player">
+        <p>Psytech</p>
+        <img src="../../../spielerfolder/Psytech.png" alt="Psytech">
+      </div>
+      <div class="player">
+        <p>Salomon</p>
+        <img src="../../../spielerfolder/Salomon.png" alt="Salomon">
+      </div>
+    </div>
+  </div>
+
+  <div class="vs">VS</div>
+
+  <div class="team right">
+    <h2>Sharks</h2>
+    <div class="players">
+      <div class="player">
+        <img src="../../../spielerfolder/Stun.png" alt="Stun">
+        <p>Stun</p>
+      </div>
+      <div class="player">
+        <img src="../../../spielerfolder/Cete.png" alt="Cete">
+        <p>Cete</p>
+      </div>
+      <div class="player">
+        <img src="../../../spielerfolder/Jabawoozee.png" alt="Jabawoozee">
+        <p>Jabawoozee</p>
+      </div>
+      <div class="player">
+        <img src="../../../spielerfolder/Alex.png" alt="Alex">
+        <p>Alex</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dashboard">
+  <h2>Übersicht</h2>
+  <table>
+    <tr>
+      <th>Team</th>
+      <th>Gesamtpunkte</th>
+      <th>Kampagnen-Siege</th>
+      <th>Kapitel-Siege</th>
+    </tr>
+    <tr>
+      <td>Sharks</td>
+      <td id="dashSharksPts">0</td>
+      <td id="sharksCamp">0</td>
+      <td id="sharksKap">0</td>
+    </tr>
+    <tr>
+      <td>Wolves</td>
+      <td id="dashWolvesPts">0</td>
+      <td id="wolvesCamp">0</td>
+      <td id="wolvesKap">0</td>
+    </tr>
+  </table>
+  <p id="leaderInfo"></p>
+</div>
+
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <h3>Gesamtpunkte</h3>
+    <p><span id="kpi-wolves-pts">0</span> Punkte für Wolves</p>
+    <p><span id="kpi-sharks-pts">0</span> Punkte für Sharks</p>
+  </div>
+
+  <div class="kpi-card">
+    <h3>Differenz</h3>
+    <p id="kpi-diff">–</p>
+  </div>
+
+  <div class="kpi-card">
+    <h3>Kampagnen-Siege</h3>
+    <p><span id="kpi-wolves-camp">0</span> für Wolves</p>
+    <p><span id="kpi-sharks-camp">0</span> für Sharks</p>
+  </div>
+
+  <div class="kpi-card">
+    <h3>Kapitel-Siege</h3>
+    <p><span id="kpi-wolves-kap">0</span> für Wolves</p>
+    <p><span id="kpi-sharks-kap">0</span> für Sharks</p>
+  </div>
+</div>
+
+<div class="charts-wrapper" style="display:flex; justify-content:center; gap:180px; margin:20px 0;"> 
+  <div class="chart-container" style="width:250px; height:250px;"> 
+    <canvas id="punkteChart"></canvas> 
+  </div>
+  <div class="chart-container" style="width:250px; height:250px;"> 
+    <canvas id="kampagnenChart"></canvas> 
+  </div> 
+  <div class="chart-container" style="width:250px; height:250px;"> 
+    <canvas id="kapitelChart"></canvas> 
+  </div> 
+</div>
+
+<table class="campaign" data-camp="4" id="Sumpffieber" style="margin-top: 60px;">
+<tr>
+    <th>Sumpffieber</th>
+    <th>Max. Punkte</th>
+    <th>Team Wolves</th>
+    <th>Team Sharks</th>
+    <th>Wolves kum.</th>
+    <th>Sharks kum.</th>
+  </tr>
+  <tr>
+    <td>Plankenlauf</td>
+    <td>600</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Der Sumpf</td>
+    <td>700</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Die Hüttensiedlung</td>
+    <td>800</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Die Plantage</td>
+    <td>900</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td><strong>Gesamt</strong></td>
+    <td></td>
+    <td class="wolvesTotal highlight">0</td>
+    <td class="sharksTotal highlight">0</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table class="campaign" data-camp="5" id="Sturmflut">
+<tr>
+    <th>Sturmflut</th>
+    <th>Max. Punkte</th>
+    <th>Team Wolves</th>
+    <th>Team Sharks</th>
+    <th>Wolves kum.</th>
+    <th>Sharks kum.</th>
+  </tr>
+  <tr>
+    <td>Milltown</td>
+    <td>600</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Die Zuckerfabrik</td>
+    <td>700</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Flucht aus der Fabrik</td>
+    <td>800</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Rückkehr in die Stadt</td>
+    <td>900</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Flucht aus der Stadt</td>
+    <td>900</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td><strong>Gesamt</strong></td>
+    <td></td>
+    <td class="wolvesTotal highlight">0</td>
+    <td class="sharksTotal highlight">0</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table class="campaign" data-camp="6" id="Die Gemeinde">
+<tr>
+    <th>Die Gemeinde</th>
+    <th>Max. Punkte</th>
+    <th>Team Wolves</th>
+    <th>Team Sharks</th>
+    <th>Wolves kum.</th>
+    <th>Sharks kum.</th>
+  </tr>
+  <tr>
+    <td>Das Ufer</td>
+    <td>500</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Der Park</td>
+    <td>600</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Der Friedhof</td>
+    <td>700</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>French Quarter</td>
+    <td>800</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Die Brücke</td>
+    <td>900</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td><strong>Gesamt</strong></td>
+    <td></td>
+    <td class="wolvesTotal highlight">0</td>
+    <td class="sharksTotal highlight">0</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table class="campaign" data-camp="7" id="The Sacrifice">
+<tr>
+    <th>The Sacrifice</th>
+    <th>Max. Punkte</th>
+    <th>Team Wolves</th>
+    <th>Team Sharks</th>
+    <th>Wolves kum.</th>
+    <th>Sharks kum.</th>
+  </tr>
+  <tr>
+    <td>Die Docks</td>
+    <td>600</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Das Schiff</td>
+    <td>700</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Der Hafen</td>
+    <td>800</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td><strong>Gesamt</strong></td>
+    <td></td>
+    <td class="wolvesTotal highlight">0</td>
+    <td class="sharksTotal highlight">0</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table class="campaign" data-camp="8" id="Mercy Hospital">
+<tr>
+    <th>Mercy Hospital</th>
+    <th>Max. Punkte</th>
+    <th>Team Wolves</th>
+    <th>Team Sharks</th>
+    <th>Wolves kum.</th>
+    <th>Sharks kum.</th>
+  </tr>
+  <tr>
+    <td>Die Apartments</td>
+    <td>500</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Die U-Bahn</td>
+    <td>600</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Der Abwasserkanal</td>
+    <td>700</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Das Krankenhaus</td>
+    <td>800</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Das Dach</td>
+    <td>900</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td><strong>Gesamt</strong></td>
+    <td></td>
+    <td class="wolvesTotal highlight">0</td>
+    <td class="sharksTotal highlight">0</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table class="campaign" data-camp="9" id="Crash Course">
+<tr>
+    <th>Crash Course</th>
+    <th>Max. Punkte</th>
+    <th>Team Wolves</th>
+    <th>Team Sharks</th>
+    <th>Wolves kum.</th>
+    <th>Sharks kum.</th>
+  </tr>
+  <tr>
+    <td>Die Gassen</td>
+    <td>600</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Finale im Truck Depot</td>
+    <td>700</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+    <tr>
+    <td><strong>Gesamt</strong></td>
+    <td></td>
+    <td class="wolvesTotal highlight">0</td>
+    <td class="sharksTotal highlight">0</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table class="campaign" data-camp="10" id="Todeszone">
+<tr>
+    <th>Todeszone</th>
+    <th>Max. Punkte</th>
+    <th>Team Wolves</th>
+    <th>Team Sharks</th>
+    <th>Wolves kum.</th>
+    <th>Sharks kum.</th>
+  </tr>
+  <tr>
+    <td>Die Fernstraße</td>
+    <td>500</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Die Kanalisation</td>
+    <td>600</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Die Kirche</td>
+    <td>700</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Die Stadt</td>
+    <td>800</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Finale im Bootshaus</td>
+    <td>900</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td><strong>Gesamt</strong></td>
+    <td></td>
+    <td class="wolvesTotal highlight">0</td>
+    <td class="sharksTotal highlight">0</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table class="campaign" data-camp="11" id="Flug zur Hölle">
+<tr>
+    <th>Flug zur Hölle</th>
+    <th>Max. Punkte</th>
+    <th>Team Wolves</th>
+    <th>Team Sharks</th>
+    <th>Wolves kum.</th>
+    <th>Sharks kum.</th>
+  </tr>
+  <tr>
+    <td>Das Gewächshaus</td>
+    <td>500</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Der Kran</td>
+    <td>600</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Die Baustelle</td>
+    <td>700</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Der Terminal</td>
+    <td>800</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+<tr>
+    <td>Finale auf der Startbahn</td>
+    <td>900</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td><strong>Gesamt</strong></td>
+    <td></td>
+    <td class="wolvesTotal highlight">0</td>
+    <td class="sharksTotal highlight">0</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table class="campaign" data-camp="12" id="Blutdurst">
+<tr>
+    <th>Blutdurst</th>
+    <th>Max. Punkte</th>
+    <th>Team Wolves</th>
+    <th>Team Sharks</th>
+    <th>Wolves kum.</th>
+    <th>Sharks kum.</th>
+  </tr>
+  <tr>
+    <td>Der Wald</td>
+    <td>500</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Der Tunnel</td>
+    <td>600</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Die Brücke</td>
+    <td>700</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Der Bahnhof</td>
+    <td>800</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+<tr>
+    <td>Finale in der Farm</td>
+    <td>900</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td><strong>Gesamt</strong></td>
+    <td></td>
+    <td class="wolvesTotal highlight">0</td>
+    <td class="sharksTotal highlight">0</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table class="campaign" data-camp="13" id="Kalter Strom">
+<tr>
+    <th>Kalter Strom</th>
+    <th>Max. Punkte</th>
+    <th>Team Wolves</th>
+    <th>Team Sharks</th>
+    <th>Wolves kum.</th>
+    <th>Sharks kum.</th>
+  </tr>
+  <tr>
+    <td>Gebirgsbach</td>
+    <td>600</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Südlicher Kiefernstrom</td>
+    <td>700</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Gedenkbrücke</td>
+    <td>800</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Mörderischer Bach</td>
+    <td>900</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td><strong>Gesamt</strong></td>
+    <td></td>
+    <td class="wolvesTotal highlight">0</td>
+    <td class="sharksTotal highlight">0</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table class="campaign" data-camp="14" id="Das letzte Gefecht">
+<tr>
+    <th>Das letzte Gefecht</th>
+    <th>Max. Punkte</th>
+    <th>Team Wolves</th>
+    <th>Team Sharks</th>
+    <th>Wolves kum.</th>
+    <th>Sharks kum.</th>
+  </tr>
+  <tr>
+    <td>Schrottplatz</td>
+    <td>900</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Leuchtturm-Finale</td>
+    <td>1.000</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td><strong>Gesamt</strong></td>
+    <td></td>
+    <td class="wolvesTotal highlight">0</td>
+    <td class="sharksTotal highlight">0</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<script src="2springfever2025_part2_punktescript.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/charts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="../0allgemein/calculate.js"></script>
+<script src="../0allgemein/charts.js"></script>
+<script src="../0allgemein/events.js"></script>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wintermajor 2026</title>
+
+    <link rel="stylesheet" href="../0allgemein/new_event_design.css">
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-container">
+    <div class="logo">
+      <img src="../../../indexfolder/startseitenfotos/nav-logo.PNG" alt="L4D2 LAN">
+    </div>
+  <ul class="nav-links">
+    <li><a href="../../../index.html">Startseite</a></li>
+    <li><a href="../../../events.html" class="active">Events</a></li>
+    <li><a href="../../../spieler.html">Spieler</a></li>
+  </ul>
+  </div>
+</nav>
+
+<!-- ==========================
+     HERO
+=========================== -->
+<header
+class="hero"
+style="
+background-image:
+linear-gradient(
+rgba(0,0,0,.55),
+rgba(0,0,0,.80)
+),
+url('Springfever2026_cover.png');
+">
+
+<div class="hero-content">
+
+    <h1>WINTERMAJOR 2026</h1>
+
+<!-- SCOREBOARD -->
+
+<div class="scoreboard">
+
+    <div class="score-team">
+
+        <img
+        class="team-logo"
+        src="../../../indexfolder/startseitenfotos/wolves.PNG"
+        alt="Wolves">
+
+        <div>
+
+            <div class="score-team-name">
+                WOLVES
+            </div>
+
+            <div
+                class="score-team-points blue"
+                id="eaglesTotal">
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="versus">
+        VS
+    </div>
+
+    <div class="score-team">
+
+        <div>
+
+            <div class="score-team-name">
+                SHARKS
+            </div>
+
+            <div
+                class="score-team-points red"
+                id="chicksTotal">
+                0
+            </div>
+
+        </div>
+
+        <img
+        class="team-logo"
+        src="../../../indexfolder/startseitenfotos/sharks.PNG"
+        alt="Sharks">
+
+    </div>
+
+</div>
+
+
+    <!-- ROSTER -->
+
+    <div class="roster-wrapper">
+
+        <div class="roster roster-left">
+
+            <div class="player-left">
+                <span>Chester244</span>
+                <img src="../../../spielerfolder/Chester244.png">
+            </div>
+
+            <div class="player-left">
+                <span>Kovka</span>
+                <img src="../../../spielerfolder/Is_Kovka.png">
+            </div>
+
+            <div class="player-left">
+                <span>Cete</span>
+                <img src="../../../spielerfolder/Cete.png">
+            </div>
+
+            <div class="player-left">
+                <span>Salomon Sunday</span>
+                <img src="../../../spielerfolder/Salomon.png">
+            </div>
+
+        </div>
+
+
+        <div class="roster-vs">
+            VS
+        </div>
+
+
+        <div class="roster roster-right">
+
+            <div class="player-right">
+                <img src="../../../spielerfolder/Stun.png">
+                <span>Stun</span>
+            </div>
+
+            <div class="player-right">
+                <img src="../../../spielerfolder/SchoKK.png">
+                <span>SchoKK</span>
+            </div>
+
+            <div class="player-right">
+                <img src="../../../spielerfolder/Jabawoozee.png">
+                <span>Jabawoozee</span>
+            </div>
+
+            <div class="player-right">
+                <img src="../../../spielerfolder/Psytech.png">
+                <span>Psytech</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</header>
+
+
+<!-- ==========================
+     KPI CARDS
+=========================== -->
+
+<section class="stats-grid">
+
+    <!-- Kampagnensiege -->
+
+    <div class="stat-card">
+
+        <img
+            src="../0allgemein/KPI_Hintergründe/trophäe-hintergrund_kampagnensiege.png"
+            class="stat-bg-icon"
+            alt="">
+
+        <div class="stat-title">
+            Kampagnensiege
+        </div>
+
+        <div class="stat-score">
+
+            <span
+                class="eagles-color"
+                id="campaignWinsEagles">
+                0
+            </span>
+
+            <span>:</span>
+
+            <span
+                class="chicks-color"
+                id="campaignWinsChicks">
+                0
+            </span>
+
+        </div>
+
+        <div
+            class="stat-subtitle"
+            id="campaignSubtitle">
+        </div>
+
+        <div class="battle-bar">
+
+            <div
+                class="battle-left"
+                id="campaignBarEagles"
+                style="width:50%">
+            </div>
+
+            <div
+                class="battle-right"
+                id="campaignBarChicks"
+                style="width:50%">
+            </div>
+
+        </div>
+
+        <div class="battle-footer">
+
+            <span id="campaignPercentEagles">
+                Wolves 50%
+            </span>
+
+            <span id="campaignPercentChicks">
+                Sharks 50%
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- Kapitelsiege -->
+
+    <div class="stat-card">
+
+        <img
+            src="../0allgemein/KPI_Hintergründe/flagge-hintergrund_Kapitelsiege.png"
+            class="stat-bg-icon"
+            alt="">
+
+        <div class="stat-title">
+            Kapitelsiege
+        </div>
+
+        <div class="stat-score">
+
+            <span
+                class="eagles-color"
+                id="chapterWinsEagles">
+                0
+            </span>
+
+            <span>:</span>
+
+            <span
+                class="chicks-color"
+                id="chapterWinsChicks">
+                0
+            </span>
+
+        </div>
+
+        <div
+            class="stat-subtitle"
+            id="chapterSubtitle">
+        </div>
+
+        <div class="battle-bar">
+
+            <div
+                class="battle-left"
+                id="chapterBarEagles"
+                style="width:50%">
+            </div>
+
+            <div
+                class="battle-right"
+                id="chapterBarChicks"
+                style="width:50%">
+            </div>
+
+        </div>
+
+        <div class="battle-footer">
+
+            <span id="chapterPercentEagles">
+                Wolves 50%
+            </span>
+
+            <span id="chapterPercentChicks">
+                Sharks 50%
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- Punktedifferenz -->
+
+    <div class="stat-card">
+
+        <img
+            src="../0allgemein/KPI_Hintergründe/schalwaage_hintergrund_punktedifferenz.png"
+            class="stat-bg-icon"
+            alt="">
+
+        <div class="stat-title">
+            Punktedifferenz
+        </div>
+
+        <div
+            class="difference-value"
+            id="pointDifference">
+            0
+        </div>
+
+        <div
+            class="difference-text"
+            id="differenceLeader">
+            -
+        </div>
+
+        <div
+            class="difference-percent"
+            id="differencePercent">
+            0%
+        </div>
+
+        <div class="difference-subtitle">
+            Vorsprung auf Gesamtpunkte
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================
+     VERGLEICHSCHART
+=========================== -->
+
+<section class="chart-panel">
+    <h2>
+        Gesamtpunkte im Vergleich
+    </h2>
+    <div class="chart-wrapper">
+        <canvas id="punkteChart"></canvas>
+    </div>
+</section>
+
+
+<!-- ==========================
+     KAMPAGNENLISTE
+=========================== -->
+
+<section class="campaign-section">
+
+    <h2>Kampagnenübersicht</h2>
+
+    <div id="campaignContainer"></div>
+
+</section>
+
+
+<!-- ==========================
+     FOOTER
+=========================== -->
+
+<footer>
+
+    <span id="lastUpdate">
+        Letztes Update
+    </span>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="6event_youtube.js"></script>
+<script src="6wintermajor2026_punktescript.js"></script>
+
+</body>
+
+</html>

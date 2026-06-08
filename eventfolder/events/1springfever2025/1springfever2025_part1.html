@@ -1,0 +1,299 @@
+<!DOCTYPE html> 
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Springfever 2025 Part 1</title>
+  <link rel="stylesheet" href="../0allgemein/old_event_design.css">
+  <style>
+    table { border-collapse: collapse; width: 60%; margin: 20px; }
+    th, td { border: 1px solid #333; padding: 8px; text-align: center; }
+    input { width: 60px; text-align: center; }
+    .highlight { font-weight: bold; color: darkred; }
+  </style>
+</head>
+<body>
+
+    <nav>
+<ul>
+<li><a href="../../../index.html">Startseite</a></li>
+<li><a href="../../../events.html" class="active">Events</a></li>
+<li><a href="../../../spieler.html">Spieler</a></li>
+</ul>
+</nav>
+
+<h1>Springfever 2025 Part 1</h1>
+
+<div class="versus">
+  <div class="team left">
+    <h2>Wolves</h2>
+    <div class="players">
+      <div class="player">
+        <p>Chester244</p>
+        <img src="../../../spielerfolder/Chester244.png" alt="Chester244">
+      </div>
+      <div class="player">
+        <p>Jabawoozee</p>
+        <img src="../../../spielerfolder/Jabawoozee.png" alt="Jabawoozee">
+      </div>
+      <div class="player">
+        <p>Alex</p>
+        <img src="../../../spielerfolder/Alex.png" alt="Alex">
+      </div>
+      <div class="player">
+        <p>Psytech</p>
+        <img src="../../../spielerfolder/Psytech.png" alt="Psytech">
+      </div>
+    </div>
+  </div>
+
+  <div class="vs">VS</div>
+
+  <div class="team right">
+    <h2>Sharks</h2>
+    <div class="players">
+      <div class="player">
+        <img src="../../../spielerfolder/Stun.png" alt="Stun">
+        <p>Stun</p>
+      </div>
+      <div class="player">
+        <img src="../../../spielerfolder/Is_Kovka.png" alt="Is_Kovka">
+        <p>Is_Kovka</p>
+      </div>
+      <div class="player">
+        <img src="../../../spielerfolder/Cete.png" alt="Cete">
+        <p>Cete</p>
+      </div>
+      <div class="player">
+        <img src="../../../spielerfolder/Salomon.png" alt="Salomon">
+        <p>Salomon Sunday</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dashboard">
+  <h2>Übersicht</h2>
+  <table>
+    <tr>
+      <th>Team</th>
+      <th>Gesamtpunkte</th>
+      <th>Kampagnen-Siege</th>
+      <th>Kapitel-Siege</th>
+    </tr>
+    <tr>
+      <td>Sharks</td>
+      <td id="dashSharksPts">0</td>
+      <td id="sharksCamp">0</td>
+      <td id="sharksKap">0</td>
+    </tr>
+    <tr>
+      <td>Wolves</td>
+      <td id="dashWolvesPts">0</td>
+      <td id="wolvesCamp">0</td>
+      <td id="wolvesKap">0</td>
+    </tr>
+  </table>
+  <p id="leaderInfo"></p>
+</div>
+
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <h3>Gesamtpunkte</h3>
+    <p><span id="kpi-wolves-pts">0</span> Punkte für Wolves</p>
+    <p><span id="kpi-sharks-pts">0</span> Punkte für Sharks</p>
+  </div>
+
+  <div class="kpi-card">
+    <h3>Differenz</h3>
+    <p id="kpi-diff">–</p>
+  </div>
+
+  <div class="kpi-card">
+    <h3>Kampagnen-Siege</h3>
+    <p><span id="kpi-wolves-camp">0</span> für Wolves</p>
+    <p><span id="kpi-sharks-camp">0</span> für Sharks</p>
+  </div>
+
+  <div class="kpi-card">
+    <h3>Kapitel-Siege</h3>
+    <p><span id="kpi-wolves-kap">0</span> für Wolves</p>
+    <p><span id="kpi-sharks-kap">0</span> für Sharks</p>
+  </div>
+</div>
+
+<div class="charts-wrapper" style="display:flex; justify-content:center; gap:180px; margin:20px 0;"> 
+  <div class="chart-container" style="width:250px; height:250px;"> 
+    <canvas id="punkteChart"></canvas> 
+  </div>
+  <div class="chart-container" style="width:250px; height:250px;"> 
+    <canvas id="kampagnenChart"></canvas> 
+  </div> 
+  <div class="chart-container" style="width:250px; height:250px;"> 
+    <canvas id="kapitelChart"></canvas> 
+  </div> 
+</div>
+
+<table class="campaign" data-camp="1" id="Infektionszentrum" style="margin-top: 60px;">
+  <tr>
+    <th>Infektionszentrum</th>
+    <th>Max. Punkte</th>
+    <th>Team Wolves</th>
+    <th>Team Sharks</th>
+    <th>Wolves kum.</th>
+    <th>Sharks kum.</th>
+  </tr>
+  <tr>
+    <td>Das Hotel</td>
+    <td>600</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Die Straße</td>
+    <td>700</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Das Einkaufszentrum</td>
+    <td>800</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Die Eingangshalle</td>
+    <td>900</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td><strong>Gesamt</strong></td>
+    <td></td>
+    <td class="wolvesTotal highlight">0</td>
+    <td class="sharksTotal highlight">0</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+
+<table class="campaign" data-camp="2" id="Die Brücke">
+  <tr>
+    <th>Die Brücke</th>
+    <th>Max. Punkte</th>
+    <th>Team Wolves</th>
+    <th>Team Sharks</th>
+    <th>Wolves kum.</th>
+    <th>Sharks kum.</th>
+  </tr>
+  <tr>
+    <td>Das Flussufer</td>
+    <td>600</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Im Untergrund</td>
+    <td>700</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Der Hafen</td>
+    <td>800</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td><strong>Gesamt</strong></td>
+    <td></td>
+    <td class="wolvesTotal highlight">0</td>
+    <td class="sharksTotal highlight">0</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table class="campaign" data-camp="3" id="Dunkler Karneval">
+<tr>
+    <th>Dunkler Karneval</th>
+    <th>Max. Punkte</th>
+    <th>Team Wolves</th>
+    <th>Team Sharks</th>
+    <th>Wolves kum.</th>
+    <th>Sharks kum.</th>
+  </tr>
+  <tr>
+    <td>Das Motel</td>
+    <td>500</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Der Jahrmarkt</td>
+    <td>600</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Die Achterbahn</td>
+    <td>700</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Die Ställe</td>
+    <td>800</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td>Das Konzert</td>
+    <td>900</td>
+    <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
+    <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
+    <td class="wolvesCum">0</td>
+    <td class="sharksCum">0</td>
+  </tr>
+  <tr>
+    <td><strong>Gesamt</strong></td>
+    <td></td>
+    <td class="wolvesTotal highlight">0</td>
+    <td class="sharksTotal highlight">0</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<script src="1springfever2025_part1_punktescript.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="../0allgemein/calculate.js"></script>
+<script src="../0allgemein/charts.js"></script>
+<script src="../0allgemein/events.js"></script>
