@@ -61,15 +61,6 @@ nav {
     display: block;
 }
 
-@media (max-width: 768px) {
-
-    .logo img {
-
-        width: 140px;
-    }
-
-}
-
 .nav-links {
 
     list-style: none;
@@ -567,16 +558,6 @@ nav {
     z-index:2;
 }
 
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
-    .stats-grid{
-
-        grid-template-columns:1fr;
-    }
-}
-
 /* BATTLE BAR */
 
 .battle-bar{
@@ -661,16 +642,6 @@ nav {
     font-size:.85rem;
 }
 
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
-    .stats-grid{
-
-        grid-template-columns:1fr;
-    }
-}
-
 /* ======================================
    CHART PANEL
 ====================================== */
@@ -753,6 +724,8 @@ nav {
     1px solid rgba(255,255,255,.05);
 
     overflow:hidden;
+
+    margin-bottom:12px;
 }
 
 /* HEADER */
@@ -1110,34 +1083,6 @@ nav {
     font-weight:800;
 }
 
-/* ======================================
-   RESPONSIVE
-====================================== */
-
-@media(max-width:900px){
-
-    .campaign-header{
-
-        grid-template-columns:1fr;
-
-        gap:20px;
-    }
-
-    .campaign-right{
-
-        width:100%;
-
-        justify-content:center;
-    }
-
-    .campaign-table{
-
-        display:block;
-
-        overflow-x:auto;
-    }
-}
-
 
 /* ======================================
    FOOTER
@@ -1160,44 +1105,241 @@ footer{
 }
 
 /* ======================================
-   RESPONSIVE
+   RESPONSIVE 768px
 ====================================== */
 
-@media(max-width:900px){
+@media(max-width:768px){
+
+    /* NAVIGATION */
+
+    .nav-container{
+        flex-direction:column;
+        gap:1rem;
+    }
+
+    .nav-links{
+        gap:1.2rem;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    /* HERO */
+
+    .hero{
+        padding:20px 12px 30px;
+    }
+
+    .hero h1{
+        font-size:2.6rem;
+        margin-bottom:15px;
+    }
+
+    /* SCOREBOARD */
 
     .scoreboard{
 
-        flex-direction:column;
+    display:grid;
 
-        gap:25px;
+    grid-template-columns:
+    1fr
+    auto
+    1fr;
+
+    align-items:center;
+
+    padding:12px;
+
+    gap:8px;
     }
 
-    .stats-grid{
-
-        grid-template-columns:1fr;
+    .score-team{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    width:100%;
     }
 
+    .score-team:first-child{
+    justify-content:flex-start;
+    }
+
+    .score-team:last-child{
+    justify-content:flex-end;
+    }
+
+    .score-team-name,
+    .score-team-points{
+
+    width:auto;
+
+    text-align:center;
 }
 
-@media(max-width:600px){
-
-    .hero-content h1{
-
-        font-size:2.5rem;
+    .team-logo{
+    flex-shrink:0;
+    width:40px;
+    height:40px;
     }
 
-    .team-score{
+    .score-team-name{
+    font-size:.8rem;
+    white-space:nowrap;
+    }
 
-        font-size:2rem;
+    .score-team-points{
+    font-size:1.2rem;
     }
 
     .versus{
-
-        font-size:2.5rem;
+    font-size:1.4rem;
     }
 
-    .campaign-score{
+    /* ROSTER */
 
-        font-size:1.5rem;
+    .roster-wrapper{
+
+    grid-template-columns:
+    1fr
+    1fr;
+
+    gap:15px;
     }
+
+    .roster-vs{
+        display:none;
+    }
+
+    .roster{
+        padding:15px;
+    }
+
+    .player-left,
+    .player-right{
+
+    justify-content:space-between;
+    }
+
+    .player-left span,
+    .player-right span{
+        font-size:0.7rem;
+    }
+
+    .player-left img,
+    .player-right img{
+        width:35px;
+        height:35px;
+    }
+
+    /* KPI */
+
+    .stats-grid{
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:10px;
+
+    padding:0 12px;
+    }
+
+    .stat-card{
+
+    min-height:150px;
+
+    padding:14px;
+    }
+
+
+
+    .stat-title{
+    font-size:.5rem;
+    }
+
+    .stat-score{
+    font-size:1.2rem;
+    }
+
+    .difference-value{
+    font-size:1.2rem;
+    }
+
+    .difference-percent{
+    font-size:.8rem;
+    }
+
+    .stat-bg-icon{
+    width:90px;
+    height:90px;
+    right:-20px;
+    }
+
+    /* CHART */
+
+    .chart-wrapper{
+        height:220px;
+        padding:15px;
+    }
+
+    /* CAMPAIGNS */
+
+    .campaign-header{
+
+        grid-template-columns:1fr;
+
+        gap:15px;
+
+        padding:18px;
+    }
+
+    .campaign-left{
+        gap:12px;
+    }
+
+    .campaign-cover{
+        width:80px;
+        height:50px;
+    }
+
+    .campaign-meta{
+    min-width:0;
+    }
+
+    .campaign-meta h3{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    }
+
+    .campaign-results{
+
+        grid-template-columns:1fr;
+
+        gap:15px;
+    }
+
+    .result-top{
+        width:100%;
+    }
+
+    .progress{
+        width:100%;
+    }
+
+    .campaign-actions{
+        margin-top:5px;
+    }
+
+    /* TABELLEN */
+
+    .campaign-body{
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    }
+
+    .chapter-header,
+    .chapter-row,
+    .campaign-total{
+    min-width:700px;
+    }
+
 }
