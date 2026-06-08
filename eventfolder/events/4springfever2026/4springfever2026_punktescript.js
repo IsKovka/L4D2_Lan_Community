@@ -2,7 +2,7 @@
    KONFIGURATION
 ====================================== */
 const SHEET_URL =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vSx1uPezcvcK8IXdFYG4En2SQHG3Ow5q9e0nEiMYfzCvecT3W11Cjg8k0wemJM3gOnoSvxzr3_EUl6p/pub?output=csv";
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vSwv8Wdf0QV2gFLahiIf8mjBeSjfI8xnjCbO0P7fBy7fkMa0Sw6ialr2jsmrVfEXK2N-CrTJUpo53Be/pub?output=csv";
 
 let pointsChart = null;
 

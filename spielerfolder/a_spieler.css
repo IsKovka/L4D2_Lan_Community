@@ -64,15 +64,6 @@ nav {
     display: block;
 }
 
-@media (max-width: 768px) {
-
-    .logo img {
-
-        width: 140px;
-    }
-
-}
-
 .nav-links {
 
     list-style: none;
@@ -319,7 +310,7 @@ nav {
 
     color:#fff;
 
-    white-space:nowrap;
+    white-space:normal;
 }
 
 .mini-trophies {
@@ -685,13 +676,12 @@ nav {
     object-fit:contain;
 }
 
-FOOTER
 .hof-card.gold {
 
     border-color:
     rgba(255,180,0,.5);
 
-    transform: scale(1.05);
+    transform: none;
 }
 
 .rank {
@@ -757,4 +747,234 @@ footer {
     1px solid rgba(255,69,0,.15);
 
     background: #050505;
+}
+
+/* ===================================
+   RESPONSIVE 900px
+=================================== */
+
+@media (max-width:900px){
+
+    .spieler-layout{
+
+        grid-template-columns:1fr;
+    }
+
+    #playerDetail{
+
+        position:static;
+    }
+
+    .hof-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+    .hero-content h1{
+
+        font-size:3rem;
+    }
+
+}
+
+    @media (max-width:650px){
+
+    /* NAVIGATION */
+
+    .nav-container{
+
+        flex-direction:column;
+
+        gap:1rem;
+    }
+
+    .nav-links{
+
+        gap:1rem;
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+    }
+
+    .logo img{
+
+        width:140px;
+    }
+
+    /* HERO */
+
+    .spieler-hero{
+
+        min-height:260px;
+    }
+
+    .hero-content{
+
+        text-align:center;
+    }
+
+    .hero-content h1{
+
+        font-size:2.2rem;
+    }
+
+    .hero-content p{
+
+        font-size:1rem;
+    }
+
+    /* SECTION */
+
+    .spieler-section{
+
+        padding:1rem;
+    }
+
+    /* SPIELER GRID */
+
+    .spieler-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .spieler-card{
+
+        min-height:80px;
+    }
+
+    /* PLAYER DETAIL */
+
+    .player-detail{
+
+        padding:1.25rem;
+    }
+
+    .player-left{
+
+        flex-direction:column;
+
+        align-items:center;
+
+        text-align:center;
+    }
+
+    .player-left > img{
+
+        width:110px;
+        height:110px;
+    }
+
+    .player-info h2{
+
+        font-size:1.8rem;
+    }
+
+    /* FACTS */
+
+    .player-facts{
+
+        grid-template-columns:1fr;
+    }
+
+    .fact-box.full{
+
+        grid-column:auto;
+    }
+
+    /* WINS */
+
+    .win-card{
+
+        flex:0 0 150px;
+    }
+
+    /* HALL OF FAME */
+
+    .hall-of-fame{
+
+        padding:0 1rem;
+    }
+
+    .hof-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .hof-card{
+
+        padding:1.5rem;
+    }
+
+}
+
+/* ===================================
+   RESPONSIVE 650px
+=================================== */
+
+.player-detail{
+
+    padding:1rem;
+
+    gap:1.25rem;
+}
+
+.fact-box{
+
+    padding:.75rem;
+}
+
+.player-info p{
+
+    font-size:.95rem;
+}
+
+.player-facts{
+
+    gap:.75rem;
+}
+
+/* ===================================
+   RESPONSIVE 480px
+=================================== */
+
+@media (max-width:480px){
+
+    .hero-content h1{
+
+        font-size:1.8rem;
+    }
+
+    .spieler-title{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:.3rem;
+    }
+
+    .spieler-card img{
+
+        width:50px;
+        height:50px;
+    }
+
+    .spieler-card h3{
+
+        font-size:1rem;
+    }
+
+    .player-info h2{
+
+        font-size:1.5rem;
+    }
+
+    .hof-card > img{
+
+        width:90px;
+        height:90px;
+    }
+
 }

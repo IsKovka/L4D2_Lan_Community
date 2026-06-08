@@ -545,6 +545,21 @@ document
                     "active"
                 );
 
+                if(window.innerWidth <= 900){
+
+    setTimeout(() => {
+
+        playerDetail.scrollIntoView({
+
+            behavior: "smooth",
+            block: "start"
+
+        });
+
+    }, 100);
+
+}
+
                 renderPlayerDetail(
                     card.dataset.player
                 );
