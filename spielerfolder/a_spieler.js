@@ -144,10 +144,10 @@ const players = {
 
         name: "Joker",
         image: "spielerfolder/Alex.png",
-        role: "",
+        role: "Demotivator",
         trophies: 1,
         eventsPlayed: 5,
-        quote: "Ich kann nicht spawnen, ich kann nicht spawnen",
+        quote: "Ich kann nicht spawnen! ich kann nicht spawnen!",
 
         campaign: "Sumpffieber",
         survivor: "Irgendeiner der Weiber",
