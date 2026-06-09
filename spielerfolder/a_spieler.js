@@ -7,15 +7,15 @@ const players = {
         role: "Alter Sack",
         trophies: 2,
         eventsPlayed: 5,
-        quote: "Scheiß Jockey alter, kein Bock mehr auf des scheiß Spiel.",
+        quote: "Scheiß Jockey alter, ich spring dem die ganze Zeit nur an die Eier.",
 
-        campaign: "Sumpffieber",
-        survivor: "Bill",
+        campaign: "Sturmflut",
+        survivor: "Ellis",
         weapon: "AK-47",
-        enemy: "Jockey",
+        enemy: "Windowstaste",
 
         moment:
-            "OG Sharks",
+            "Blutdurst, der Wald, 2 Instakills mit einem Charge",
 
         wins: [
         
