@@ -2,23 +2,16 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Springfever 2025 Part 2</title>
   <link rel="stylesheet" href="../0allgemein/old_event_design.css">
-  <style>
-    table { border-collapse: collapse; width: 60%; margin: 20px; }
-    th, td { border: 1px solid #333; padding: 8px; text-align: center; }
-    input { width: 60px; text-align: center; }
-    .highlight { font-weight: bold; color: darkred; }
-  </style>
 </head>
 <body>
 
     <nav>
 <ul>
-<li><a href="../../../index.html">Startseite</a></li>
-<li><a href="../../../events.html" class="active">Events</a></li>
-<li><a href="../../../spieler.html">Spieler</a></li>
+<li><a href="../index.html">Startseite</a></li>
+<li><a href="../events.html" class="active">Events</a></li>
+<li><a href="../spieler.html">Spieler</a></li>
 </ul>
 </nav>
 
@@ -122,14 +115,14 @@
   </div>
 </div>
 
-<div class="charts-wrapper" style="display:flex; justify-content:center; gap:180px; margin:20px 0;"> 
-  <div class="chart-container" style="width:250px; height:250px;"> 
+<div class="charts-wrapper" style="display:flex; justify-content:center; gap:50px; margin:20px 0;"> 
+  <div class="chart-container" style="width:222px; height:222px;"> 
     <canvas id="punkteChart"></canvas> 
   </div>
-  <div class="chart-container" style="width:250px; height:250px;"> 
+  <div class="chart-container" style="width:222px; height:222px;"> 
     <canvas id="kampagnenChart"></canvas> 
   </div> 
-  <div class="chart-container" style="width:250px; height:250px;"> 
+  <div class="chart-container" style="width:222px; height:222px;"> 
     <canvas id="kapitelChart"></canvas> 
   </div> 
 </div>
@@ -196,7 +189,7 @@
   </tr>
   <tr>
     <td>Milltown</td>
-    <td>600</td>
+    <td>500</td>
     <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
     <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
     <td class="wolvesCum">0</td>
@@ -204,7 +197,7 @@
   </tr>
   <tr>
     <td>Die Zuckerfabrik</td>
-    <td>700</td>
+    <td>600</td>
     <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
     <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
     <td class="wolvesCum">0</td>
@@ -212,7 +205,7 @@
   </tr>
   <tr>
     <td>Flucht aus der Fabrik</td>
-    <td>800</td>
+    <td>700</td>
     <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
     <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
     <td class="wolvesCum">0</td>
@@ -220,7 +213,7 @@
   </tr>
   <tr>
     <td>Rückkehr in die Stadt</td>
-    <td>900</td>
+    <td>800</td>
     <td><input type="number" value="0" oninput="updateAll()" class="wolves" readonly></td>
     <td><input type="number" value="0" oninput="updateAll()" class="sharks" readonly></td>
     <td class="wolvesCum">0</td>
@@ -705,8 +698,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
-<script src="2springfever2025_part2_punktescript.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/charts.js"></script>
+<script src="1springfever2025_Part2_punktecript.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 <script src="../0allgemein/calculate.js"></script>
 <script src="../0allgemein/charts.js"></script>
