@@ -284,11 +284,11 @@ tr:hover td {
 }
 
 .team.left::before {
-  background-image: url("../Teamwappen/Teamwolf.PNG");
+  background-image: url("../1springfever2025/Teamwolf.PNG");
 }
 
 .team.right::before {
-  background-image: url("../Teamwappen/Teamshark.PNG");
+  background-image: url("../1springfever2025/Teamshark.PNG");
 }
 
 .team::before {
