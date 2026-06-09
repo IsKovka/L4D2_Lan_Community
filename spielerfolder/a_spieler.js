@@ -6,6 +6,7 @@ const players = {
         image: "spielerfolder/Stun.png",
         role: "Alter Sack",
         trophies: 2,
+        eventsPlayed: 5,
         quote: "Scheiß Jockey alter, kein Bock mehr auf des scheiß Spiel.",
 
         campaign: "Sumpffieber",
@@ -40,6 +41,7 @@ const players = {
         image: "spielerfolder/Psytech.png",
         role: "",
         trophies: 0,
+        eventsPlayed: 4,
         quote: "",
 
         campaign: "",
@@ -62,6 +64,7 @@ const players = {
         image: "spielerfolder/Jabawoozee.png",
         role: "",
         trophies: 2,
+        eventsPlayed: 5,
         quote: "",
 
         campaign: "",
@@ -96,6 +99,7 @@ const players = {
         image: "spielerfolder/Is_Kovka.png",
         role: "Fehlcharger",
         trophies: 4,
+        eventsPlayed: 5,
         quote: "Insta-Charge-Wahrscheinlichkeit ca. 1,9%",
 
         campaign: "Die Gemeinde",
@@ -142,15 +146,16 @@ const players = {
         image: "spielerfolder/Alex.png",
         role: "",
         trophies: 1,
-        quote: "",
+        eventsPlayed: 5,
+        quote: "Ich kann nicht spawnen, ich kann nicht spawnen",
 
-        campaign: "",
-        survivor: "",
-        weapon: "",
-        enemy: "",
+        campaign: "Sumpffieber",
+        survivor: "Irgendeiner der Weiber",
+        weapon: "MAC-10",
+        enemy: "Mein Headset",
 
         moment:
-            "",
+            "Erfolgreich gespawnt (Summerjam 2025)",
 
         wins: [
 
@@ -170,6 +175,7 @@ const players = {
         image: "spielerfolder/Chester244.png",
         role: "",
         trophies: 3,
+        eventsPlayed: 5,
         quote: "",
 
         campaign: "",
@@ -210,6 +216,7 @@ const players = {
         image: "spielerfolder/SchoKK.png",
         role: "",
         trophies: 0,
+        eventsPlayed: 2,
         quote: "",
 
         campaign: "",
@@ -230,17 +237,18 @@ const players = {
 
         name: "Salomon Sunday",
         image: "spielerfolder/Salomon.png",
-        role: "",
+        role: "Feel Good Manager",
         trophies: 4,
-        quote: "",
+        eventsPlayed: 5,
+        quote: "ich hab doch gesagt da steht ein Boomer, du Missgeburt - Sung Tzu (Art of War)",
 
-        campaign: "",
+        campaign: "KaDeWe Shopping Mall",
         survivor: "Coach",
-        weapon: "",
-        enemy: "",
+        weapon: "Autoschrotze",
+        enemy: "DIMI UND SEINE VERSCHISSENEN BLOCKS",
 
         moment:
-            "",
+            "Christo und sein Glasscheibenholocaust",
 
         wins: [
 
@@ -278,6 +286,7 @@ const players = {
         image: "spielerfolder/Cete.png",
         role: "",
         trophies: 4,
+        eventsPlayed: 4,
         quote: "",
 
         campaign: "",
@@ -324,6 +333,7 @@ const players = {
         image: "spielerfolder/serbia4life88.png",
         role: "",
         trophies: 0,
+        eventsPlayed: 0,
         quote: "",
 
         campaign: "",
@@ -414,6 +424,17 @@ function renderPlayerDetail(playerId) {
         return;
     }
 
+    const winsCount =
+    (player.wins || []).length;
+
+    const winRate =
+    player.eventsPlayed > 0
+        ? (
+            winsCount /
+            player.eventsPlayed
+        ) * 100
+        : 0;
+
     playerDetail.innerHTML = `
 
         <div class="player-detail">
@@ -466,6 +487,16 @@ function renderPlayerDetail(playerId) {
                 <div class="fact-box">
                     <h4>Gefürchtetster Gegner</h4>
                     <p>${player.enemy}</p>
+                </div>
+
+                <div class="fact-box">
+                    <h4>gespielte LANs</h4>
+                    <p>${player.eventsPlayed}</p>
+                </div>
+
+                <div class="fact-box">
+                    <h4>Winrate</h4>
+                    <p>${winRate.toFixed(0)}%</p>
                 </div>
 
                 <div class="fact-box full">
