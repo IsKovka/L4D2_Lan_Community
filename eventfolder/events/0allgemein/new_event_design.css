@@ -1330,15 +1330,35 @@ footer{
 
     /* TABELLEN */
 
-    .campaign-body{
-        overflow:hidden;
+    .chapter-header span:nth-child(3),
+    .chapter-row span:nth-child(3),
+    .campaign-total span:nth-child(3){
+        display:none;
     }
 
-    .campaign-body-inner{
-        transform:scale(0.55);
-        transform-origin:top left;
-        width:182%;
-        margin-bottom:-250px;
+    .chapter-header,
+    .chapter-row,
+    .campaign-total{
+
+        grid-template-columns:
+        45px
+        2fr
+        0.8fr
+        0.8fr
+        0.8fr;
     }
+
+.chapter-header{
+    font-size:0.5rem;
+}
+
+.chapter-row img{
+    width:40px;
+    height:24px;
+}
+
+.total-label{
+    font-size:0.7rem;
+}
 
 }
