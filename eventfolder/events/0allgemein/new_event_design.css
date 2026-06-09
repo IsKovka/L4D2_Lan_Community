@@ -1331,15 +1331,14 @@ footer{
     /* TABELLEN */
 
     .campaign-body{
-    overflow-x:auto;
-    overflow-y:hidden;
-    -webkit-overflow-scrolling:touch;
+        overflow:hidden;
     }
 
-    .chapter-header,
-    .chapter-row,
-    .campaign-total{
-    min-width:700px;
+    .campaign-body-inner{
+        transform:scale(0.55);
+        transform-origin:top left;
+        width:182%;
+        margin-bottom:-250px;
     }
 
 }
