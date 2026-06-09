@@ -730,7 +730,7 @@ const youtubeLink =
         <div class="result-top">
 
             <span class="team-label blue">
-                Eagles
+                Wolves
             </span>
 
             <span class="score-value blue">
@@ -755,7 +755,7 @@ const youtubeLink =
         <div class="result-top">
 
             <span class="team-label red">
-                Chicks
+                Sharks
             </span>
 
             <span class="score-value red">
