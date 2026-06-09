@@ -1254,11 +1254,11 @@ footer{
     }
 
     .stat-score{
-    font-size:1.2rem;
+    font-size:1rem;
     }
 
     .difference-value{
-    font-size:1.2rem;
+    font-size:1rem;
     }
 
     .difference-percent{
@@ -1359,11 +1359,20 @@ footer{
 
     grid-template-columns:
     65px
-    2fr
+    1.8fr
     0.75fr
     0.75fr
     0.75fr;
 
     padding:8px 10px;
 }
+
+.campaign-total .total-label{
+    font-size:0.70rem;
+}
+
+.campaign-total span{
+    font-size:0.65rem;
+}
+
 }
