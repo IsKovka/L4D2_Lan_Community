@@ -26,7 +26,6 @@ async function loadScores() {
     const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
     console.log('[sheets] parsed rows:', parsed.data.length, 'fields:', parsed.meta?.fields);
 
-    // Normalize incoming CSV keys to canonical keys
     const rows = parsed.data.map(raw => {
       const out = { kampagne: '', kapitel: '', wolves: '', sharks: '' };
       Object.keys(raw).forEach(k => {
@@ -35,12 +34,10 @@ async function loadScores() {
         else if (nk.includes('kapit')) out.kapitel = (raw[k]||'').toString().trim();
         else if (nk.includes('wolv') || nk.includes('wolf') || nk.includes('wolves')) out.wolves = raw[k];
         else if (nk.includes('shark') || nk.includes('sharks')) out.sharks = raw[k];
-        // falls noch andere Header existieren, werden ignoriert
       });
       return out;
     });
 
-    // Debug: zeige erste paar Zeilen
     console.log('[sheets] normalized rows sample:', rows.slice(0,6));
 
     rows.forEach(row => {
@@ -73,7 +70,6 @@ async function loadScores() {
         console.warn('[sheets] .wolves Input nicht gefunden in Zeile:', { kampagne, kapitel, rowEl });
       } else {
         wolvesInput.value = wolvesNum;
-        // Event dispatch, damit oninput/Listener ausgelöst werden
         wolvesInput.dispatchEvent(new Event('input', { bubbles: true }));
       }
 
@@ -85,7 +81,6 @@ async function loadScores() {
       }
     });
 
-    // nach der vollständigen Aktualisierung die lokale Update-Logik anstoßen
     if (typeof updateAll === 'function') {
       updateAll();
     } else {
