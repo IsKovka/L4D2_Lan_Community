@@ -1249,8 +1249,6 @@ footer{
     padding:14px;
     }
 
-
-
     .stat-title{
     font-size:.5rem;
     }
@@ -1330,35 +1328,42 @@ footer{
 
     /* TABELLEN */
 
-    .chapter-header span:nth-child(3),
-    .chapter-row span:nth-child(3),
-    .campaign-total span:nth-child(3){
-        display:none;
-    }
-
-    .chapter-header,
-    .chapter-row,
-    .campaign-total{
-
-        grid-template-columns:
-        45px
-        2fr
-        0.8fr
-        0.8fr
-        0.8fr;
-    }
-
-.chapter-header{
-    font-size:0.5rem;
+.chapter-header span:nth-child(3),
+.chapter-row span:nth-child(3),
+.campaign-total span:nth-child(3){
+    display:none;
 }
 
 .chapter-row img{
-    width:40px;
-    height:24px;
+    width:60px;
+    height:34px;
 }
 
-.total-label{
-    font-size:0.7rem;
+.chapter-row span:nth-child(2){
+    font-size:0.70rem;
 }
 
+.chapter-row span:nth-child(4),
+.chapter-row span:nth-child(5),
+.chapter-row span:nth-child(6){
+    font-size:0.65rem;
+}
+
+.chapter-header{
+    font-size:0.55rem;
+}
+
+.chapter-header,
+.chapter-row,
+.campaign-total{
+
+    grid-template-columns:
+    65px
+    2fr
+    0.75fr
+    0.75fr
+    0.75fr;
+
+    padding:8px 10px;
+}
 }
