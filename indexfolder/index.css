@@ -731,8 +731,20 @@ footer {
 
     .countdown-box{
 
-        flex-direction:column;
-    }
+    flex-direction:row;
+
+    padding:.75rem 1rem;
+
+    gap:.5rem;
+}
+
+.countdown-label{
+    font-size:.8rem;
+}
+
+#countdown{
+    font-size:1rem;
+}
 
     #countdown{
 
@@ -780,8 +792,44 @@ footer {
 
     .match-card{
 
-    padding:1.25rem;
-    }
+    flex-direction:row;
+
+    padding:1rem;
+
+    gap:.5rem;
+}
+
+.team-card{
+    flex:1;
+}
+
+.team-card img{
+
+    width:65px;
+    height:65px;
+}
+
+.team-card h3{
+
+    font-size:1rem;
+}
+
+.versus-section{
+
+    flex-shrink:0;
+}
+
+.versus-section h2{
+
+    font-size:2rem;
+    margin-bottom:.5rem;
+}
+
+.primary-btn{
+
+    padding:.6rem 1rem;
+    font-size:.8rem;
+}
 
 }
 
