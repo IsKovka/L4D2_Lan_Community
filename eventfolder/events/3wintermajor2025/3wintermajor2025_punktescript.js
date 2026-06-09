@@ -327,17 +327,11 @@ totalCampaignWins > 0
 
     document.getElementById(
         "campaignPercentEagles"
-    ).textContent =
-        "" +
-        campaignPercentEagles.toFixed(0) +
-        "%";
+    ).textContent = campaignPercentEagles.toFixed(0) = "%";
 
     document.getElementById(
         "campaignPercentChicks"
-    ).textContent =
-        "" +
-        campaignPercentChicks.toFixed(0) +
-        "%";
+    ).textContent = campaignPercentChicks.toFixed(0) = "%";
 
         const totalChapterWins =
 chapterWinsEagles +
@@ -355,27 +349,19 @@ totalChapterWins > 0
 
     document.getElementById(
         "chapterBarEagles"
-    ).style.width =
-        chapterPercentEagles + "%";
+    ).style.width = chapterPercentEagles = "%";
 
     document.getElementById(
         "chapterBarChicks"
-    ).style.width =
-        chapterPercentChicks + "%";
+    ).style.width = chapterPercentChicks = "%";
 
     document.getElementById(
         "chapterPercentEagles"
-    ).textContent =
-        "" +
-        chapterPercentEagles.toFixed(0) +
-        "%";
+    ).textContent = chapterPercentEagles.toFixed(0) = "%";
 
     document.getElementById(
         "chapterPercentChicks"
-    ).textContent =
-        "" +
-        chapterPercentChicks.toFixed(0) +
-        "%";
+    ).textContent = chapterPercentChicks.toFixed(0) = "%";
 
       const totalCampaigns = campaignCount;
 const totalChapters = chapterCount;
