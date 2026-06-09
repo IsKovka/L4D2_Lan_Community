@@ -457,7 +457,7 @@ const percent =
    if (rawDiff > 0) {
 
     leader.textContent =
-        "Eagles führen";
+        "Wolves führen";
 
     differenceValue.style.color =
         "#0066b9";
@@ -470,7 +470,7 @@ const percent =
 else if (rawDiff < 0) {
 
     leader.textContent =
-        "Chicks führen";
+        "Sharks führen";
 
     differenceValue.style.color =
         "#8a0000";
@@ -526,13 +526,13 @@ function updateChart(
                 datasets: [
 
                     {
-                        label: "Eagles",
+                        label: "Wolves",
                         data: eagles,
                         backgroundColor:"#0066b9"
                     },
 
                     {
-                        label: "Chicks",
+                        label: "Sharks",
                         data: chicks,
                         backgroundColor:"#8a0000"
                     }
@@ -807,8 +807,8 @@ const youtubeLink =
                         <span></span>
                         <span>Kapitel</span>
                         <span>Max</span>
-                        <span>Eagles</span>
-                        <span>Chicks</span>
+                        <span>Wolves</span>
+                        <span>Sharks</span>
                         <span>Diff</span>
 
                     </div>
