@@ -716,7 +716,7 @@ const youtubeLink =
                             </h3>
 
                             <span>
-                                ${data.chapters.length} Maps
+                                ${data.chapters.length} Kapitel
                             </span>
 
                         </div>
