@@ -1,4 +1,4 @@
-const nextLan = new Date("2026-06-13T09:00:00"); // Beispieltermin
+const nextLan = new Date("2026-10-24T09:00:00"); // Beispieltermin
 const countdownEl = document.getElementById("countdown");
 
 function updateCountdown() {
