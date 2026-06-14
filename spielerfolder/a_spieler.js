@@ -5,8 +5,8 @@ const players = {
         name: "Stun",
         image: "spielerfolder/Stun.png",
         role: "Alter Sack",
-        trophies: 2,
-        eventsPlayed: 5,
+        trophies: 3,
+        eventsPlayed: 6,
         quote: "Scheiß Jockey alter, ich spring dem die ganze Zeit nur an die Eier.",
 
         campaign: "Sturmflut",
@@ -18,7 +18,12 @@ const players = {
             "Blutdurst, der Wald, 2 Instakills mit einem Charge",
 
         wins: [
-        
+        {
+            name: "Summerjam 2026",
+            image: "eventfolder/events/5summerjam2026/Summerjam2026_cover.png",
+            link: "eventfolder/events/5summerjam2026/5summerjam2026.html"
+        },
+
         {
             name: "Springfever 2025 Part 2",
             image: "eventfolder/events/1springfever2025/springfever2025_cover.png",
@@ -63,8 +68,8 @@ const players = {
         name: "Jabawoozee",
         image: "spielerfolder/Jabawoozee.png",
         role: "",
-        trophies: 2,
-        eventsPlayed: 5,
+        trophies: 3,
+        eventsPlayed: 6,
         quote: "",
 
         campaign: "",
@@ -76,6 +81,11 @@ const players = {
             "",
 
         wins: [
+        {
+            name: "Summerjam 2026",
+            image: "eventfolder/events/5summerjam2026/Summerjam2026_cover.png",
+            link: "eventfolder/events/5summerjam2026/5summerjam2026.html"
+        },
 
         {
             name: "Springfever 2026",
@@ -99,7 +109,7 @@ const players = {
         image: "spielerfolder/Is_Kovka.png",
         role: "Fehlcharger",
         trophies: 4,
-        eventsPlayed: 5,
+        eventsPlayed: 6,
         quote: "Insta-Charge-Wahrscheinlichkeit ca. 1,9%",
 
         campaign: "Die Gemeinde",
@@ -146,7 +156,7 @@ const players = {
         image: "spielerfolder/Alex.png",
         role: "Demotivator",
         trophies: 1,
-        eventsPlayed: 5,
+        eventsPlayed: 6,
         quote: "Ich kann nicht spawnen! ich kann nicht spawnen!",
 
         campaign: "Sumpffieber",
@@ -174,8 +184,8 @@ const players = {
         name: "Chester244",
         image: "spielerfolder/Chester244.png",
         role: "",
-        trophies: 3,
-        eventsPlayed: 5,
+        trophies: 4,
+        eventsPlayed: 6,
         quote: "",
 
         campaign: "",
@@ -187,6 +197,11 @@ const players = {
             "",
 
         wins: [
+        {
+            name: "Summerjam 2026",
+            image: "eventfolder/events/5summerjam2026/Summerjam2026_cover.png",
+            link: "eventfolder/events/5summerjam2026/5summerjam2026.html"
+        },
 
         {
             name: "Springfever 2026",
@@ -239,7 +254,7 @@ const players = {
         image: "spielerfolder/Salomon.png",
         role: "Feel Good Manager",
         trophies: 4,
-        eventsPlayed: 5,
+        eventsPlayed: 6,
         quote: "ich hab doch gesagt da steht ein Boomer, du Missgeburt - Sung Tzu (Art of War)",
 
         campaign: "KaDeWe Shopping Mall",
@@ -286,7 +301,7 @@ const players = {
         image: "spielerfolder/Cete.png",
         role: "",
         trophies: 4,
-        eventsPlayed: 4,
+        eventsPlayed: 5,
         quote: "",
 
         campaign: "",
@@ -332,8 +347,8 @@ const players = {
         name: "Serbia4Life88",
         image: "spielerfolder/serbia4life88.png",
         role: "",
-        trophies: 0,
-        eventsPlayed: 0,
+        trophies: 1,
+        eventsPlayed: 1,
         quote: "",
 
         campaign: "",
@@ -345,6 +360,11 @@ const players = {
             "",
 
         wins: [
+        {
+            name: "Summerjam 2026",
+            image: "eventfolder/events/5summerjam2026/Summerjam2026_cover.png",
+            link: "eventfolder/events/5summerjam2026/5summerjam2026.html"
+        },
 
     ]
 
