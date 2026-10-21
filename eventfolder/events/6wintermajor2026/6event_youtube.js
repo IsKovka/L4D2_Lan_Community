@@ -7,27 +7,27 @@ const campaignMeta = {
 
     "Die Brücke": {
         blueYoutube: "",
-        redYoutube: "https://www.youtube.com/watch?v=kwS-yIOv7S4"
+        redYoutube: ""
     },
 
     "Dunkler Karneval": {
         blueYoutube: "",
-        redYoutube: "https://www.youtube.com/watch?v=fejkN0J4ThA"
+        redYoutube: ""
     },
 
     "Sumpffieber": {
         blueYoutube: "",
-        redYoutube: "https://www.youtube.com/watch?v=F9QUTSSRnI0"
+        redYoutube: ""
     },
 
     "Sturmflut": {
         blueYoutube: "",
-        redYoutube: "https://www.youtube.com/watch?v=YorQ4J4xiH8"
+        redYoutube: ""
     },
 
     "Die Gemeinde": {
         blueYoutube: "",
-        redYoutube: "https://www.youtube.com/watch?v=05aVsyrGknQ"
+        redYoutube: ""
     },
 
     "The Sacrifice": {
@@ -37,12 +37,12 @@ const campaignMeta = {
 
     "Mercy Hospital": {
         blueYoutube: "",
-        redYoutube: "https://www.youtube.com/watch?v=plSyVSvgimA"
+        redYoutube: ""
     },
 
     "Crash Course": {
-        blueYoutube: "https://www.youtube.com/watch?v=FpaLthrZg3E",
-        redYoutube: "https://www.youtube.com/watch?v=50ujY24dnx8"
+        blueYoutube: "",
+        redYoutube: ""
     },
 
     "Todeszone": {
@@ -52,7 +52,7 @@ const campaignMeta = {
 
     "Flug zur Hölle": {
         blueYoutube: "",
-        redYoutube: "https://www.youtube.com/watch?v=ZByIMz557tE"
+        redYoutube: ""
     },
 
     "Blutdurst": {
@@ -62,12 +62,12 @@ const campaignMeta = {
 
     "Kalter Strom": {
         blueYoutube: "",
-        redYoutube: "https://www.youtube.com/watch?v=Qyy9igCHfgI&list=PLcdur7y6I31E&index=6"
+        redYoutube: ""
     },
 
     "Das letzte Gefecht": {
         blueYoutube: "",
-        redYoutube: "https://www.youtube.com/watch?v=0ddBfffw5Io"
+        redYoutube: ""
     }
 
 };
