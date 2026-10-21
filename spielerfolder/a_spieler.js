@@ -44,18 +44,18 @@ const players = {
 
         name: "Psytech",
         image: "spielerfolder/Psytech.png",
-        role: "",
+        role: "Der vorsichtige oder so kp",
         trophies: 0,
         eventsPlayed: 4,
-        quote: "",
+        quote: "Wir machen aus den Sharks kleine Oktopussies.",
 
-        campaign: "",
-        survivor: "",
-        weapon: "",
-        enemy: "",
+        campaign: "Dunkler Karneval",
+        survivor: "Virgil",
+        weapon: "Katana",
+        enemy: "Sumpffieber",
 
         moment:
-            "",
+            "Solorush bei Blutdurst",
         
             wins: [
 
@@ -183,18 +183,18 @@ const players = {
 
         name: "Chester244",
         image: "spielerfolder/Chester244.png",
-        role: "",
+        role: "Alphawolf",
         trophies: 4,
         eventsPlayed: 6,
-        quote: "",
+        quote: "Boom, alle drei blind",
 
-        campaign: "",
-        survivor: "",
-        weapon: "",
-        enemy: "",
+        campaign: "Blutdurst",
+        survivor: "Coach",
+        weapon: "AK-47",
+        enemy: "Boomer",
 
         moment:
-            "",
+            "Spitter 3K auf der Brück bei Blutdurst",
 
         wins: [
         {
@@ -229,18 +229,18 @@ const players = {
 
         name: "Schokk",
         image: "spielerfolder/SchoKK.png",
-        role: "",
+        role: "One-Man-Army",
         trophies: 0,
         eventsPlayed: 2,
-        quote: "",
+        quote: "...",
 
-        campaign: "",
-        survivor: "",
-        weapon: "",
-        enemy: "",
+        campaign: "Todeszone",
+        survivor: "Nick",
+        weapon: "AK-47",
+        enemy: "Infiziertenleiter",
 
         moment:
-            "",
+            "Hunterblocker, 100% Blockquote",
 
         wins: [
 
@@ -299,18 +299,18 @@ const players = {
 
         name: "Cete",
         image: "spielerfolder/Cete.png",
-        role: "",
+        role: "Spawnkiller",
         trophies: 4,
         eventsPlayed: 5,
-        quote: "",
+        quote: "Jungs, ich muss des Spiel noch downloaden.",
 
-        campaign: "",
-        survivor: "",
-        weapon: "",
-        enemy: "",
+        campaign: "Infektionszentrum",
+        survivor: "Francis",
+        weapon: "AK-47",
+        enemy: "Vorbereitung",
 
         moment:
-            "",
+            "PC-Glas explodiert beim Ram-Speicher-Fix",
 
         wins: [
 
@@ -346,18 +346,18 @@ const players = {
 
         name: "Serbia4Life88",
         image: "spielerfolder/serbia4life88.png",
-        role: "",
+        role: "Wiedergeburt",
         trophies: 1,
         eventsPlayed: 1,
-        quote: "",
+        quote: "Begeben Sie sich zum Mercy Hospital",
 
-        campaign: "",
-        survivor: "",
-        weapon: "",
-        enemy: "",
+        campaign: "Mercy Hospital",
+        survivor: "Zoey",
+        weapon: "AK-47",
+        enemy: "Brennender Computer",
 
         moment:
-            "",
+            "2x Mercy auf einer Lan.",
 
         wins: [
         {
