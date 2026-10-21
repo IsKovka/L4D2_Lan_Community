@@ -41,7 +41,7 @@ const campaignMeta = {
     },
 
     "Crash Course": {
-        blueYoutube: "",
+        blueYoutube: "https://www.youtube.com/watch?v=FpaLthrZg3E",
         redYoutube: "https://www.youtube.com/watch?v=50ujY24dnx8"
     },
 
