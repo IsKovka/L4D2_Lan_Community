@@ -1,9 +1,13 @@
+
+
 <!DOCTYPE html>
 <html lang="de">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Springfever 2027 – Die Online-Qualifikation zum großen Left 4 Dead 2 LAN-Finale. Verfolge Spielplan, Ergebnisse und Rangliste.">
 
     <title>Springfever 2027 – Online-Qualifikation</title>
 
@@ -12,432 +16,494 @@
 
 <body>
 
-<!-- ==========================
-     NAVIGATION
-=========================== -->
+    <!-- ==========================
+         NAVIGATION
+    =========================== -->
 
-<nav>
-    <div class="nav-container">
+    <nav>
+        <div class="nav-container">
 
-        <div class="logo">
-            <img
-                src="../../../../indexfolder/startseitenfotos/nav-logo.PNG"
-                alt="L4D2 LAN">
-        </div>
-
-        <ul class="nav-links">
-            <li><a href="../../../../index.html">Startseite</a></li>
-            <li><a href="../../../../events.html" class="active">Events</a></li>
-            <li><a href="../../../../spieler.html">Spieler</a></li>
-        </ul>
-
-    </div>
-</nav>
-
-
-<!-- ==========================
-     HERO
-=========================== -->
-
-<header class="season-hero">
-
-    <div class="season-hero-overlay"></div>
-
-    <div class="season-hero-content">
-
-        <div class="season-label">
-            ONLINE QUALIFICATION
-        </div>
-
-        <h1>SPRINGFEVER 2027</h1>
-
-        <p class="season-subtitle">
-            DER WEG ZUM LAN-FINALE
-        </p>
-
-        <div class="season-meta">
-
-            <div class="meta-item">
-                <span class="meta-label">SAISON</span>
-                <strong>Frühling 2027</strong>
+            <div class="logo">
+                <a href="../../../../index.html">
+                    <img
+                        src="../../../../indexfolder/startseitenfotos/nav-logo.PNG"
+                        alt="L4D2 LAN">
+                </a>
             </div>
 
-            <div class="meta-item">
-                <span class="meta-label">TEAMS</span>
-                <strong>3 Teams</strong>
+            <ul class="nav-links">
+                <li><a href="../../../../index.html">Startseite</a></li>
+                <li><a href="../../../../events.html" class="active">Events</a></li>
+                <li><a href="../../../../spieler.html">Spieler</a></li>
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <!-- ==========================
+         HERO
+    =========================== -->
+
+    <header class="season-hero">
+
+        <div class="season-hero-overlay"></div>
+
+        <div class="season-hero-content">
+
+            <div class="season-label">
+                ONLINE QUALIFICATION
             </div>
 
-            <div class="meta-item">
-                <span class="meta-label">KAMPAGNEN</span>
-                <strong>24 insgesamt</strong>
-            </div>
+            <h1>SPRINGFEVER 2027</h1>
 
-            <div class="meta-item">
-                <span class="meta-label">FINALPLÄTZE</span>
-                <strong>2 Teams</strong>
-            </div>
+            <p class="season-subtitle">
+                DER WEG ZUM LAN-FINALE
+            </p>
 
-        </div>
+            <div class="season-meta">
 
-        <a href="#rangliste" class="hero-button">
-            AKTUELLER TABELLENSTAND
-        </a>
-
-    </div>
-
-</header>
-
-<!-- ==========================
-     TEILNEHMENDE TEAMS
-=========================== -->
-
-<section class="team-overview-section">
-
-    <div class="team-overview-header">
-        <span class="section-label">SPRINGFEVER 2027</span>
-        <h2>TEILNEHMENDE TEAMS</h2>
-        <p>Die drei Teams der Online-Qualifikation</p>
-    </div>
-
-    <div id="teamOverviewContainer" class="team-overview-grid">
-
-        <div class="team-loading">
-            Teams werden geladen ...
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ==========================
-     SAISONSTATUS
-=========================== -->
-
-<section class="season-overview">
-
-    <div class="overview-card">
-
-        <span class="overview-label">
-            SAISONFORTSCHRITT
-        </span>
-
-        <div class="overview-value">
-            <span id="completedCampaignCount">0</span>
-            <span>/ 24</span>
-        </div>
-
-        <div class="overview-description">
-            Kampagnen abgeschlossen
-        </div>
-
-        <div class="season-progress">
-            <div
-                class="season-progress-fill"
-                id="seasonProgressFill"
-                style="width: 0%">
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="overview-card">
-
-        <span class="overview-label">
-            NÄCHSTE BEGEGNUNG
-        </span>
-
-        <div class="overview-value overview-date" id="nextMatchDate">
-            TBD
-        </div>
-
-        <div class="overview-description" id="nextMatchTeams">
-            Spielplan wird geladen
-        </div>
-
-    </div>
-
-
-    <div class="overview-card">
-
-        <span class="overview-label">
-            QUALIFIKATIONSPLÄTZE
-        </span>
-
-        <div class="overview-value">
-            2 <span>/ 3</span>
-        </div>
-
-        <div class="overview-description">
-            Teams erreichen das LAN-Finale
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ==========================
-     RANGLISTE
-=========================== -->
-
-<section class="section-container" id="rangliste">
-
-    <div class="section-heading">
-
-        <div>
-            <span class="section-eyebrow">
-                THE ROAD TO THE FINAL
-            </span>
-
-            <h2>AKTUELLE RANGLISTE</h2>
-        </div>
-
-        <div class="ranking-status">
-            <span class="status-dot"></span>
-            VORLÄUFIGER TABELLENSTAND
-        </div>
-
-    </div>
-
-
-    <div class="ranking-card">
-
-        <div class="ranking-table-header">
-
-            <span>PLATZ</span>
-            <span>TEAM</span>
-            <span>KAMPAGNEN</span>
-            <span>PUNKTE</span>
-            <span>STATUS</span>
-
-        </div>
-
-
-        <!-- DYNAMISCHE RANGLISTE -->
-
-        <div id="rankingContainer">
-
-            <div class="ranking-row">
-                <div class="ranking-position">–</div>
-
-                <div class="ranking-team">
-                    <div>
-                        <strong>Rangliste wird geladen</strong>
-                        <span>Bitte warten</span>
-                    </div>
+                <div class="meta-item">
+                    <span class="meta-label">SAISON</span>
+                    <strong>Frühling 2027</strong>
                 </div>
+
+                <div class="meta-item">
+                    <span class="meta-label">TEAMS</span>
+                    <strong>3 Teams</strong>
+                </div>
+
+                <div class="meta-item">
+                    <span class="meta-label">KAMPAGNEN</span>
+                    <strong>24 insgesamt</strong>
+                </div>
+
+                <div class="meta-item">
+                    <span class="meta-label">FINALPLÄTZE</span>
+                    <strong>2 Teams</strong>
+                </div>
+
             </div>
+
+            <a href="#rangliste" class="hero-button">
+                AKTUELLER TABELLENSTAND
+            </a>
 
         </div>
 
-
-        <div class="ranking-footer">
-
-            <div class="ranking-legend">
-                <span class="legend-qualified"></span>
-                <span>Aktuell für das Finale qualifiziert</span>
-            </div>
-
-            <div class="ranking-legend">
-                <span class="legend-eliminated"></span>
-                <span>Aktuell außerhalb der Finalplätze</span>
-            </div>
-
-        </div>
-
-    </div>
+    </header>
 
 
-    <p class="section-note">
-        Die Rangliste basiert auf den bisher erzielten Gesamtpunkten.
-        Die Platzierungen sind bis zum Abschluss der Qualifikation vorläufig.
-    </p>
+    <!-- ==========================
+         TEILNEHMENDE TEAMS
+    =========================== -->
 
-</section>
+    <section class="team-overview-section">
 
+        <div class="team-overview-header">
 
-<!-- ==========================
-     SPIELPLAN
-=========================== -->
-
-<section class="section-container">
-
-    <div class="section-heading">
-
-        <div>
-            <span class="section-eyebrow">
-                MATCH SCHEDULE
+            <span class="section-label">
+                SPRINGFEVER 2027
             </span>
 
-            <h2>SPIELPLAN</h2>
-        </div>
-
-        <span class="section-counter">
-            12 BEGEGNUNGEN
-        </span>
-
-    </div>
-
-
-    <!-- DYNAMISCHER SPIELPLAN -->
-
-    <div class="schedule-list">
-
-        <div class="empty-results">
-            <h3>SPIELPLAN WIRD GELADEN</h3>
+            <h2>TEILNEHMENDE TEAMS</h2>
 
             <p>
-                Die Begegnungen werden aus der Qualifikationsdatenbank geladen.
-            </p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ==========================
-     ABGESCHLOSSENE BEGEGNUNGEN
-=========================== -->
-
-<section class="section-container">
-
-    <div class="section-heading">
-
-        <div>
-            <span class="section-eyebrow">
-                MATCH HISTORY
-            </span>
-
-            <h2>ABGESCHLOSSENE BEGEGNUNGEN</h2>
-        </div>
-
-        <span class="section-counter" id="completedMatchCount">
-            0 / 12 BEGEGNUNGEN
-        </span>
-
-    </div>
-
-
-    <!-- DYNAMISCHE MATCH-HISTORIE -->
-
-    <div id="matchHistoryContainer">
-
-        <div class="empty-results">
-
-            <div class="empty-results-icon">—</div>
-
-            <h3>NOCH KEINE ERGEBNISSE</h3>
-
-            <p>
-                Abgeschlossene Begegnungen mit Kampagnen-
-                und Kapitelwertungen erscheinen hier.
+                Die drei Teams der Online-Qualifikation
             </p>
 
         </div>
 
-    </div>
+        <div
+            id="teamOverviewContainer"
+            class="team-overview-grid">
 
-</section>
-
-
-<!-- ==========================
-     FINALE
-=========================== -->
-
-<section class="final-section">
-
-    <div class="final-background"></div>
-
-    <div class="final-content">
-
-        <span class="section-eyebrow">
-            THE FINAL DESTINATION
-        </span>
-
-        <h2>SPRINGFEVER 2027</h2>
-
-        <p class="final-subtitle">
-            DAS GROSSE LAN-FINALE
-        </p>
-
-
-        <div class="final-qualification">
-
-            <div class="final-qualification-team">
-
-                <span>FINALPLATZ 01</span>
-
-                <strong>
-                    PLATZ 1
-                </strong>
-
+            <div class="team-loading">
+                Teams werden geladen ...
             </div>
 
+        </div>
 
-            <div class="final-vs">
-                VS
+    </section>
+
+
+    <!-- ==========================
+         SAISONSTATUS
+    =========================== -->
+
+    <section class="season-overview">
+
+        <!-- SAISONFORTSCHRITT -->
+
+        <div class="overview-card">
+
+            <span class="overview-label">
+                SAISONFORTSCHRITT
+            </span>
+
+            <div class="overview-value">
+                <span id="completedCampaignCount">0</span>
+                <span>/ 24</span>
             </div>
 
+            <div class="overview-description">
+                Kampagnen abgeschlossen
+            </div>
 
-            <div class="final-qualification-team">
+            <div class="season-progress">
 
-                <span>FINALPLATZ 02</span>
-
-                <strong>
-                    PLATZ 2
-                </strong>
+                <div
+                    class="season-progress-fill"
+                    id="seasonProgressFill"
+                    style="width: 0%">
+                </div>
 
             </div>
 
         </div>
 
 
-        <p class="final-description">
-            Nur die zwei bestplatzierten Teams der Online-Qualifikation
-            erreichen das offizielle LAN-Finale.
+        <!-- NÄCHSTE BEGEGNUNG -->
+
+        <div class="overview-card">
+
+            <span class="overview-label">
+                NÄCHSTE BEGEGNUNG
+            </span>
+
+            <div
+                class="overview-value overview-date"
+                id="nextMatchDate">
+
+                TBD
+
+            </div>
+
+            <div
+                class="overview-description"
+                id="nextMatchTeams">
+
+                Spielplan wird geladen
+
+            </div>
+
+        </div>
+
+
+        <!-- FINALPLÄTZE -->
+
+        <div class="overview-card">
+
+            <span class="overview-label">
+                QUALIFIKATIONSPLÄTZE
+            </span>
+
+            <div class="overview-value">
+                2 <span>/ 3</span>
+            </div>
+
+            <div class="overview-description">
+                Teams erreichen das LAN-Finale
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================
+         RANGLISTE
+    =========================== -->
+
+    <section class="section-container" id="rangliste">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-eyebrow">
+                    THE ROAD TO THE FINAL
+                </span>
+
+                <h2>AKTUELLE RANGLISTE</h2>
+
+            </div>
+
+            <div class="ranking-status">
+
+                <span class="status-dot"></span>
+
+                VORLÄUFIGER TABELLENSTAND
+
+            </div>
+
+        </div>
+
+
+        <div class="ranking-card">
+
+            <div class="ranking-table-header">
+
+                <span>PLATZ</span>
+                <span>TEAM</span>
+                <span>KAMPAGNEN</span>
+                <span>PUNKTE</span>
+                <span>STATUS</span>
+
+            </div>
+
+
+            <div id="rankingContainer">
+
+                <div class="ranking-row">
+
+                    <div class="ranking-position">
+                        –
+                    </div>
+
+                    <div class="ranking-team">
+
+                        <div>
+                            <strong>Rangliste wird geladen</strong>
+                            <span>Bitte warten</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="ranking-footer">
+
+                <div class="ranking-legend">
+
+                    <span class="legend-qualified"></span>
+
+                    <span>
+                        Aktuell für das Finale qualifiziert
+                    </span>
+
+                </div>
+
+                <div class="ranking-legend">
+
+                    <span class="legend-eliminated"></span>
+
+                    <span>
+                        Aktuell außerhalb der Finalplätze
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <p class="section-note">
+            Die Rangliste basiert auf den bisher erzielten Gesamtpunkten.
+            Die Platzierungen sind bis zum Abschluss der Qualifikation vorläufig.
         </p>
 
-
-        <a
-            href="../Springfever2027/Springfever2027.html"
-            class="final-button">
-
-            ZUM LAN-EVENT
-
-        </a>
-
-    </div>
-
-</section>
+    </section>
 
 
-<!-- ==========================
-     FOOTER
-=========================== -->
+    <!-- ==========================
+         ANSTEHENDE BEGEGNUNGEN
+    =========================== -->
 
-<footer>
+    <section class="section-container">
 
-    <span>
-        SPRINGFEVER 2027 · ONLINE QUALIFICATION
-    </span>
+        <div class="section-heading">
 
-    <span id="lastUpdate">
-        Letztes Update: Noch nicht verfügbar
-    </span>
+            <div>
 
-</footer>
+                <span class="section-eyebrow">
+                    UPCOMING MATCHES
+                </span>
+
+                <h2>ANSTEHENDE BEGEGNUNGEN</h2>
+
+            </div>
+
+            <span
+                class="section-counter"
+                id="upcomingMatchCount">
+
+                0 BEGEGNUNGEN
+
+            </span>
+
+        </div>
 
 
-<!-- ==========================
-     JAVASCRIPT
-=========================== -->
+        <div
+            class="schedule-list"
+            id="upcomingMatchesContainer">
 
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+            <div class="empty-results">
 
-<script src="quali_script.js"></script>
+                <h3>SPIELE WERDEN GELADEN</h3>
 
+                <p>
+                    Die anstehenden Begegnungen werden geladen.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================
+         MATCH HISTORY
+    =========================== -->
+
+    <section class="section-container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-eyebrow">
+                    MATCH HISTORY
+                </span>
+
+                <h2>ERGEBNISSE & MATCH-HISTORY</h2>
+
+            </div>
+
+            <span
+                class="section-counter"
+                id="completedMatchCount">
+
+                0 / 12 BEGEGNUNGEN
+
+            </span>
+
+        </div>
+
+
+        <div id="matchHistoryContainer">
+
+            <div class="empty-results">
+
+                <div class="empty-results-icon">
+                    —
+                </div>
+
+                <h3>NOCH KEINE ABGESCHLOSSENEN BEGEGNUNGEN</h3>
+
+                <p>
+                    Sobald beide Kampagnen einer Begegnung abgeschlossen sind,
+                    erscheinen hier die Ergebnisse.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================
+         LAN-FINALE
+    =========================== -->
+
+    <section class="final-section">
+
+        <div class="final-background"></div>
+
+        <div class="final-content">
+
+            <span class="section-eyebrow">
+                THE FINAL DESTINATION
+            </span>
+
+            <h2>SPRINGFEVER 2027</h2>
+
+            <p class="final-subtitle">
+                DAS GROSSE LAN-FINALE
+            </p>
+
+
+            <div class="final-qualification">
+
+                <div class="final-qualification-team">
+
+                    <span>FINALPLATZ 01</span>
+
+                    <strong>
+                        PLATZ 1
+                    </strong>
+
+                </div>
+
+
+                <div class="final-vs">
+                    VS
+                </div>
+
+
+                <div class="final-qualification-team">
+
+                    <span>FINALPLATZ 02</span>
+
+                    <strong>
+                        PLATZ 2
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <p class="final-description">
+                Nur die zwei bestplatzierten Teams der Online-Qualifikation
+                erreichen das offizielle LAN-Finale.
+            </p>
+
+
+            <a
+                href="../Springfever2027/Springfever2027.html"
+                class="final-button">
+
+                ZUM LAN-EVENT
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================
+         FOOTER
+    =========================== -->
+
+    <footer>
+
+        <span>
+            SPRINGFEVER 2027 · ONLINE QUALIFICATION
+        </span>
+
+        <span id="lastUpdate">
+            Letztes Update: Noch nicht verfügbar
+        </span>
+
+    </footer>
+
+
+    <!-- ==========================
+         JAVASCRIPT
+    =========================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+    <script src="quali_script.js"></script>
 
 </body>
 </html>

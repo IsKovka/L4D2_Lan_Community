@@ -1,5 +1,6 @@
 
 
+
 /* =========================================================
    SPRINGFEVER 2027 – ONLINE QUALIFICATION
    DESIGN SYSTEM
@@ -9,6 +10,32 @@
 /* =========================================================
    1. RESET & BASIS
 ========================================================= */
+
+:root {
+    --color-bg: #080808;
+    --color-bg-soft: #101010;
+    --color-card: #151515;
+    --color-card-light: #1c1c1c;
+
+    --color-orange: #ff5b00;
+    --color-orange-hover: #ff762b;
+
+    --color-white: #ffffff;
+    --color-text: #dddddd;
+    --color-muted: #999999;
+
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-border-orange: rgba(255, 91, 0, 0.25);
+
+    --color-blue: #4c9fff;
+    --color-red: #ff5b5b;
+
+    --radius-small: 7px;
+    --radius-medium: 12px;
+    --radius-large: 18px;
+
+    --content-width: 1250px;
+}
 
 * {
     margin: 0;
@@ -23,9 +50,10 @@ html {
 
 body {
     font-family: "Segoe UI", sans-serif;
-    background: #080808;
-    color: #fff;
+    background: var(--color-bg);
+    color: var(--color-white);
     overflow-x: hidden;
+    line-height: 1.5;
 }
 
 a {
@@ -43,6 +71,10 @@ input {
     font: inherit;
 }
 
+button {
+    cursor: pointer;
+}
+
 
 /* =========================================================
    2. NAVIGATION
@@ -52,17 +84,21 @@ nav {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(10, 10, 10, 0.95);
+
+    background: rgba(10, 10, 10, 0.96);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 69, 0, 0.15);
+
+    border-bottom: 1px solid var(--color-border-orange);
 }
 
 .nav-container {
     max-width: 1400px;
     margin: auto;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     padding: 0.25rem 2rem;
 }
 
@@ -73,24 +109,26 @@ nav {
 
 .nav-links {
     list-style: none;
+
     display: flex;
+    align-items: center;
     gap: 3rem;
 }
 
 .nav-links a {
     color: white;
     font-weight: 600;
-    transition: color .25s;
+    transition: color 0.25s;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: #ff4500;
+    color: var(--color-orange);
 }
 
 .nav-links a.active {
-    border-bottom: 2px solid #ff4500;
-    padding-bottom: .35rem;
+    border-bottom: 2px solid var(--color-orange);
+    padding-bottom: 0.35rem;
 }
 
 
@@ -100,50 +138,57 @@ nav {
 
 .season-hero {
     position: relative;
-    min-height: 620px;
+
+    min-height: 470px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 80px 24px;
+
+    padding: 75px 25px;
 
     background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.45),
-            rgba(0, 0, 0, 0.75)
-        ),
-        url("7springfever2027_cover.png");
+        url("Springfever2027_quali_cover.png");
 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
     overflow: hidden;
 }
 
 .season-hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, .55),
-        rgba(0, 0, 0, .88)
-    );
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.55),
+            rgba(0, 0, 0, 0.88)
+        );
 }
 
 .season-hero-content {
     position: relative;
     z-index: 2;
+
     width: 100%;
     max-width: 1100px;
+
     margin: auto;
     text-align: center;
 }
 
 .season-label {
     display: inline-block;
-    color: #ff5b00;
-    font-size: .8rem;
+
+    color: var(--color-orange);
+
+    font-size: 0.8rem;
     font-weight: 800;
     letter-spacing: 4px;
+
     margin-bottom: 15px;
 }
 
@@ -151,14 +196,19 @@ nav {
     font-size: clamp(2.8rem, 7vw, 5.5rem);
     font-weight: 900;
     letter-spacing: 2px;
-    color: #ff5b00;
+
+    color: var(--color-orange);
+
     line-height: 1;
-    text-shadow: 0 5px 25px rgba(0, 0, 0, .6);
+
+    text-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
 }
 
 .season-subtitle {
     margin-top: 15px;
-    color: #ddd;
+
+    color: #dddddd;
+
     font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: 5px;
@@ -168,7 +218,9 @@ nav {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+
     gap: 45px;
+
     margin: 40px 0 30px;
 }
 
@@ -179,33 +231,40 @@ nav {
 }
 
 .meta-label {
-    color: #999;
-    font-size: .7rem;
+    color: var(--color-muted);
+
+    font-size: 0.7rem;
     font-weight: 800;
     letter-spacing: 1.5px;
 }
 
 .meta-item strong {
     font-size: 1rem;
-    color: #fff;
+    color: white;
 }
 
 .hero-button {
     display: inline-block;
+
     padding: 14px 25px;
-    background: #ff5b00;
+
+    background: var(--color-orange);
     color: white;
-    border-radius: 7px;
-    font-size: .85rem;
+
+    border-radius: var(--radius-small);
+
+    font-size: 0.85rem;
     font-weight: 800;
-    letter-spacing: .5px;
-    transition: .25s;
+    letter-spacing: 0.5px;
+
+    transition: 0.25s;
 }
 
 .hero-button:hover {
-    background: #ff762b;
+    background: var(--color-orange-hover);
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(255, 91, 0, .25);
+
+    box-shadow: 0 8px 25px rgba(255, 91, 0, 0.25);
 }
 
 
@@ -215,182 +274,318 @@ nav {
 
 .season-overview {
     max-width: 1100px;
+
     margin: -35px auto 55px;
     padding: 0 25px;
+
     position: relative;
     z-index: 5;
+
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+
     gap: 18px;
 }
 
 .overview-card {
-    background: linear-gradient(180deg, #171717, #0c0c0c);
-    border: 1px solid rgba(255, 255, 255, .07);
+    background: linear-gradient(
+        180deg,
+        #171717,
+        #0c0c0c
+    );
+
+    border: 1px solid var(--color-border);
     border-radius: 15px;
+
     padding: 25px;
     min-height: 160px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, .35);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    transition:
+        border-color 0.25s,
+        transform 0.25s;
+}
+
+.overview-card:hover {
+    border-color: var(--color-border-orange);
+    transform: translateY(-3px);
 }
 
 .overview-label {
-    display: block;
-    color: #999;
-    font-size: .72rem;
+    color: var(--color-muted);
+
+    font-size: 0.7rem;
     font-weight: 800;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+
+    margin-bottom: 12px;
 }
 
 .overview-value {
-    margin-top: 15px;
-    font-size: 2.8rem;
+    color: var(--color-orange);
+
+    font-size: 2.2rem;
     font-weight: 900;
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-}
-
-.overview-value span {
-    color: #777;
-    font-size: 1.2rem;
-}
-
-.overview-date {
-    font-size: 2.3rem;
+    line-height: 1.1;
 }
 
 .overview-description {
-    color: #888;
-    font-size: .82rem;
-    margin-top: 10px;
-}
+    color: var(--color-muted);
 
-.season-progress {
-    height: 7px;
-    background: #252525;
-    border-radius: 999px;
-    overflow: hidden;
-    margin-top: 18px;
-}
+    font-size: 0.8rem;
 
-.season-progress-fill {
-    height: 100%;
-    width: 0%;
-    background: #ff5b00;
-    border-radius: 999px;
-    transition: width .4s ease;
+    margin-top: 8px;
 }
 
 
 /* =========================================================
-   5. ALLGEMEINE SEKTIONSLAYOUTS
+   5. ALLGEMEINE SEKTIONSSTRUKTUR
 ========================================================= */
 
 .section-container {
-    max-width: 1100px;
-    margin: 0 auto 65px;
-    padding: 0 25px;
+    max-width: var(--content-width);
+
+    margin: 0 auto;
+    padding: 55px 25px;
 }
 
-.section-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 20px;
-    margin-bottom: 22px;
+.section-header {
+    margin-bottom: 30px;
 }
 
-.section-eyebrow {
-    display: block;
-    color: #ff5b00;
-    font-size: .7rem;
+.section-label {
+    display: inline-block;
+
+    color: var(--color-orange);
+
+    font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 2px;
+
     margin-bottom: 8px;
 }
 
-.section-heading h2 {
-    font-size: 1.45rem;
+.section-header h2 {
+    font-size: clamp(1.7rem, 4vw, 2.3rem);
     font-weight: 900;
-    letter-spacing: .5px;
+
+    margin-bottom: 8px;
 }
 
-.section-counter {
-    color: #777;
-    font-size: .75rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
+.section-header p {
+    color: var(--color-muted);
 
-.section-note {
-    color: #777;
-    font-size: .8rem;
+    font-size: 0.9rem;
     line-height: 1.6;
-    margin-top: 15px;
-}
-
-.ranking-status {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #999;
-    font-size: .7rem;
-    font-weight: 700;
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    background: #ff9b00;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(255, 155, 0, .5);
 }
 
 
 /* =========================================================
-   6. RANGLISTE
+   6. TEAMÜBERSICHT
 ========================================================= */
 
+.team-overview-section {
+    max-width: var(--content-width);
+
+    margin: 0 auto;
+    padding: 55px 25px;
+}
+
+.team-overview-header {
+    margin-bottom: 30px;
+}
+
+.team-overview-header .section-label {
+    color: var(--color-orange);
+
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.team-overview-header h2 {
+    font-size: 2rem;
+    font-weight: 900;
+
+    margin: 8px 0;
+}
+
+.team-overview-header p {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+}
+
+.team-overview-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 24px;
+}
+
+.team-overview-card {
+    background: linear-gradient(
+        180deg,
+        #181818,
+        #0d0d0d
+    );
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-large);
+
+    padding: 24px;
+
+    transition:
+        border-color 0.25s,
+        transform 0.25s;
+}
+
+.team-overview-card:hover {
+    border-color: var(--color-border-orange);
+    transform: translateY(-3px);
+}
+
+.team-overview-card h3 {
+    font-size: 1.25rem;
+    font-weight: 900;
+
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+.team-player-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.team-player {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+    min-height: 54px;
+}
+
+.team-player img,
+.team-player-placeholder {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+    object-fit: cover;
+
+    border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.team-player-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #292929;
+    color: #dddddd;
+
+    font-weight: 800;
+    font-size: 1rem;
+}
+
+.team-player span {
+    color: #eeeeee;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   7. RANGLISTE
+========================================================= */
+
+.ranking-section {
+    max-width: var(--content-width);
+
+    margin: 0 auto;
+    padding: 55px 25px;
+}
+
 .ranking-card {
-    background: linear-gradient(180deg, #151515, #0c0c0c);
-    border: 1px solid rgba(255, 255, 255, .06);
-    border-radius: 16px;
+    background: linear-gradient(
+        180deg,
+        #151515,
+        #0c0c0c
+    );
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-large);
+
     overflow: hidden;
 }
 
 .ranking-table-header {
     display: grid;
-    grid-template-columns: 75px minmax(180px, 2fr) 1fr 1fr 160px;
-    align-items: center;
+
+    grid-template-columns:
+        65px
+        minmax(200px, 1fr)
+        130px
+        110px
+        150px;
+
     gap: 15px;
-    padding: 17px 25px;
-    color: #777;
-    font-size: .7rem;
+
+    padding: 17px 24px;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    border-bottom: 1px solid var(--color-border);
+
+    color: var(--color-muted);
+
+    font-size: 0.65rem;
     font-weight: 800;
-    letter-spacing: 1px;
-    background: rgba(255, 255, 255, .025);
+    letter-spacing: 1.2px;
 }
 
 .ranking-row {
     display: grid;
-    grid-template-columns: 75px minmax(180px, 2fr) 1fr 1fr 160px;
-    align-items: center;
+
+    grid-template-columns:
+        65px
+        minmax(200px, 1fr)
+        130px
+        110px
+        150px;
+
     gap: 15px;
-    padding: 22px 25px;
-    border-top: 1px solid rgba(255, 255, 255, .05);
-    border-left: 3px solid transparent;
-    transition: background .2s;
+
+    align-items: center;
+
+    padding: 20px 24px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+    transition: background 0.2s;
+}
+
+.ranking-row:last-child {
+    border-bottom: none;
 }
 
 .ranking-row:hover {
-    background: rgba(255, 255, 255, .025);
+    background: rgba(255, 255, 255, 0.035);
 }
 
 .ranking-row.qualified {
-    border-left-color: #ff5b00;
-}
-
-.ranking-row.eliminated {
-    border-left-color: #444;
+    border-left: 3px solid var(--color-orange);
 }
 
 .ranking-position {
@@ -399,76 +594,63 @@ nav {
 }
 
 .position-number {
-    color: #ddd;
-    font-size: 1.4rem;
+    color: #777777;
+
+    font-size: 1.35rem;
     font-weight: 900;
-    font-variant-numeric: tabular-nums;
+}
+
+.ranking-row.qualified .position-number {
+    color: var(--color-orange);
 }
 
 .ranking-team {
     display: flex;
     align-items: center;
-    gap: 15px;
-    min-width: 0;
-}
 
-.ranking-logo {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.ranking-team div {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
     min-width: 0;
 }
 
 .ranking-team strong {
+    display: block;
+
     font-size: 1rem;
-    font-weight: 900;
+    font-weight: 800;
 }
 
 .ranking-team span {
-    color: #777;
-    font-size: .75rem;
-    overflow-wrap: anywhere;
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--color-muted);
+
+    font-size: 0.72rem;
+    line-height: 1.5;
 }
 
 .ranking-games {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+
+    gap: 3px;
 }
 
 .ranking-games strong {
-    font-size: .95rem;
-    font-variant-numeric: tabular-nums;
+    font-size: 0.95rem;
+    font-weight: 800;
 }
 
 .ranking-games span {
-    color: #777;
-    font-size: .7rem;
+    color: var(--color-muted);
+    font-size: 0.68rem;
 }
 
 .ranking-points {
-    font-size: 1.7rem;
+    font-size: 1.15rem;
     font-weight: 900;
-    font-variant-numeric: tabular-nums;
-}
 
-.ranking-points.blue {
-    color: #1688d2;
-}
-
-.ranking-points.red {
-    color: #d13a3a;
-}
-
-.ranking-points.green {
-    color: #aaa;
+    color: white;
 }
 
 .ranking-status-cell {
@@ -478,79 +660,87 @@ nav {
 
 .qualification-badge {
     display: inline-block;
-    padding: 7px 10px;
+
+    padding: 7px 11px;
+
     border-radius: 5px;
-    background: rgba(255, 91, 0, .12);
-    color: #ff7a32;
-    font-size: .65rem;
+
+    background: rgba(255, 91, 0, 0.14);
+    border: 1px solid rgba(255, 91, 0, 0.35);
+
+    color: var(--color-orange);
+
+    font-size: 0.62rem;
     font-weight: 900;
-    letter-spacing: .5px;
-    text-align: center;
-    white-space: nowrap;
+    letter-spacing: 0.5px;
 }
 
 .qualification-badge.pending {
-    background: rgba(255, 255, 255, .06);
-    color: #888;
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.12);
+
+    color: #888888;
 }
 
 .ranking-footer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-    padding: 18px 25px;
-    border-top: 1px solid rgba(255, 255, 255, .05);
-    background: rgba(255, 255, 255, .015);
-}
+    padding: 16px 24px;
 
-.ranking-legend {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #888;
-    font-size: .72rem;
-}
+    background: rgba(255, 255, 255, 0.025);
 
-.legend-qualified,
-.legend-eliminated {
-    width: 8px;
-    height: 8px;
-    border-radius: 2px;
-}
+    border-top: 1px solid var(--color-border);
 
-.legend-qualified {
-    background: #ff5b00;
-}
+    color: var(--color-muted);
 
-.legend-eliminated {
-    background: #555;
+    font-size: 0.75rem;
+    line-height: 1.6;
 }
 
 
 /* =========================================================
-   7. SPIELPLAN
+   8. SPIELPLAN
 ========================================================= */
 
-.schedule-list {
+.schedule-section {
+    max-width: var(--content-width);
+
+    margin: 0 auto;
+    padding: 55px 25px;
+}
+
+.schedule-list,
+#upcomingMatchesContainer {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+
+    gap: 14px;
 }
 
 .match-card {
     display: grid;
-    grid-template-columns: 85px minmax(0, 1fr) 150px;
+
+    grid-template-columns: 85px minmax(0, 1fr) 180px;
+
     align-items: center;
-    gap: 25px;
-    padding: 22px 25px;
-    background: linear-gradient(180deg, #151515, #0c0c0c);
-    border: 1px solid rgba(255, 255, 255, .06);
-    border-radius: 14px;
-    transition: .2s;
+    gap: 20px;
+
+    padding: 20px 24px;
+
+    background: linear-gradient(
+        110deg,
+        #181818,
+        #101010
+    );
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+
+    transition:
+        border-color 0.25s,
+        transform 0.25s;
 }
 
 .match-card:hover {
-    border-color: rgba(255, 91, 0, .25);
+    border-color: var(--color-border-orange);
     transform: translateY(-2px);
 }
 
@@ -559,32 +749,36 @@ nav {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-right: 1px solid rgba(255, 255, 255, .08);
-    padding-right: 20px;
-    min-height: 55px;
-    color: #ddd;
-    font-size: .85rem;
-    font-weight: 800;
-    text-align: center;
+
+    width: 70px;
+    min-height: 75px;
+
+    background: rgba(255, 91, 0, 0.08);
+
+    border: 1px solid rgba(255, 91, 0, 0.18);
+    border-radius: 9px;
 }
 
 .match-date strong {
-    font-size: 2rem;
+    color: var(--color-orange);
+
+    font-size: 1.6rem;
     font-weight: 900;
-    line-height: 1;
+
+    line-height: 1.1;
 }
 
 .match-date span {
-    color: #ff5b00;
-    font-size: .8rem;
-    font-weight: 900;
-    margin-top: 5px;
+    color: white;
+
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 1px;
 }
 
 .match-date small {
-    color: #777;
-    font-size: .7rem;
-    margin-top: 3px;
+    color: var(--color-muted);
+    font-size: 0.65rem;
 }
 
 .match-content {
@@ -594,109 +788,143 @@ nav {
 .match-teams {
     display: flex;
     align-items: center;
-    gap: 22px;
+
+    gap: 18px;
 }
 
 .match-team {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     min-width: 0;
-}
-
-.match-team img {
-    width: 38px;
-    height: 38px;
-    object-fit: contain;
-    flex-shrink: 0;
+    flex: 1;
 }
 
 .match-team strong {
-    font-size: .95rem;
-    font-weight: 900;
+    display: block;
+
+    font-size: 1rem;
+    font-weight: 800;
+
+    overflow-wrap: anywhere;
 }
 
 .match-vs {
-    color: #777;
-    font-size: .75rem;
+    color: var(--color-orange);
+
+    font-size: 0.75rem;
     font-weight: 900;
+    letter-spacing: 1px;
 }
 
 .match-details {
-    color: #777;
-    font-size: .75rem;
-    margin-top: 10px;
+    margin-top: 9px;
+
+    color: var(--color-muted);
+
+    font-size: 0.72rem;
+    line-height: 1.5;
 }
 
 .match-result {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 8px;
+
+    gap: 5px;
 }
 
 .match-status {
     display: inline-block;
-    padding: 6px 9px;
-    border-radius: 5px;
-    font-size: .6rem;
+
+    padding: 5px 9px;
+
+    border-radius: 4px;
+
+    font-size: 0.58rem;
     font-weight: 900;
-    letter-spacing: .5px;
+    letter-spacing: 0.5px;
 }
 
 .match-status.upcoming {
-    color: #e3a13c;
-    background: rgba(227, 161, 60, .1);
-}
+    color: #aaaaaa;
 
-.match-status.completed {
-    color: #65bd82;
-    background: rgba(101, 189, 130, .1);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .match-status.in-progress {
-    color: #e3a13c;
-    background: rgba(227, 161, 60, .1);
+    color: #ffb35c;
+
+    background: rgba(255, 179, 92, 0.1);
+    border: 1px solid rgba(255, 179, 92, 0.2);
+}
+
+.match-status.completed {
+    color: #65c58a;
+
+    background: rgba(101, 197, 138, 0.1);
+    border: 1px solid rgba(101, 197, 138, 0.2);
 }
 
 .match-score {
-    color: #ddd;
+    color: white;
+
     font-size: 1.1rem;
     font-weight: 900;
-    font-variant-numeric: tabular-nums;
 }
 
 .match-id {
-    color: #666;
-    font-size: .65rem;
-    letter-spacing: .5px;
-    text-align: right;
+    color: #666666;
+
+    font-size: 0.62rem;
+    letter-spacing: 0.5px;
 }
 
 
 /* =========================================================
-   8. MATCH HISTORY
+   9. MATCH-HISTORY
 ========================================================= */
+
+.history-section {
+    max-width: var(--content-width);
+
+    margin: 0 auto;
+    padding: 55px 25px;
+}
 
 #matchHistoryContainer {
     display: flex;
     flex-direction: column;
+
     gap: 12px;
 }
 
 .history-card {
-    background: linear-gradient(180deg, #151515, #0c0c0c);
-    border: 1px solid rgba(255, 255, 255, .06);
-    border-radius: 15px;
+    background: linear-gradient(
+        110deg,
+        #181818,
+        #101010
+    );
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+
     overflow: hidden;
+
+    transition: border-color 0.25s;
+}
+
+.history-card:hover {
+    border-color: rgba(255, 91, 0, 0.2);
 }
 
 .history-card > summary {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     gap: 20px;
-    padding: 22px 25px;
+
+    padding: 20px 24px;
+
     cursor: pointer;
     list-style: none;
 }
@@ -705,315 +933,490 @@ nav {
     display: none;
 }
 
-.history-card > summary:hover {
-    background: rgba(255, 255, 255, .025);
-}
-
-.history-card > summary > div {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.history-card > summary strong {
-    font-size: .95rem;
-    font-weight: 900;
-}
-
-.history-card > summary span {
-    color: #888;
-    font-size: .72rem;
-}
-
-.history-card > summary > span {
-    color: #ff7a32;
-    font-weight: 800;
-    white-space: nowrap;
-}
-
 .history-card > summary::after {
     content: "+";
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 27px;
-    height: 27px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, .07);
-    color: #ff5b00;
-    font-size: 1.2rem;
-    transition: transform .25s;
+
+    color: var(--color-orange);
+
+    font-size: 1.5rem;
+    font-weight: 400;
+
+    margin-left: 5px;
 }
 
 .history-card[open] > summary::after {
-    transform: rotate(45deg);
+    content: "−";
+}
+
+.history-summary-main {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.history-summary-main strong {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.history-summary-main span {
+    color: var(--color-muted);
+    font-size: 0.7rem;
+}
+
+.history-summary-result {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    gap: 4px;
+
+    margin-left: auto;
+}
+
+.history-summary-result strong {
+    font-size: 1.1rem;
+    font-weight: 900;
+}
+
+.history-summary-result span {
+    color: var(--color-muted);
+    font-size: 0.68rem;
 }
 
 .history-content {
-    padding: 0 25px 22px;
-    border-top: 1px solid rgba(255, 255, 255, .06);
+    padding: 0 24px 24px;
+
+    border-top: 1px solid var(--color-border);
 }
 
 
 /* =========================================================
-   9. KAMPAGNEN INNERHALB DER MATCH HISTORY
+   10. MATCH-HISTORY – MANNSCHAFTSAUFSTELLUNGEN
 ========================================================= */
 
-.campaign-details,
-.history-campaign {
-    margin-top: 12px;
-    background: rgba(255, 255, 255, .025);
-    border: 1px solid rgba(255, 255, 255, .05);
-    border-radius: 10px;
-    overflow: hidden;
+.history-rosters {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+    padding: 22px 0;
 }
 
-.campaign-details > summary,
-.history-campaign > summary {
+.history-roster {
+    padding: 18px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+}
+
+.history-roster > strong {
+    display: block;
+
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+
+    border-bottom: 1px solid var(--color-border);
+
+    font-size: 0.9rem;
+    font-weight: 900;
+}
+
+.history-player-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+.history-player {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    min-width: 0;
+}
+
+.history-player img {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    object-fit: cover;
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.history-player span {
+    color: #dddddd;
+
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    overflow-wrap: anywhere;
+}
+
+.history-no-players {
+    color: var(--color-muted);
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   11. MATCH-HISTORY – GESAMTSIEGER
+========================================================= */
+
+.history-match-winner {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     gap: 15px;
-    padding: 17px 20px;
+
+    padding: 16px 18px;
+    margin-bottom: 20px;
+
+    background: rgba(255, 91, 0, 0.07);
+
+    border: 1px solid rgba(255, 91, 0, 0.2);
+    border-radius: 9px;
+}
+
+.history-match-winner span {
+    color: var(--color-muted);
+
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.history-match-winner strong {
+    color: var(--color-orange);
+
+    font-size: 0.95rem;
+    font-weight: 900;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   12. MATCH-HISTORY – KAMPAGNEN
+========================================================= */
+
+.history-campaigns {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.campaign-details {
+    background: rgba(255, 255, 255, 0.025);
+
+    border: 1px solid var(--color-border);
+    border-radius: 9px;
+
+    overflow: hidden;
+}
+
+.campaign-details > summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 16px 18px;
+
     cursor: pointer;
     list-style: none;
 }
 
-.campaign-details > summary::-webkit-details-marker,
-.history-campaign > summary::-webkit-details-marker {
+.campaign-details > summary::-webkit-details-marker {
     display: none;
 }
 
-.campaign-details > summary:hover,
-.history-campaign > summary:hover {
-    background: rgba(255, 255, 255, .035);
-}
+.campaign-details > summary::after {
+    content: "+";
 
-.campaign-details > summary > span,
-.history-campaign-title strong {
-    font-size: .9rem;
-    font-weight: 900;
-}
-
-.campaign-details > summary > strong,
-.history-campaign-title span {
-    color: #ddd;
-    font-size: .9rem;
-    font-weight: 800;
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-}
-
-.history-campaign-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-}
-
-.campaign-toggle {
-    width: 27px;
-    height: 27px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, .07);
-    color: #ff5b00;
+    color: var(--color-orange);
     font-size: 1.2rem;
-    transition: transform .25s;
 }
 
-.campaign-details[open] > summary .campaign-toggle,
-.history-campaign[open] .campaign-toggle {
-    transform: rotate(45deg);
+.campaign-details[open] > summary::after {
+    content: "−";
+}
+
+.campaign-details > summary span {
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.campaign-details > summary strong {
+    font-size: 0.95rem;
+    font-weight: 900;
+
+    white-space: nowrap;
 }
 
 
 /* =========================================================
-   10. KAPITELTABELLE
+   13. KAPITELTABELLE
 ========================================================= */
 
 .chapter-table-wrapper {
+    width: 100%;
     overflow-x: auto;
-    border-top: 1px solid rgba(255, 255, 255, .06);
+
+    border-top: 1px solid var(--color-border);
 }
 
 .chapter-table {
     width: 100%;
+
     border-collapse: collapse;
-    font-size: .8rem;
+
+    min-width: 420px;
 }
 
 .chapter-table th,
 .chapter-table td {
-    padding: 13px 18px;
-    text-align: right;
-    white-space: nowrap;
-}
+    padding: 12px 15px;
 
-.chapter-table th:first-child,
-.chapter-table td:first-child {
     text-align: left;
+
+    font-size: 0.75rem;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.chapter-table thead {
-    color: #777;
-    font-size: .68rem;
-    text-transform: uppercase;
-    letter-spacing: .5px;
+.chapter-table th {
+    color: var(--color-muted);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+
+    background: rgba(255, 255, 255, 0.025);
 }
 
-.chapter-table tbody tr {
-    border-top: 1px solid rgba(255, 255, 255, .035);
+.chapter-table td {
+    color: #dddddd;
 }
 
-.chapter-table tbody tr:hover {
-    background: rgba(255, 255, 255, .025);
+.chapter-table td.blue {
+    color: var(--color-blue);
+    font-weight: 800;
 }
 
-.chapter-table tfoot {
-    background: rgba(255, 255, 255, .035);
+.chapter-table td.red {
+    color: var(--color-red);
+    font-weight: 800;
+}
+
+.chapter-table tfoot td {
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    color: var(--color-orange);
+
     font-weight: 900;
-    border-top: 1px solid rgba(255, 255, 255, .1);
-}
 
-.chapter-table .blue {
-    color: #1688d2;
-    font-weight: 800;
-}
-
-.chapter-table .red {
-    color: #d13a3a;
-    font-weight: 800;
+    border-top: 1px solid var(--color-border-orange);
+    border-bottom: none;
 }
 
 
 /* =========================================================
-   11. LEERE DATEN / LADEZUSTÄNDE / FEHLER
+   14. SAISONFORTSCHRITT
 ========================================================= */
 
-.empty-results {
-    padding: 35px 25px;
-    text-align: center;
-    background: linear-gradient(180deg, #151515, #0c0c0c);
-    border: 1px solid rgba(255, 255, 255, .06);
-    border-radius: 14px;
+.season-progress-section {
+    max-width: var(--content-width);
+
+    margin: 0 auto;
+    padding: 45px 25px;
 }
 
-.empty-results-icon {
-    color: #ff5b00;
-    font-size: 2rem;
+.season-progress-card {
+    padding: 25px;
+
+    background: linear-gradient(
+        110deg,
+        #181818,
+        #101010
+    );
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+}
+
+.season-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+.season-progress-header strong {
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.season-progress-header span {
+    color: var(--color-orange);
+
+    font-size: 0.85rem;
     font-weight: 900;
-    margin-bottom: 12px;
 }
 
-.empty-results h3 {
-    color: #ddd;
-    font-size: .9rem;
-    font-weight: 900;
-    letter-spacing: 1px;
+.season-progress-track {
+    width: 100%;
+    height: 9px;
+
+    background: #292929;
+
+    border-radius: 20px;
+    overflow: hidden;
 }
 
-.empty-results p {
-    color: #777;
-    font-size: .8rem;
-    line-height: 1.6;
-    margin-top: 10px;
+.season-progress-fill {
+    width: 0;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #ff4500,
+        #ff8a36
+    );
+
+    border-radius: 20px;
+
+    transition: width 0.5s ease;
 }
 
-.data-error {
-    padding: 20px;
-    color: #e27b70;
-    background: rgba(180, 40, 40, .08);
-    border: 1px solid rgba(180, 40, 40, .2);
-    border-radius: 10px;
-    font-size: .85rem;
-    line-height: 1.5;
+.season-progress-description {
+    color: var(--color-muted);
+
+    font-size: 0.72rem;
+
+    margin-top: 12px;
 }
 
 
 /* =========================================================
-   12. FINALE
+   15. FINALE / QUALIFIKATION
 ========================================================= */
 
 .final-section {
     position: relative;
-    overflow: hidden;
-    min-height: 390px;
+
+    min-height: 470px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 65px 25px;
-    background: #101010;
-    border-top: 1px solid rgba(255, 91, 0, .2);
-    border-bottom: 1px solid rgba(255, 91, 0, .2);
+
+    padding: 80px 25px;
+
+    border-top: 1px solid rgba(255, 91, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 91, 0, 0.2);
+
+    overflow: hidden;
 }
 
 .final-background {
     position: absolute;
     inset: 0;
+
     background-image:
         linear-gradient(
             90deg,
-            rgba(0, 0, 0, .9),
-            rgba(0, 0, 0, .75),
-            rgba(0, 0, 0, .9)
+            rgba(0, 0, 0, 0.9),
+            rgba(0, 0, 0, 0.75),
+            rgba(0, 0, 0, 0.9)
         ),
         url("Springfever2027_finale_cover.png");
+
     background-size: cover;
     background-position: center;
-    opacity: .8;
+
+    opacity: 0.8;
 }
 
 .final-content {
     position: relative;
     z-index: 2;
+
     max-width: 850px;
     width: 100%;
+
     text-align: center;
 }
 
 .final-content h2 {
-    color: #ff5b00;
+    color: var(--color-orange);
+
     font-size: clamp(2.3rem, 5vw, 4rem);
     font-weight: 900;
+
     margin-top: 8px;
 }
 
 .final-subtitle {
-    color: #ddd;
-    font-size: .95rem;
+    color: #dddddd;
+
+    font-size: 0.95rem;
     font-weight: 800;
     letter-spacing: 4px;
+
     margin-top: 8px;
 }
 
 .final-qualification {
     display: grid;
+
     grid-template-columns: 1fr auto 1fr;
+
     align-items: center;
     gap: 30px;
+
     max-width: 650px;
+
     margin: 35px auto 25px;
     padding: 25px;
-    background: rgba(0, 0, 0, .65);
+
+    background: rgba(0, 0, 0, 0.65);
+
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, .08);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
 }
 
 .final-qualification-team {
     display: flex;
     flex-direction: column;
+
     gap: 8px;
 }
 
 .final-qualification-team span {
-    color: #999;
-    font-size: .65rem;
+    color: var(--color-muted);
+
+    font-size: 0.65rem;
     font-weight: 800;
     letter-spacing: 1px;
 }
@@ -1024,244 +1427,215 @@ nav {
 }
 
 .final-vs {
-    color: #ff5b00;
+    color: var(--color-orange);
+
     font-size: 1.5rem;
     font-weight: 900;
 }
 
 .final-description {
-    color: #aaa;
-    font-size: .85rem;
+    color: #aaaaaa;
+
+    font-size: 0.85rem;
     line-height: 1.6;
+
     max-width: 650px;
     margin: 0 auto;
 }
 
 .final-button {
     display: inline-block;
+
     margin-top: 25px;
     padding: 13px 24px;
-    background: #ff5b00;
-    color: #fff;
-    border-radius: 7px;
-    font-size: .8rem;
+
+    background: var(--color-orange);
+    color: white;
+
+    border-radius: var(--radius-small);
+
+    font-size: 0.8rem;
     font-weight: 900;
-    letter-spacing: .5px;
-    transition: .25s;
+    letter-spacing: 0.5px;
+
+    transition: 0.25s;
 }
 
 .final-button:hover {
-    background: #ff762b;
+    background: var(--color-orange-hover);
     transform: translateY(-3px);
 }
 
-Team-Übersicht
-/* ===================================
-   TEAMÜBERSICHT
-=================================== */
-
-.team-overview-section {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 60px 24px;
-}
-
-.team-overview-header {
-    margin-bottom: 30px;
-}
-
-.team-overview-header .section-label {
-    color: #ff4500;
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-}
-
-.team-overview-header h2 {
-    font-size: 2rem;
-    margin: 8px 0;
-}
-
-.team-overview-header p {
-    color: #999;
-}
-
-.team-overview-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
-}
-
-.team-overview-card {
-    background: linear-gradient(180deg, #181818, #0d0d0d);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 18px;
-    padding: 24px;
-}
-
-.team-overview-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 20px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.team-player-list {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.team-player {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    min-height: 54px;
-}
-
-.team-player img,
-.team-player-placeholder {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(255,255,255,0.15);
-}
-
-.team-player-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #292929;
-    color: #ddd;
-    font-weight: 700;
-}
-
-.team-player span {
-    color: #eee;
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
-.team-loading {
-    color: #999;
-    grid-column: 1 / -1;
-}
-
-/* RESPONSIVE */
-
-@media (max-width: 900px) {
-    .team-overview-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (max-width: 600px) {
-    .team-overview-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .team-overview-section {
-        padding: 40px 16px;
-    }
-
-    .team-overview-header h2 {
-        font-size: 1.6rem;
-    }
-}
-
 
 /* =========================================================
-   13. FOOTER
+   16. FOOTER
 ========================================================= */
 
 footer {
-    max-width: 1100px;
+    padding: 30px 25px;
+
+    background: #050505;
+
+    border-top: 1px solid var(--color-border);
+}
+
+.footer-content {
+    max-width: var(--content-width);
+
     margin: auto;
-    padding: 25px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
-    color: #666;
-    font-size: .7rem;
-    letter-spacing: .5px;
+
+    gap: 20px;
+}
+
+.footer-content p {
+    color: #777777;
+    font-size: 0.72rem;
+}
+
+#lastUpdate {
+    color: #666666;
+    font-size: 0.68rem;
 }
 
 
 /* =========================================================
-   14. TABLET
+   17. LEERZUSTÄNDE UND FEHLERMELDUNGEN
 ========================================================= */
 
-@media (max-width: 900px) {
+.empty-results,
+.data-error {
+    padding: 35px 25px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+}
+
+.empty-results-icon {
+    color: var(--color-orange);
+
+    font-size: 2rem;
+    font-weight: 900;
+
+    margin-bottom: 12px;
+}
+
+.empty-results h3 {
+    color: white;
+
+    font-size: 0.95rem;
+    font-weight: 900;
+
+    margin-bottom: 8px;
+}
+
+.empty-results p {
+    max-width: 550px;
+
+    margin: auto;
+
+    color: var(--color-muted);
+
+    font-size: 0.8rem;
+    line-height: 1.6;
+}
+
+.data-error {
+    color: #ff7777;
+
+    font-size: 0.85rem;
+    line-height: 1.6;
+
+    border-color: rgba(255, 80, 80, 0.25);
+    background: rgba(255, 80, 80, 0.05);
+}
+
+
+/* =========================================================
+   18. RESPONSIVE – TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .nav-links {
+        gap: 1.5rem;
+    }
 
     .season-overview {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .team-overview-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .ranking-table-header,
     .ranking-row {
-        grid-template-columns: 55px minmax(130px, 2fr) 85px 90px 120px;
+        grid-template-columns:
+            50px
+            minmax(150px, 1fr)
+            100px
+            90px
+            125px;
+
         gap: 10px;
-        padding-left: 15px;
-        padding-right: 15px;
-    }
 
-    .ranking-team strong {
-        font-size: .9rem;
-    }
-
-    .ranking-points {
-        font-size: 1.4rem;
+        padding-left: 16px;
+        padding-right: 16px;
     }
 
     .match-card {
-        grid-template-columns: 70px minmax(0, 1fr) 120px;
-        gap: 15px;
+        grid-template-columns: 75px minmax(0, 1fr) 145px;
+        gap: 14px;
     }
 
 }
 
 
 /* =========================================================
-   15. MOBILE
+   19. RESPONSIVE – SMARTPHONE
 ========================================================= */
 
-@media (max-width: 768px) {
-
-    /* Navigation */
+@media (max-width: 700px) {
 
     .nav-container {
-        padding: 10px 15px;
+        padding: 10px 18px;
+
+        flex-direction: column;
+        gap: 12px;
     }
 
     .logo img {
-        width: 115px;
+        width: 135px;
     }
 
     .nav-links {
-        gap: 1.1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        gap: 18px;
+
+        font-size: 0.8rem;
     }
-
-    .nav-links a {
-        font-size: .8rem;
-    }
-
-
-    /* Hero */
 
     .season-hero {
-        min-height: 420px;
-        padding: 60px 18px;
+        min-height: 400px;
+        padding: 60px 20px;
     }
 
     .season-hero h1 {
-        font-size: clamp(2.3rem, 10vw, 4rem);
+        font-size: clamp(2.5rem, 12vw, 4rem);
     }
 
     .season-subtitle {
-        font-size: .8rem;
+        font-size: 0.8rem;
         letter-spacing: 3px;
     }
 
@@ -1271,338 +1645,312 @@ footer {
     }
 
     .meta-item strong {
-        font-size: .85rem;
+        font-size: 0.85rem;
     }
-
-
-    /* Overview */
 
     .season-overview {
         grid-template-columns: 1fr;
+
         margin-top: -20px;
-        padding: 0 15px;
-        gap: 10px;
+        gap: 12px;
     }
 
     .overview-card {
-        min-height: 125px;
+        min-height: 110px;
         padding: 20px;
     }
 
     .overview-value {
-        font-size: 2.3rem;
+        font-size: 1.8rem;
     }
 
-
-    /* Sections */
-
-    .section-container {
-        padding: 0 15px;
-        margin-bottom: 45px;
+    .section-container,
+    .team-overview-section,
+    .ranking-section,
+    .schedule-section,
+    .history-section,
+    .season-progress-section {
+        padding: 40px 18px;
     }
 
-    .section-heading {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 10px;
+    .team-overview-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
     }
 
-    .section-heading h2 {
-        font-size: 1.2rem;
+    .team-overview-card {
+        padding: 20px;
     }
 
-
-    /* Ranking */
+    .ranking-card {
+        overflow-x: auto;
+    }
 
     .ranking-table-header {
         display: none;
     }
 
     .ranking-row {
-        grid-template-columns: 35px minmax(0, 1fr) auto;
+        grid-template-columns: 38px minmax(0, 1fr) auto;
+
         gap: 10px;
-        padding: 17px 12px;
+
+        padding: 17px 14px;
     }
 
     .ranking-position {
-        grid-column: 1;
         grid-row: 1 / 3;
-    }
-
-    .position-number {
-        font-size: 1.2rem;
     }
 
     .ranking-team {
         grid-column: 2;
         grid-row: 1;
-        gap: 8px;
-    }
-
-    .ranking-team strong {
-        font-size: .85rem;
-    }
-
-    .ranking-team span {
-        font-size: .65rem;
     }
 
     .ranking-games {
         grid-column: 2;
         grid-row: 2;
-        flex-direction: row;
-        align-items: center;
-        gap: 6px;
-    }
-
-    .ranking-games strong {
-        font-size: .75rem;
-    }
-
-    .ranking-games span {
-        font-size: .65rem;
     }
 
     .ranking-points {
         grid-column: 3;
         grid-row: 1;
-        font-size: 1.25rem;
+
         text-align: right;
     }
 
     .ranking-status-cell {
         grid-column: 3;
         grid-row: 2;
+
         justify-content: flex-end;
+    }
+
+    .ranking-team strong {
+        font-size: 0.9rem;
+    }
+
+    .ranking-team span {
+        font-size: 0.65rem;
+    }
+
+    .position-number {
+        font-size: 1.1rem;
     }
 
     .qualification-badge {
         padding: 5px 7px;
-        font-size: .55rem;
+        font-size: 0.55rem;
     }
 
     .ranking-footer {
-        flex-direction: column;
-        gap: 10px;
+        padding: 14px;
+        font-size: 0.68rem;
+    }
+
+    .match-card {
+        grid-template-columns: 60px minmax(0, 1fr);
+
+        gap: 12px;
         padding: 15px;
     }
 
-
-    /* Schedule */
-
-    .match-card {
-        grid-template-columns: 55px minmax(0, 1fr);
-        gap: 12px;
-        padding: 16px 12px;
-    }
-
     .match-date {
-        grid-column: 1;
-        grid-row: 1 / 3;
-        padding-right: 10px;
-        font-size: .7rem;
+        width: 55px;
+        min-height: 65px;
     }
 
     .match-date strong {
-        font-size: 1.5rem;
-    }
-
-    .match-date span {
-        font-size: .7rem;
-    }
-
-    .match-content {
-        grid-column: 2;
-        grid-row: 1;
+        font-size: 1.3rem;
     }
 
     .match-teams {
         gap: 8px;
-        flex-wrap: wrap;
-    }
-
-    .match-team {
-        gap: 6px;
-    }
-
-    .match-team img {
-        width: 27px;
-        height: 27px;
     }
 
     .match-team strong {
-        font-size: .75rem;
+        font-size: 0.8rem;
     }
 
     .match-vs {
-        font-size: .6rem;
+        font-size: 0.65rem;
     }
 
     .match-details {
-        font-size: .65rem;
-        margin-top: 7px;
+        font-size: 0.65rem;
     }
 
     .match-result {
         grid-column: 2;
-        grid-row: 2;
+
         flex-direction: row;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
+
+        flex-wrap: wrap;
+        gap: 8px;
     }
 
-    .match-id {
-        display: none;
+    .match-score {
+        font-size: 0.95rem;
     }
-
-
-    /* Match History */
 
     .history-card > summary {
-        padding: 15px 12px;
+        padding: 16px;
         gap: 10px;
     }
 
-    .history-card > summary strong {
-        font-size: .8rem;
+    .history-summary-main strong {
+        font-size: 0.82rem;
     }
 
-    .history-card > summary span {
-        font-size: .62rem;
+    .history-summary-main span {
+        font-size: 0.62rem;
     }
 
-    .history-card > summary > span {
-        white-space: normal;
-        text-align: right;
+    .history-summary-result strong {
+        font-size: 0.9rem;
+    }
+
+    .history-summary-result span {
+        font-size: 0.58rem;
     }
 
     .history-content {
-        padding: 0 10px 12px;
+        padding: 0 14px 16px;
     }
 
-    .campaign-details > summary,
-    .history-campaign > summary {
-        padding: 14px 12px;
+    .history-rosters {
+        grid-template-columns: 1fr;
+        gap: 12px;
+
+        padding: 16px 0;
     }
 
-    .campaign-details > summary > span,
-    .history-campaign-title strong {
-        font-size: .75rem;
+    .history-roster {
+        padding: 15px;
     }
 
-    .campaign-details > summary > strong,
-    .history-campaign-title span {
-        font-size: .75rem;
+    .history-player-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .chapter-table {
-        font-size: .7rem;
+    .history-player img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .history-player span {
+        font-size: 0.7rem;
+    }
+
+    .history-match-winner {
+        padding: 13px;
+    }
+
+    .history-match-winner span {
+        font-size: 0.6rem;
+    }
+
+    .history-match-winner strong {
+        font-size: 0.8rem;
+    }
+
+    .campaign-details > summary {
+        padding: 13px;
+    }
+
+    .campaign-details > summary span {
+        font-size: 0.75rem;
+    }
+
+    .campaign-details > summary strong {
+        font-size: 0.85rem;
     }
 
     .chapter-table th,
     .chapter-table td {
-        padding: 11px 9px;
+        padding: 10px;
+        font-size: 0.68rem;
     }
 
+    .season-progress-card {
+        padding: 18px;
+    }
 
-    /* Finale */
+    .season-progress-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
 
     .final-section {
-        padding: 50px 15px;
+        min-height: 430px;
+        padding: 60px 18px;
     }
 
     .final-qualification {
-        gap: 12px;
-        padding: 18px 12px;
-    }
+        grid-template-columns: 1fr;
 
-    .final-qualification-team strong {
-        font-size: .9rem;
+        gap: 15px;
+        padding: 20px;
     }
 
     .final-vs {
         font-size: 1.1rem;
     }
 
+    .final-qualification-team strong {
+        font-size: 1rem;
+    }
+
     .final-subtitle {
-        font-size: .75rem;
+        font-size: 0.75rem;
         letter-spacing: 2px;
     }
 
-
-    /* Footer */
-
-    footer {
+    .footer-content {
         flex-direction: column;
         text-align: center;
-        padding: 20px 15px;
     }
 
 }
 
 
 /* =========================================================
-   16. SMALL MOBILE
+   20. RESPONSIVE – KLEINE SMARTPHONES
 ========================================================= */
 
-@media (max-width: 420px) {
-
-    .nav-container {
-        padding: 10px;
-    }
-
-    .logo img {
-        width: 95px;
-    }
+@media (max-width: 400px) {
 
     .nav-links {
-        gap: .75rem;
+        gap: 12px;
+        font-size: 0.72rem;
     }
 
-    .nav-links a {
-        font-size: .7rem;
+    .season-meta {
+        gap: 18px;
+    }
+
+    .meta-label {
+        font-size: 0.6rem;
+    }
+
+    .meta-item strong {
+        font-size: 0.78rem;
     }
 
     .ranking-row {
-        grid-template-columns: 27px minmax(0, 1fr) auto;
+        grid-template-columns: 30px minmax(0, 1fr) auto;
         gap: 7px;
-        padding: 15px 9px;
-    }
-
-    .ranking-team strong {
-        font-size: .78rem;
-    }
-
-    .ranking-team span {
-        font-size: .6rem;
     }
 
     .ranking-points {
-        font-size: 1.1rem;
+        font-size: 0.95rem;
     }
 
-    .qualification-badge {
-        font-size: .5rem;
-    }
-
-    .match-card {
-        gap: 8px;
-    }
-
-    .match-team strong {
-        font-size: .68rem;
-    }
-
-    .history-card > summary {
-        gap: 7px;
-    }
-
-    .history-card > summary strong {
-        font-size: .72rem;
-    }
-
-    .history-card > summary > span {
-        font-size: .58rem;
+    .history-player-list {
+        grid-template-columns: 1fr;
     }
 
 }

@@ -1,9 +1,12 @@
 
 
+
 /* =========================================================
    SPRINGFEVER 2027 – ONLINE QUALIFICATION
+
    Datenquelle: Google Sheets (CSV)
-   ========================================================= */
+   Darstellung: Teamübersicht, Rangliste, Spielplan, Match-History
+========================================================= */
 
 
 /* =========================================================
@@ -34,12 +37,40 @@ let teams = [];
 
 const TOTAL_CAMPAIGNS = 24;
 const TOTAL_MATCHES = 12;
+
 const CAMPAIGNS_PER_MATCH = 2;
 const CAMPAIGNS_PER_TEAM = 16;
 
 
 /* =========================================================
-   3. HILFSFUNKTIONEN
+   3. SPIELERBILDER
+========================================================= */
+
+// Die Dateinamen entsprechen deiner bestehenden Spielerübersicht.
+// Spieler ohne eigenes Bild erhalten automatisch einen Platzhalter.
+
+const PLAYER_IMAGES = {
+
+    "stun": "Stun.png",
+    "schokk": "SchoKK.png",
+    "serbia": "serbia4life88.png",
+    "serbia4life88": "serbia4life88.png",
+    "salomon sunday": "Salomon.png",
+    "salomon": "Salomon.png",
+    "chester244": "Chester244.png",
+    "joker": "Alex.png",
+    "kovka": "Is_Kovka.png",
+    "is_kovka": "Is_Kovka.png",
+    "cete": "Cete.png",
+    "jabawoozee": "Jabawoozee.png",
+    "jaba": "Jabawoozee.png",
+    "psytech": "Psytech.png"
+
+};
+
+
+/* =========================================================
+   4. HILFSFUNKTIONEN
 ========================================================= */
 
 function clean(value) {
@@ -64,13 +95,16 @@ function escapeHTML(value) {
 }
 
 
+function normalizeName(value) {
+
+    return clean(value).toLowerCase();
+
+}
+
+
 function parseNumber(value) {
 
-    if (
-        value === undefined ||
-        value === null ||
-        String(value).trim() === ""
-    ) {
+    if (!hasValue(value)) {
         return 0;
     }
 
@@ -96,14 +130,29 @@ function hasValue(value) {
 }
 
 
-/* =========================================================
-   4. DATUMSFUNKTIONEN
-========================================================= */
+function formatPoints(value) {
 
-// Unterstützt:
-// 15.12.2026
-// 2026-12-15
-// 2026-12-15T00:00:00
+    return Number(value || 0).toLocaleString("de-DE");
+
+}
+
+
+function getPlayerImage(playerName) {
+
+    const image = PLAYER_IMAGES[normalizeName(playerName)];
+
+    if (!image) {
+        return null;
+    }
+
+    return "../../../../spielerfolder/" + image;
+
+}
+
+
+/* =========================================================
+   5. DATUMSFUNKTIONEN
+========================================================= */
 
 function parseDate(value) {
 
@@ -111,7 +160,8 @@ function parseDate(value) {
 
     if (!input) return null;
 
-    // Deutsches Datumsformat
+    // Deutsches Format: 15.12.2026
+
     const germanDate = input.match(
         /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
     );
@@ -136,7 +186,8 @@ function parseDate(value) {
 
     }
 
-    // ISO-Format
+    // ISO-Format: 2026-12-15
+
     const isoDate = input.match(
         /^(\d{4})-(\d{2})-(\d{2})/
     );
@@ -203,7 +254,7 @@ function getDateParts(value) {
 
 
 /* =========================================================
-   5. CSV-DATEN LADEN
+   6. CSV-DATEN LADEN
 ========================================================= */
 
 function loadCSV(url, requiredColumns) {
@@ -213,7 +264,6 @@ function loadCSV(url, requiredColumns) {
         if (!url) {
 
             reject(new Error("CSV-Link fehlt."));
-
             return;
 
         }
@@ -224,7 +274,7 @@ function loadCSV(url, requiredColumns) {
             header: true,
             skipEmptyLines: true,
 
-            transformHeader: function (header) {
+            transformHeader: function(header) {
 
                 return header
                     .replace(/^\uFEFF/, "")
@@ -232,16 +282,7 @@ function loadCSV(url, requiredColumns) {
 
             },
 
-            complete: function (results) {
-
-                if (results.errors.length > 0) {
-
-                    console.warn(
-                        "CSV-Hinweise:",
-                        results.errors
-                    );
-
-                }
+            complete: function(results) {
 
                 const availableColumns = results.meta.fields || [];
 
@@ -260,11 +301,30 @@ function loadCSV(url, requiredColumns) {
 
                 }
 
+                if (!results.data || results.data.length === 0) {
+
+                    reject(new Error(
+                        "Die CSV-Datei enthält keine Daten."
+                    ));
+
+                    return;
+
+                }
+
+                if (results.errors.length > 0) {
+
+                    console.warn(
+                        "CSV-Hinweise:",
+                        results.errors
+                    );
+
+                }
+
                 resolve(results.data);
 
             },
 
-            error: function (error) {
+            error: function(error) {
 
                 reject(error);
 
@@ -278,7 +338,7 @@ function loadCSV(url, requiredColumns) {
 
 
 /* =========================================================
-   6. TEAMS ZUSAMMENFASSEN
+   7. TEAMS ZUSAMMENFASSEN
 ========================================================= */
 
 function getUniqueTeams() {
@@ -306,7 +366,10 @@ function getUniqueTeams() {
 
         const player = clean(row.Spieler);
 
-        if (player) {
+        if (
+            player &&
+            !uniqueTeams.get(id).players.includes(player)
+        ) {
 
             uniqueTeams.get(id).players.push(player);
 
@@ -321,12 +384,12 @@ function getUniqueTeams() {
 
 function findTeam(identifier) {
 
-    const value = clean(identifier).toLowerCase();
+    const value = normalizeName(identifier);
 
     return getUniqueTeams().find(team =>
 
-        team.id.toLowerCase() === value ||
-        team.name.toLowerCase() === value
+        normalizeName(team.id) === value ||
+        normalizeName(team.name) === value
 
     );
 
@@ -334,11 +397,99 @@ function findTeam(identifier) {
 
 
 /* =========================================================
-   7. ERGEBNISSE GRUPPIEREN
+   8. TEAMÜBERSICHT
 ========================================================= */
 
-// Alle Kampagnenzeilen eines Matches.
-// Auch noch nicht abgeschlossene Kampagnen bleiben enthalten.
+function renderTeamOverview() {
+
+    const container = document.getElementById(
+        "teamOverviewContainer"
+    );
+
+    if (!container) return;
+
+    const allTeams = getUniqueTeams();
+
+    if (allTeams.length === 0) {
+
+        container.innerHTML = `
+            <div class="empty-results">
+                <h3>KEINE TEAMS GEFUNDEN</h3>
+                <p>Die Teamdaten konnten nicht verarbeitet werden.</p>
+            </div>
+        `;
+
+        return;
+
+    }
+
+    container.innerHTML = allTeams.map(team => {
+
+        const playerHTML = team.players.map(playerName => {
+
+            const imagePath = getPlayerImage(playerName);
+
+            const avatar = imagePath
+
+                ? `
+                    <img
+                        src="${escapeHTML(imagePath)}"
+                        alt="${escapeHTML(playerName)}"
+                        onerror="
+                            this.style.display='none';
+                            this.nextElementSibling.style.display='flex';
+                        "
+                    >
+
+                    <div class="team-player-placeholder" style="display:none">
+                        ${escapeHTML(playerName.charAt(0).toUpperCase())}
+                    </div>
+                `
+
+                : `
+                    <div class="team-player-placeholder">
+                        ${escapeHTML(playerName.charAt(0).toUpperCase())}
+                    </div>
+                `;
+
+            return `
+                <div class="team-player">
+
+                    ${avatar}
+
+                    <span>
+                        ${escapeHTML(playerName)}
+                    </span>
+
+                </div>
+            `;
+
+        }).join("");
+
+        return `
+            <article class="team-overview-card">
+
+                <h3>
+                    ${escapeHTML(team.name)}
+                </h3>
+
+                <div class="team-player-list">
+
+                    ${playerHTML}
+
+                </div>
+
+            </article>
+        `;
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   9. ERGEBNISSE GRUPPIEREN
+========================================================= */
 
 function groupAllResultsByMatch() {
 
@@ -352,15 +503,11 @@ function groupAllResultsByMatch() {
         if (!matchID || !campaignID) return;
 
         if (!grouped[matchID]) {
-
             grouped[matchID] = {};
-
         }
 
         if (!grouped[matchID][campaignID]) {
-
             grouped[matchID][campaignID] = [];
-
         }
 
         grouped[matchID][campaignID].push(row);
@@ -373,27 +520,25 @@ function groupAllResultsByMatch() {
 
 
 // Eine Kampagne gilt nur dann als abgeschlossen,
-// wenn ALLE Kapitelzeilen den Status "Fertig" haben
+// wenn alle Kapitelzeilen den Status "Fertig" haben
 // und beide kumulierten Punktestände eingetragen sind.
 
 function isCampaignComplete(rows) {
 
-    if (!rows || rows.length === 0) return false;
+    if (!rows || rows.length === 0) {
+        return false;
+    }
 
     return rows.every(row =>
 
         clean(row.Status).toLowerCase() === "fertig" &&
-
         hasValue(row.Team_Blau_Punkte_kum) &&
-
         hasValue(row.Team_Rot_Punkte_kum)
 
     );
 
 }
 
-
-// Liefert nur vollständig abgeschlossene Kampagnen.
 
 function getCompletedCampaignsForMatch(matchID) {
 
@@ -404,9 +549,7 @@ function getCompletedCampaignsForMatch(matchID) {
     return Object.entries(campaigns)
 
         .filter(([campaignID, rows]) =>
-
             isCampaignComplete(rows)
-
         )
 
         .map(([campaignID, rows]) => ({
@@ -420,7 +563,7 @@ function getCompletedCampaignsForMatch(matchID) {
 
 
 /* =========================================================
-   8. KAPITELPUNKTE UND KAMPAGNENERGEBNISSE
+   10. KAPITELPUNKTE UND KAMPAGNENERGEBNISSE
 ========================================================= */
 
 function calculateCampaign(rows) {
@@ -430,9 +573,7 @@ function calculateCampaign(rows) {
 
     const chapters = [];
 
-    // Wichtig:
-    // Die Reihenfolge aus Google Sheets bleibt erhalten.
-    // Keine alphabetische Sortierung der Kapitel!
+    // Die Reihenfolge der Kapitel aus Google Sheets bleibt erhalten.
 
     rows.forEach(row => {
 
@@ -469,7 +610,6 @@ function calculateCampaign(rows) {
     return {
 
         campaignID: clean(rows[0].Kampagne_ID),
-
         campaignName: clean(rows[0].Kampagne),
 
         chapters: chapters,
@@ -483,7 +623,7 @@ function calculateCampaign(rows) {
 
 
 /* =========================================================
-   9. RANGLISTE BERECHNEN
+   11. RANGLISTE BERECHNEN
 ========================================================= */
 
 function calculateRanking() {
@@ -504,9 +644,7 @@ function calculateRanking() {
     Object.entries(grouped).forEach(([matchID, campaigns]) => {
 
         const match = spielplan.find(row =>
-
             clean(row.Match_ID) === matchID
-
         );
 
         if (!match) return;
@@ -514,16 +652,7 @@ function calculateRanking() {
         const blueTeam = findTeam(match.Team_Blau);
         const redTeam = findTeam(match.Team_Rot);
 
-        if (!blueTeam || !redTeam) {
-
-            console.warn(
-                "Team nicht gefunden bei Match:",
-                matchID
-            );
-
-            return;
-
-        }
+        if (!blueTeam || !redTeam) return;
 
         const blue = ranking.find(team =>
             team.id === blueTeam.id
@@ -542,14 +671,17 @@ function calculateRanking() {
             const campaign = calculateCampaign(rows);
 
             // Gesamtpunkte
+
             blue.totalPoints += campaign.blueTotal;
             red.totalPoints += campaign.redTotal;
 
-            // Anzahl gespielter Kampagnen
+            // Gespielte Kampagnen
+
             blue.playedCampaigns++;
             red.playedCampaigns++;
 
             // Kampagnensiege
+
             if (campaign.blueTotal > campaign.redTotal) {
 
                 blue.campaignWins++;
@@ -561,6 +693,7 @@ function calculateRanking() {
             }
 
             // Kapitelgewinne
+
             campaign.chapters.forEach(chapter => {
 
                 if (chapter.bluePoints > chapter.redPoints) {
@@ -579,7 +712,6 @@ function calculateRanking() {
 
     });
 
-
     // Ranglistensortierung:
     // 1. Gesamtpunkte
     // 2. Kampagnensiege
@@ -588,9 +720,7 @@ function calculateRanking() {
     ranking.sort((a, b) =>
 
         b.totalPoints - a.totalPoints ||
-
         b.campaignWins - a.campaignWins ||
-
         b.chapterWins - a.chapterWins
 
     );
@@ -601,7 +731,7 @@ function calculateRanking() {
 
 
 /* =========================================================
-   10. RANGLISTE ANZEIGEN
+   12. RANGLISTE ANZEIGEN
 ========================================================= */
 
 function renderRanking() {
@@ -617,7 +747,6 @@ function renderRanking() {
     container.innerHTML = ranking.map((team, index) => {
 
         const position = index + 1;
-
         const qualified = position <= 2;
 
         const status = qualified
@@ -625,7 +754,6 @@ function renderRanking() {
             : "eliminated";
 
         return `
-
             <div class="ranking-row ${status}">
 
                 <div class="ranking-position">
@@ -635,7 +763,6 @@ function renderRanking() {
                     </span>
 
                 </div>
-
 
                 <div class="ranking-team">
 
@@ -653,7 +780,6 @@ function renderRanking() {
 
                 </div>
 
-
                 <div class="ranking-games">
 
                     <strong>
@@ -664,26 +790,19 @@ function renderRanking() {
 
                 </div>
 
-
                 <div class="ranking-points">
-
-                    ${team.totalPoints.toLocaleString("de-DE")}
-
+                    ${formatPoints(team.totalPoints)}
                 </div>
-
 
                 <div class="ranking-status-cell">
 
                     <span class="qualification-badge ${qualified ? "" : "pending"}">
-
                         ${qualified ? "QUALIFIZIERT" : "AUSSERHALB"}
-
                     </span>
 
                 </div>
 
             </div>
-
         `;
 
     }).join("");
@@ -692,7 +811,7 @@ function renderRanking() {
 
 
 /* =========================================================
-   11. SPIELPLAN – DATEN UND STATUS
+   13. MATCHDATEN UND STATUS
 ========================================================= */
 
 function getMatchData(match) {
@@ -721,7 +840,9 @@ function getMatchData(match) {
     });
 
     const campaignNames = Object.values(assignedCampaigns)
+
         .map(rows => clean(rows[0]?.Kampagne))
+
         .filter(Boolean);
 
     let status;
@@ -759,12 +880,18 @@ function getMatchData(match) {
 
 
 /* =========================================================
-   12. SPIELPLAN ANZEIGEN
+   14. ANSTEHENDE BEGEGNUNGEN
 ========================================================= */
 
 function renderSchedule() {
 
-    const container = document.querySelector(".schedule-list");
+    const container = document.getElementById(
+        "upcomingMatchesContainer"
+    );
+
+    const counter = document.getElementById(
+        "upcomingMatchCount"
+    );
 
     if (!container) return;
 
@@ -779,14 +906,53 @@ function renderSchedule() {
 
     });
 
+    // Nur Matches anzeigen, bei denen noch mindestens
+    // eine Kampagne nicht abgeschlossen ist.
 
-    container.innerHTML = sortedMatches.map(match => {
+    const upcomingMatches = sortedMatches.filter(match => {
+
+        const data = getMatchData(match);
+
+        return data.completedCount < CAMPAIGNS_PER_MATCH;
+
+    });
+
+    if (counter) {
+
+        counter.textContent =
+            `${upcomingMatches.length} BEGEGNUNGEN`;
+
+    }
+
+    if (upcomingMatches.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-results">
+
+                <div class="empty-results-icon">✓</div>
+
+                <h3>ALLE BEGEGNUNGEN ABGESCHLOSSEN</h3>
+
+                <p>
+                    Aktuell stehen keine offenen Begegnungen mehr aus.
+                    Die Ergebnisse findest du in der Match-History.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    container.innerHTML = upcomingMatches.map(match => {
 
         const blueTeam = findTeam(match.Team_Blau);
         const redTeam = findTeam(match.Team_Rot);
 
         const data = getMatchData(match);
-
         const date = getDateParts(match.Datum);
 
         const blueName = blueTeam?.name || match.Team_Blau;
@@ -798,25 +964,20 @@ function renderSchedule() {
 
             : "Kampagnen werden geladen";
 
-
         const score = data.completedCount > 0
 
-            ? `${data.blueTotal.toLocaleString("de-DE")} : ${data.redTotal.toLocaleString("de-DE")}`
+            ? `${formatPoints(data.blueTotal)} : ${formatPoints(data.redTotal)}`
 
             : "– : –";
-
 
         return `
 
             <article class="match-card">
 
-
                 <div class="match-date">
 
                     <strong>${date.day}</strong>
-
                     <span>${date.month}</span>
-
                     <small>${date.year}</small>
 
                 </div>
@@ -827,34 +988,20 @@ function renderSchedule() {
                     <div class="match-teams">
 
                         <div class="match-team">
-
-                            <strong>
-                                ${escapeHTML(blueName)}
-                            </strong>
-
+                            <strong>${escapeHTML(blueName)}</strong>
                         </div>
 
-
-                        <span class="match-vs">
-                            VS
-                        </span>
-
+                        <span class="match-vs">VS</span>
 
                         <div class="match-team">
-
-                            <strong>
-                                ${escapeHTML(redName)}
-                            </strong>
-
+                            <strong>${escapeHTML(redName)}</strong>
                         </div>
 
                     </div>
 
-
                     <div class="match-details">
-
-                        ${CAMPAIGNS_PER_MATCH} Kampagnen · ${campaignText}
-
+                        ${data.completedCount} / ${CAMPAIGNS_PER_MATCH} Kampagnen abgeschlossen
+                        · ${campaignText}
                     </div>
 
                 </div>
@@ -863,27 +1010,18 @@ function renderSchedule() {
                 <div class="match-result">
 
                     <span class="match-status ${data.statusClass}">
-
                         ${data.status}
-
                     </span>
-
 
                     <span class="match-score">
-
                         ${score}
-
                     </span>
 
-
                     <span class="match-id">
-
                         ${escapeHTML(match.Match_ID)}
-
                     </span>
 
                 </div>
-
 
             </article>
 
@@ -895,7 +1033,100 @@ function renderSchedule() {
 
 
 /* =========================================================
-   13. MATCH-HISTORIE – KAMPAGNEN UND KAPITEL
+   15. SPIELER IN DER MATCH-HISTORY
+========================================================= */
+
+function renderHistoryPlayers(team) {
+
+    if (!team || !team.players.length) {
+
+        return `
+            <span class="history-no-players">
+                Keine Spielerdaten verfügbar
+            </span>
+        `;
+
+    }
+
+    return team.players.map(playerName => {
+
+        const imagePath = getPlayerImage(playerName);
+
+        const avatar = imagePath
+
+            ? `
+                <img
+                    src="${escapeHTML(imagePath)}"
+                    alt="${escapeHTML(playerName)}"
+                    onerror="this.style.display='none'"
+                >
+            `
+
+            : "";
+
+        return `
+
+            <div class="history-player">
+
+                ${avatar}
+
+                <span>
+                    ${escapeHTML(playerName)}
+                </span>
+
+            </div>
+
+        `;
+
+    }).join("");
+
+}
+
+
+function renderHistoryRosters(blueTeam, redTeam, blueName, redName) {
+
+    return `
+
+        <div class="history-rosters">
+
+            <div class="history-roster">
+
+                <strong>
+                    ${escapeHTML(blueName)}
+                </strong>
+
+                <div class="history-player-list">
+
+                    ${renderHistoryPlayers(blueTeam)}
+
+                </div>
+
+            </div>
+
+
+            <div class="history-roster">
+
+                <strong>
+                    ${escapeHTML(redName)}
+                </strong>
+
+                <div class="history-player-list">
+
+                    ${renderHistoryPlayers(redTeam)}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   16. MATCH-HISTORY – KAMPAGNEN UND KAPITEL
 ========================================================= */
 
 function renderMatchHistory() {
@@ -906,16 +1137,53 @@ function renderMatchHistory() {
 
     if (!container) return;
 
-    const sortedMatches = [...spielplan].sort((a, b) => {
+    // Nur Begegnungen anzeigen, bei denen beide Kampagnen
+    // vollständig abgeschlossen sind.
 
-        const dateA = parseDate(a.Datum);
-        const dateB = parseDate(b.Datum);
+    const sortedMatches = [...spielplan]
 
-        if (!dateA || !dateB) return 0;
+        .filter(match => {
 
-        return dateB - dateA;
+            return getCompletedCampaignsForMatch(
+                clean(match.Match_ID)
+            ).length >= CAMPAIGNS_PER_MATCH;
 
-    });
+        })
+
+        .sort((a, b) => {
+
+            const dateA = parseDate(a.Datum);
+            const dateB = parseDate(b.Datum);
+
+            if (!dateA || !dateB) return 0;
+
+            return dateB - dateA;
+
+        });
+
+
+    if (sortedMatches.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-results">
+
+                <div class="empty-results-icon">—</div>
+
+                <h3>NOCH KEINE ABGESCHLOSSENEN BEGEGNUNGEN</h3>
+
+                <p>
+                    Sobald beide Kampagnen einer Begegnung abgeschlossen sind,
+                    erscheinen hier die Ergebnisse.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
 
 
     container.innerHTML = sortedMatches.map(match => {
@@ -930,10 +1198,21 @@ function renderMatchHistory() {
             getCompletedCampaignsForMatch(clean(match.Match_ID));
 
 
+        // Spieler beider Mannschaften
+
+        const playersHTML = renderHistoryRosters(
+            blueTeam,
+            redTeam,
+            blueName,
+            redName
+        );
+
+
+        // Kampagnen und Kapitel
+
         const campaignHTML = completedCampaigns.map(item => {
 
             const campaign = calculateCampaign(item.rows);
-
 
             const chaptersHTML = campaign.chapters.map(chapter => `
 
@@ -944,15 +1223,15 @@ function renderMatchHistory() {
                     </td>
 
                     <td>
-                        ${chapter.maxPoints.toLocaleString("de-DE")}
+                        ${formatPoints(chapter.maxPoints)}
                     </td>
 
                     <td class="blue">
-                        ${chapter.bluePoints.toLocaleString("de-DE")}
+                        ${formatPoints(chapter.bluePoints)}
                     </td>
 
                     <td class="red">
-                        ${chapter.redPoints.toLocaleString("de-DE")}
+                        ${formatPoints(chapter.redPoints)}
                     </td>
 
                 </tr>
@@ -977,7 +1256,6 @@ function renderMatchHistory() {
 
                 <details class="campaign-details">
 
-
                     <summary>
 
                         <span>
@@ -986,9 +1264,9 @@ function renderMatchHistory() {
 
                         <strong>
 
-                            ${campaign.blueTotal.toLocaleString("de-DE")}
+                            ${formatPoints(campaign.blueTotal)}
                             :
-                            ${campaign.redTotal.toLocaleString("de-DE")}
+                            ${formatPoints(campaign.redTotal)}
 
                         </strong>
 
@@ -1004,11 +1282,8 @@ function renderMatchHistory() {
                                 <tr>
 
                                     <th>KAPITEL</th>
-
                                     <th>MAX.</th>
-
                                     <th>${escapeHTML(blueName)}</th>
-
                                     <th>${escapeHTML(redName)}</th>
 
                                 </tr>
@@ -1043,7 +1318,6 @@ function renderMatchHistory() {
 
                     </div>
 
-
                 </details>
 
             `;
@@ -1051,7 +1325,19 @@ function renderMatchHistory() {
         }).join("");
 
 
-        const completedCount = completedCampaigns.length;
+        // Gesamtergebnis der Begegnung
+
+        const matchData = getMatchData(match);
+
+        const matchWinner =
+
+            matchData.blueTotal > matchData.redTotal
+                ? blueName
+
+                : matchData.redTotal > matchData.blueTotal
+                    ? redName
+
+                    : "UNENTSCHIEDEN";
 
 
         return `
@@ -1061,7 +1347,7 @@ function renderMatchHistory() {
 
                 <summary>
 
-                    <div>
+                    <div class="history-summary-main">
 
                         <strong>
 
@@ -1070,7 +1356,6 @@ function renderMatchHistory() {
                             ${escapeHTML(redName)}
 
                         </strong>
-
 
                         <span>
 
@@ -1083,37 +1368,52 @@ function renderMatchHistory() {
                     </div>
 
 
-                    <span>
+                    <div class="history-summary-result">
 
-                        ${completedCount} / ${CAMPAIGNS_PER_MATCH} Kampagnen
+                        <strong>
+                            ${formatPoints(matchData.blueTotal)}
+                            :
+                            ${formatPoints(matchData.redTotal)}
+                        </strong>
 
-                    </span>
+                        <span>
+                            ${completedCampaigns.length} / ${CAMPAIGNS_PER_MATCH} Kampagnen
+                        </span>
+
+                    </div>
 
                 </summary>
 
 
                 <div class="history-content">
 
-                    ${
 
-                        campaignHTML ||
+                    <!-- MANNSCHAFTSAUFSTELLUNGEN -->
 
-                        `
+                    ${playersHTML}
 
-                            <div class="empty-results">
 
-                                <h3>NOCH KEINE ERGEBNISSE</h3>
+                    <!-- GESAMTSIEGER -->
 
-                                <p>
-                                    Für diese Begegnung liegen noch keine
-                                    vollständig abgeschlossenen Kampagnen vor.
-                                </p>
+                    <div class="history-match-winner">
 
-                            </div>
+                        <span>BEGEGNUNGSSIEGER</span>
 
-                        `
+                        <strong>
+                            ${escapeHTML(matchWinner)}
+                        </strong>
 
-                    }
+                    </div>
+
+
+                    <!-- KAMPAGNEN -->
+
+                    <div class="history-campaigns">
+
+                        ${campaignHTML}
+
+                    </div>
+
 
                 </div>
 
@@ -1128,29 +1428,36 @@ function renderMatchHistory() {
 
 
 /* =========================================================
-   14. SAISONFORTSCHRITT
+   17. SAISONFORTSCHRITT
 ========================================================= */
 
-function renderSeasonProgress() {
+function getCompletedCampaignCount() {
 
     const grouped = groupAllResultsByMatch();
 
-    let completedCampaignCount = 0;
+    let count = 0;
 
     Object.values(grouped).forEach(campaigns => {
 
         Object.values(campaigns).forEach(rows => {
 
             if (isCampaignComplete(rows)) {
-
-                completedCampaignCount++;
-
+                count++;
             }
 
         });
 
     });
 
+    return count;
+
+}
+
+
+function renderSeasonProgress() {
+
+    const completedCampaignCount =
+        getCompletedCampaignCount();
 
     const countElement = document.getElementById(
         "completedCampaignCount"
@@ -1160,25 +1467,22 @@ function renderSeasonProgress() {
         "seasonProgressFill"
     );
 
-
     if (countElement) {
 
-        countElement.textContent = completedCampaignCount;
+        countElement.textContent =
+            completedCampaignCount;
 
     }
-
 
     if (progressElement) {
 
         const percentage = Math.min(
-
             100,
-
             (completedCampaignCount / TOTAL_CAMPAIGNS) * 100
-
         );
 
-        progressElement.style.width = percentage + "%";
+        progressElement.style.width =
+            percentage + "%";
 
     }
 
@@ -1186,7 +1490,7 @@ function renderSeasonProgress() {
 
 
 /* =========================================================
-   15. ABGESCHLOSSENE BEGEGNUNGEN
+   18. ABGESCHLOSSENE BEGEGNUNGEN
 ========================================================= */
 
 function renderCompletedMatchCount() {
@@ -1212,16 +1516,14 @@ function renderCompletedMatchCount() {
 
     });
 
-
     element.textContent =
-
         `${completedMatches} / ${TOTAL_MATCHES} BEGEGNUNGEN`;
 
 }
 
 
 /* =========================================================
-   16. NÄCHSTE BEGEGNUNG
+   19. NÄCHSTE BEGEGNUNG
 ========================================================= */
 
 function renderNextMatch() {
@@ -1236,7 +1538,6 @@ function renderNextMatch() {
 
     if (!dateElement || !teamsElement) return;
 
-
     const sortedMatches = [...spielplan].sort((a, b) => {
 
         const dateA = parseDate(a.Datum);
@@ -1247,7 +1548,6 @@ function renderNextMatch() {
         return dateA - dateB;
 
     });
-
 
     const nextMatch = sortedMatches.find(match => {
 
@@ -1282,27 +1582,30 @@ function renderNextMatch() {
 
     if (date) {
 
-        dateElement.textContent = date.toLocaleDateString("de-DE", {
+        dateElement.textContent =
+            date.toLocaleDateString("de-DE", {
 
-            day: "2-digit",
-            month: "2-digit"
+                day: "2-digit",
+                month: "2-digit"
 
-        });
+            });
 
     } else {
 
-        dateElement.textContent = clean(nextMatch.Datum);
+        dateElement.textContent =
+            clean(nextMatch.Datum);
 
     }
 
 
-    teamsElement.textContent = `${blueName} vs. ${redName}`;
+    teamsElement.textContent =
+        `${blueName} vs. ${redName}`;
 
 }
 
 
 /* =========================================================
-   17. AKTUELLE FINALISTEN
+   20. AKTUELLE FINALISTEN
 ========================================================= */
 
 function renderFinalists() {
@@ -1319,7 +1622,6 @@ function renderFinalists() {
         team.playedCampaigns > 0
     );
 
-
     if (!hasResults) {
 
         finalistElements[0].textContent = "NOCH OFFEN";
@@ -1328,7 +1630,6 @@ function renderFinalists() {
         return;
 
     }
-
 
     finalistElements[0].textContent =
         ranking[0]?.name || "NOCH OFFEN";
@@ -1340,7 +1641,7 @@ function renderFinalists() {
 
 
 /* =========================================================
-   18. LETZTES UPDATE
+   21. LETZTES UPDATE
 ========================================================= */
 
 function renderLastUpdate() {
@@ -1370,16 +1671,28 @@ function renderLastUpdate() {
 
 
 /* =========================================================
-   19. GESAMTE SEITE AKTUALISIEREN
+   22. GESAMTE SEITE AKTUALISIEREN
 ========================================================= */
 
 function renderPage() {
 
+    // Teams
+
+    renderTeamOverview();
+
+    // Rangliste
+
     renderRanking();
+
+    // Offene Begegnungen
 
     renderSchedule();
 
+    // Abgeschlossene Begegnungen
+
     renderMatchHistory();
+
+    // Saisonstatus
 
     renderSeasonProgress();
 
@@ -1387,7 +1700,11 @@ function renderPage() {
 
     renderNextMatch();
 
+    // Finale
+
     renderFinalists();
+
+    // Zeitstempel
 
     renderLastUpdate();
 
@@ -1395,7 +1712,7 @@ function renderPage() {
 
 
 /* =========================================================
-   20. DATEN LADEN UND SEITE STARTEN
+   23. DATEN LADEN UND SEITE STARTEN
 ========================================================= */
 
 async function initQualification() {
@@ -1410,9 +1727,7 @@ async function initQualification() {
         const [
 
             scheduleData,
-
             resultData,
-
             teamData
 
         ] = await Promise.all([
@@ -1466,18 +1781,14 @@ async function initQualification() {
 
 
         spielplan = scheduleData;
-
         ergebnisse = resultData;
-
         teams = teamData;
 
 
         console.log("CSV-Daten erfolgreich geladen.");
 
         console.log("Spielplan:", spielplan);
-
         console.log("Ergebnisse:", ergebnisse);
-
         console.log("Teams:", teams);
 
 
@@ -1486,22 +1797,17 @@ async function initQualification() {
 
     } catch (error) {
 
-
         console.error(
-
             "Fehler beim Laden der Qualifikationsdaten:",
-
             error
-
         );
 
 
         const containers = [
 
+            document.getElementById("teamOverviewContainer"),
             document.getElementById("rankingContainer"),
-
-            document.querySelector(".schedule-list"),
-
+            document.getElementById("upcomingMatchesContainer"),
             document.getElementById("matchHistoryContainer")
 
         ];
@@ -1532,112 +1838,10 @@ async function initQualification() {
 
 
 /* =========================================================
-   21. START
+   24. START
 ========================================================= */
 
 document.addEventListener(
-
     "DOMContentLoaded",
-
     initQualification
-
 );
-
-
-/* ===================================
-   TEAMÜBERSICHT
-=================================== */
-
-// Zuordnung der Spielernamen zu den vorhandenen Profilbildern
-const PLAYER_IMAGES = {
-    "Stun": "Stun.png",
-    "Schokk": "SchoKK.png",
-    "serbia4life88": "serbia4life88.png",
-    "salomon sunday": "Salomon.png",
-    "chester244": "Chester244.png",
-    "joker": "Alex.png",
-    "kovka": "Kovka.png",
-    "cete": "Cete.png",
-    "jabawoozee": "Jabawoozee.png",
-    "psytech": "Psytech.png"
-};
-
-function normalizePlayerName(name) {
-    return String(name || "")
-        .trim()
-        .toLowerCase();
-}
-
-function getPlayerImage(playerName) {
-    const image = PLAYER_IMAGES[normalizePlayerName(playerName)];
-
-    if (!image) {
-        return null;
-    }
-
-    // Qualifikationsseite liegt vier Verzeichnisebenen unter dem Root
-    return "../../../../spielerfolder/" + image;
-}
-
-function renderTeamOverview(teamRows) {
-    const container = document.getElementById("teamOverviewContainer");
-
-    if (!container) return;
-
-    // Teams anhand der Teamnamen gruppieren
-    const groupedTeams = {};
-
-    teamRows.forEach(row => {
-        const teamName = row.Teamname?.trim();
-        const playerName = row.Spieler?.trim();
-
-        if (!teamName || !playerName) return;
-
-        if (!groupedTeams[teamName]) {
-            groupedTeams[teamName] = [];
-        }
-
-        groupedTeams[teamName].push(playerName);
-    });
-
-    // Teamnamen alphabetisch sortieren
-    const sortedTeams = Object.entries(groupedTeams)
-        .sort(([a], [b]) => a.localeCompare(b, "de"));
-
-    container.innerHTML = sortedTeams.map(([teamName, players]) => {
-
-        const playerHTML = players.map(playerName => {
-            const imagePath = getPlayerImage(playerName);
-
-            const avatar = imagePath
-                ? `
-                    <img
-                        src="${imagePath}"
-                        alt="${playerName}"
-                        onerror="this.outerHTML='<div class=&quot;team-player-placeholder&quot;>${playerName.charAt(0).toUpperCase()}</div>'"
-                    >
-                `
-                : `
-                    <div class="team-player-placeholder">
-                        ${playerName.charAt(0).toUpperCase()}
-                    </div>
-                `;
-
-            return `
-                <div class="team-player">
-                    ${avatar}
-                    <span>${playerName}</span>
-                </div>
-            `;
-        }).join("");
-
-        return `
-            <article class="team-overview-card">
-                <h3>${teamName}</h3>
-                <div class="team-player-list">
-                    ${playerHTML}
-                </div>
-            </article>
-        `;
-    }).join("");
-}

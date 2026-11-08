@@ -5,8 +5,8 @@ const players = {
         name: "Stun",
         image: "spielerfolder/Stun.png",
         role: "Alter Sack",
-        trophies: 3,
-        eventsPlayed: 6,
+        trophies: 4,
+        eventsPlayed: 7,
         quote: "Scheiß Jockey alter, ich spring dem die ganze Zeit nur an die Eier.",
 
         campaign: "Sturmflut",
@@ -18,6 +18,12 @@ const players = {
             "Blutdurst, der Wald, 2 Instakills mit einem Charge",
 
         wins: [
+        {
+            name: "Wintermajor 2026",
+            image: "eventfolder/events/6wintermajor2026/Wintermajor2026_cover.png",
+            link: "eventfolder/events/6wintermajor2026/6wintermajor2026.html"
+        },
+
         {
             name: "Summerjam 2026",
             image: "eventfolder/events/5summerjam2026/Summerjam2026_cover.png",
@@ -45,8 +51,8 @@ const players = {
         name: "Psytech",
         image: "spielerfolder/Psytech.png",
         role: "Der vorsichtige oder so kp",
-        trophies: 0,
-        eventsPlayed: 4,
+        trophies: 1,
+        eventsPlayed: 5,
         quote: "Wir machen aus den Sharks kleine Oktopussies.",
 
         campaign: "Dunkler Karneval",
@@ -58,6 +64,11 @@ const players = {
             "Solorush bei Blutdurst",
         
             wins: [
+        {
+            name: "Wintermajor 2026",
+            image: "eventfolder/events/6wintermajor2026/Wintermajor2026_cover.png",
+            link: "eventfolder/events/6wintermajor2026/6wintermajor2026.html"
+        },
 
     ]
 
@@ -68,8 +79,8 @@ const players = {
         name: "Jabawoozee",
         image: "spielerfolder/Jabawoozee.png",
         role: "",
-        trophies: 3,
-        eventsPlayed: 6,
+        trophies: 4,
+        eventsPlayed: 7,
         quote: "",
 
         campaign: "",
@@ -81,6 +92,12 @@ const players = {
             "",
 
         wins: [
+        {
+            name: "Wintermajor 2026",
+            image: "eventfolder/events/6wintermajor2026/Wintermajor2026_cover.png",
+            link: "eventfolder/events/6wintermajor2026/6wintermajor2026.html"
+        },
+
         {
             name: "Summerjam 2026",
             image: "eventfolder/events/5summerjam2026/Summerjam2026_cover.png",
@@ -109,7 +126,7 @@ const players = {
         image: "spielerfolder/Is_Kovka.png",
         role: "Fehlcharger",
         trophies: 4,
-        eventsPlayed: 6,
+        eventsPlayed: 7,
         quote: "Insta-Charge-Wahrscheinlichkeit ca. 1,9%",
 
         campaign: "Die Gemeinde",
@@ -185,7 +202,7 @@ const players = {
         image: "spielerfolder/Chester244.png",
         role: "Alphawolf",
         trophies: 4,
-        eventsPlayed: 6,
+        eventsPlayed: 7,
         quote: "Boom, alle drei blind",
 
         campaign: "Blutdurst",
@@ -230,8 +247,8 @@ const players = {
         name: "Schokk",
         image: "spielerfolder/SchoKK.png",
         role: "One-Man-Army",
-        trophies: 0,
-        eventsPlayed: 2,
+        trophies: 1,
+        eventsPlayed: 3,
         quote: "...",
 
         campaign: "Todeszone",
@@ -243,6 +260,11 @@ const players = {
             "Hunterblocker, 100% Blockquote",
 
         wins: [
+        {
+            name: "Wintermajor 2026",
+            image: "eventfolder/events/6wintermajor2026/Wintermajor2026_cover.png",
+            link: "eventfolder/events/6wintermajor2026/6wintermajor2026.html"
+        },
 
         ]
 
@@ -254,7 +276,7 @@ const players = {
         image: "spielerfolder/Salomon.png",
         role: "Feel Good Manager",
         trophies: 4,
-        eventsPlayed: 6,
+        eventsPlayed: 7,
         quote: "ich hab doch gesagt da steht ein Boomer, du Missgeburt - Sung Tzu (Art of War)",
 
         campaign: "KaDeWe Shopping Mall",
@@ -301,7 +323,7 @@ const players = {
         image: "spielerfolder/Cete.png",
         role: "Spawnkiller",
         trophies: 4,
-        eventsPlayed: 5,
+        eventsPlayed: 6,
         quote: "Jungs, ich muss des Spiel noch downloaden.",
 
         campaign: "Infektionszentrum",
