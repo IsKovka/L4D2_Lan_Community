@@ -213,6 +213,22 @@ nav {
     font-weight: 800;
 }
 
+/* ERGEBNISANZEIGE NACH DEM EVENT */
+
+#countdown {
+    text-align: center;
+}
+
+/* Etwas kleinere Schrift bei längeren Ergebnistexten */
+
+@media (max-width: 650px) {
+
+    #countdown {
+        line-height: 1.4;
+    }
+
+}
+
 
 /* ===================================
    MATCH CARD
