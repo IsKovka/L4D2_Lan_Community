@@ -122,7 +122,7 @@ function updateCountdown() {
     countdownLabelEl.hidden = true;
 
     countdownEl.textContent =
-        "Ergebnisse " + lanName;
+        "Ergebnisse";
 
 }
 
