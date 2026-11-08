@@ -1,20 +1,137 @@
-const nextLan = new Date("2026-10-24T09:00:00"); // Beispieltermin
-const countdownEl = document.getElementById("countdown");
+
+/* ======================================
+   EVENT KONFIGURATION
+====================================== */
+
+const lanName = "Springfever 2027";
+
+// HIER DEN TATSÄCHLICHEN STARTTERMIN EINTRAGEN
+const nextLan = new Date("2027-03-01T09:00:00");
+
+// Dauer der aktiven LAN-Phase: 24 Stunden
+const lanDuration = 24 * 60 * 60 * 1000;
+
+
+/* ======================================
+   HTML ELEMENTE
+====================================== */
+
+const countdownEl =
+    document.getElementById("countdown");
+
+const countdownLabelEl =
+    document.getElementById("countdownLabel");
+
+
+/* ======================================
+   COUNTDOWN AKTUALISIEREN
+====================================== */
 
 function updateCountdown() {
-  const now = new Date();
-  const diff = nextLan - now;
-  if (diff <= 0) {
-    countdownEl.textContent = "LAN läuft!";
-    return;
-  }
 
-  const days = Math.floor(diff / (1000*60*60*24));
-  const hours = Math.floor((diff / (1000*60*60)) % 24);
-  const mins = Math.floor((diff / (1000*60)) % 60);
-  const secs = Math.floor((diff / 1000) % 60);
-  countdownEl.textContent = `${days} Tage ${hours} Stunden ${mins.toString().padStart(2,"0")} Minuten ${secs.toString().padStart(2,"0")} Sekunden`;
+    if (!countdownEl || !countdownLabelEl) {
+        return;
+    }
+
+    const now = Date.now();
+
+    const startTime = nextLan.getTime();
+
+    // Prüfen, ob das Datum gültig ist
+    if (isNaN(startTime)) {
+
+        countdownLabelEl.hidden = true;
+
+        countdownEl.textContent =
+            "Termin nicht verfügbar";
+
+        return;
+    }
+
+    const diff =
+        startTime - now;
+
+    const elapsed =
+        now - startTime;
+
+
+    /* ======================================
+       PHASE 1: EVENT STEHT NOCH BEVOR
+    ====================================== */
+
+    if (diff > 0) {
+
+        countdownLabelEl.hidden = false;
+
+        countdownLabelEl.textContent =
+            "Startet in:";
+
+        const days =
+            Math.floor(
+                diff / (1000 * 60 * 60 * 24)
+            );
+
+        const hours =
+            Math.floor(
+                (diff / (1000 * 60 * 60)) % 24
+            );
+
+        const mins =
+            Math.floor(
+                (diff / (1000 * 60)) % 60
+            );
+
+        const secs =
+            Math.floor(
+                (diff / 1000) % 60
+            );
+
+        countdownEl.textContent =
+            `${days} Tage ${hours} Stunden ` +
+            `${mins.toString().padStart(2, "0")} Minuten ` +
+            `${secs.toString().padStart(2, "0")} Sekunden`;
+
+        return;
+
+    }
+
+
+    /* ======================================
+       PHASE 2: LAN LÄUFT (ERSTE 24 STUNDEN)
+    ====================================== */
+
+    if (elapsed < lanDuration) {
+
+        countdownLabelEl.hidden = false;
+
+        countdownLabelEl.textContent =
+            "Status:";
+
+        countdownEl.textContent =
+            "LAN läuft!";
+
+        return;
+
+    }
+
+
+    /* ======================================
+       PHASE 3: LAN BEENDET
+    ====================================== */
+
+    countdownLabelEl.hidden = true;
+
+    countdownEl.textContent =
+        "Ergebnisse " + lanName;
+
 }
 
-setInterval(updateCountdown, 1000);
+
+/* ======================================
+   INITIALISIERUNG
+====================================== */
+
 updateCountdown();
+
+setInterval(updateCountdown, 1000);
+
