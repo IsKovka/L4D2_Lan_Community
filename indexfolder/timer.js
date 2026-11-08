@@ -3,10 +3,10 @@
    EVENT KONFIGURATION
 ====================================== */
 
-const lanName = "Springfever 2027";
+const lanName = "Wintermajor 2026";
 
 // HIER DEN TATSÄCHLICHEN STARTTERMIN EINTRAGEN
-const nextLan = new Date("2027-03-01T09:00:00");
+const nextLan = new Date("2026-10-24T09:00:00");
 
 // Dauer der aktiven LAN-Phase: 24 Stunden
 const lanDuration = 24 * 60 * 60 * 1000;
