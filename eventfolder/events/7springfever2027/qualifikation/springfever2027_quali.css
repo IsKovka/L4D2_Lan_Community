@@ -137,7 +137,7 @@ nav {
     text-align: center;
 
     background:
-        url("Springfever2027_quali_cover.png")
+        url("7springfever2027_cover.png")
         center 40% / cover no-repeat;
 
     overflow: hidden;
@@ -413,6 +413,32 @@ nav {
    6. RANKING – MAIN CARD
 ========================================================= */
 
+/* LIVE-WERTUNG */
+
+.ranking-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    color: var(--color-muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.ranking-status::before {
+    content: "";
+
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+    background: var(--color-orange);
+    box-shadow: 0 0 9px rgba(255, 91, 0, 0.8);
+}
+
 .ranking-card {
     position: relative;
     width: 100%;
@@ -668,25 +694,17 @@ nav {
 
 .ranking-watermark {
     position: absolute;
-    z-index: 1;
-
     top: 50%;
     right: 18px;
-
     width: 165px;
     height: 165px;
-
     transform: translateY(-50%);
-
     background-position: center;
-    background-size: contain;
     background-repeat: no-repeat;
-
+    background-size: contain;
     opacity: 0.075;
-
     pointer-events: none;
 }
-
 
 /* SHARKS */
 
@@ -762,20 +780,10 @@ nav {
 ========================================================= */
 
 .ranking-points {
-    position: relative;
-    z-index: 3;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    color: white;
-
-    font-size: 29px;
-    font-weight: 900;
-
-    text-align: center;
+    color: var(--orange);
+    font-size: 1.65rem;
+    font-weight: 800;
+    text-shadow: 0 0 12px rgba(255, 91, 0, 0.25);
 }
 
 .ranking-points span {
@@ -795,11 +803,7 @@ nav {
 ========================================================= */
 
 .ranking-footer {
-    padding: 22px 25px;
-
-    background: rgba(255, 255, 255, 0.018);
-
-    border-top: 1px solid var(--color-border);
+    display: none;
 }
 
 .ranking-legend {
@@ -1671,7 +1675,7 @@ nav {
     inset: 0;
 
     background:
-        url("Springfever2027_finale_cover.png")
+        url("7springfever2027_cover.png")
         center / cover no-repeat;
 
     opacity: 0.25;
