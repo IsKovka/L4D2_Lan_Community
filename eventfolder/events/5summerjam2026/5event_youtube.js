@@ -1,32 +1,32 @@
 const campaignMeta = {
 
     "Infektionszentrum": {
-        blueYoutube: "",
+        blueYoutube: "https://www.youtube.com/watch?v=YJiskZEAdPw",
         redYoutube: ""
     },
 
     "Die Brücke": {
-        blueYoutube: "",
+        blueYoutube: "https://www.youtube.com/watch?v=cJej8M4uIGg",
         redYoutube: "https://www.youtube.com/watch?v=kwS-yIOv7S4"
     },
 
     "Dunkler Karneval": {
-        blueYoutube: "",
+        blueYoutube: "https://www.youtube.com/watch?v=sNVNMOkColo",
         redYoutube: "https://www.youtube.com/watch?v=fejkN0J4ThA"
     },
 
     "Sumpffieber": {
-        blueYoutube: "",
+        blueYoutube: "https://www.youtube.com/watch?v=m48ME-n-aL8",
         redYoutube: "https://www.youtube.com/watch?v=F9QUTSSRnI0"
     },
 
     "Sturmflut": {
-        blueYoutube: "",
+        blueYoutube: "https://www.youtube.com/watch?v=RQx51RVvePU",
         redYoutube: "https://www.youtube.com/watch?v=YorQ4J4xiH8"
     },
 
     "Die Gemeinde": {
-        blueYoutube: "",
+        blueYoutube: "https://www.youtube.com/watch?v=943iVDj9ZNA",
         redYoutube: "https://www.youtube.com/watch?v=05aVsyrGknQ"
     },
 
@@ -36,7 +36,7 @@ const campaignMeta = {
     },
 
     "Mercy Hospital": {
-        blueYoutube: "",
+        blueYoutube: "https://www.youtube.com/watch?v=-182q27jCWs",
         redYoutube: "https://www.youtube.com/watch?v=plSyVSvgimA"
     },
 
@@ -51,7 +51,7 @@ const campaignMeta = {
     },
 
     "Flug zur Hölle": {
-        blueYoutube: "",
+        blueYoutube: "https://www.youtube.com/watch?v=g3Yv_8Ke11g",
         redYoutube: "https://www.youtube.com/watch?v=ZByIMz557tE"
     },
 
@@ -61,12 +61,12 @@ const campaignMeta = {
     },
 
     "Kalter Strom": {
-        blueYoutube: "",
+        blueYoutube: "https://www.youtube.com/watch?v=74P9OghsiRY",
         redYoutube: "https://www.youtube.com/watch?v=Qyy9igCHfgI&list=PLcdur7y6I31E&index=6"
     },
 
     "Das letzte Gefecht": {
-        blueYoutube: "",
+        blueYoutube: "https://www.youtube.com/watch?v=gF3Pw5Ymwwk",
         redYoutube: "https://www.youtube.com/watch?v=0ddBfffw5Io"
     }
 

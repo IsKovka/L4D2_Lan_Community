@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="de">
 
@@ -95,116 +93,70 @@
 
 
     <!-- ==========================
-         TEILNEHMENDE TEAMS
-    =========================== -->
+     SAISONSTATUS
+=========================== -->
 
-    <section class="team-overview-section">
+<section class="season-overview">
 
-        <div class="team-overview-header">
+    <!-- NÄCHSTE BEGEGNUNG -->
 
-            <span class="section-label">
-                SPRINGFEVER 2027
-            </span>
+    <div class="overview-card">
 
-            <h2>TEILNEHMENDE TEAMS</h2>
+        <span class="overview-label">
+            NÄCHSTE BEGEGNUNG
+        </span>
+
+        <div
+            class="overview-value overview-date"
+            id="nextMatchDate">
+
+            TBD
 
         </div>
 
         <div
-            id="teamOverviewContainer"
-            class="team-overview-grid">
+            class="overview-description"
+            id="nextMatchTeams">
 
-            <div class="team-loading">
-                Teams werden geladen ...
-            </div>
+            Spielplan wird geladen
 
         </div>
 
-    </section>
+    </div>
 
 
-    <!-- ==========================
-         SAISONSTATUS
-    =========================== -->
+    <!-- SAISONFORTSCHRITT -->
 
-    <section class="season-overview">
+    <div class="overview-card">
 
-        <!-- SAISONFORTSCHRITT -->
+        <span class="overview-label">
+            SAISONFORTSCHRITT
+        </span>
 
-        <div class="overview-card">
+        <div class="overview-value">
 
-            <span class="overview-label">
-                SAISONFORTSCHRITT
-            </span>
-
-            <div class="overview-value">
-                <span id="completedCampaignCount">0</span>
-                <span>/ 24</span>
-            </div>
-
-            <div class="overview-description">
-                Kampagnen abgeschlossen
-            </div>
-
-            <div class="season-progress">
-
-                <div
-                    class="season-progress-fill"
-                    id="seasonProgressFill"
-                    style="width: 0%">
-                </div>
-
-            </div>
+            <span id="completedMatchProgress">0</span>
+            <span>/ 12</span>
 
         </div>
 
+        <div class="overview-description">
+            Begegnungen abgeschlossen
+        </div>
 
-        <!-- NÄCHSTE BEGEGNUNG -->
-
-        <div class="overview-card">
-
-            <span class="overview-label">
-                NÄCHSTE BEGEGNUNG
-            </span>
+        <div class="season-progress">
 
             <div
-                class="overview-value overview-date"
-                id="nextMatchDate">
-
-                TBD
-
-            </div>
-
-            <div
-                class="overview-description"
-                id="nextMatchTeams">
-
-                Spielplan wird geladen
-
+                class="season-progress-fill"
+                id="seasonProgressFill"
+                style="width: 0%">
             </div>
 
         </div>
 
+    </div>
 
-        <!-- FINALPLÄTZE -->
-
-        <div class="overview-card">
-
-            <span class="overview-label">
-                QUALIFIKATIONSPLÄTZE
-            </span>
-
-            <div class="overview-value">
-                2 <span>/ 3</span>
-            </div>
-
-            <div class="overview-description">
-                Teams erreichen das LAN-Finale
-            </div>
-
-        </div>
-
-    </section>
+</section>
 
 
     <!-- ==========================
@@ -215,9 +167,10 @@
 
         <div class="section-heading">
 
-            <div>
+            <div class="ranking-heading">
 
                 <span class="section-eyebrow">
+                    SPRINGFEVER 2027
                 </span>
 
                 <h2>AKTUELLE RANGLISTE</h2>
@@ -228,6 +181,8 @@
 
                 <span class="status-dot"></span>
 
+                <span>LIVE-WERTUNG</span>
+
             </div>
 
         </div>
@@ -235,16 +190,22 @@
 
         <div class="ranking-card">
 
+            <!-- TABELLENKOPF -->
+
             <div class="ranking-table-header">
 
                 <span>PLATZ</span>
-                <span>TEAM</span>
-                <span>KAMPAGNEN</span>
+
+                <span>TEAM &amp; SPIELER</span>
+
+                <span>BEGEGNUNGEN</span>
+
                 <span>PUNKTE</span>
-                <span>STATUS</span>
 
             </div>
 
+
+            <!-- DYNAMISCHE RANGLISTE -->
 
             <div id="rankingContainer">
 
@@ -263,10 +224,20 @@
 
                     </div>
 
+                    <div class="ranking-games">
+                        –
+                    </div>
+
+                    <div class="ranking-points">
+                        –
+                    </div>
+
                 </div>
 
             </div>
 
+
+            <!-- RANGLISTEN-FOOTER -->
 
             <div class="ranking-footer">
 
@@ -275,12 +246,42 @@
                     <span class="legend-qualified"></span>
 
                     <span>
-                        Die Rangliste basiert auf den bisher erzielten Gesamtpunkten. Die Platzierungen sind bis zum Abschluss der Qualifikation vorläufig.
+                        Finale: Platz 1 und 2
+                    </span>
+
+                    <span class="legend-eliminated"></span>
+
+                    <span>
+                        Ausgeschieden: Platz 3
                     </span>
 
                 </div>
 
-                <div class="ranking-legend">
+
+                <!-- SAISONFORTSCHRITT -->
+
+                <div class="ranking-progress">
+
+                    <div class="ranking-progress-label">
+
+                        <span>SAISONFORTSCHRITT</span>
+
+                        <strong>
+                            <span id="completedCampaignCount">0</span>
+                            / 24 Kampagnen
+                        </strong>
+
+                    </div>
+
+                    <div class="season-progress">
+
+                        <div
+                            class="season-progress-fill"
+                            id="seasonProgressFill"
+                            style="width: 0%">
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -302,6 +303,7 @@
             <div>
 
                 <span class="section-eyebrow">
+                    SPRINGFEVER 2027
                 </span>
 
                 <h2>ANSTEHENDE BEGEGNUNGEN</h2>
@@ -349,9 +351,10 @@
             <div>
 
                 <span class="section-eyebrow">
+                    SPRINGFEVER 2027
                 </span>
 
-                <h2>Vergangene Begegnungen</h2>
+                <h2>VERGANGENE BEGEGNUNGEN</h2>
 
             </div>
 
@@ -375,6 +378,11 @@
                 </div>
 
                 <h3>NOCH KEINE ABGESCHLOSSENEN BEGEGNUNGEN</h3>
+
+                <p>
+                    Sobald beide Kampagnen einer Begegnung abgeschlossen sind,
+                    erscheinen hier die Ergebnisse.
+                </p>
 
             </div>
 
@@ -400,7 +408,7 @@
             <h2>SPRINGFEVER 2027</h2>
 
             <p class="final-subtitle">
-                DAS GROßE LAN-FINALE
+                DAS GROẞE LAN-FINALE
             </p>
 
 
@@ -430,6 +438,7 @@
 
             </div>
 
+
             <a
                 href="../Springfever2027/Springfever2027.html"
                 class="final-button">
@@ -452,6 +461,8 @@
         <span>
             © 2026 L4D2 LAN Community
         </span>
+
+        <span id="lastUpdate"></span>
 
     </footer>
 
