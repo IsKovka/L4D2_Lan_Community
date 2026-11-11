@@ -1,6 +1,33 @@
-/* ===================================
-   GLOBAL
-=================================== */
+
+/* =========================================================
+   L4D2 LAN – STARTSEITE
+   Designsystem angelehnt an Springfever 2027 Qualification
+========================================================= */
+
+
+/* =========================================================
+   1. GLOBAL
+========================================================= */
+
+:root {
+    --color-bg: #080808;
+    --color-bg-soft: #101010;
+    --color-card: #151515;
+    --color-card-light: #1c1c1c;
+
+    --color-orange: #ff5b00;
+    --color-white: #f5f5f5;
+    --color-text: #d0d0d0;
+    --color-muted: #888888;
+
+    --color-border: rgba(255, 255, 255, 0.09);
+
+    --color-blue: #0066b9;
+    --color-red: #8a0000;
+
+    --content-width: 1200px;
+    --section-spacing: 90px;
+}
 
 * {
     margin: 0;
@@ -8,98 +35,98 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
 body {
-    font-family: "Segoe UI", sans-serif;
-
-    background:
-        radial-gradient(
-            circle at top,
-            #161616 0%,
-            #0b0b0b 55%,
-            #050505 100%
-        );
-
-    color: #ffffff;
-
-    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-white);
+    overflow-x: hidden;
 }
 
 a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
 }
 
 img {
-    display: block;
     max-width: 100%;
+    display: block;
+}
+
+button,
+input {
+    font: inherit;
 }
 
 
-/* ===================================
-   NAVIGATION
-=================================== */
+/* =========================================================
+   2. NAVIGATION
+   Entspricht der Qualifikations-CSS
+========================================================= */
 
 nav {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    width: 100%;
+    height: 76px;
 
-    background: rgba(10, 10, 10, 0.95);
+    background: rgba(8, 8, 8, 0.96);
+    border-bottom: 1px solid var(--color-border);
 
-    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 100;
 
-    border-bottom: 1px solid rgba(255, 69, 0, 0.15);
+    backdrop-filter: blur(12px);
 }
 
 .nav-container {
-    max-width: 1400px;
+    max-width: var(--content-width);
+    height: 100%;
 
-    margin: auto;
+    margin: 0 auto;
+    padding: 0 25px;
 
     display: flex;
-
-    justify-content: space-between;
     align-items: center;
-
-    padding: 0.25rem 2rem;
+    justify-content: space-between;
 }
 
 .logo img {
-    width: 170px;
+    width: 145px;
     height: auto;
 }
 
 .nav-links {
-    list-style: none;
-
     display: flex;
+    align-items: center;
+    gap: 35px;
 
-    gap: 3rem;
+    list-style: none;
 }
 
 .nav-links a {
-    color: white;
+    color: #aaa;
 
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 700;
 
-    transition: color 0.25s ease;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+
+    transition: color 0.2s ease;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: #ff4500;
-}
-
-.nav-links a.active {
-    border-bottom: 2px solid #ff4500;
-
-    padding-bottom: 0.35rem;
+    color: var(--color-orange);
 }
 
 
-/* ===================================
-   HERO
-=================================== */
+/* =========================================================
+   3. HERO
+========================================================= */
 
 .hero {
     position: relative;
@@ -107,34 +134,40 @@ nav {
     min-height: 650px;
 
     display: flex;
-
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
-    padding: 5rem 2rem;
+    padding: 60px 25px;
 
-    background:
+    background-image:
         linear-gradient(
+            180deg,
             rgba(0, 0, 0, 0.55),
-            rgba(0, 0, 0, 0.75)
+            rgba(0, 0, 0, 0.82)
         ),
         url("startseitenfotos/hero-banner.png");
 
-    background-size: 100% auto;
+    background-size: cover;
+    background-position: center 40%;
     background-repeat: no-repeat;
-    background-position: center top;
+
+    overflow: hidden;
 }
 
 .hero-overlay {
     position: absolute;
-
     inset: 0;
 
     background:
-        radial-gradient(
-            circle,
-            transparent 20%,
-            rgba(0, 0, 0, 0.4) 100%
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.25),
+            rgba(0, 0, 0, 0.35)
+        ),
+        linear-gradient(
+            0deg,
+            var(--color-bg) 0%,
+            transparent 35%
         );
 
     pointer-events: none;
@@ -145,7 +178,13 @@ nav {
     z-index: 2;
 
     width: 100%;
-    max-width: 1200px;
+    max-width: var(--content-width);
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     text-align: center;
 }
@@ -153,117 +192,116 @@ nav {
 .hero-subtitle {
     display: block;
 
-    color: #ff4500;
+    color: var(--color-orange);
 
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
 
     letter-spacing: 3px;
 
-    margin-bottom: 1rem;
+    margin-bottom: 18px;
 }
 
 .hero h1 {
-    font-size: 5rem;
+    color: white;
 
-    font-weight: 800;
+    font-size: clamp(42px, 6vw, 76px);
+    line-height: 1;
 
-    margin-bottom: 2rem;
+    font-weight: 900;
+    letter-spacing: -2px;
 
-    text-shadow:
-        0 0 25px rgba(0, 0, 0, 0.8);
+    margin-bottom: 35px;
+
+    text-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
 }
 
 
-/* ===================================
-   COUNTDOWN
-=================================== */
+/* =========================================================
+   4. COUNTDOWN
+========================================================= */
 
 .countdown-box {
     width: fit-content;
     max-width: 100%;
 
-    margin: 0 auto 2rem;
+    margin: 0 auto 30px;
 
     display: flex;
-
     align-items: center;
+    justify-content: center;
 
-    gap: 1rem;
+    gap: 15px;
 
-    padding: 1rem 2rem;
+    padding: 16px 25px;
 
-    border-radius: 15px;
+    background: rgba(18, 18, 18, 0.88);
 
-    background: rgba(10, 10, 10, 0.85);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
 
-    border: 1px solid rgba(255, 69, 0, 0.2);
-
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
 }
 
 .countdown-label {
-    color: #cccccc;
-}
+    color: #999;
 
-#countdown {
-    color: #ff4500;
-
-    font-size: 2rem;
-
+    font-size: 11px;
     font-weight: 800;
-}
 
-/* ERGEBNISANZEIGE NACH DEM EVENT */
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
 
 #countdown {
+    color: var(--color-orange);
+
+    font-size: 25px;
+    font-weight: 900;
+
     text-align: center;
-}
-
-/* Etwas kleinere Schrift bei längeren Ergebnistexten */
-
-@media (max-width: 650px) {
-
-    #countdown {
-        line-height: 1.4;
-    }
-
+    line-height: 1.4;
 }
 
 
-/* ===================================
-   MATCH CARD
-=================================== */
+/* =========================================================
+   5. MATCH CARD
+========================================================= */
 
 .match-card {
+    width: 100%;
     max-width: 950px;
 
-    margin: auto;
+    margin: 0 auto;
 
     display: flex;
-
     justify-content: space-between;
     align-items: center;
 
-    gap: 2rem;
+    gap: 30px;
 
-    padding: 2rem;
+    padding: 28px;
 
-    border-radius: 22px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(21, 21, 21, 0.96),
+            rgba(11, 11, 11, 0.96)
+        );
 
-    background: rgba(15, 15, 15, 0.85);
+    border: 1px solid var(--color-border);
+    border-radius: 13px;
 
     backdrop-filter: blur(12px);
-
-    border: 1px solid rgba(255, 69, 0, 0.15);
-
-    box-shadow:
-        0 0 40px rgba(0, 0, 0, 0.5);
 }
 
 .team-card {
     flex: 1;
-
     min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     text-align: center;
 }
@@ -272,223 +310,246 @@ nav {
     width: 120px;
     height: 120px;
 
-    object-fit: cover;
+    object-fit: contain;
 
+    margin: 0 auto;
+
+    border: 2px solid var(--color-orange);
     border-radius: 50%;
 
-    margin: auto;
-
-    border: 3px solid #ff4500;
+    background: #111;
+    padding: 5px;
 }
 
 .team-card h3 {
-    margin-top: 1rem;
-
-    font-size: 1.4rem;
-}
-
-.team-card p {
-    margin-top: 0.5rem;
-
-    color: #aaaaaa;
-}
-
-.versus-section {
-    text-align: center;
-
-    flex-shrink: 0;
-}
-
-.versus-section h2 {
-    font-size: 4rem;
-
-    color: #ff4500;
-
-    margin-bottom: 1rem;
-}
-
-
-/* ===================================
-   BUTTON
-=================================== */
-
-.primary-btn {
-    display: inline-block;
-
-    background: #ff4500;
+    margin-top: 16px;
 
     color: white;
 
-    font-weight: 700;
+    font-size: 21px;
+    font-weight: 900;
 
-    padding: 0.9rem 1.6rem;
-
-    border-radius: 10px;
-
-    transition:
-        background 0.25s ease,
-        transform 0.25s ease;
+    letter-spacing: 0.5px;
 }
 
-.primary-btn:hover {
-    background: #db3d00;
+.versus-section {
+    flex-shrink: 0;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+.versus-section h2 {
+    color: var(--color-orange);
+
+    font-size: 38px;
+    font-weight: 900;
+
+    letter-spacing: -1px;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   6. BUTTONS
+========================================================= */
+
+.primary-btn,
+.qualification-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 0 18px;
+
+    background: var(--color-orange);
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    font-size: 11px;
+    font-weight: 900;
+
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.primary-btn:hover,
+.qualification-btn:hover {
+    background: #e64f00;
     transform: translateY(-2px);
 }
 
 
-/* ===================================
-   STATS
-=================================== */
+/* =========================================================
+   7. STATISTICS
+========================================================= */
 
 .stats-section {
-    max-width: 1300px;
+    width: 100%;
+    max-width: var(--content-width);
 
-    margin: 3rem auto;
-
-    padding: 0 2rem;
+    margin: 0 auto;
+    padding: 0 25px;
 
     display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
+    gap: 18px;
 
-    gap: 1.5rem;
+    position: relative;
+    z-index: 5;
+
+    margin-top: -25px;
+    margin-bottom: var(--section-spacing);
 }
 
 .stat-box {
     min-width: 0;
+    min-height: 145px;
+
+    padding: 25px;
 
     background:
         linear-gradient(
-            180deg,
-            #181818,
-            #0e0e0e
+            145deg,
+            #171717,
+            #0d0d0d
         );
 
-    border: 1px solid rgba(255, 69, 0, 0.15);
+    border: 1px solid var(--color-border);
+    border-radius: 13px;
 
-    border-radius: 20px;
-
-    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     text-align: center;
 
     transition:
-        transform 0.25s ease,
-        border-color 0.25s ease;
+        transform 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .stat-box:hover {
-    transform: translateY(-4px);
-
-    border-color: rgba(255, 69, 0, 0.4);
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .stat-number {
     display: block;
 
-    font-size: 3rem;
+    color: var(--color-orange);
 
-    font-weight: 800;
+    font-size: 34px;
+    font-weight: 900;
 
-    color: #ff4500;
+    line-height: 1.1;
+
+    margin-bottom: 12px;
 }
 
 .stat-label {
     display: block;
 
-    margin-top: 0.75rem;
+    color: #999;
 
-    color: #bbbbbb;
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 
-/* ===================================
-   DASHBOARD GRID
-=================================== */
-
-/*
-   Obere Reihe:
-   News & Updates | Highlights
-
-   Untere Reihe:
-   Events & LANs über die gesamte Breite
-*/
+/* =========================================================
+   8. DASHBOARD
+========================================================= */
 
 .dashboard {
-    max-width: 1300px;
+    width: 100%;
+    max-width: 1250px;
 
-    margin: auto;
-
-    padding: 0 2rem 5rem;
+    margin: 0 auto;
+    padding: 0 25px 90px;
 
     display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
     align-items: stretch;
 
-    gap: 1.5rem;
+    gap: 18px;
 }
 
 .dashboard > .panel {
     min-width: 0;
 }
 
-/* EVENTS UND LANs ÜBER DIE GESAMTE BREITE */
-
 .events-panel {
     grid-column: 1 / -1;
 }
 
 
-/* ===================================
-   PANELS
-=================================== */
+/* =========================================================
+   9. PANELS
+========================================================= */
 
 .panel {
     min-width: 0;
 
+    padding: 25px;
+
     background:
         linear-gradient(
             180deg,
-            #161616,
-            #0d0d0d
+            #151515 0%,
+            #0d0d0d 100%
         );
 
-    border-radius: 20px;
-
-    padding: 2rem;
-
-    border: 1px solid rgba(255, 69, 0, 0.15);
-
-    box-shadow:
-        0 0 20px rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--color-border);
+    border-radius: 13px;
 }
 
 .panel-header {
     display: flex;
-
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
-    gap: 1rem;
+    gap: 20px;
 
-    margin-bottom: 2rem;
+    margin-bottom: 25px;
 }
 
 .panel-header h2 {
-    font-size: 1.5rem;
+    color: white;
 
-    line-height: 1.3;
+    font-size: 21px;
+    font-weight: 900;
+
+    letter-spacing: -0.3px;
+    text-transform: uppercase;
 }
 
 .panel-header a {
-    color: #ff4500;
+    color: var(--color-orange);
 
-    font-weight: 600;
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 
     white-space: nowrap;
 
@@ -496,166 +557,36 @@ nav {
 }
 
 .panel-header a:hover {
-    color: #ff7a45;
+    color: #ff7840;
 }
 
 
-/* ===================================
-   EVENTS & LANs – LAYOUT
-=================================== */
-
-.events-columns {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    align-items: stretch;
-
-    gap: 2rem;
-}
-
-.event-group {
-    min-width: 0;
-}
-
-.event-group-title {
-    font-size: 1.15rem;
-
-    color: #ff4500;
-
-    margin-bottom: 1.5rem;
-}
-
-/* TRENNLINIE ZWISCHEN BEIDEN BEREICHEN */
-
-.event-group + .event-group {
-    border-left: 1px solid rgba(255, 255, 255, 0.08);
-
-    padding-left: 2rem;
-}
-
-
-/* ===================================
-   EVENT LIST
-=================================== */
-
-.event-list {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 1.5rem;
-}
-
-.event-item {
-    display: flex;
-
-    align-items: flex-start;
-
-    gap: 1rem;
-
-    min-width: 0;
-
-    padding-bottom: 1.5rem;
-
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.event-item:last-child {
-    border-bottom: none;
-
-    padding-bottom: 0;
-}
-
-.event-item img {
-    flex-shrink: 0;
-
-    width: 120px;
-    height: 90px;
-
-    object-fit: cover;
-
-    border-radius: 12px;
-}
-
-.event-content {
-    min-width: 0;
-
-    flex: 1;
-}
-
-.event-content h3 {
-    font-size: 1.1rem;
-
-    margin-bottom: 0.5rem;
-}
-
-.event-content p {
-    color: #bbbbbb;
-
-    line-height: 1.5;
-
-    margin-bottom: 0.75rem;
-
-    overflow-wrap: anywhere;
-}
-
-.event-date {
-    color: #ff4500;
-
-    font-size: 0.9rem;
-
-    font-weight: 600;
-}
-
-/* ===================================
-   SPRINGFEVER QUALIFICATION BUTTON
-=================================== */
-
-.qualification-btn {
-
-    display: inline-block;
-
-    margin-top: 10px;
-    padding: 10px 16px;
-
-    background: #ff4500;
-    color: #ffffff;
-
-    border-radius: 7px;
-
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.4px;
-
-    transition:
-        background 0.25s ease,
-        transform 0.25s ease;
-
-}
-
-
-/* ===================================
-   NEWS
-=================================== */
+/* =========================================================
+   10. NEWS
+========================================================= */
 
 .news-list {
     display: flex;
-
     flex-direction: column;
 
-    gap: 1.5rem;
+    gap: 20px;
 }
 
 .news-item {
     display: flex;
-
     align-items: flex-start;
 
-    gap: 1rem;
+    gap: 15px;
 
     min-width: 0;
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+.news-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
 .news-item img {
@@ -666,87 +597,86 @@ nav {
 
     object-fit: cover;
 
-    border-radius: 12px;
+    border-radius: 7px;
+
+    background: #111;
 }
 
 .news-content {
     flex: 1;
-
     min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
 }
 
 .news-content h4 {
-    font-size: 1.05rem;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 800;
 
     line-height: 1.4;
-
-    margin-bottom: 0.5rem;
 }
 
 .news-content p {
-    color: #bbbbbb;
+    color: #999;
 
+    font-size: 12px;
     line-height: 1.6;
 
     overflow-wrap: anywhere;
 }
 
 
-/* ===================================
-   HIGHLIGHTS – YOUTUBE VIDEOS
-=================================== */
+/* =========================================================
+   11. HIGHLIGHTS – YOUTUBE
+========================================================= */
 
 .highlights-list {
     display: flex;
-
     flex-direction: column;
 
-    gap: 1.5rem;
+    gap: 25px;
 }
-
-/* KLICKBARER VIDEO-BEREICH */
 
 .highlight-video {
     display: block;
 
-    color: inherit;
-
-    text-decoration: none;
-
     min-width: 0;
+
+    color: inherit;
+    text-decoration: none;
 }
 
 .highlight-video h3 {
-    font-size: 1.05rem;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 800;
 
     line-height: 1.4;
 
-    margin-bottom: 0.65rem;
-
-    color: #ffffff;
+    margin-bottom: 10px;
 
     transition: color 0.2s ease;
 }
-
-/* THUMBNAIL-CONTAINER */
 
 .highlight-thumbnail {
     position: relative;
 
     width: 100%;
-
     aspect-ratio: 16 / 9;
 
     overflow: hidden;
 
-    border-radius: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
 
-    background: #111111;
-
-    border: 1px solid rgba(255, 69, 0, 0.15);
+    background: #111;
 }
-
-/* YOUTUBE VORSCHAUBILD */
 
 .highlight-thumbnail img {
     display: block;
@@ -759,8 +689,6 @@ nav {
     transition: transform 0.3s ease;
 }
 
-/* PLAY-BUTTON */
-
 .highlight-play {
     position: absolute;
 
@@ -770,9 +698,8 @@ nav {
     transform: translate(-50%, -50%);
 
     display: flex;
-
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
     width: 58px;
     height: 58px;
@@ -781,41 +708,30 @@ nav {
 
     border-radius: 50%;
 
-    background: rgba(255, 69, 0, 0.78);
-
+    background: rgba(255, 91, 0, 0.82);
     border: 1px solid rgba(255, 255, 255, 0.3);
 
-    color: #ffffff;
+    color: white;
 
-    font-size: 1.5rem;
-
+    font-size: 24px;
     line-height: 1;
 
-    box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 
     transition:
         transform 0.22s ease,
         background 0.22s ease,
         box-shadow 0.22s ease;
 
-    /*
-       Der Hover wird vom Thumbnail erkannt.
-       Das Icon blockiert weder den Hover noch den Klick.
-    */
-
     pointer-events: none;
 }
-
-/* HOVER AUF DEM BILD */
 
 .highlight-thumbnail:hover .highlight-play {
     transform: translate(-50%, -50%) scale(1.18);
 
-    background: rgba(255, 69, 0, 0.95);
+    background: rgba(255, 91, 0, 0.96);
 
-    box-shadow:
-        0 0 25px rgba(255, 69, 0, 0.4);
+    box-shadow: 0 0 25px rgba(255, 91, 0, 0.4);
 }
 
 .highlight-thumbnail:hover img {
@@ -823,14 +739,11 @@ nav {
 }
 
 .highlight-video:hover h3 {
-    color: #ff6a32;
+    color: var(--color-orange);
 }
 
-/* TASTATURBEDIENUNG */
-
 .highlight-video:focus-visible {
-    outline: 2px solid #ff4500;
-
+    outline: 2px solid var(--color-orange);
     outline-offset: 5px;
 
     border-radius: 5px;
@@ -838,51 +751,179 @@ nav {
 
 .highlight-video:focus-visible .highlight-play {
     transform: translate(-50%, -50%) scale(1.18);
-
-    background: rgba(255, 69, 0, 0.95);
+    background: rgba(255, 91, 0, 0.96);
 }
 
-/* HINWEIS UNTER DEN VIDEOS */
-
 .highlights-note {
-    margin-top: 1.5rem;
+    margin-top: 25px;
+    padding-top: 18px;
 
-    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
 
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    color: #999;
 
-    color: #bbbbbb;
-
-    font-size: 0.9rem;
-
+    font-size: 12px;
     line-height: 1.6;
 }
 
 
-/* ===================================
-   FOOTER
-=================================== */
+/* =========================================================
+   12. EVENTS & LANs
+========================================================= */
 
-footer {
-    padding: 2rem;
+.events-columns {
+    display: grid;
 
-    text-align: center;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
-    color: #888888;
+    align-items: stretch;
 
-    background: #050505;
+    gap: 25px;
+}
 
-    border-top: 1px solid rgba(255, 69, 0, 0.15);
+.event-group {
+    min-width: 0;
+}
+
+.event-group-title {
+    color: var(--color-orange);
+
+    font-size: 13px;
+    font-weight: 900;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    margin-bottom: 22px;
+}
+
+.event-group + .event-group {
+    border-left: 1px solid var(--color-border);
+    padding-left: 25px;
 }
 
 
-/* ===================================
-   RESPONSIVE – TABLET
-=================================== */
+/* =========================================================
+   13. EVENT LIST
+========================================================= */
+
+.event-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.event-item {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 15px;
+
+    min-width: 0;
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+.event-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.event-item img {
+    flex-shrink: 0;
+
+    width: 120px;
+    height: 90px;
+
+    object-fit: cover;
+
+    border-radius: 7px;
+
+    background: #111;
+}
+
+.event-content {
+    flex: 1;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 9px;
+}
+
+.event-content h3 {
+    color: white;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    line-height: 1.4;
+}
+
+.event-content p {
+    color: #999;
+
+    font-size: 12px;
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+}
+
+.event-date {
+    color: var(--color-orange);
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   14. QUALIFICATION BUTTON
+========================================================= */
+
+.qualification-btn {
+    margin-top: 5px;
+
+    min-height: 36px;
+    padding: 0 13px;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   15. FOOTER
+========================================================= */
+
+footer {
+    padding: 25px;
+
+    text-align: center;
+
+    color: #777;
+
+    background: #050505;
+
+    border-top: 1px solid var(--color-border);
+}
+
+footer p {
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   16. RESPONSIVE – TABLET
+========================================================= */
 
 @media (max-width: 900px) {
-
-    /* DASHBOARD UNTEREINANDER */
 
     .dashboard {
         grid-template-columns: 1fr;
@@ -892,129 +933,146 @@ footer {
         grid-column: auto;
     }
 
-    /* EVENTS UND LANs UNTEREINANDER */
-
     .events-columns {
         grid-template-columns: 1fr;
-
-        gap: 1.5rem;
+        gap: 25px;
     }
-
-    /* TRENNLINIE HORIZONTAL */
 
     .event-group + .event-group {
         border-left: none;
 
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: 1px solid var(--color-border);
 
         padding-left: 0;
-
-        padding-top: 1.5rem;
+        padding-top: 25px;
     }
-
-    /* STATS */
 
     .stats-section {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    /* MATCH CARD */
-
-    .match-card {
-        flex-direction: column;
+    .hero {
+        min-height: 600px;
     }
 
-    /* HERO */
-
     .hero h1 {
-        font-size: 3rem;
+        font-size: clamp(38px, 6vw, 58px);
     }
 }
 
 
-/* ===================================
-   RESPONSIVE – SMARTPHONE
-=================================== */
+/* =========================================================
+   17. RESPONSIVE – SMARTPHONE
+========================================================= */
 
 @media (max-width: 650px) {
 
     /* NAVIGATION */
 
+    nav {
+        height: auto;
+        min-height: 76px;
+    }
+
     .nav-container {
         flex-direction: column;
+        justify-content: center;
 
-        gap: 1rem;
+        gap: 12px;
+
+        padding: 12px 16px;
+    }
+
+    .logo img {
+        width: 125px;
     }
 
     .nav-links {
-        gap: 1rem;
+        gap: 20px;
 
         flex-wrap: wrap;
-
         justify-content: center;
     }
+
+    .nav-links a {
+        font-size: 11px;
+    }
+
 
     /* HERO */
 
     .hero {
+        min-height: 0;
+
+        padding: 65px 16px 55px;
+
         background-size: cover;
-
         background-position: center center;
-
-        min-height: 420px;
-
-        padding: 2rem 1rem;
     }
 
     .hero h1 {
-        font-size: 2.2rem;
+        font-size: clamp(30px, 8vw, 42px);
+        letter-spacing: -1px;
+
+        margin-bottom: 25px;
     }
+
+    .hero-subtitle {
+        font-size: 11px;
+        letter-spacing: 2px;
+
+        margin-bottom: 14px;
+    }
+
 
     /* COUNTDOWN */
 
     .countdown-box {
-        flex-direction: row;
+        width: 100%;
 
         flex-wrap: wrap;
-
         justify-content: center;
 
-        padding: 0.75rem 1rem;
+        gap: 8px;
 
-        gap: 0.5rem;
+        padding: 13px 15px;
+        margin-bottom: 22px;
     }
 
     .countdown-label {
-        font-size: 0.8rem;
+        font-size: 10px;
     }
 
     #countdown {
-        font-size: 1.3rem;
+        font-size: 20px;
     }
+
 
     /* MATCH CARD */
 
     .match-card {
         flex-direction: row;
 
-        padding: 1rem;
+        gap: 8px;
 
-        gap: 0.5rem;
+        padding: 18px 12px;
     }
 
     .team-card {
         flex: 1;
-
         min-width: 0;
     }
 
     .team-card img {
         width: 65px;
         height: 65px;
+
+        padding: 3px;
     }
 
     .team-card h3 {
-        font-size: 1rem;
+        font-size: 12px;
+        margin-top: 10px;
     }
 
     .versus-section {
@@ -1022,57 +1080,82 @@ footer {
     }
 
     .versus-section h2 {
-        font-size: 2rem;
-
-        margin-bottom: 0.5rem;
+        font-size: 23px;
+        margin-bottom: 10px;
     }
 
     .primary-btn {
-        padding: 0.6rem 1rem;
+        min-height: 34px;
 
-        font-size: 0.8rem;
+        padding: 0 10px;
+
+        font-size: 9px;
     }
 
-    /* STATS */
+
+    /* STATISTICS */
 
     .stats-section {
         grid-template-columns: repeat(2, minmax(0, 1fr));
 
-        gap: 1rem;
+        gap: 12px;
 
-        padding: 0 1rem;
+        padding: 0 16px;
+
+        margin-top: -18px;
+        margin-bottom: 60px;
     }
 
     .stat-box {
-        padding: 1.25rem 0.75rem;
+        min-height: 115px;
+        padding: 18px 10px;
     }
+
+    .stat-number {
+        font-size: 27px;
+        margin-bottom: 9px;
+    }
+
+    .stat-label {
+        font-size: 9px;
+        letter-spacing: 0.7px;
+    }
+
 
     /* DASHBOARD */
 
     .dashboard {
-        padding: 0 1rem 3rem;
+        padding: 0 16px 60px;
 
-        gap: 1rem;
+        gap: 15px;
     }
 
-    /* PANEL-ABSTÄNDE */
+
+    /* PANELS */
 
     .panel {
-        padding: 1.5rem;
+        padding: 20px;
     }
 
     .panel-header {
-        margin-bottom: 1.5rem;
+        margin-bottom: 20px;
     }
 
     .panel-header h2 {
-        font-size: 1.3rem;
+        font-size: 17px;
     }
+
+    .panel-header a {
+        font-size: 10px;
+    }
+
 
     /* NEWS */
 
     .news-item {
         flex-direction: column;
+
+        gap: 12px;
     }
 
     .news-item img {
@@ -1080,10 +1163,17 @@ footer {
         height: 160px;
     }
 
+    .news-content h4 {
+        font-size: 13px;
+    }
+
+
     /* EVENTS */
 
     .event-item {
         flex-direction: column;
+
+        gap: 12px;
     }
 
     .event-item img {
@@ -1091,74 +1181,137 @@ footer {
         height: 160px;
     }
 
-    /* VIDEO-HIGHLIGHTS */
+    .event-content {
+        width: 100%;
+    }
+
+    .event-content h3 {
+        font-size: 14px;
+    }
+
+
+    /* HIGHLIGHTS */
 
     .highlight-thumbnail {
-        border-radius: 10px;
+        border-radius: 7px;
     }
 
     .highlight-play {
-        width: 52px;
-        height: 52px;
+        width: 48px;
+        height: 48px;
 
-        font-size: 1.35rem;
+        font-size: 20px;
+    }
+
+    .highlights-note {
+        font-size: 11px;
+    }
+
+
+    /* EVENT COLUMNS */
+
+    .events-columns {
+        gap: 20px;
+    }
+
+    .event-group-title {
+        margin-bottom: 17px;
     }
 }
 
 
-/* ===================================
-   RESPONSIVE – KLEINE SMARTPHONES
-=================================== */
+/* =========================================================
+   18. RESPONSIVE – KLEINE SMARTPHONES
+========================================================= */
 
 @media (max-width: 480px) {
 
-    /* HERO */
+    .nav-links {
+        gap: 14px;
+    }
+
+    .nav-links a {
+        font-size: 10px;
+    }
+
+    .hero {
+        padding: 50px 12px 45px;
+    }
 
     .hero h1 {
-        font-size: 1.8rem;
+        font-size: 30px;
     }
-
-    /* STATS */
-
-    .stats-section {
-        grid-template-columns: 1fr;
-    }
-
-    .stat-number {
-        font-size: 2rem;
-    }
-
-    /* PANEL */
-
-    .panel {
-        padding: 1.25rem;
-    }
-
-    /* COUNTDOWN */
 
     .countdown-box {
         width: 100%;
     }
 
     #countdown {
-        font-size: 1.1rem;
+        font-size: 17px;
     }
 
-    /* HIGHLIGHTS */
-
-    .highlight-video h3 {
-        font-size: 1rem;
+    .match-card {
+        padding: 15px 8px;
+        gap: 5px;
     }
 
-    .highlights-note {
-        font-size: 0.85rem;
+    .team-card img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .team-card h3 {
+        font-size: 11px;
+    }
+
+    .versus-section h2 {
+        font-size: 20px;
+    }
+
+    .primary-btn {
+        font-size: 8px;
+        padding: 0 8px;
+    }
+
+    .stats-section {
+        gap: 10px;
+    }
+
+    .stat-box {
+        min-height: 105px;
+        padding: 15px 8px;
+    }
+
+    .stat-number {
+        font-size: 24px;
+    }
+
+    .stat-label {
+        font-size: 8px;
+    }
+
+    .panel {
+        padding: 16px;
+    }
+
+    .panel-header h2 {
+        font-size: 15px;
+    }
+
+    .event-item img,
+    .news-item img {
+        height: 145px;
+    }
+
+    .qualification-btn {
+        font-size: 9px;
     }
 }
 
 
-/* ===================================
-   REDUZIERTE ANIMATIONEN
-=================================== */
+/* =========================================================
+   19. REDUCED MOTION
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -1173,5 +1326,4 @@ footer {
 
         animation-iteration-count: 1 !important;
     }
-
 }

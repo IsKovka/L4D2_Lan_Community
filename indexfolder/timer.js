@@ -64,7 +64,7 @@ function updateCountdown() {
         countdownLabelEl.hidden = false;
 
         countdownLabelEl.textContent =
-            "Startet in:";
+            "STARTET IN:";
 
         const days =
             Math.floor(
@@ -87,9 +87,9 @@ function updateCountdown() {
             );
 
         countdownEl.textContent =
-            `${days} Tage ${hours} Stunden ` +
-            `${mins.toString().padStart(2, "0")} Minuten ` +
-            `${secs.toString().padStart(2, "0")} Sekunden`;
+            `${days} TAGE ${hours} STUNDEN ` +
+            `${mins.toString().padStart(2, "0")} MINUTEN ` +
+            `${secs.toString().padStart(2, "0")} SEKUNDEN`;
 
         return;
 
@@ -105,10 +105,10 @@ function updateCountdown() {
         countdownLabelEl.hidden = false;
 
         countdownLabelEl.textContent =
-            "Status:";
+            "STATUS:";
 
         countdownEl.textContent =
-            "LAN läuft!";
+            "LAN LÄUFT!";
 
         return;
 
@@ -122,7 +122,7 @@ function updateCountdown() {
     countdownLabelEl.hidden = true;
 
     countdownEl.textContent =
-        "Ergebnisse";
+        "ERGEBNISSE";
 
 }
 
