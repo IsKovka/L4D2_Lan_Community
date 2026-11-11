@@ -2,7 +2,7 @@
    KONFIGURATION
 ====================================== */
 const SHEET_URL =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vSx1uPezcvcK8IXdFYG4En2SQHG3Ow5q9e0nEiMYfzCvecT3W11Cjg8k0wemJM3gOnoSvxzr3_EUl6p/pub?output=csv";
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vRzbJOdKiiI_VhDs3f4LIoFRFBJ1CklQHhMgqNWltxYMDgFIIyW79pWGkQg2g6DRhkHBvNFhxDNPNIs/pub?output=csv";
 
 let pointsChart = null;
 
@@ -457,7 +457,7 @@ const percent =
    if (rawDiff > 0) {
 
     leader.textContent =
-        "Eagles führen";
+        "Wolves führen";
 
     differenceValue.style.color =
         "#0066b9";
@@ -470,7 +470,7 @@ const percent =
 else if (rawDiff < 0) {
 
     leader.textContent =
-        "Chicks führen";
+        "Sharks führen";
 
     differenceValue.style.color =
         "#8a0000";
@@ -526,13 +526,13 @@ function updateChart(
                 datasets: [
 
                     {
-                        label: "Eagles",
+                        label: "Wolves",
                         data: eagles,
                         backgroundColor:"#0066b9"
                     },
 
                     {
-                        label: "Chicks",
+                        label: "Sharks",
                         data: chicks,
                         backgroundColor:"#8a0000"
                     }
@@ -578,16 +578,13 @@ function updateChart(
 /* ======================================
    KAMPAGNENLISTE GENERIEREN
 ====================================== */
-function renderCampaigns(
-    campaigns
-){
+
+function renderCampaigns(campaigns) {
 
     const container =
-        document.getElementById(
-            "campaignContainer"
-        );
+        document.getElementById("campaignContainer");
 
-    if(!container){
+    if (!container) {
         return;
     }
 
@@ -595,301 +592,239 @@ function renderCampaigns(
 
     let campaignIndex = 1;
 
-    Object.entries(campaigns)
-        .forEach(([campaignName,data]) => {
+    Object.entries(campaigns).forEach(([campaignName, data]) => {
 
-            const meta =
-                campaignMeta[campaignName] || {};
+        const meta =
+            campaignMeta[campaignName] || {};
 
-            const blueYoutubeLink =
-                meta.blueYoutube || "";
+        const blueYoutubeLink =
+            meta.blueYoutube || "";
 
-            const redYoutubeLink =
-                meta.redYoutube || "";
+        const redYoutubeLink =
+            meta.redYoutube || "";
 
-            let previousE = 0;
-            let previousC = 0;
+        let previousE = 0;
+        let previousC = 0;
 
-            let totalMax = 0;
+        let totalMax = 0;
 
-            const chapterRows = [];
+        const chapterRows = [];
 
-            data.chapters.forEach(
-                (chapter,chapterIndex) => {
+        data.chapters.forEach((chapter, chapterIndex) => {
 
-                    const ePoints =
-                        chapter.eCum -
-                        previousE;
+            const ePoints =
+                chapter.eCum - previousE;
 
-                    const cPoints =
-                        chapter.cCum -
-                        previousC;
+            const cPoints =
+                chapter.cCum - previousC;
 
-                    previousE =
-                        chapter.eCum;
+            previousE = chapter.eCum;
+            previousC = chapter.cCum;
 
-                    previousC =
-                        chapter.cCum;
+            const maxPoints =
+                chapter.maxPoints || 0;
 
-                    const maxPoints =
-                        chapter.maxPoints || 0;
+            totalMax += maxPoints;
 
-                    totalMax +=
-                        maxPoints;
+            const diff =
+                ePoints - cPoints;
 
-                    const diff =
-                        ePoints -
-                        cPoints;
+            chapterRows.push(`
 
-                    chapterRows.push(`
+                <div class="chapter-row">
 
-                        <div class="chapter-row">
+                    <img
+                        src="../0allgemein/Kampagnencover/${campaignIndex}_${chapterIndex + 1}.png"
+                        alt="">
 
-                            <img
-                                src="../0allgemein/Kampagnencover/${campaignIndex}_${chapterIndex + 1}.png"
-                                alt="">
+                    <span>${chapter.chapter}</span>
 
-                            <span>${chapter.chapter}</span>
+                    <span>
+                        ${maxPoints.toLocaleString("de-DE")}
+                    </span>
+
+                    <span class="eagles-score">
+                        ${ePoints.toLocaleString("de-DE")}
+                    </span>
+
+                    <span class="chicks-score">
+                        ${cPoints.toLocaleString("de-DE")}
+                    </span>
+
+                    <span class="${
+                        diff >= 0
+                        ? "diff-positive"
+                        : "diff-negative"
+                    }">
+                        ${Math.abs(diff).toLocaleString("de-DE")}
+                    </span>
+
+                </div>
+
+            `);
+
+        });
+
+        const campaignEagles = previousE;
+        const campaignChicks = previousC;
+
+        const campaignDiff =
+            campaignEagles - campaignChicks;
+
+        const eaglesProgress =
+            totalMax > 0
+            ? (campaignEagles / totalMax) * 100
+            : 0;
+
+        const chicksProgress =
+            totalMax > 0
+            ? (campaignChicks / totalMax) * 100
+            : 0;
+
+
+        container.insertAdjacentHTML(
+            "beforeend",
+
+            `
+
+            <div class="campaign-card">
+
+                <div
+                    class="campaign-header"
+                    onclick="toggleCampaign(this)">
+
+                    <!-- KAMPAGNENCOVER UND NAME -->
+
+                    <div class="campaign-left">
+
+                        <img
+                            src="../0allgemein/Kampagnencover/${campaignIndex}_0.png"
+                            class="campaign-cover"
+                            alt="">
+
+                        <div class="campaign-meta">
+
+                            <h3>
+                                ${campaignName}
+                            </h3>
 
                             <span>
-                                ${maxPoints.toLocaleString("de-DE")}
+                                ${data.chapters.length} Kapitel
                             </span>
-
-                            <span class="eagles-score">
-                                ${ePoints.toLocaleString("de-DE")}
-                            </span>
-
-                            <span class="chicks-score">
-                                ${cPoints.toLocaleString("de-DE")}
-                            </span>
-
-                            <span class="${
-                                diff >= 0
-                                ? "diff-positive"
-                                : "diff-negative"
-                            }">
-                                ${Math.abs(diff).toLocaleString("de-DE")}
-                            </span>
-
-                        </div>
-
-                    `);
-
-                }
-            );
-
-            const campaignEagles =
-                previousE;
-
-            const campaignChicks =
-                previousC;
-
-            const campaignDiff =
-                campaignEagles -
-                campaignChicks;
-
-            const eaglesProgress =
-                totalMax > 0
-                ? (campaignEagles / totalMax) * 100
-                : 0;
-
-            const chicksProgress =
-                totalMax > 0
-                ? (campaignChicks / totalMax) * 100
-                : 0;
-
-            container.insertAdjacentHTML(
-                "beforeend",
-
-                `
-
-                <div class="campaign-card">
-
-                    <div
-                        class="campaign-header"
-                        onclick="toggleCampaign(this)">
-
-                        <!-- KAMPAGNENCOVER UND NAME -->
-
-                        <div class="campaign-left">
-
-                            <img
-                                src="../0allgemein/Kampagnencover/${campaignIndex}_0.png"
-                                class="campaign-cover"
-                                alt="">
-
-                            <div class="campaign-meta">
-
-                                <h3>
-                                    ${campaignName}
-                                </h3>
-
-                                <span>
-                                    ${data.chapters.length} Kapitel
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ERGEBNISSE UND VIDEO-BUTTONS -->
-
-                        <div class="campaign-results">
-
-                            <!-- BLAUER VIDEO-BUTTON -->
-
-                            <div class="campaign-actions campaign-actions-blue">
-
-                                ${
-                                    blueYoutubeLink
-                                    ? `
-                                        <a
-                                            href="${blueYoutubeLink}"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="campaign-video-btn campaign-video-btn-blue"
-                                            title="Blue POV"
-                                            aria-label="Blue POV: ${campaignName}"
-                                            onclick="event.stopPropagation()">
-                                            ▶
-                                        </a>
-                                      `
-                                    : `
-                                        <span class="campaign-video-pending"></span>
-                                      `
-                                }
-
-                            </div>
-
-                            <!-- BLAUES TEAM -->
-
-                            <div class="team-result team-result-blue">
-
-                                <div class="result-top">
-
-                                    <span class="team-label blue">
-                                        Eagles
-                                    </span>
-
-                                    <span class="score-value blue">
-                                        ${campaignEagles.toLocaleString("de-DE")}
-                                    </span>
-
-                                </div>
-
-                                <div class="progress">
-
-                                    <div
-                                        class="progress-blue"
-                                        style="width:${eaglesProgress}%">
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <!-- ROTES TEAM -->
-
-                            <div class="team-result team-result-red">
-
-                                <div class="result-top">
-
-                                    <span class="team-label red">
-                                        Chicks
-                                    </span>
-
-                                    <span class="score-value red">
-                                        ${campaignChicks.toLocaleString("de-DE")}
-                                    </span>
-
-                                </div>
-
-                                <div class="progress">
-
-                                    <div
-                                        class="progress-red"
-                                        style="width:${chicksProgress}%">
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <!-- ROTER VIDEO-BUTTON -->
-
-                            <div class="campaign-actions campaign-actions-red">
-
-                                ${
-                                    redYoutubeLink
-                                    ? `
-                                        <a
-                                            href="${redYoutubeLink}"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="campaign-video-btn campaign-video-btn-red"
-                                            title="Red POV"
-                                            aria-label="Red POV: ${campaignName}"
-                                            onclick="event.stopPropagation()">
-                                            ▶
-                                        </a>
-                                      `
-                                    : `
-                                        <span class="campaign-video-pending"></span>
-                                      `
-                                }
-
-                            </div>
 
                         </div>
 
                     </div>
 
-                    <!-- KAPITELDETAILS -->
 
-                    <div class="campaign-body collapsed">
+                    <!-- ERGEBNISSE UND VIDEO-BUTTONS -->
 
-                        <div class="chapter-header">
+                    <div class="campaign-results">
 
-                            <span></span>
-                            <span>Kapitel</span>
-                            <span>Max</span>
-                            <span>Eagles</span>
-                            <span>Chicks</span>
-                            <span>Diff</span>
+                        <!-- BLAUER VIDEO-BUTTON -->
+
+                        <div class="campaign-actions campaign-actions-blue">
+
+                            ${
+                                blueYoutubeLink
+                                ? `
+                                    <a
+                                        href="${blueYoutubeLink}"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="campaign-video-btn campaign-video-btn-blue"
+                                        title="Blue POV"
+                                        aria-label="Blue POV: ${campaignName}"
+                                        onclick="event.stopPropagation()">
+                                        ▶
+                                    </a>
+                                  `
+                                : `
+                                    <span class="campaign-video-pending"></span>
+                                  `
+                            }
 
                         </div>
 
-                        ${chapterRows.join("")}
 
-                        <!-- GESAMTERGEBNIS -->
+                        <!-- BLAU -->
 
-                        <div class="campaign-total">
+                        <div class="team-result team-result-blue">
 
-                            <span></span>
+                            <div class="result-top">
 
-                            <span class="total-label">
-                                Gesamt
-                            </span>
+                                <span class="team-label blue">
+                                    Wolves
+                                </span>
 
-                            <span>
-                                ${totalMax.toLocaleString("de-DE")}
-                            </span>
+                                <span class="score-value blue">
+                                    ${campaignEagles.toLocaleString("de-DE")}
+                                </span>
 
-                            <span class="eagles-score">
-                                ${campaignEagles.toLocaleString("de-DE")}
-                            </span>
+                            </div>
 
-                            <span class="chicks-score">
-                                ${campaignChicks.toLocaleString("de-DE")}
-                            </span>
+                            <div class="progress">
 
-                            <span class="${
-                                campaignDiff >= 0
-                                ? "diff-positive"
-                                : "diff-negative"
-                            }">
-                                ${Math.abs(campaignDiff).toLocaleString("de-DE")}
-                            </span>
+                                <div
+                                    class="progress-blue"
+                                    style="width:${eaglesProgress}%">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ROT -->
+
+                        <div class="team-result team-result-red">
+
+                            <div class="result-top">
+
+                                <span class="team-label red">
+                                    Sharks
+                                </span>
+
+                                <span class="score-value red">
+                                    ${campaignChicks.toLocaleString("de-DE")}
+                                </span>
+
+                            </div>
+
+                            <div class="progress">
+
+                                <div
+                                    class="progress-red"
+                                    style="width:${chicksProgress}%">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ROTER VIDEO-BUTTON -->
+
+                        <div class="campaign-actions campaign-actions-red">
+
+                            ${
+                                redYoutubeLink
+                                ? `
+                                    <a
+                                        href="${redYoutubeLink}"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="campaign-video-btn campaign-video-btn-red"
+                                        title="Red POV"
+                                        aria-label="Red POV: ${campaignName}"
+                                        onclick="event.stopPropagation()">
+                                        ▶
+                                    </a>
+                                  `
+                                : `
+                                    <span class="campaign-video-pending"></span>
+                                  `
+                            }
 
                         </div>
 
@@ -897,13 +832,68 @@ function renderCampaigns(
 
                 </div>
 
-                `
 
-            );
+                <!-- KAPITELDETAILS -->
 
-            campaignIndex++;
+                <div class="campaign-body collapsed">
 
-        });
+                    <div class="chapter-header">
+
+                        <span></span>
+                        <span>Kapitel</span>
+                        <span>Max</span>
+                        <span>Wolves</span>
+                        <span>Sharks</span>
+                        <span>Diff</span>
+
+                    </div>
+
+                    ${chapterRows.join("")}
+
+
+                    <!-- GESAMTERGEBNIS -->
+
+                    <div class="campaign-total">
+
+                        <span></span>
+
+                        <span class="total-label">
+                            Gesamt
+                        </span>
+
+                        <span>
+                            ${totalMax.toLocaleString("de-DE")}
+                        </span>
+
+                        <span class="eagles-score">
+                            ${campaignEagles.toLocaleString("de-DE")}
+                        </span>
+
+                        <span class="chicks-score">
+                            ${campaignChicks.toLocaleString("de-DE")}
+                        </span>
+
+                        <span class="${
+                            campaignDiff >= 0
+                            ? "diff-positive"
+                            : "diff-negative"
+                        }">
+                            ${Math.abs(campaignDiff).toLocaleString("de-DE")}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            `
+
+        );
+
+        campaignIndex++;
+
+    });
 
 }
 
