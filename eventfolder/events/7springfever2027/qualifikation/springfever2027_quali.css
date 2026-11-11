@@ -709,33 +709,33 @@ nav {
 /* SHARKS */
 
 .ranking-row[data-team-id="A"] .ranking-team-logo {
-    background-image: url("../Teamlogos/logo_sharks.png");
+    background-image: url("../Teamlogos/logo_sharkss.png");
 }
 
 .ranking-row[data-team-id="A"] .ranking-watermark {
-    background-image: url("../Teamlogos/logo_sharks.png");
+    background-image: url("../Teamlogos/logo_sharkss.png");
 }
 
 
 /* WOLVES */
 
 .ranking-row[data-team-id="B"] .ranking-team-logo {
-    background-image: url("../Teamlogos/logo_wolves.png");
+    background-image: url("../Teamlogos/logo_wolvess.png");
 }
 
 .ranking-row[data-team-id="B"] .ranking-watermark {
-    background-image: url("../Teamlogos/logo_wolves.png");
+    background-image: url("../Teamlogos/logo_wolvess.png");
 }
 
 
 /* BEARS */
 
 .ranking-row[data-team-id="C"] .ranking-team-logo {
-    background-image: url("../Teamlogos/logo_bears.png");
+    background-image: url("../Teamlogos/logo_bearss.png");
 }
 
 .ranking-row[data-team-id="C"] .ranking-watermark {
-    background-image: url("../Teamlogos/logo_bears.png");
+    background-image: url("../Teamlogos/logo_bearss.png");
 }
 
 

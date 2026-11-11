@@ -1,58 +1,73 @@
 const campaignMeta = {
 
     "Infektionszentrum": {
-        youtube: "https://www.youtube.com/watch?v=aWW1uR82dUo&list=PLMMjH3eMWTg03VBOZ0W6aWYrqMmQUv4H2&index=1"
+        blueYoutube: "https://www.youtube.com/watch?v=aWW1uR82dUo",
+        redYoutube: ""
     },
 
     "Die Brücke": {
-        youtube: "https://www.youtube.com/watch?v=1JsqMDMpevY&list=PLMMjH3eMWTg03VBOZ0W6aWYrqMmQUv4H2&index=2"
+        blueYoutube: "https://www.youtube.com/watch?v=1JsqMDMpevY",
+        redYoutube: ""
     },
 
     "Dunkler Karneval": {
-        youtube: "https://www.youtube.com/watch?v=dBTyvf-f7cQ&list=PLMMjH3eMWTg03VBOZ0W6aWYrqMmQUv4H2&index=3"
+        blueYoutube: "https://www.youtube.com/watch?v=dBTyvf-f7cQ",
+        redYoutube: ""
     },
 
     "Sumpffieber": {
-        youtube: "https://www.youtube.com/watch?v=hvmus2tzwKc&list=PLMMjH3eMWTg03VBOZ0W6aWYrqMmQUv4H2&index=4"
+        blueYoutube: "https://www.youtube.com/watch?v=hvmus2tzwKc",
+        redYoutube: ""
     },
 
     "Sturmflut": {
-        youtube: "https://www.youtube.com/watch?v=CZu-qocUNJI&list=PLMMjH3eMWTg03VBOZ0W6aWYrqMmQUv4H2&index=5"
+        blueYoutube: "https://www.youtube.com/watch?v=CZu-qocUNJI",
+        redYoutube: ""
     },
 
     "Die Gemeinde": {
-        youtube: "https://www.youtube.com/watch?v=4AMuj8FGQUY&list=PLMMjH3eMWTg03VBOZ0W6aWYrqMmQUv4H2&index=6"
+        blueYoutube: "https://www.youtube.com/watch?v=4AMuj8FGQUY",
+        redYoutube: ""
     },
 
     "The Sacrifice": {
-        youtube: "https://www.youtube.com/watch?v=72On5As4i6U&list=PLMMjH3eMWTg03VBOZ0W6aWYrqMmQUv4H2&index=7"
+        blueYoutube: "https://www.youtube.com/watch?v=72On5As4i6U",
+        redYoutube: ""
     },
 
     "Mercy Hospital": {
-        youtube: "https://www.youtube.com/watch?v=2kD2g4JKszM&list=PLMMjH3eMWTg03VBOZ0W6aWYrqMmQUv4H2&index=8"
+        blueYoutube: "https://www.youtube.com/watch?v=2kD2g4JKszM",
+        redYoutube: ""
     },
 
     "Crash Course": {
-        youtube: "https://www.youtube.com/watch?v=W8w9oZNouNw&list=PLMMjH3eMWTg03VBOZ0W6aWYrqMmQUv4H2&index=9"
+        blueYoutube: "https://www.youtube.com/watch?v=W8w9oZNouNw",
+        redYoutube: ""
     },
 
     "Todeszone": {
-        youtube: ""
+        blueYoutube: "",
+        redYoutube: ""
     },
 
     "Flug zur Hölle": {
-        youtube: ""
+        blueYoutube: "",
+        redYoutube: ""
     },
 
     "Blutdurst": {
-        youtube: ""
+        blueYoutube: "",
+        redYoutube: ""
     },
 
     "Kalter Strom": {
-        youtube: ""
+        blueYoutube: "",
+        redYoutube: ""
     },
 
     "Das letzte Gefecht": {
-        youtube: ""
-    },
+        blueYoutube: "",
+        redYoutube: ""
+    }
+
 };
