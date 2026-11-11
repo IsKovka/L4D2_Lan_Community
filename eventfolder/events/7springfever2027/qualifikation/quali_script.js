@@ -1085,10 +1085,12 @@ function renderHistoryRosters(
     return `
         <div class="history-rosters">
 
+            <!-- BLAUES TEAM -->
             <div class="history-roster blue">
 
                 <div class="history-roster-header">
                     <strong>${escapeHTML(blueName)}</strong>
+
                     <span class="history-roster-score">
                         ${formatPoints(bluePoints)}
                     </span>
@@ -1101,10 +1103,12 @@ function renderHistoryRosters(
             </div>
 
 
+            <!-- ROTES TEAM -->
             <div class="history-roster red">
 
                 <div class="history-roster-header">
                     <strong>${escapeHTML(redName)}</strong>
+
                     <span class="history-roster-score">
                         ${formatPoints(redPoints)}
                     </span>
@@ -1214,11 +1218,12 @@ function renderMatchHistory() {
 
 
         const completedCampaigns =
-            getCompletedCampaignsForMatch(clean(match.Match_ID));
+    getCompletedCampaignsForMatch(clean(match.Match_ID));
+
+const matchData = getMatchData(match);
 
 
-        const matchData = getMatchData(match);
-
+// Teamaufstellungen und Gesamtpunkte
 const playersHTML = renderHistoryRosters(
     blueTeam,
     redTeam,
@@ -1525,77 +1530,46 @@ const playersHTML = renderHistoryRosters(
 
 
         return `
-            <details class="history-card">
+    <details class="history-card">
 
+        <summary>
 
-                <summary>
+            <div class="history-summary-heading">
 
+                <div class="history-summary-main">
+                    <strong>
+                        ${escapeHTML(blueName)} vs. ${escapeHTML(redName)}
+                    </strong>
 
-                    <div class="history-summary-main">
-
-                        <strong>
-                            ${escapeHTML(blueName)} vs. ${escapeHTML(redName)}
-                        </strong>
-
-                        <span>
-                            ${escapeHTML(formatDate(match.Datum))}
-                            · ${escapeHTML(match.Match_ID)}
-                        </span>
-
-                    </div>
-
-
-                    <div class="history-summary-result">
-
-                        <strong>
-                            ${formatPoints(matchData.blueTotal)}
-                            :
-                            ${formatPoints(matchData.redTotal)}
-                        </strong>
-
-                        <span>
-                            ${completedCampaigns.length} / ${CAMPAIGNS_PER_MATCH} Kampagnen
-                        </span>
-
-                    </div>
-
-
-                </summary>
-
-
-                <div class="history-content">
-
-
-                    ${playersHTML}
-
-
-                    <div class="history-match-winner">
-
-                        <span>BEGEGNUNGSSIEGER</span>
-
-                        <strong>
-                            ${escapeHTML(matchWinner)}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="history-campaigns">
-
-                        <div class="qualification-campaign-section-label">
-                            KAMPAGNENÜBERSICHT
-                        </div>
-
-                        ${campaignHTML}
-
-                    </div>
-
-
+                    <span>
+                        ${escapeHTML(formatDate(match.Datum))}
+                        · ${escapeHTML(match.Match_ID)}
+                    </span>
                 </div>
 
+            </div>
 
-            </details>
-        `;
+            ${playersHTML}
+
+        </summary>
+
+
+        <div class="history-content">
+
+            <div class="history-campaigns">
+
+                <div class="qualification-campaign-section-label">
+                    KAMPAGNENÜBERSICHT
+                </div>
+
+                ${campaignHTML}
+
+            </div>
+
+        </div>
+
+    </details>
+`;
 
     }).join("");
 
