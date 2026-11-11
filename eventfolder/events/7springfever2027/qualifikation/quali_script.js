@@ -1078,18 +1078,21 @@ function renderHistoryRosters(
     blueTeam,
     redTeam,
     blueName,
-    redName
+    redName,
+    bluePoints,
+    redPoints
 ) {
-
     return `
         <div class="history-rosters">
 
+            <div class="history-roster blue">
 
-            <div class="history-roster">
-
-                <strong>
-                    ${escapeHTML(blueName)}
-                </strong>
+                <div class="history-roster-header">
+                    <strong>${escapeHTML(blueName)}</strong>
+                    <span class="history-roster-score">
+                        ${formatPoints(bluePoints)}
+                    </span>
+                </div>
 
                 <div class="history-player-list">
                     ${renderHistoryPlayers(blueTeam)}
@@ -1098,11 +1101,14 @@ function renderHistoryRosters(
             </div>
 
 
-            <div class="history-roster">
+            <div class="history-roster red">
 
-                <strong>
-                    ${escapeHTML(redName)}
-                </strong>
+                <div class="history-roster-header">
+                    <strong>${escapeHTML(redName)}</strong>
+                    <span class="history-roster-score">
+                        ${formatPoints(redPoints)}
+                    </span>
+                </div>
 
                 <div class="history-player-list">
                     ${renderHistoryPlayers(redTeam)}
@@ -1110,10 +1116,8 @@ function renderHistoryRosters(
 
             </div>
 
-
         </div>
     `;
-
 }
 
 
@@ -1152,24 +1156,30 @@ function renderMatchHistory() {
 
     const sortedMatches = [...spielplan]
 
-        .filter(match =>
+    .filter(match =>
+        getCompletedCampaignsForMatch(
+            clean(match.Match_ID)
+        ).length >= CAMPAIGNS_PER_MATCH
+    )
 
-            getCompletedCampaignsForMatch(
-                clean(match.Match_ID)
-            ).length >= CAMPAIGNS_PER_MATCH
+    .sort((a, b) => {
 
-        )
+        const dateA = parseDate(a.Datum)?.getTime() ?? 0;
+        const dateB = parseDate(b.Datum)?.getTime() ?? 0;
 
-        .sort((a, b) => {
-
-            const dateA = parseDate(a.Datum);
-            const dateB = parseDate(b.Datum);
-
-            if (!dateA || !dateB) return 0;
-
+        // Neueste Begegnung zuerst
+        if (dateA !== dateB) {
             return dateB - dateA;
+        }
 
-        });
+        // Bei identischem Datum nach Match-ID sortieren
+        return clean(b.Match_ID).localeCompare(
+            clean(a.Match_ID),
+            "de",
+            { numeric: true }
+        );
+
+    });
 
 
     if (sortedMatches.length === 0) {
@@ -1207,12 +1217,16 @@ function renderMatchHistory() {
             getCompletedCampaignsForMatch(clean(match.Match_ID));
 
 
-        const playersHTML = renderHistoryRosters(
-            blueTeam,
-            redTeam,
-            blueName,
-            redName
-        );
+        const matchData = getMatchData(match);
+
+const playersHTML = renderHistoryRosters(
+    blueTeam,
+    redTeam,
+    blueName,
+    redName,
+    matchData.blueTotal,
+    matchData.redTotal
+);
 
 
         const campaignHTML = completedCampaigns.map(item => {
@@ -1498,10 +1512,6 @@ function renderMatchHistory() {
             `;
 
         }).join("");
-
-
-        const matchData = getMatchData(match);
-
 
         const matchWinner = matchData.blueTotal > matchData.redTotal
 
