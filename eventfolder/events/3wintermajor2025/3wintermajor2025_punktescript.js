@@ -725,7 +725,18 @@ const youtubeLink =
 
                     <div class="campaign-results">
 
-    <div class="team-result">
+    <!-- BLAUER VIDEO-BUTTON -->
+
+    <div class="campaign-actions campaign-actions-blue">
+
+        <span class="campaign-video-pending"></span>
+
+    </div>
+
+
+    <!-- WOLVES -->
+
+    <div class="team-result team-result-blue">
 
         <div class="result-top">
 
@@ -750,7 +761,10 @@ const youtubeLink =
 
     </div>
 
-    <div class="team-result">
+
+    <!-- SHARKS -->
+
+    <div class="team-result team-result-red">
 
         <div class="result-top">
 
@@ -772,6 +786,35 @@ const youtubeLink =
             </div>
 
         </div>
+
+    </div>
+
+
+    <!-- VIDEO-BUTTON -->
+
+    <div class="campaign-actions campaign-actions-red">
+
+        ${
+            youtubeLink
+            ? `
+                <a
+                    href="${youtubeLink}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="campaign-video-btn campaign-video-btn-red"
+                    title="Video ansehen"
+                    onclick="event.stopPropagation()">
+                    ▶
+                </a>
+              `
+            : `
+                <span class="campaign-video-pending"></span>
+              `
+        }
+
+    </div>
+
+</div>
 
     </div>
 
