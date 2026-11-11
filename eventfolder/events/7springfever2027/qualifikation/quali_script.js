@@ -1,3 +1,4 @@
+
 /* =========================================================
    SPRINGFEVER 2027 – ONLINE QUALIFICATION
 
@@ -563,15 +564,18 @@ function calculateRanking() {
 
             const campaign = calculateCampaign(rows);
 
+
             // Gesamtpunkte
 
             blue.totalPoints += campaign.blueTotal;
             red.totalPoints += campaign.redTotal;
 
+
             // Abgeschlossene Kampagnen
 
             blue.playedCampaigns++;
             red.playedCampaigns++;
+
 
             // Kapitelgewinne
 
@@ -660,10 +664,12 @@ function renderRanking() {
     if (ranking.length === 0) {
 
         container.innerHTML = `
+
             <div class="empty-results">
                 <h3>KEINE TEAMS GEFUNDEN</h3>
                 <p>Die Teamdaten konnten nicht verarbeitet werden.</p>
             </div>
+
         `;
 
         return;
@@ -689,31 +695,38 @@ function renderRanking() {
             const avatar = imagePath
 
                 ? `
+
                     <img
                         src="${escapeHTML(imagePath)}"
                         alt="${escapeHTML(playerName)}"
                         loading="lazy"
                         onerror="this.style.display='none'"
                     >
+
                 `
 
                 : `
+
                     <span class="ranking-player-placeholder">
                         ${escapeHTML(playerName.charAt(0).toUpperCase())}
                     </span>
+
                 `;
 
             return `
+
                 <div class="ranking-player">
                     ${avatar}
                     <span>${escapeHTML(playerName)}</span>
                 </div>
+
             `;
 
         }).join("");
 
 
         return `
+
             <article
                 class="ranking-row ${status}"
                 data-team-id="${escapeHTML(team.id)}"
@@ -772,6 +785,7 @@ function renderRanking() {
                 </div>
 
             </article>
+
         `;
 
     }).join("");
@@ -908,6 +922,7 @@ function renderSchedule() {
     if (upcomingMatches.length === 0) {
 
         container.innerHTML = `
+
             <div class="empty-results">
 
                 <div class="empty-results-icon">✓</div>
@@ -920,6 +935,7 @@ function renderSchedule() {
                 </p>
 
             </div>
+
         `;
 
         return;
@@ -954,6 +970,7 @@ function renderSchedule() {
 
 
         return `
+
             <article class="match-card">
 
 
@@ -1015,6 +1032,7 @@ function renderSchedule() {
 
 
             </article>
+
         `;
 
     }).join("");
@@ -1031,9 +1049,11 @@ function renderHistoryPlayers(team) {
     if (!team || !team.players.length) {
 
         return `
+
             <span class="history-no-players">
                 Keine Spielerdaten verfügbar
             </span>
+
         `;
 
     }
@@ -1046,18 +1066,21 @@ function renderHistoryPlayers(team) {
         const avatar = imagePath
 
             ? `
+
                 <img
                     src="${escapeHTML(imagePath)}"
                     alt="${escapeHTML(playerName)}"
                     loading="lazy"
                     onerror="this.style.display='none'"
                 >
+
             `
 
             : "";
 
 
         return `
+
             <div class="history-player">
 
                 ${avatar}
@@ -1067,6 +1090,7 @@ function renderHistoryPlayers(team) {
                 </span>
 
             </div>
+
         `;
 
     }).join("");
@@ -1082,18 +1106,23 @@ function renderHistoryRosters(
     bluePoints,
     redPoints
 ) {
+
     return `
+
         <div class="history-rosters">
 
             <!-- BLAUES TEAM -->
+
             <div class="history-roster blue">
 
                 <div class="history-roster-header">
+
                     <strong>${escapeHTML(blueName)}</strong>
 
                     <span class="history-roster-score">
                         ${formatPoints(bluePoints)}
                     </span>
+
                 </div>
 
                 <div class="history-player-list">
@@ -1104,14 +1133,17 @@ function renderHistoryRosters(
 
 
             <!-- ROTES TEAM -->
+
             <div class="history-roster red">
 
                 <div class="history-roster-header">
+
                     <strong>${escapeHTML(redName)}</strong>
 
                     <span class="history-roster-score">
                         ${formatPoints(redPoints)}
                     </span>
+
                 </div>
 
                 <div class="history-player-list">
@@ -1121,7 +1153,9 @@ function renderHistoryRosters(
             </div>
 
         </div>
+
     `;
+
 }
 
 
@@ -1160,35 +1194,38 @@ function renderMatchHistory() {
 
     const sortedMatches = [...spielplan]
 
-    .filter(match =>
-        getCompletedCampaignsForMatch(
-            clean(match.Match_ID)
-        ).length >= CAMPAIGNS_PER_MATCH
-    )
+        .filter(match =>
+            getCompletedCampaignsForMatch(
+                clean(match.Match_ID)
+            ).length >= CAMPAIGNS_PER_MATCH
+        )
 
-    .sort((a, b) => {
+        .sort((a, b) => {
 
-        const dateA = parseDate(a.Datum)?.getTime() ?? 0;
-        const dateB = parseDate(b.Datum)?.getTime() ?? 0;
+            const dateA = parseDate(a.Datum)?.getTime() ?? 0;
+            const dateB = parseDate(b.Datum)?.getTime() ?? 0;
 
-        // Neueste Begegnung zuerst
-        if (dateA !== dateB) {
-            return dateB - dateA;
-        }
+            // Neueste Begegnung zuerst
 
-        // Bei identischem Datum nach Match-ID sortieren
-        return clean(b.Match_ID).localeCompare(
-            clean(a.Match_ID),
-            "de",
-            { numeric: true }
-        );
+            if (dateA !== dateB) {
+                return dateB - dateA;
+            }
 
-    });
+            // Bei identischem Datum nach Match-ID sortieren
+
+            return clean(b.Match_ID).localeCompare(
+                clean(a.Match_ID),
+                "de",
+                { numeric: true }
+            );
+
+        });
 
 
     if (sortedMatches.length === 0) {
 
         container.innerHTML = `
+
             <div class="empty-results">
 
                 <div class="empty-results-icon">—</div>
@@ -1201,6 +1238,7 @@ function renderMatchHistory() {
                 </p>
 
             </div>
+
         `;
 
         return;
@@ -1208,7 +1246,14 @@ function renderMatchHistory() {
     }
 
 
-    container.innerHTML = sortedMatches.map(match => {
+    container.innerHTML = sortedMatches.map((match, index) => {
+
+        // Neueste Begegnung zuerst.
+        // Die Rundennummer bleibt chronologisch korrekt:
+        // Die neueste abgeschlossene Begegnung erhält die höchste Nummer.
+
+        const roundNumber = sortedMatches.length - index;
+
 
         const blueTeam = findTeam(match.Team_Blau);
         const redTeam = findTeam(match.Team_Rot);
@@ -1218,20 +1263,21 @@ function renderMatchHistory() {
 
 
         const completedCampaigns =
-    getCompletedCampaignsForMatch(clean(match.Match_ID));
+            getCompletedCampaignsForMatch(clean(match.Match_ID));
 
-const matchData = getMatchData(match);
+        const matchData = getMatchData(match);
 
 
-// Teamaufstellungen und Gesamtpunkte
-const playersHTML = renderHistoryRosters(
-    blueTeam,
-    redTeam,
-    blueName,
-    redName,
-    matchData.blueTotal,
-    matchData.redTotal
-);
+        // Teamaufstellungen und Gesamtpunkte
+
+        const playersHTML = renderHistoryRosters(
+            blueTeam,
+            redTeam,
+            blueName,
+            redName,
+            matchData.blueTotal,
+            matchData.redTotal
+        );
 
 
         const campaignHTML = completedCampaigns.map(item => {
@@ -1302,18 +1348,21 @@ const playersHTML = renderHistoryRosters(
 
 
                     return `
+
                         <div class="qualification-chapter-row">
 
 
                             <div class="qualification-chapter-name">
 
                                 ${chapterImage ? `
+
                                     <img
                                         src="${escapeHTML(chapterImage)}"
                                         alt=""
                                         loading="lazy"
                                         onerror="this.style.display='none'"
                                     >
+
                                 ` : ""}
 
                                 <span>
@@ -1352,6 +1401,7 @@ const playersHTML = renderHistoryRosters(
 
 
                         </div>
+
                     `;
 
                 }
@@ -1360,6 +1410,7 @@ const playersHTML = renderHistoryRosters(
 
 
             return `
+
                 <details class="campaign-details">
 
 
@@ -1369,6 +1420,7 @@ const playersHTML = renderHistoryRosters(
                         <div class="qualification-campaign-left">
 
                             ${campaignCover ? `
+
                                 <img
                                     class="qualification-campaign-cover"
                                     src="${escapeHTML(campaignCover)}"
@@ -1376,6 +1428,7 @@ const playersHTML = renderHistoryRosters(
                                     loading="lazy"
                                     onerror="this.style.display='none'"
                                 >
+
                             ` : ""}
 
 
@@ -1514,62 +1567,55 @@ const playersHTML = renderHistoryRosters(
 
 
                 </details>
+
             `;
 
         }).join("");
 
-        const matchWinner = matchData.blueTotal > matchData.redTotal
-
-            ? blueName
-
-            : matchData.redTotal > matchData.blueTotal
-
-                ? redName
-
-                : "UNENTSCHIEDEN";
-
 
         return `
-    <details class="history-card">
 
-        <summary>
+            <details class="history-card">
 
-            <div class="history-summary-heading">
+                <summary>
 
-                <div class="history-summary-main">
-                    <strong>
-                        ${escapeHTML(blueName)} vs. ${escapeHTML(redName)}
-                    </strong>
+                    <div class="history-summary-heading">
 
-                    <span>
-                        ${escapeHTML(formatDate(match.Datum))}
-                        · ${escapeHTML(match.Match_ID)}
-                    </span>
+                        <div class="history-summary-main">
+
+                            <strong>RUNDE ${roundNumber}</strong>
+
+                            <span>
+                                ${escapeHTML(formatDate(match.Datum))}
+                                · ${escapeHTML(match.Match_ID)}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    ${playersHTML}
+
+                </summary>
+
+
+                <div class="history-content">
+
+                    <div class="history-campaigns">
+
+                        <div class="qualification-campaign-section-label">
+                            KAMPAGNENÜBERSICHT
+                        </div>
+
+                        ${campaignHTML}
+
+                    </div>
+
                 </div>
 
-            </div>
+            </details>
 
-            ${playersHTML}
-
-        </summary>
-
-
-        <div class="history-content">
-
-            <div class="history-campaigns">
-
-                <div class="qualification-campaign-section-label">
-                    KAMPAGNENÜBERSICHT
-                </div>
-
-                ${campaignHTML}
-
-            </div>
-
-        </div>
-
-    </details>
-`;
+        `;
 
     }).join("");
 
@@ -1577,7 +1623,7 @@ const playersHTML = renderHistoryRosters(
 
 
 /* =========================================================
-   SAISONFORTSCHRITT – ABGESCHLOSSENE BEGEGNUNGEN
+   16. SAISONFORTSCHRITT – ABGESCHLOSSENE BEGEGNUNGEN
 ========================================================= */
 
 function renderSeasonProgress() {
@@ -1719,8 +1765,10 @@ function renderNextMatch() {
 
         dateElement.textContent =
             date.toLocaleDateString("de-DE", {
+
                 day: "2-digit",
                 month: "2-digit"
+
             });
 
     } else {
@@ -1789,6 +1837,7 @@ function renderLastUpdate() {
 
     element.textContent =
         "Daten geladen: " +
+
         now.toLocaleString("de-DE", {
 
             day: "2-digit",
@@ -1869,10 +1918,12 @@ async function initQualification() {
             loadCSV(
                 CSV_URLS.spielplan,
                 [
+
                     "Match_ID",
                     "Datum",
                     "Team_Blau",
                     "Team_Rot"
+
                 ]
             ),
 
@@ -1880,6 +1931,7 @@ async function initQualification() {
             loadCSV(
                 CSV_URLS.ergebnisse,
                 [
+
                     "Match_ID",
                     "Kampagne_ID",
                     "Kampagne",
@@ -1888,6 +1940,7 @@ async function initQualification() {
                     "Team_Blau_Punkte_kum",
                     "Team_Rot_Punkte_kum",
                     "Status"
+
                 ]
             ),
 
@@ -1895,9 +1948,11 @@ async function initQualification() {
             loadCSV(
                 CSV_URLS.teams,
                 [
+
                     "Team_ID",
                     "Teamname",
                     "Spieler"
+
                 ]
             )
 
@@ -1943,6 +1998,7 @@ async function initQualification() {
             if (!container) return;
 
             container.innerHTML = `
+
                 <div class="data-error">
 
                     Die Qualifikationsdaten konnten nicht geladen werden.
@@ -1951,6 +2007,7 @@ async function initQualification() {
                     und die Spaltennamen.
 
                 </div>
+
             `;
 
         });
