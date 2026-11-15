@@ -6,7 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Springfever 2027 – Die Online-Qualifikation zum großen Left 4 Dead 2 LAN-Finale. Verfolge Spielplan, Ergebnisse und Rangliste.">
+    <meta
+        name="description"
+        content="Springfever 2027 – Die Online-Qualifikation zum großen Left 4 Dead 2 LAN-Finale. Verfolge Spielplan, Ergebnisse und Rangliste."
+    >
 
     <title>Springfever 2027 – Online-Qualifikation</title>
 
@@ -15,9 +18,9 @@
 
 <body>
 
-    <!-- ==========================
+    <!-- =====================================================
          NAVIGATION
-    =========================== -->
+    ====================================================== -->
 
     <nav>
         <div class="nav-container">
@@ -26,23 +29,32 @@
                 <a href="../../../../index.html">
                     <img
                         src="../../../../indexfolder/startseitenfotos/nav-logo.PNG"
-                        alt="L4D2 LAN">
+                        alt="L4D2 LAN"
+                    >
                 </a>
             </div>
 
             <ul class="nav-links">
-                <li><a href="../../../../index.html">Startseite</a></li>
-                <li><a href="../../../../events.html" class="active">Events</a></li>
-                <li><a href="../../../../spieler.html">Spieler</a></li>
+                <li>
+                    <a href="../../../../index.html">Startseite</a>
+                </li>
+
+                <li>
+                    <a href="../../../../events.html" class="active">Events</a>
+                </li>
+
+                <li>
+                    <a href="../../../../spieler.html">Spieler</a>
+                </li>
             </ul>
 
         </div>
     </nav>
 
 
-    <!-- ==========================
+    <!-- =====================================================
          HERO
-    =========================== -->
+    ====================================================== -->
 
     <header class="season-hero">
 
@@ -93,11 +105,13 @@
     </header>
 
 
-    <!-- ==========================
+    <!-- =====================================================
          SAISONSTATUS
-    =========================== -->
+    ====================================================== -->
 
     <section class="season-overview">
+
+        <!-- NÄCHSTE BEGEGNUNG -->
 
         <div class="overview-card">
 
@@ -107,22 +121,22 @@
 
             <div
                 class="overview-value overview-date"
-                id="nextMatchDate">
-
+                id="nextMatchDate"
+            >
                 TBD
-
             </div>
 
             <div
                 class="overview-description"
-                id="nextMatchTeams">
-
+                id="nextMatchTeams"
+            >
                 Spielplan wird geladen
-
             </div>
 
         </div>
 
+
+        <!-- ABGESCHLOSSENE BEGEGNUNGEN -->
 
         <div class="overview-card">
 
@@ -132,8 +146,7 @@
 
             <div class="overview-value">
 
-                <span id="completedMatchProgress">0</span>
-                <span>/ 12</span>
+                <span id="completedMatchCount">0 / 12 BEGEGNUNGEN</span>
 
             </div>
 
@@ -141,48 +154,42 @@
                 Begegnungen abgeschlossen
             </div>
 
-            <div class="season-progress">
-
-                <div
-                    class="season-progress-fill"
-                    style="width: 0%">
-                </div>
-
-            </div>
-
         </div>
 
     </section>
 
 
-    <!-- ==========================
+    <!-- =====================================================
          TEAMÜBERSICHT
-    =========================== -->
+    ====================================================== -->
 
-    <section class="section-container team-overview-section">
+    <section class="team-overview-section">
 
-        <div class="section-heading">
+        <div class="team-overview-header">
 
-            <div>
-                <span class="section-eyebrow">
-                    SPRINGFEVER 2027
-                </span>
+            <span class="section-label">
+                SPRINGFEVER 2027
+            </span>
 
-                <h2>TEILNEHMENDE TEAMS</h2>
-            </div>
+            <h2>TEILNEHMENDE TEAMS</h2>
+
+            <p>
+                Die drei Teams der Online-Qualifikation im Überblick.
+            </p>
 
         </div>
 
         <div
             class="team-overview-grid"
-            id="teamOverviewContainer">
+            id="teamOverviewContainer"
+        >
 
             <div class="empty-results">
 
                 <h3>TEAMS WERDEN GELADEN</h3>
 
                 <p>
-                    Die Team- und Spielerdaten werden geladen.
+                    Die Teamdaten werden geladen.
                 </p>
 
             </div>
@@ -192,11 +199,11 @@
     </section>
 
 
-    <!-- ==========================
+    <!-- =====================================================
          RANGLISTE
-    =========================== -->
+    ====================================================== -->
 
-    <section class="section-container" id="rangliste">
+    <section class="ranking-section" id="rangliste">
 
         <div class="section-heading">
 
@@ -223,15 +230,24 @@
 
         <div class="ranking-card">
 
+            <!-- TABELLENKOPF -->
+
             <div class="ranking-table-header">
 
                 <span>PLATZ</span>
+
                 <span>TEAM &amp; SPIELER</span>
+
                 <span>BEGEGNUNGEN</span>
+
                 <span>PUNKTE</span>
+
+                <span>STATUS</span>
 
             </div>
 
+
+            <!-- DYNAMISCHE RANGLISTE -->
 
             <div id="rankingContainer">
 
@@ -258,10 +274,16 @@
                         –
                     </div>
 
+                    <div class="ranking-status-cell">
+                        –
+                    </div>
+
                 </div>
 
             </div>
 
+
+            <!-- RANGLISTEN-FOOTER -->
 
             <div class="ranking-footer">
 
@@ -282,6 +304,8 @@
                 </div>
 
 
+                <!-- KAMPAGNENFORTSCHRITT -->
+
                 <div class="ranking-progress">
 
                     <div class="ranking-progress-label">
@@ -300,8 +324,8 @@
                         <div
                             class="season-progress-fill"
                             id="seasonProgressFill"
-                            style="width: 0%">
-                        </div>
+                            style="width: 0%"
+                        ></div>
 
                     </div>
 
@@ -314,11 +338,11 @@
     </section>
 
 
-    <!-- ==========================
+    <!-- =====================================================
          ANSTEHENDE BEGEGNUNGEN
-    =========================== -->
+    ====================================================== -->
 
-    <section class="section-container">
+    <section class="schedule-section">
 
         <div class="section-heading">
 
@@ -334,10 +358,9 @@
 
             <span
                 class="section-counter"
-                id="upcomingMatchCount">
-
+                id="upcomingMatchCount"
+            >
                 0 BEGEGNUNGEN
-
             </span>
 
         </div>
@@ -345,7 +368,8 @@
 
         <div
             class="schedule-list"
-            id="upcomingMatchesContainer">
+            id="upcomingMatchesContainer"
+        >
 
             <div class="empty-results">
 
@@ -362,11 +386,11 @@
     </section>
 
 
-    <!-- ==========================
+    <!-- =====================================================
          MATCH HISTORY
-    =========================== -->
+    ====================================================== -->
 
-    <section class="section-container">
+    <section class="history-section">
 
         <div class="section-heading">
 
@@ -380,12 +404,8 @@
 
             </div>
 
-            <span
-                class="section-counter"
-                id="completedMatchCount">
-
-                0 / 12 BEGEGNUNGEN
-
+            <span class="section-counter">
+                MATCH HISTORY
             </span>
 
         </div>
@@ -413,9 +433,9 @@
     </section>
 
 
-    <!-- ==========================
+    <!-- =====================================================
          LAN-FINALE
-    =========================== -->
+    ====================================================== -->
 
     <section class="final-section">
 
@@ -430,13 +450,15 @@
             <h2>SPRINGFEVER 2027</h2>
 
             <p class="final-subtitle">
-                DAS GROẞE LAN-FINALE
+                DAS GROSSE LAN-FINALE
             </p>
 
 
             <div class="final-qualification">
 
                 <div class="final-qualification-team">
+
+                    <span>FINALPLATZ 01</span>
 
                     <strong>
                         PLATZ 1
@@ -452,6 +474,8 @@
 
                 <div class="final-qualification-team">
 
+                    <span>FINALPLATZ 02</span>
+
                     <strong>
                         PLATZ 2
                     </strong>
@@ -463,10 +487,9 @@
 
             <a
                 href="../7springfever2027.html"
-                class="final-button">
-
+                class="final-button"
+            >
                 ZUM LAN-EVENT
-
             </a>
 
         </div>
@@ -474,24 +497,30 @@
     </section>
 
 
-    <!-- ==========================
+    <!-- =====================================================
          FOOTER
-    =========================== -->
+    ====================================================== -->
 
     <footer>
 
-        <span>
-            © 2026 L4D2 LAN Community
-        </span>
+        <div class="footer-content">
 
-        <span id="lastUpdate"></span>
+            <p>
+                © 2026 L4D2 LAN Community
+            </p>
+
+            <span id="lastUpdate">
+                Daten werden geladen
+            </span>
+
+        </div>
 
     </footer>
 
 
-    <!-- ==========================
+    <!-- =====================================================
          JAVASCRIPT
-    =========================== -->
+    ====================================================== -->
 
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
