@@ -1584,7 +1584,72 @@ function renderLastUpdate() {
    22. GESAMTE SEITE AKTUALISIEREN
 ========================================================= */
 
+function renderTeamOverview() {
+
+    const container = document.getElementById("teamOverviewContainer");
+
+    if (!container) return;
+
+    const uniqueTeams = getUniqueTeams();
+
+    if (uniqueTeams.length === 0) {
+        container.innerHTML = `
+            <div class="empty-results">
+                <h3>KEINE TEAMS GEFUNDEN</h3>
+                <p>Die Teamdaten konnten nicht geladen werden.</p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = uniqueTeams.map(team => {
+
+        const playersHTML = team.players.map(playerName => {
+
+            const imagePath = getPlayerImage(playerName);
+
+            const avatar = imagePath
+                ? `
+                    <img
+                        src="${escapeHTML(imagePath)}"
+                        alt="${escapeHTML(playerName)}"
+                        loading="lazy"
+                        onerror="this.style.display='none'"
+                    >
+                `
+                : `
+                    <div class="team-player-placeholder">
+                        ${escapeHTML(playerName.charAt(0).toUpperCase())}
+                    </div>
+                `;
+
+            return `
+                <div class="team-player">
+                    ${avatar}
+                    <span>${escapeHTML(playerName)}</span>
+                </div>
+            `;
+
+        }).join("");
+
+        return `
+            <article class="team-overview-card">
+
+                <h3>${escapeHTML(team.name)}</h3>
+
+                <div class="team-player-list">
+                    ${playersHTML}
+                </div>
+
+            </article>
+        `;
+
+    }).join("");
+
+}
+
 function renderPage() {
+    renderTeamOverview();
     renderRanking();
     renderSchedule();
     renderMatchHistory();
