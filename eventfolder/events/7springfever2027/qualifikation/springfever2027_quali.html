@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 
@@ -93,70 +94,102 @@
 
 
     <!-- ==========================
-     SAISONSTATUS
-=========================== -->
+         SAISONSTATUS
+    =========================== -->
 
-<section class="season-overview">
+    <section class="season-overview">
 
-    <!-- NÄCHSTE BEGEGNUNG -->
+        <div class="overview-card">
 
-    <div class="overview-card">
-
-        <span class="overview-label">
-            NÄCHSTE BEGEGNUNG
-        </span>
-
-        <div
-            class="overview-value overview-date"
-            id="nextMatchDate">
-
-            TBD
-
-        </div>
-
-        <div
-            class="overview-description"
-            id="nextMatchTeams">
-
-            Spielplan wird geladen
-
-        </div>
-
-    </div>
-
-
-    <!-- SAISONFORTSCHRITT -->
-
-    <div class="overview-card">
-
-        <span class="overview-label">
-            SAISONFORTSCHRITT
-        </span>
-
-        <div class="overview-value">
-
-            <span id="completedMatchProgress">0</span>
-            <span>/ 12</span>
-
-        </div>
-
-        <div class="overview-description">
-            Begegnungen abgeschlossen
-        </div>
-
-        <div class="season-progress">
+            <span class="overview-label">
+                NÄCHSTE BEGEGNUNG
+            </span>
 
             <div
-                class="season-progress-fill"
-                id="seasonProgressFill"
-                style="width: 0%">
+                class="overview-value overview-date"
+                id="nextMatchDate">
+
+                TBD
+
+            </div>
+
+            <div
+                class="overview-description"
+                id="nextMatchTeams">
+
+                Spielplan wird geladen
+
             </div>
 
         </div>
 
-    </div>
 
-</section>
+        <div class="overview-card">
+
+            <span class="overview-label">
+                SAISONFORTSCHRITT
+            </span>
+
+            <div class="overview-value">
+
+                <span id="completedMatchProgress">0</span>
+                <span>/ 12</span>
+
+            </div>
+
+            <div class="overview-description">
+                Begegnungen abgeschlossen
+            </div>
+
+            <div class="season-progress">
+
+                <div
+                    class="season-progress-fill"
+                    style="width: 0%">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================
+         TEAMÜBERSICHT
+    =========================== -->
+
+    <section class="section-container team-overview-section">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="section-eyebrow">
+                    SPRINGFEVER 2027
+                </span>
+
+                <h2>TEILNEHMENDE TEAMS</h2>
+            </div>
+
+        </div>
+
+        <div
+            class="team-overview-grid"
+            id="teamOverviewContainer">
+
+            <div class="empty-results">
+
+                <h3>TEAMS WERDEN GELADEN</h3>
+
+                <p>
+                    Die Team- und Spielerdaten werden geladen.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
 
 
     <!-- ==========================
@@ -190,22 +223,15 @@
 
         <div class="ranking-card">
 
-            <!-- TABELLENKOPF -->
-
             <div class="ranking-table-header">
 
                 <span>PLATZ</span>
-
                 <span>TEAM &amp; SPIELER</span>
-
                 <span>BEGEGNUNGEN</span>
-
                 <span>PUNKTE</span>
 
             </div>
 
-
-            <!-- DYNAMISCHE RANGLISTE -->
 
             <div id="rankingContainer">
 
@@ -237,8 +263,6 @@
             </div>
 
 
-            <!-- RANGLISTEN-FOOTER -->
-
             <div class="ranking-footer">
 
                 <div class="ranking-legend">
@@ -257,8 +281,6 @@
 
                 </div>
 
-
-                <!-- SAISONFORTSCHRITT -->
 
                 <div class="ranking-progress">
 
