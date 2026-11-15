@@ -569,7 +569,17 @@ function renderRanking() {
         const position = index + 1;
         const qualified = position <= 2;
         const status = qualified ? "qualified" : "eliminated";
+        const logoPath = getTeamLogo(team);
 
+        const logoHTML = logoPath
+        ? `
+        <img
+            class="ranking-team-logo"
+            src="${escapeHTML(logoPath)}"
+            alt="${escapeHTML(team.name)}"
+        >
+    `
+    : "";
         const playerHTML = team.players.map(playerName => {
             const imagePath = getPlayerImage(playerName);
 
@@ -609,18 +619,29 @@ function renderRanking() {
                 </div>
 
                 <div class="ranking-team">
-                    <div class="ranking-team-logo" aria-hidden="true"></div>
 
-                    <div class="ranking-team-info">
-                        <strong>${escapeHTML(team.name)}</strong>
+                ${logoHTML}
+
+                <div class="ranking-team-info">
+                        
+                    
+                    <strong>${escapeHTML(team.name)}</strong>
 
                         <div class="ranking-player-list">
                             ${playerHTML}
                         </div>
                     </div>
 
-                    <div class="ranking-watermark" aria-hidden="true"></div>
-                </div>
+                ${logoPath ? `
+                    
+                    <div
+                        class="ranking-watermark"
+                        style="background-image: url('${escapeHTML(logoPath)}')"
+                        aria-hidden="true"
+                    ></div>
+                ` : ""}
+                
+                    </div>
 
                 <div class="ranking-games">
                     <strong>
@@ -1649,7 +1670,6 @@ function renderTeamOverview() {
 }
 
 function renderPage() {
-    renderTeamOverview();
     renderRanking();
     renderSchedule();
     renderMatchHistory();
