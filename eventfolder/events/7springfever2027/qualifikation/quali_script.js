@@ -819,7 +819,6 @@ function renderScheduleTeam(team, fallbackName, color) {
 // Rendert eine Kampagnenkarte mit Coverbild.
 
 function renderScheduleCampaign(campaign, index) {
-
     const coverHTML = campaign.cover
         ? `
             <img
@@ -832,19 +831,17 @@ function renderScheduleCampaign(campaign, index) {
         `
         : `
             <div class="schedule-campaign-placeholder">
-                <span>${String(index + 1).padStart(2, "0")}</span>
+                ${String(index + 1).padStart(2, "0")}
             </div>
         `;
 
     return `
         <div class="schedule-campaign-card">
-
             ${coverHTML}
 
             <div class="schedule-campaign-info">
                 <strong>${escapeHTML(campaign.name)}</strong>
             </div>
-
         </div>
     `;
 }
@@ -872,12 +869,8 @@ function renderSchedule() {
         return dateA - dateB;
     });
 
-    // Nur Begegnungen anzeigen, bei denen mindestens
-    // eine Kampagne noch nicht abgeschlossen ist.
-
     const upcomingMatches = sortedMatches.filter(match => {
         const data = getMatchData(match);
-
         return data.completedCount < CAMPAIGNS_PER_MATCH;
     });
 
@@ -913,74 +906,88 @@ function renderSchedule() {
             match.Match_ID
         );
 
+        const campaignNames = campaigns.length > 0
+            ? campaigns.map(campaign => campaign.name).join(" · ")
+            : "Kampagnen werden geladen";
+
         const campaignHTML = campaigns.length > 0
             ? campaigns.map(renderScheduleCampaign).join("")
             : `
                 <div class="schedule-campaign-empty">
-                    Kampagneninformationen werden geladen
+                    Keine Kampagneninformationen verfügbar
                 </div>
             `;
 
         return `
-            <article class="schedule-match-card">
+            <details class="schedule-match-card">
 
-                <div class="schedule-match-top">
+                <summary class="schedule-match-summary">
 
-                    <div class="schedule-match-date">
-                        <strong>${date.day}</strong>
-                        <span>${date.month}</span>
-                        <small>${date.year}</small>
+                    <div class="schedule-summary-team blue">
+                        <span>${escapeHTML(blueName)}</span>
                     </div>
 
-                    <div class="schedule-match-main">
+                    <div class="schedule-summary-center">
+                        <span class="schedule-summary-vs">VS</span>
 
-                        <div class="schedule-match-faceoff">
-
-                            <span class="schedule-team-title blue">
-                                ${escapeHTML(blueName)}
-                            </span>
-
-                            <span class="schedule-match-vs">VS</span>
-
-                            <span class="schedule-team-title red">
-                                ${escapeHTML(redName)}
-                            </span>
-
+                        <div class="schedule-match-date">
+                            <strong>${date.day}</strong>
+                            <span>${date.month}</span>
+                            <small>${date.year}</small>
                         </div>
+                    </div>
 
+                    <div class="schedule-summary-team red">
+                        <span>${escapeHTML(redName)}</span>
+                    </div>
+
+                    <div class="schedule-summary-meta">
                         <span class="schedule-match-id">
                             ${escapeHTML(match.Match_ID)}
                         </span>
 
+                        <span class="schedule-summary-campaigns">
+                            ${escapeHTML(campaignNames)}
+                        </span>
+
+                        <span class="schedule-expand-indicator"></span>
+                    </div>
+
+                </summary>
+
+                <div class="schedule-match-expanded">
+
+                    <div class="schedule-match-teams">
+
+                        ${renderScheduleTeam(
+                            blueTeam,
+                            blueName,
+                            "blue"
+                        )}
+
+                        ${renderScheduleTeam(
+                            redTeam,
+                            redName,
+                            "red"
+                        )}
+
+                    </div>
+
+                    <div class="schedule-match-campaigns">
+
+                        <div class="schedule-campaign-heading">
+                            KAMPAGNENÜBERSICHT
+                        </div>
+
+                        <div class="schedule-campaign-grid">
+                            ${campaignHTML}
+                        </div>
+
                     </div>
 
                 </div>
 
-
-                <div class="schedule-match-teams">
-
-                    ${renderScheduleTeam(
-                        blueTeam,
-                        blueName,
-                        "blue"
-                    )}
-
-                    ${renderScheduleTeam(
-                        redTeam,
-                        redName,
-                        "red"
-                    )}
-
-                </div>
-
-
-                <div class="schedule-match-campaigns">
-
-                    ${campaignHTML}
-
-                </div>
-
-            </article>
+            </details>
         `;
     }).join("");
 }

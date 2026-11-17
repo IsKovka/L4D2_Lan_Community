@@ -3225,3 +3225,403 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================================================
+   ANSTEHENDE BEGEGNUNGEN – AUFKLAPPBARE KARTEN
+========================================================= */
+
+.schedule-match-card {
+    display: block;
+    overflow: hidden;
+    background: linear-gradient(145deg, #171717, #0d0d0d);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-large);
+    transition: border-color 0.3s, background 0.3s;
+}
+
+.schedule-match-card:hover {
+    border-color: rgba(255, 255, 255, 0.17);
+}
+
+.schedule-match-card[open] {
+    border-color: rgba(255, 91, 0, 0.28);
+}
+
+/* Geschlossener und geöffneter Kopf */
+
+.schedule-match-summary {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 110px minmax(0, 1fr);
+    align-items: center;
+    gap: 20px;
+    padding: 24px 28px 0;
+    cursor: pointer;
+    list-style: none;
+}
+
+.schedule-match-summary::-webkit-details-marker {
+    display: none;
+}
+
+.schedule-match-summary::marker {
+    content: "";
+}
+
+/* Teamnamen */
+
+.schedule-summary-team {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+}
+
+.schedule-summary-team.blue {
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.schedule-summary-team.red {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.schedule-summary-team span {
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.schedule-summary-team.blue span {
+    color: var(--color-blue);
+}
+
+.schedule-summary-team.red span {
+    color: var(--color-red);
+}
+
+/* Zentrales VS und Datum */
+
+.schedule-summary-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.schedule-summary-vs {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.schedule-match-date {
+    width: 68px;
+    min-height: 66px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 91, 0, 0.10);
+    border: 1px solid rgba(255, 91, 0, 0.28);
+    border-radius: 9px;
+    transition: width 0.3s, min-height 0.3s, background 0.3s;
+}
+
+.schedule-match-date strong {
+    color: var(--color-orange);
+    font-size: 1.45rem;
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+.schedule-match-date span {
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.schedule-match-date small {
+    color: var(--color-muted);
+    font-size: 0.6rem;
+}
+
+/* Matchcode und Kampagnennamen */
+
+.schedule-summary-meta {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    padding: 15px 0 17px;
+    border-top: 1px solid var(--color-border);
+}
+
+.schedule-summary-meta .schedule-match-id {
+    flex-shrink: 0;
+    color: var(--color-muted);
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+
+.schedule-summary-campaigns {
+    min-width: 0;
+    color: #888;
+    font-size: 0.7rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.schedule-expand-indicator {
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+    margin-left: auto;
+    border-right: 2px solid var(--color-orange);
+    border-bottom: 2px solid var(--color-orange);
+    transform: rotate(45deg);
+    transition: transform 0.3s;
+}
+
+.schedule-match-card[open] .schedule-expand-indicator {
+    transform: rotate(225deg);
+}
+
+/* Aufgeklappter Bereich */
+
+.schedule-match-expanded {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.schedule-match-card[open] .schedule-match-expanded {
+    opacity: 1;
+    border-top: 1px solid var(--color-border);
+}
+
+/* Teams und Spieler */
+
+.schedule-match-teams {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    padding: 20px 24px;
+}
+
+.schedule-team-card {
+    min-width: 0;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+}
+
+.schedule-team-card.blue {
+    border-top: 2px solid var(--color-blue);
+}
+
+.schedule-team-card.red {
+    border-top: 2px solid var(--color-red);
+}
+
+.schedule-team-header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 17px;
+}
+
+.schedule-team-logo,
+.schedule-team-logo-placeholder {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    object-fit: contain;
+}
+
+.schedule-team-name {
+    font-size: 0.95rem;
+    font-weight: 900;
+}
+
+.schedule-team-card.blue .schedule-team-name {
+    color: var(--color-blue);
+}
+
+.schedule-team-card.red .schedule-team-name {
+    color: var(--color-red);
+}
+
+.schedule-player-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.schedule-player {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+}
+
+.schedule-player img,
+.schedule-player-placeholder {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.schedule-player span {
+    min-width: 0;
+    color: #ddd;
+    font-size: 0.78rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.schedule-no-players {
+    color: var(--color-muted);
+    font-size: 0.75rem;
+}
+
+/* Kampagnenübersicht */
+
+.schedule-match-campaigns {
+    padding: 20px 24px 24px;
+    border-top: 1px solid var(--color-border);
+}
+
+.schedule-campaign-heading {
+    margin-bottom: 14px;
+    color: var(--color-muted);
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 1.3px;
+}
+
+.schedule-campaign-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.schedule-campaign-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid var(--color-border);
+    border-radius: 9px;
+}
+
+.schedule-campaign-cover,
+.schedule-campaign-placeholder {
+    width: 150px;
+    height: 84px;
+    flex: 0 0 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #222;
+}
+
+.schedule-campaign-info {
+    min-width: 0;
+}
+
+.schedule-campaign-info strong {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+
+/* Geöffneter Zustand: Datum stärker hervorheben */
+
+.schedule-match-card[open] .schedule-summary-center {
+    gap: 12px;
+}
+
+.schedule-match-card[open] .schedule-match-date {
+    width: 82px;
+    min-height: 76px;
+    background: rgba(255, 91, 0, 0.16);
+}
+
+.schedule-match-card[open] .schedule-match-date strong {
+    font-size: 1.8rem;
+}
+
+/* Responsive */
+
+@media (max-width: 760px) {
+    .schedule-match-summary {
+        grid-template-columns: minmax(0, 1fr) 80px minmax(0, 1fr);
+        gap: 10px;
+        padding: 20px 16px 0;
+    }
+
+    .schedule-summary-team span {
+        font-size: 0.82rem;
+    }
+
+    .schedule-match-teams,
+    .schedule-campaign-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .schedule-match-teams,
+    .schedule-match-campaigns {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .schedule-match-summary {
+        grid-template-columns: minmax(0, 1fr) 65px minmax(0, 1fr);
+        gap: 6px;
+        padding: 18px 12px 0;
+    }
+
+    .schedule-summary-team span {
+        font-size: 0.72rem;
+    }
+
+    .schedule-summary-vs {
+        font-size: 0.75rem;
+    }
+
+    .schedule-match-date {
+        width: 58px;
+        min-height: 60px;
+    }
+
+    .schedule-summary-meta {
+        gap: 8px;
+    }
+
+    .schedule-summary-campaigns {
+        font-size: 0.62rem;
+    }
+
+    .schedule-campaign-cover,
+    .schedule-campaign-placeholder {
+        width: 112px;
+        height: 68px;
+        flex-basis: 112px;
+    }
+
+    .schedule-player-list {
+        grid-template-columns: 1fr;
+    }
+}
