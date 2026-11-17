@@ -2739,16 +2739,17 @@ footer {
 
 .ranking-player-list {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(4, max-content);
     align-items: center;
-    gap: 12px 14px;
-    width: 100%;
+    column-gap: 24px;
+    row-gap: 10px;
+    width: fit-content;
 }
 
 .ranking-player {
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: 8px;
     min-width: 0;
     white-space: nowrap;
 }
@@ -2821,15 +2822,16 @@ footer {
     }
 
     .ranking-player-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, max-content);
+        column-gap: 18px;
+        row-gap: 12px;
     }
 
 }
 
 @media (max-width: 600px) {
-
     .ranking-player-list {
         grid-template-columns: 1fr;
+        row-gap: 10px;
     }
-
 }
