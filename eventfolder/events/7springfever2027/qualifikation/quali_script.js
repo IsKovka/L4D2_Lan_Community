@@ -631,15 +631,6 @@ function renderRanking() {
                             ${playerHTML}
                         </div>
                     </div>
-
-                ${logoPath ? `
-                    
-                    <div
-                        class="ranking-watermark"
-                        style="background-image: url('${escapeHTML(logoPath)}')"
-                        aria-hidden="true"
-                    ></div>
-                ` : ""}
                 
                     </div>
 
