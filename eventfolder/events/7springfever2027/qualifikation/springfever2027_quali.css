@@ -2835,3 +2835,393 @@ footer {
         row-gap: 10px;
     }
 }
+
+/* =========================================================
+   ANSTEHENDE BEGEGNUNGEN – NEUES KARTENDESIGN
+========================================================= */
+
+.schedule-section {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 55px 25px;
+}
+
+.schedule-section .section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.schedule-section .section-heading h2 {
+    font-size: clamp(1.7rem, 4vw, 2.3rem);
+    font-weight: 900;
+}
+
+.schedule-section .section-counter {
+    color: var(--color-muted);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.schedule-list,
+#upcomingMatchesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Gesamte Begegnung */
+
+.schedule-match-card {
+    overflow: hidden;
+    background: linear-gradient(145deg, #171717, #0d0d0d);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-large);
+    transition: border-color 0.25s, transform 0.25s;
+}
+
+.schedule-match-card:hover {
+    border-color: var(--color-border-orange);
+    transform: translateY(-2px);
+}
+
+/* Datum und Begegnungskopf */
+
+.schedule-match-top {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.schedule-match-date {
+    width: 66px;
+    min-width: 66px;
+    min-height: 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 91, 0, 0.08);
+    border: 1px solid rgba(255, 91, 0, 0.2);
+    border-radius: 9px;
+}
+
+.schedule-match-date strong {
+    color: var(--color-orange);
+    font-size: 1.65rem;
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+.schedule-match-date span {
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.schedule-match-date small {
+    color: var(--color-muted);
+    font-size: 0.62rem;
+}
+
+.schedule-match-main {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.schedule-match-faceoff {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.schedule-team-title {
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+.schedule-team-title.blue {
+    color: var(--color-blue);
+}
+
+.schedule-team-title.red {
+    color: var(--color-red);
+}
+
+.schedule-match-vs {
+    color: var(--color-muted);
+    font-size: 0.7rem;
+    font-weight: 900;
+}
+
+.schedule-match-id {
+    color: #777;
+    font-size: 0.68rem;
+    letter-spacing: 0.5px;
+}
+
+/* Teamkarten: Blau links, Rot rechts */
+
+.schedule-match-teams {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    padding: 20px 24px;
+}
+
+.schedule-team-card {
+    min-width: 0;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+}
+
+.schedule-team-card.blue {
+    border-top: 2px solid var(--color-blue);
+}
+
+.schedule-team-card.red {
+    border-top: 2px solid var(--color-red);
+}
+
+.schedule-team-header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+    margin-bottom: 17px;
+}
+
+.schedule-team-logo,
+.schedule-team-logo-placeholder {
+    width: 54px;
+    height: 54px;
+    flex: 0 0 54px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.schedule-team-logo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #292929;
+    border: 1px solid var(--color-border);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.schedule-team-name {
+    min-width: 0;
+    font-size: 0.95rem;
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.schedule-team-card.blue .schedule-team-name {
+    color: var(--color-blue);
+}
+
+.schedule-team-card.red .schedule-team-name {
+    color: var(--color-red);
+}
+
+/* Spieler */
+
+.schedule-player-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 16px;
+}
+
+.schedule-player {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+}
+
+.schedule-player img,
+.schedule-player-placeholder {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.schedule-player-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #292929;
+    color: #fff;
+    font-weight: 800;
+}
+
+.schedule-player span {
+    min-width: 0;
+    color: #ddd;
+    font-size: 0.78rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.schedule-no-players {
+    color: var(--color-muted);
+    font-size: 0.75rem;
+}
+
+/* Kampagnenübersicht */
+
+.schedule-match-campaigns {
+    padding: 20px 24px 24px;
+    border-top: 1px solid var(--color-border);
+}
+
+.schedule-match-campaigns::before {
+    content: "KAMPAGNENÜBERSICHT";
+    display: block;
+    margin-bottom: 14px;
+    color: var(--color-muted);
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 1.3px;
+}
+
+.schedule-match-campaigns > * {
+    min-width: 0;
+}
+
+.schedule-campaign-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid var(--color-border);
+    border-radius: 9px;
+}
+
+.schedule-campaign-cover,
+.schedule-campaign-placeholder {
+    width: 150px;
+    height: 84px;
+    flex: 0 0 150px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 6px;
+    background: #222;
+}
+
+.schedule-campaign-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-muted);
+    font-size: 1.3rem;
+    font-weight: 900;
+}
+
+.schedule-campaign-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.schedule-campaign-info strong {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+
+.schedule-campaign-info span {
+    display: none;
+}
+
+.schedule-campaign-empty {
+    color: var(--color-muted);
+    font-size: 0.8rem;
+}
+
+/* Mehrere Kampagnen nebeneinander */
+
+.schedule-match-campaigns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.schedule-match-campaigns::before {
+    grid-column: 1 / -1;
+}
+
+/* Mobile */
+
+@media (max-width: 760px) {
+    .schedule-match-teams {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .schedule-match-campaigns {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .schedule-match-top {
+        padding: 16px;
+        gap: 14px;
+    }
+
+    .schedule-player-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .schedule-section {
+        padding: 35px 15px;
+    }
+
+    .schedule-section .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .schedule-match-faceoff {
+        gap: 7px;
+    }
+
+    .schedule-team-title {
+        font-size: 0.85rem;
+    }
+
+    .schedule-campaign-cover,
+    .schedule-campaign-placeholder {
+        width: 112px;
+        height: 68px;
+        flex-basis: 112px;
+    }
+
+    .schedule-player-list {
+        grid-template-columns: 1fr;
+    }
+}

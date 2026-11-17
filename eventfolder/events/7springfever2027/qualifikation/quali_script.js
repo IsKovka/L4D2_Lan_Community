@@ -819,6 +819,7 @@ function renderScheduleTeam(team, fallbackName, color) {
 // Rendert eine Kampagnenkarte mit Coverbild.
 
 function renderScheduleCampaign(campaign, index) {
+
     const coverHTML = campaign.cover
         ? `
             <img
@@ -837,12 +838,13 @@ function renderScheduleCampaign(campaign, index) {
 
     return `
         <div class="schedule-campaign-card">
+
             ${coverHTML}
 
             <div class="schedule-campaign-info">
                 <strong>${escapeHTML(campaign.name)}</strong>
-                <span>${campaign.chapterCount} Kapitel</span>
             </div>
+
         </div>
     `;
 }
