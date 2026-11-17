@@ -2719,3 +2719,117 @@ footer {
     }
 
 }
+
+
+/* =========================================================
+   RANGLISTE – FINALER FEINSCHLIFF
+========================================================= */
+
+/* Teamlogos vergrößern */
+
+.ranking-team-logo {
+    width: 72px;
+    height: 72px;
+    flex: 0 0 72px;
+    object-fit: contain;
+    object-position: center;
+}
+
+/* Spieler in gleichmäßigen Spalten ausrichten */
+
+.ranking-player-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+    gap: 12px 14px;
+    width: 100%;
+}
+
+.ranking-player {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    white-space: nowrap;
+}
+
+.ranking-player img,
+.ranking-player-placeholder {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    object-fit: cover;
+}
+
+/* Spielernamen besser lesbar */
+
+.ranking-player span {
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+/* Platz 1 und 2: volle Sichtbarkeit */
+
+.ranking-row.qualified .ranking-team-logo {
+    filter: none;
+    opacity: 1;
+}
+
+.ranking-row.qualified .ranking-games {
+    color: #ffffff;
+}
+
+.ranking-row.qualified .ranking-player span {
+    color: #ffffff;
+}
+
+/* Platz 3: Schwarz-Weiß-Darstellung */
+
+.ranking-row.eliminated::before {
+    filter: grayscale(1);
+    opacity: 0.13;
+}
+
+.ranking-row.eliminated .ranking-team-logo {
+    filter: grayscale(1);
+    opacity: 0.55;
+}
+
+.ranking-row.eliminated .ranking-games,
+.ranking-row.eliminated .ranking-games strong,
+.ranking-row.eliminated .ranking-games span {
+    color: #777777;
+}
+
+.ranking-row.eliminated .ranking-team-info > strong,
+.ranking-row.eliminated .ranking-player span,
+.ranking-row.eliminated .ranking-points,
+.ranking-row.eliminated .ranking-points span {
+    color: #777777;
+}
+
+/* Mobile Darstellung */
+
+@media (max-width: 900px) {
+
+    .ranking-team-logo {
+        width: 58px;
+        height: 58px;
+        flex-basis: 58px;
+    }
+
+    .ranking-player-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .ranking-player-list {
+        grid-template-columns: 1fr;
+    }
+
+}
