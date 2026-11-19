@@ -847,14 +847,39 @@ function renderScheduleCampaign(campaign, index) {
 }
 
 
-function renderSchedule() {
-    const container = document.getElementById(
-        "upcomingMatchesContainer"
-    );
 
-    const counter = document.getElementById(
-        "upcomingMatchCount"
-    );
+function renderScheduleCampaign(campaign, index) {
+    const coverHTML = campaign.cover
+        ? `
+            <img
+                class="schedule-campaign-cover"
+                src="${escapeHTML(campaign.cover)}"
+                alt="${escapeHTML(campaign.name)}"
+                loading="lazy"
+                onerror="this.style.display='none'"
+            >
+        `
+        : `
+            <div class="schedule-campaign-placeholder">
+                ${String(index + 1).padStart(2, "0")}
+            </div>
+        `;
+
+    return `
+        <div class="schedule-campaign-card">
+            ${coverHTML}
+
+            <div class="schedule-campaign-info">
+                <strong>${escapeHTML(campaign.name)}</strong>
+            </div>
+        </div>
+    `;
+}
+
+
+function renderSchedule() {
+    const container = document.getElementById("upcomingMatchesContainer");
+    const counter = document.getElementById("upcomingMatchCount");
 
     if (!container) return;
 
@@ -875,8 +900,7 @@ function renderSchedule() {
     });
 
     if (counter) {
-        counter.textContent =
-            `${upcomingMatches.length} BEGEGNUNGEN`;
+        counter.textContent = `${upcomingMatches.length} BEGEGNUNGEN`;
     }
 
     if (upcomingMatches.length === 0) {
@@ -902,15 +926,13 @@ function renderSchedule() {
 
         const date = getDateParts(match.Datum);
 
-        const campaigns = getAssignedCampaignsForMatch(
-            match.Match_ID
-        );
+        const campaigns = getAssignedCampaignsForMatch(match.Match_ID);
 
-        const campaignNames = campaigns.length > 0
+        const campaignNames = campaigns.length
             ? campaigns.map(campaign => campaign.name).join(" · ")
-            : "Kampagnen werden geladen";
+            : "Kampagneninformationen werden geladen";
 
-        const campaignHTML = campaigns.length > 0
+        const campaignHTML = campaigns.length
             ? campaigns.map(renderScheduleCampaign).join("")
             : `
                 <div class="schedule-campaign-empty">
@@ -923,22 +945,20 @@ function renderSchedule() {
 
                 <summary class="schedule-match-summary">
 
+                    <div class="schedule-summary-date">
+                        <strong>${date.day}</strong>
+                        <span>${date.month}</span>
+                        <small>${date.year}</small>
+                    </div>
+
                     <div class="schedule-summary-team blue">
-                        <span>${escapeHTML(blueName)}</span>
+                        ${escapeHTML(blueName)}
                     </div>
 
-                    <div class="schedule-summary-center">
-                        <span class="schedule-summary-vs">VS</span>
-
-                        <div class="schedule-match-date">
-                            <strong>${date.day}</strong>
-                            <span>${date.month}</span>
-                            <small>${date.year}</small>
-                        </div>
-                    </div>
+                    <div class="schedule-summary-vs">VS</div>
 
                     <div class="schedule-summary-team red">
-                        <span>${escapeHTML(redName)}</span>
+                        ${escapeHTML(redName)}
                     </div>
 
                     <div class="schedule-summary-meta">
@@ -953,9 +973,23 @@ function renderSchedule() {
                         <span class="schedule-expand-indicator"></span>
                     </div>
 
+                    <div class="schedule-summary-open-label">
+                        BEGEGNUNG SCHLIESSEN
+                    </div>
+
                 </summary>
 
                 <div class="schedule-match-expanded">
+
+                    <div class="schedule-expanded-center">
+                        <span class="schedule-expanded-vs">VS</span>
+
+                        <div class="schedule-expanded-date">
+                            <strong>${date.day}</strong>
+                            <span>${date.month}</span>
+                            <small>${date.year}</small>
+                        </div>
+                    </div>
 
                     <div class="schedule-match-teams">
 
@@ -991,6 +1025,7 @@ function renderSchedule() {
         `;
     }).join("");
 }
+
 
 
 /* =========================================================
