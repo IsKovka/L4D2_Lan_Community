@@ -238,14 +238,17 @@ nav {
 /* =========================================================
    5. AKTUELLE RANGLISTE
 ========================================================= */
+
 .ranking-section {
     max-width: var(--content-width);
     margin: 0 auto;
     padding: 55px 25px;
 }
+
 .ranking-section .section-heading {
     margin-bottom: 24px;
 }
+
 .ranking-status {
     display: flex;
     align-items: center;
@@ -255,6 +258,7 @@ nav {
     font-weight: 800;
     letter-spacing: 0.8px;
 }
+
 .status-dot {
     width: 7px;
     height: 7px;
@@ -263,12 +267,14 @@ nav {
     border-radius: 50%;
     box-shadow: 0 0 9px rgba(101, 197, 138, 0.45);
 }
+
 .ranking-card {
     overflow: hidden;
     background: linear-gradient(180deg, #151515, #0c0c0c);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-large);
 }
+
 .ranking-table-header {
     display: grid;
     grid-template-columns: 65px minmax(200px, 1fr) 130px 110px;
@@ -281,6 +287,7 @@ nav {
     font-weight: 800;
     letter-spacing: 1.2px;
 }
+
 .ranking-row {
     position: relative;
     isolation: isolate;
@@ -293,6 +300,7 @@ nav {
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     transition: background 0.2s;
 }
+
 .ranking-row::before {
     content: "";
     position: absolute;
@@ -305,27 +313,34 @@ nav {
     opacity: 0.16;
     pointer-events: none;
 }
+
 .ranking-row:last-child {
     border-bottom: none;
 }
+
 .ranking-row:hover {
     background: rgba(255, 255, 255, 0.035);
 }
+
 .ranking-row.qualified {
     border-left: 3px solid var(--color-orange);
 }
+
 .ranking-position {
     display: flex;
     align-items: center;
 }
+
 .position-number {
     color: #777777;
     font-size: 1.35rem;
     font-weight: 900;
 }
+
 .ranking-row.qualified .position-number {
     color: var(--color-orange);
 }
+
 .ranking-team {
     position: relative;
     display: flex;
@@ -335,6 +350,7 @@ nav {
     min-height: 76px;
     overflow: visible;
 }
+
 .ranking-team-logo {
     display: block;
     width: 72px;
@@ -343,17 +359,20 @@ nav {
     object-fit: contain;
     object-position: center;
 }
+
 .ranking-team-info {
     position: relative;
     width: 100%;
     min-width: 0;
 }
+
 .ranking-team-info > strong {
     display: block;
     margin-bottom: 12px;
     font-size: 1rem;
     font-weight: 800;
 }
+
 .ranking-team span {
     display: block;
     margin-top: 4px;
@@ -363,6 +382,7 @@ nav {
     overflow-wrap: break-word;
     word-break: normal;
 }
+
 .ranking-player-list {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -371,6 +391,7 @@ nav {
     row-gap: 10px;
     width: 100%;
 }
+
 .ranking-player {
     display: flex;
     align-items: center;
@@ -378,6 +399,7 @@ nav {
     min-width: 0;
     white-space: nowrap;
 }
+
 .ranking-player img,
 .ranking-player-placeholder {
     display: block;
@@ -388,6 +410,7 @@ nav {
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 50%;
 }
+
 .ranking-player-placeholder {
     display: flex;
     align-items: center;
@@ -396,6 +419,7 @@ nav {
     color: #fff;
     font-weight: 800;
 }
+
 .ranking-player span {
     display: inline-block;
     min-width: 0;
@@ -405,54 +429,65 @@ nav {
     font-weight: 700;
     line-height: 1.25;
 }
+
 .ranking-games {
     display: flex;
     flex-direction: column;
     gap: 3px;
 }
+
 .ranking-games strong {
     font-size: 0.95rem;
     font-weight: 800;
 }
+
 .ranking-games span {
     color: var(--color-muted);
     font-size: 0.68rem;
 }
+
 .ranking-points {
     color: #fff;
     font-size: 1.15rem;
     font-weight: 900;
 }
+
 .ranking-points span {
     display: block;
     margin-top: 3px;
     color: var(--color-muted);
     font-size: 0.7rem;
 }
+
 .ranking-status-cell {
     display: flex;
     justify-content: flex-start;
 }
 
 /* Qualifizierte Plätze 1 und 2 */
+
 .ranking-row.qualified .ranking-team-logo {
     filter: none;
     opacity: 1;
 }
+
 .ranking-row.qualified .ranking-games,
 .ranking-row.qualified .ranking-player span {
     color: #ffffff;
 }
 
 /* Ausgeschiedener Platz 3 */
+
 .ranking-row.eliminated::before {
     filter: grayscale(1);
     opacity: 0.13;
 }
+
 .ranking-row.eliminated .ranking-team-logo {
     filter: grayscale(1);
     opacity: 0.55;
 }
+
 .ranking-row.eliminated .ranking-games,
 .ranking-row.eliminated .ranking-games strong,
 .ranking-row.eliminated .ranking-games span,
@@ -464,6 +499,7 @@ nav {
 }
 
 /* Fortschrittsleiste im Ranglisten-Footer */
+
 .ranking-footer {
     display: flex;
     flex-direction: column;
@@ -475,9 +511,11 @@ nav {
     font-size: 0.75rem;
     line-height: 1.6;
 }
+
 .ranking-progress {
     width: 100%;
 }
+
 .ranking-progress-label {
     display: flex;
     justify-content: space-between;
@@ -489,6 +527,7 @@ nav {
     font-weight: 800;
     letter-spacing: 0.7px;
 }
+
 .ranking-progress-label strong {
     color: var(--color-muted);
     font-size: inherit;
@@ -496,10 +535,10 @@ nav {
     letter-spacing: inherit;
     white-space: nowrap;
 }
+
 .season-progress-fill {
     width: 0;
     height: 100%;
-
     background: linear-gradient(90deg, #ff4500, #ff8a36);
     border-radius: 20px;
     transition: width 0.5s ease;
