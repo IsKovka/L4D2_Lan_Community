@@ -392,10 +392,10 @@ const players = {
 
     },
 
-    Kenzo: {
+    Kenji: {
 
-        name: "Kenzo",
-        image: "spielerfolder/kenzo.png",
+        name: "Kenji",
+        image: "spielerfolder/kenji.png",
         role: "",
         trophies: 0,
         eventsPlayed: 0,

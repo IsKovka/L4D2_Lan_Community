@@ -385,10 +385,19 @@ nav {
 
 .ranking-player-list {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    grid-template-columns:
+        var(--ranking-player-col-1, max-content)
+        var(--ranking-player-col-2, max-content)
+        var(--ranking-player-col-3, max-content)
+        var(--ranking-player-col-4, max-content);
+
     align-items: center;
-    column-gap: 12px;
+    justify-content: start;
+
+    column-gap: 20px;
     row-gap: 10px;
+
     width: 100%;
 }
 
@@ -396,17 +405,24 @@ nav {
     display: flex;
     align-items: center;
     gap: 8px;
+
     min-width: 0;
+    width: max-content;
+
     white-space: nowrap;
 }
 
 .ranking-player img,
 .ranking-player-placeholder {
     display: block;
+
     width: 42px;
     height: 42px;
+
     flex: 0 0 42px;
+
     object-fit: cover;
+
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 50%;
 }
@@ -415,19 +431,25 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+
     background: #292929;
     color: #fff;
+
     font-weight: 800;
 }
 
 .ranking-player span {
     display: inline-block;
+
     min-width: 0;
     margin: 0;
+
     color: #ffffff;
     font-size: 0.88rem;
     font-weight: 700;
     line-height: 1.25;
+
+    white-space: nowrap;
 }
 
 .ranking-games {
@@ -476,6 +498,7 @@ nav {
     color: #ffffff;
 }
 
+
 /* Ausgeschiedener Platz 3 */
 
 .ranking-row.eliminated::before {
@@ -483,7 +506,9 @@ nav {
     opacity: 0.13;
 }
 
-.ranking-row.eliminated .ranking-team-logo {
+.ranking-row.eliminated .ranking-team-logo,
+.ranking-row.eliminated .ranking-player img,
+.ranking-row.eliminated .ranking-player-placeholder {
     filter: grayscale(1);
     opacity: 0.55;
 }
@@ -497,6 +522,7 @@ nav {
 .ranking-row.eliminated .ranking-points span {
     color: #777777;
 }
+
 
 /* Fortschrittsleiste im Ranglisten-Footer */
 
@@ -2416,10 +2442,13 @@ footer {
         flex-basis: 58px;
     }
     .ranking-player-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        column-gap: 14px;
-        row-gap: 12px;
-    }
+    grid-template-columns:
+        var(--ranking-player-col-13, max-content)
+        var(--ranking-player-col-24, max-content);
+
+    column-gap: 18px;
+    row-gap: 12px;
+}
     /* Match-History */
     .qualification-campaign-results {
         gap: 22px;
@@ -2669,9 +2698,11 @@ footer {
 @media (max-width: 600px) {
     /* Rangliste */
     .ranking-player-list {
-        grid-template-columns: 1fr;
-        row-gap: 10px;
-    }
+    grid-template-columns:
+        var(--ranking-player-col-all, max-content);
+
+    row-gap: 10px;
+}
     /* Match-History-Kampagnen */
     .qualification-campaign-results {
         gap: 14px;

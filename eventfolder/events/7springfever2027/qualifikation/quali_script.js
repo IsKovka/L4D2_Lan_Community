@@ -824,6 +824,7 @@ function calculateRanking() {
 }
 
 
+
 /* =========================================================
    12. RANGLISTE ANZEIGEN
 ========================================================= */
@@ -831,9 +832,7 @@ function calculateRanking() {
 function renderRanking() {
 
     const container = document.getElementById(
-
         "rankingContainer"
-
     );
 
     if (!container) return;
@@ -857,6 +856,7 @@ function renderRanking() {
         return;
 
     }
+
 
     container.innerHTML = ranking.map((team, index) => {
 
@@ -885,6 +885,7 @@ function renderRanking() {
             `
 
             : "";
+
 
         const playerHTML = team.players.map(playerName => {
 
@@ -931,6 +932,7 @@ function renderRanking() {
             `;
 
         }).join("");
+
 
         return `
 
@@ -998,7 +1000,137 @@ function renderRanking() {
 
     }).join("");
 
+
+    /* -----------------------------------------------------
+       GEMEINSAME SPIELERSPALTEN FÜR ALLE TEAMS
+
+       Die Breite jeder Spalte richtet sich nach dem längsten
+       Spielereintrag an derselben Position über alle Teams.
+
+       Dadurch bleiben sämtliche Spielerbilder senkrecht
+       untereinander, ohne unnötige Freiräume.
+    ----------------------------------------------------- */
+
+    const playerLists = Array.from(
+
+        container.querySelectorAll(".ranking-player-list")
+
+    );
+
+    const columnWidths = [0, 0, 0, 0];
+
+
+    // Für die Messung zunächst natürliche Inhaltsbreiten nutzen.
+
+    playerLists.forEach(list => {
+
+        list.style.gridTemplateColumns = "repeat(4, max-content)";
+
+    });
+
+
+    // Größten Eintrag je Spalte über alle Teams ermitteln.
+
+    playerLists.forEach(list => {
+
+        Array.from(list.children).forEach((player, index) => {
+
+            const column = index % 4;
+
+            const width = player.getBoundingClientRect().width;
+
+            columnWidths[column] = Math.max(
+
+                columnWidths[column],
+
+                width
+
+            );
+
+        });
+
+    });
+
+
+    // Gemeinsame Spaltenbreiten als CSS-Variablen hinterlegen.
+
+    const widths = columnWidths.map(width =>
+
+        Math.max(60, Math.ceil(width))
+
+    );
+
+    container.style.setProperty(
+
+        "--ranking-player-col-1",
+
+        `${widths[0]}px`
+
+    );
+
+    container.style.setProperty(
+
+        "--ranking-player-col-2",
+
+        `${widths[1]}px`
+
+    );
+
+    container.style.setProperty(
+
+        "--ranking-player-col-3",
+
+        `${widths[2]}px`
+
+    );
+
+    container.style.setProperty(
+
+        "--ranking-player-col-4",
+
+        `${widths[3]}px`
+
+    );
+
+    // Gemeinsame Breiten für die Tablet-Ansicht mit zwei Spalten.
+
+    container.style.setProperty(
+
+        "--ranking-player-col-13",
+
+        `${Math.max(widths[0], widths[2])}px`
+
+    );
+
+    container.style.setProperty(
+
+        "--ranking-player-col-24",
+
+        `${Math.max(widths[1], widths[3])}px`
+
+    );
+
+    // Größte Breite für die einspaltige Smartphone-Ansicht.
+
+    container.style.setProperty(
+
+        "--ranking-player-col-all",
+
+        `${Math.max(...widths)}px`
+
+    );
+
+
+    // Temporäre Messwerte entfernen. Die CSS-Variablen übernehmen.
+
+    playerLists.forEach(list => {
+
+        list.style.gridTemplateColumns = "";
+
+    });
+
 }
+
 
 
 /* =========================================================
