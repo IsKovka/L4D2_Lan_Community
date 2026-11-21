@@ -155,19 +155,26 @@ function getPlayerImage(playerName) {
 ========================================================= */
 
 function parseDate(value) {
+
     const input = clean(value);
 
     if (!input) return null;
 
-    // Deutsches Format: 15.12.2026
+    // Deutsches Format: 27.12.2026 oder 27.12.26
     const germanDate = input.match(
-        /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
+        /^(\d{1,2})\.(\d{1,2})\.(\d{2}|\d{4})(?:\s.*)?$/
     );
 
     if (germanDate) {
+
         const day = Number(germanDate[1]);
         const month = Number(germanDate[2]) - 1;
-        const year = Number(germanDate[3]);
+
+        let year = Number(germanDate[3]);
+
+        if (year < 100) {
+            year += year <= 69 ? 2000 : 1900;
+        }
 
         const date = new Date(year, month, day);
 
@@ -182,17 +189,28 @@ function parseDate(value) {
         return date;
     }
 
-    // ISO-Format: 2026-12-15
+    // ISO-Format: 2026-12-27
     const isoDate = input.match(
         /^(\d{4})-(\d{2})-(\d{2})/
     );
 
     if (isoDate) {
-        return new Date(
-            Number(isoDate[1]),
-            Number(isoDate[2]) - 1,
-            Number(isoDate[3])
-        );
+
+        const year = Number(isoDate[1]);
+        const month = Number(isoDate[2]) - 1;
+        const day = Number(isoDate[3]);
+
+        const date = new Date(year, month, day);
+
+        if (
+            date.getFullYear() !== year ||
+            date.getMonth() !== month ||
+            date.getDate() !== day
+        ) {
+            return null;
+        }
+
+        return date;
     }
 
     return null;
@@ -818,37 +836,43 @@ function renderScheduleTeam(team, fallbackName, color) {
 
 // Rendert eine Kampagnenkarte mit Coverbild.
 
-function renderScheduleCampaign(campaign, index) {
+// Kleine Kampagnenvorschau für die geschlossene Karte
+
+function renderScheduleCampaignPreview(campaign, index) {
+
     const coverHTML = campaign.cover
         ? `
             <img
-                class="schedule-campaign-cover"
+                class="schedule-preview-cover"
                 src="${escapeHTML(campaign.cover)}"
                 alt="${escapeHTML(campaign.name)}"
                 loading="lazy"
-                onerror="this.style.display='none'"
             >
         `
         : `
-            <div class="schedule-campaign-placeholder">
+            <span class="schedule-preview-placeholder">
                 ${String(index + 1).padStart(2, "0")}
-            </div>
+            </span>
         `;
 
     return `
-        <div class="schedule-campaign-card">
+        <div class="schedule-preview-campaign">
+
             ${coverHTML}
 
-            <div class="schedule-campaign-info">
-                <strong>${escapeHTML(campaign.name)}</strong>
-            </div>
+            <span class="schedule-preview-name">
+                ${escapeHTML(campaign.name)}
+            </span>
+
         </div>
     `;
 }
 
 
+// Große Kampagnenkarte für die geöffnete Begegnung
 
 function renderScheduleCampaign(campaign, index) {
+
     const coverHTML = campaign.cover
         ? `
             <img
@@ -867,23 +891,35 @@ function renderScheduleCampaign(campaign, index) {
 
     return `
         <div class="schedule-campaign-card">
+
             ${coverHTML}
 
             <div class="schedule-campaign-info">
                 <strong>${escapeHTML(campaign.name)}</strong>
             </div>
+
         </div>
     `;
 }
 
 
 function renderSchedule() {
-    const container = document.getElementById("upcomingMatchesContainer");
-    const counter = document.getElementById("upcomingMatchCount");
+
+    const container = document.getElementById(
+        "upcomingMatchesContainer"
+    );
+
+    const counter = document.getElementById(
+        "upcomingMatchCount"
+    );
 
     if (!container) return;
 
+
+    // Begegnungen chronologisch sortieren
+
     const sortedMatches = [...spielplan].sort((a, b) => {
+
         const dateA = parseDate(a.Datum);
         const dateB = parseDate(b.Datum);
 
@@ -892,47 +928,92 @@ function renderSchedule() {
         if (!dateB) return -1;
 
         return dateA - dateB;
+
     });
+
+
+    // Nur noch nicht vollständig abgeschlossene Begegnungen
 
     const upcomingMatches = sortedMatches.filter(match => {
+
         const data = getMatchData(match);
+
         return data.completedCount < CAMPAIGNS_PER_MATCH;
+
     });
 
+
     if (counter) {
-        counter.textContent = `${upcomingMatches.length} BEGEGNUNGEN`;
+        counter.textContent =
+            `${upcomingMatches.length} BEGEGNUNGEN`;
     }
 
+
     if (upcomingMatches.length === 0) {
+
         container.innerHTML = `
             <div class="empty-results">
+
                 <div class="empty-results-icon">✓</div>
+
                 <h3>ALLE BEGEGNUNGEN ABGESCHLOSSEN</h3>
+
                 <p>
                     Aktuell stehen keine offenen Begegnungen mehr aus.
                     Die Ergebnisse findest du in der Match-History.
                 </p>
+
             </div>
         `;
+
         return;
     }
 
-    container.innerHTML = upcomingMatches.map(match => {
+
+    container.innerHTML = upcomingMatches.map((match, index) => {
+
         const blueTeam = findTeam(match.Team_Blau);
         const redTeam = findTeam(match.Team_Rot);
 
         const blueName = blueTeam?.name || match.Team_Blau;
         const redName = redTeam?.name || match.Team_Rot;
 
+
+        // Datum aufbereiten
+
+        const parsedDate = parseDate(match.Datum);
         const date = getDateParts(match.Datum);
 
-        const campaigns = getAssignedCampaignsForMatch(match.Match_ID);
+        const dateLabel = parsedDate
+            ? `${date.day} ${date.month} ${date.year}`
+            : clean(match.Datum) || "TERMIN OFFEN";
 
-        const campaignNames = campaigns.length
-            ? campaigns.map(campaign => campaign.name).join(" · ")
-            : "Kampagneninformationen werden geladen";
 
-        const campaignHTML = campaigns.length
+        const expandedDateHTML = parsedDate
+            ? `
+                <strong>${date.day}</strong>
+                <span>${date.month}</span>
+                <small>${date.year}</small>
+            `
+            : `
+                <strong>--</strong>
+                <span>TERMIN</span>
+                <small>OFFEN</small>
+            `;
+
+
+        // Kampagnen laden
+
+        const campaigns = getAssignedCampaignsForMatch(
+            match.Match_ID
+        );
+
+        const previewCampaigns = campaigns
+            .slice(0, 2)
+            .map(renderScheduleCampaignPreview)
+            .join("");
+
+        const campaignHTML = campaigns.length > 0
             ? campaigns.map(renderScheduleCampaign).join("")
             : `
                 <div class="schedule-campaign-empty">
@@ -940,58 +1021,108 @@ function renderSchedule() {
                 </div>
             `;
 
+
+        const campaignCount = campaigns.length > 0
+            ? `${campaigns.length} KAMPAGNEN`
+            : "KAMPAGNEN WERDEN GELADEN";
+
+
+        // Kompakte, geschlossene Ansicht
+
         return `
             <details class="schedule-match-card">
 
                 <summary class="schedule-match-summary">
 
-                    <div class="schedule-summary-date">
-                        <strong>${date.day}</strong>
-                        <span>${date.month}</span>
-                        <small>${date.year}</small>
+                    <div class="schedule-summary-collapsed">
+
+                        <div class="schedule-dossier-top">
+
+                            <span class="schedule-dossier-kicker">
+                                MATCH ${String(index + 1).padStart(2, "0")}
+                                / SPRINGFEVER 2027
+                            </span>
+
+                            <span class="schedule-dossier-date">
+                                ${escapeHTML(dateLabel)}
+                            </span>
+
+                        </div>
+
+
+                        <div class="schedule-dossier-faceoff">
+
+                            <div class="schedule-dossier-team blue">
+
+                                <small>TEAM BLUE</small>
+
+                                <strong>
+                                    ${escapeHTML(blueName)}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="schedule-dossier-vs">
+                                VS
+                            </div>
+
+
+                            <div class="schedule-dossier-team red">
+
+                                <small>TEAM RED</small>
+
+                                <strong>
+                                    ${escapeHTML(redName)}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="schedule-dossier-footer">
+
+                            <span class="schedule-match-id">
+                                ${escapeHTML(match.Match_ID)}
+                            </span>
+
+
+                            <div class="schedule-dossier-campaigns">
+
+                                ${previewCampaigns}
+
+                                <span class="schedule-campaign-count">
+                                    ${campaignCount}
+                                </span>
+
+                            </div>
+
+
+                            <span class="schedule-expand-indicator"></span>
+
+                        </div>
+
                     </div>
 
-                    <div class="schedule-summary-team blue">
-                        ${escapeHTML(blueName)}
-                    </div>
-
-                    <div class="schedule-summary-vs">VS</div>
-
-                    <div class="schedule-summary-team red">
-                        ${escapeHTML(redName)}
-                    </div>
-
-                    <div class="schedule-summary-meta">
-                        <span class="schedule-match-id">
-                            ${escapeHTML(match.Match_ID)}
-                        </span>
-
-                        <span class="schedule-summary-campaigns">
-                            ${escapeHTML(campaignNames)}
-                        </span>
-
-                        <span class="schedule-expand-indicator"></span>
-                    </div>
 
                     <div class="schedule-summary-open-label">
-                        BEGEGNUNG SCHLIESSEN
+
+                        <span>BEGEGNUNG SCHLIESSEN</span>
+
+                        <span class="schedule-expand-indicator"></span>
+
                     </div>
 
                 </summary>
 
+
+                <!-- GEÖFFNETE DETAILANSICHT -->
+
                 <div class="schedule-match-expanded">
 
-                    <div class="schedule-expanded-center">
-                        <span class="schedule-expanded-vs">VS</span>
-
-                        <div class="schedule-expanded-date">
-                            <strong>${date.day}</strong>
-                            <span>${date.month}</span>
-                            <small>${date.year}</small>
-                        </div>
-                    </div>
-
                     <div class="schedule-match-teams">
+
 
                         ${renderScheduleTeam(
                             blueTeam,
@@ -999,13 +1130,31 @@ function renderSchedule() {
                             "blue"
                         )}
 
+
+                        <div class="schedule-expanded-center">
+
+                            <span class="schedule-expanded-vs">
+                                VS
+                            </span>
+
+                            <div class="schedule-expanded-date">
+                                ${expandedDateHTML}
+                            </div>
+
+                        </div>
+
+
                         ${renderScheduleTeam(
                             redTeam,
                             redName,
                             "red"
                         )}
 
+
                     </div>
+
+
+                    <!-- KAMPAGNEN -->
 
                     <div class="schedule-match-campaigns">
 
@@ -1014,7 +1163,9 @@ function renderSchedule() {
                         </div>
 
                         <div class="schedule-campaign-grid">
+
                             ${campaignHTML}
+
                         </div>
 
                     </div>
@@ -1023,7 +1174,31 @@ function renderSchedule() {
 
             </details>
         `;
+
     }).join("");
+
+
+    // Geöffnete Karte auch durch Klick in den Inhalt schließen
+
+    container.onclick = function(event) {
+
+        const card = event.target.closest(
+            ".schedule-match-card[open]"
+        );
+
+        if (!card) return;
+
+        // Klick auf den Summary-Kopf übernimmt das native
+        // Öffnen und Schließen des Details-Elements.
+
+        if (event.target.closest(".schedule-match-summary")) {
+            return;
+        }
+
+        card.open = false;
+
+    };
+
 }
 
 

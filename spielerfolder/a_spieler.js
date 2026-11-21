@@ -392,6 +392,52 @@ const players = {
 
     },
 
+    Kenzo: {
+
+        name: "Kenzo",
+        image: "spielerfolder/kenzo.png",
+        role: "",
+        trophies: 0,
+        eventsPlayed: 0,
+        quote: "",
+
+        campaign: "",
+        survivor: "",
+        weapon: "",
+        enemy: "",
+
+        moment:
+            "",
+
+        wins: [
+
+    ]
+
+    },
+
+     Twarisch52: {
+
+        name: "Twarisch52",
+        image: "spielerfolder/twarisch52.png",
+        role: "",
+        trophies: 0,
+        eventsPlayed: 0,
+        quote: "",
+
+        campaign: "",
+        survivor: "",
+        weapon: "",
+        enemy: "",
+
+        moment:
+            "",
+
+        wins: [
+
+    ]
+
+    },
+
 };
 
     const playerDetail =
