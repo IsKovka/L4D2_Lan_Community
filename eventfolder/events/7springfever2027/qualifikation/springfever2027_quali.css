@@ -1067,374 +1067,1122 @@ nav {
 }
 
 
+
 /* =========================================================
-   7. VERGANGENE BEGEGNUNGEN / MATCH-HISTORY
+   7. VERGANGENE BEGEGNUNGEN – MATCH HISTORY
 ========================================================= */
+
 .history-section {
     max-width: var(--content-width);
     margin: 0 auto;
     padding: 55px 25px;
 }
+
 #matchHistoryContainer {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     width: 100%;
     min-width: 0;
 }
-.history-card {
+
+
+/* =========================================================
+   7.1 MATCH-KARTE
+========================================================= */
+
+.history-match-card {
+    display: block;
     overflow: hidden;
-    background: linear-gradient(110deg, #181818, #101010);
+    background:
+        radial-gradient(
+            ellipse at 15% 45%,
+            rgba(255, 91, 0, 0.055),
+            transparent 45%
+        ),
+        radial-gradient(
+            ellipse at 85% 45%,
+            rgba(255, 91, 0, 0.055),
+            transparent 45%
+        ),
+        linear-gradient(145deg, #171717, #0d0d0d);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-medium);
-    transition: border-color 0.25s;
+    border-radius: var(--radius-large);
+    transition: border-color 0.25s, transform 0.25s;
 }
-.history-card:hover {
-    border-color: rgba(255, 91, 0, 0.2);
+
+.history-match-card:hover {
+    border-color: rgba(255, 91, 0, 0.28);
+    transform: translateY(-2px);
 }
-.history-card > summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 24px;
+
+.history-match-card[open] {
+    border-color: rgba(255, 91, 0, 0.32);
+}
+
+
+/* =========================================================
+   7.2 GESCHLOSSENE ANSICHT
+========================================================= */
+
+.history-match-summary {
+    display: block;
     cursor: pointer;
     list-style: none;
 }
-.history-card > summary::-webkit-details-marker {
+
+.history-match-summary::-webkit-details-marker {
     display: none;
 }
-.history-card > summary::after {
-    content: "+";
-    margin-left: 5px;
-    color: var(--color-orange);
-    font-size: 1.5rem;
-    font-weight: 400;
+
+.history-match-summary::marker {
+    content: "";
 }
-.history-card[open] > summary::after {
-    content: "−";
-}
-.history-summary-main {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-.history-summary-main strong {
-    font-size: 1rem;
-    font-weight: 800;
-}
-.history-summary-main span {
-    color: var(--color-muted);
-    font-size: 0.7rem;
-}
-.history-content {
-    padding: 0 24px 24px;
-    border-top: 1px solid var(--color-border);
-}
-.history-rosters {
+
+.history-match-collapsed {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-    width: 100%;
-    padding: 22px 0;
+    gap: 15px;
+    min-height: 190px;
+    padding: 20px 24px 15px;
 }
-.history-roster {
-    min-width: 0;
-    max-width: 100%;
-    padding: 18px;
-    background: rgba(255, 255, 255, 0.025);
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-}
-.history-roster-header {
+
+
+/* Kopfzeile: Matchnummer und Datum */
+
+.history-match-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    padding-bottom: 12px;
-    margin-bottom: 14px;
-    border-bottom: 1px solid var(--color-border);
+    gap: 15px;
 }
-.history-roster-header strong {
-    font-size: 0.9rem;
-    font-weight: 900;
+
+.history-match-kicker {
+    color: #858585;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 1.3px;
 }
-.history-roster-score {
+
+.history-match-date {
     flex-shrink: 0;
-    font-size: 0.9rem;
+    color: var(--color-orange);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+}
+
+
+/* Teams, Punktesummen und VS */
+
+.history-match-faceoff {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr);
+    align-items: center;
+    gap: 20px;
+    min-height: 75px;
+}
+
+.history-match-team {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.history-match-team.blue {
+    align-items: flex-start;
+    text-align: left;
+}
+
+.history-match-team.red {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.history-match-team > strong {
+    font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.history-match-team.blue > strong {
+    color: var(--color-blue);
+}
+
+.history-match-team.red > strong {
+    color: var(--color-red);
+}
+
+.history-match-total {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    color: #fff;
+    font-size: 1.05rem;
     font-weight: 900;
     font-variant-numeric: tabular-nums;
 }
-.history-roster.blue .history-roster-score {
+
+.history-match-team.blue .history-match-total {
     color: var(--color-blue);
 }
-.history-roster.red .history-roster-score {
+
+.history-match-team.red .history-match-total {
     color: var(--color-red);
 }
+
+.history-match-total small {
+    color: var(--color-muted);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+}
+
+.history-match-vs {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+
+
+/* Match-ID bleibt verfügbar, wird aber nicht dargestellt. */
+
+.history-match-code.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
+/* Untere Zeile: Kampagnenvorschau und Öffnen */
+
+.history-match-footer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+    padding-top: 13px;
+    border-top: 1px solid var(--color-border);
+}
+
+.history-campaign-count {
+    flex: 0 0 auto;
+    color: var(--color-orange);
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.7px;
+    white-space: nowrap;
+}
+
+.history-campaign-preview-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    min-width: 0;
+}
+
+.history-campaign-preview {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.history-campaign-preview img,
+.history-campaign-preview-placeholder {
+    width: 48px;
+    height: 31px;
+    flex: 0 0 48px;
+    object-fit: cover;
+    object-position: center;
+    background: #242424;
+    border-radius: 4px;
+}
+
+.history-campaign-preview-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-orange);
+    font-size: 0.7rem;
+    font-weight: 900;
+}
+
+.history-campaign-preview span {
+    color: #aaa;
+    font-size: 0.68rem;
+    font-weight: 600;
+}
+
+
+/* Plus-/Minus-Symbol */
+
+.history-expand-indicator {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+    display: grid;
+    place-items: center;
+    margin-left: auto;
+    border: 1px solid rgba(255, 91, 0, 0.35);
+    border-radius: 50%;
+    transition: background 0.25s, border-color 0.25s;
+}
+
+.history-expand-indicator::before {
+    content: "+";
+    display: block;
+    color: var(--color-orange);
+    font-family: Arial, sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1;
+    transform: translateY(-1px);
+}
+
+.history-match-card:hover .history-expand-indicator {
+    background: rgba(255, 91, 0, 0.10);
+    border-color: var(--color-orange);
+}
+
+
+/* =========================================================
+   7.3 GEÖFFNETE ANSICHT – SCHLIESSLEISTE
+========================================================= */
+
+.history-match-open-label {
+    display: none;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 36px;
+    padding: 6px 18px;
+}
+
+.history-match-card[open] .history-match-collapsed {
+    display: none;
+}
+
+.history-match-card[open] .history-match-open-label {
+    display: flex;
+}
+
+.history-match-card[open] .history-expand-indicator {
+    margin: 0;
+    background: rgba(255, 91, 0, 0.08);
+}
+
+.history-match-card[open] .history-expand-indicator::before {
+    content: "−";
+    font-size: 20px;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   7.4 GEÖFFNETE ANSICHT – TEAMKARTEN
+========================================================= */
+
+.history-match-expanded {
+    display: block;
+    animation: historyReveal 0.3s ease;
+}
+
+@keyframes historyReveal {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Teams links und rechts, Datum und VS in der Mitte */
+
+.history-match-teams {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 82px minmax(0, 1fr);
+    align-items: stretch;
+    gap: 14px;
+    padding: 22px 24px;
+}
+
+.history-expanded-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.history-expanded-vs {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.history-expanded-date {
+    width: 68px;
+    min-height: 66px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 91, 0, 0.11);
+    border: 1px solid rgba(255, 91, 0, 0.28);
+    border-radius: 9px;
+}
+
+.history-expanded-date strong {
+    color: var(--color-orange);
+    font-size: 1.6rem;
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+.history-expanded-date span {
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.history-expanded-date small {
+    color: var(--color-muted);
+    font-size: 0.6rem;
+}
+
+
+/* Einzelne Teamkarte */
+
+.history-team-card {
+    min-width: 0;
+    padding: 18px;
+    background: linear-gradient(145deg, #191919, #121212);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+}
+
+.history-team-card.blue {
+    border-top: 2px solid var(--color-blue);
+}
+
+.history-team-card.red {
+    border-top: 2px solid var(--color-red);
+}
+
+
+/* Teamlogo, Teamname und Matchpunkte */
+
+.history-team-header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+    margin-bottom: 17px;
+}
+
+.history-team-logo,
+.history-team-logo-placeholder {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.history-team-logo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #292929;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.history-team-title {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.history-team-title > strong {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.history-team-card.blue .history-team-total {
+    color: var(--color-blue);
+}
+
+.history-team-card.red .history-team-total {
+    color: var(--color-red);
+}
+
+.history-team-total {
+    font-size: 0.95rem;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+}
+
+.history-team-total small {
+    margin-left: 4px;
+    color: var(--color-muted);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+
+/* Spieleraufstellung */
+
 .history-player-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    gap: 12px 15px;
 }
+
 .history-player {
     display: flex;
     align-items: center;
     gap: 9px;
     min-width: 0;
-    max-width: 100%;
 }
-.history-player img {
-    width: 34px;
-    height: 34px;
-    flex-shrink: 0;
+
+.history-player img,
+.history-player-placeholder {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
     object-fit: cover;
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 50%;
 }
+
+.history-player-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #292929;
+    color: #fff;
+    font-weight: 800;
+}
+
 .history-player span {
     min-width: 0;
-    color: #dddddd;
-    font-size: 0.75rem;
+    color: #ddd;
+    font-size: 0.78rem;
     font-weight: 600;
-    overflow-wrap: break-word;
-    word-break: normal;
-    white-space: normal;
+    overflow-wrap: anywhere;
 }
+
 .history-no-players {
     color: var(--color-muted);
     font-size: 0.75rem;
 }
 
-/* Kampagnen innerhalb einer abgeschlossenen Begegnung */
-.history-campaigns {
-    display: flex;
-    flex-direction: column;
+
+/* =========================================================
+   7.5 KAMPAGNENÜBERSICHT – ZWEI KARTEN NEBENEINANDER
+========================================================= */
+
+.history-campaign-section {
+    display: block;
+    padding: 20px 24px 24px;
+    border-top: 1px solid var(--color-border);
+}
+
+.history-campaign-section-heading {
+    margin-bottom: 15px;
+    color: var(--color-muted);
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 1.3px;
+}
+
+.history-campaign-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
     gap: 14px;
 }
-.qualification-campaign-section-label {
-    margin: 4px 0 14px;
-    color: var(--color-orange);
-    font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-}
-.campaign-details {
+
+
+/* Einzelne Kampagnenkarte */
+
+.history-campaign-card {
+    min-width: 0;
     overflow: hidden;
-    background: linear-gradient(180deg, #121212, #0a0a0a);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 16px;
+    background: linear-gradient(145deg, #181818, #101010);
+    border: 1px solid var(--color-border);
+    border-radius: 11px;
 }
-.campaign-details:hover {
-    border-color: rgba(255, 255, 255, 0.12);
+
+
+/* Kampagnentitel und Cover */
+
+.history-campaign-header {
+    padding: 15px;
+    border-bottom: 1px solid var(--color-border);
 }
-.campaign-details > summary.qualification-campaign-header {
-    display: grid;
-    grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1.1fr);
-    align-items: center;
-    gap: 30px;
-    width: 100%;
-    padding: 22px 26px;
-    cursor: pointer;
-    list-style: none;
-}
-.campaign-details > summary.qualification-campaign-header::-webkit-details-marker {
-    display: none;
-}
-.campaign-details > summary.qualification-campaign-header::after {
-    display: none;
-}
-.qualification-campaign-left {
+
+.history-campaign-title {
     display: flex;
     align-items: center;
-    gap: 17px;
+    gap: 13px;
     min-width: 0;
-    max-width: 100%;
 }
-.qualification-campaign-cover {
+
+.history-campaign-cover,
+.history-campaign-cover-placeholder {
     width: 100px;
     height: 60px;
     flex: 0 0 100px;
     object-fit: cover;
-    background: #202020;
-    border-radius: 8px;
+    object-position: center;
+    background: #242424;
+    border-radius: 7px;
 }
-.qualification-campaign-meta {
+
+.history-campaign-cover-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-orange);
+    font-size: 1.1rem;
+    font-weight: 900;
+}
+
+.history-campaign-meta {
     display: flex;
     flex-direction: column;
     gap: 5px;
     min-width: 0;
-    max-width: 100%;
 }
-.qualification-campaign-meta strong {
+
+.history-campaign-meta strong {
     color: #fff;
-    font-size: 1.25rem;
-    font-weight: 800;
-    line-height: 1.2;
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
 }
-.qualification-campaign-meta span {
-    color: #888;
-    font-size: 0.82rem;
+
+.history-campaign-meta span {
+    color: var(--color-muted);
+    font-size: 0.7rem;
 }
-.qualification-campaign-results {
+
+
+/* Kampagnensummen beider Teams */
+
+.history-campaign-scores {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px;
-    min-width: 0;
-    max-width: 100%;
+    gap: 16px;
+    padding: 15px;
+    border-bottom: 1px solid var(--color-border);
 }
-.qualification-campaign-team {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+
+.history-campaign-team-score {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.history-campaign-score-heading {
+    display: flex;
+    justify-content: space-between;
     align-items: baseline;
-    column-gap: 12px;
-    row-gap: 8px;
+    gap: 7px;
     min-width: 0;
-    max-width: 100%;
 }
-.qualification-campaign-team span {
+
+.history-campaign-score-heading span {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 1rem;
+    font-size: 0.68rem;
     font-weight: 800;
-    overflow-wrap: normal;
-    word-break: normal;
 }
-.qualification-campaign-team strong {
-    font-size: 1.45rem;
+
+.history-campaign-score-heading strong {
+    flex: 0 0 auto;
+    font-size: 1.05rem;
     font-weight: 900;
     font-variant-numeric: tabular-nums;
 }
-.qualification-campaign-team.blue span,
-.qualification-campaign-team.blue strong {
-    color: #0066b9;
+
+.history-campaign-team-score.blue .history-campaign-score-heading {
+    color: var(--color-blue);
 }
-.qualification-campaign-team.red span,
-.qualification-campaign-team.red strong {
-    color: #8a0000;
+
+.history-campaign-team-score.red .history-campaign-score-heading {
+    color: var(--color-red);
 }
-.qualification-progress {
-    grid-column: 1 / -1;
+
+.history-campaign-progress {
+    width: 100%;
     height: 4px;
     overflow: hidden;
-    background: #252525;
+    background: #292929;
     border-radius: 999px;
 }
-.qualification-progress-blue,
-.qualification-progress-red {
+
+.history-campaign-progress-fill {
     height: 100%;
     border-radius: inherit;
 }
-.qualification-progress-blue {
-    background: #0066b9;
-    box-shadow: 0 0 10px rgba(0, 102, 185, 0.35);
-}
-.qualification-progress-red {
-    background: #8a0000;
-    box-shadow: 0 0 10px rgba(138, 0, 0, 0.35);
+
+.history-campaign-progress-fill.blue {
+    background: var(--color-blue);
+    box-shadow: 0 0 8px rgba(76, 159, 255, 0.25);
 }
 
-/* Kapitel-Tabelle */
-.qualification-chapter-table {
+.history-campaign-progress-fill.red {
+    background: var(--color-red);
+    box-shadow: 0 0 8px rgba(255, 91, 91, 0.25);
+}
+
+
+/* =========================================================
+   7.6 KAPITELÜBERSICHT – DIREKT SICHTBAR
+========================================================= */
+
+.history-chapter-table {
     width: 100%;
     min-width: 0;
     overflow-x: auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
-.qualification-chapter-heading,
-.qualification-chapter-row,
-.qualification-campaign-total {
+
+.history-chapter-heading,
+.history-chapter-row,
+.history-chapter-total {
     display: grid;
-    grid-template-columns: minmax(220px, 2fr) minmax(65px, 0.65fr) repeat(3, minmax(75px, 0.8fr));
+    grid-template-columns:
+        minmax(125px, 1.65fr)
+        minmax(48px, 0.55fr)
+        minmax(58px, 0.7fr)
+        minmax(65px, 0.8fr)
+        minmax(48px, 0.6fr);
     align-items: center;
-    gap: 12px;
-    min-width: 680px;
-    padding: 12px 20px;
+    gap: 8px;
+    min-width: 520px;
+    padding: 11px 13px;
 }
-.qualification-chapter-heading {
-    min-height: 44px;
+
+.history-chapter-heading {
+    min-height: 39px;
     background: rgba(255, 255, 255, 0.025);
     color: #858585;
-    font-size: 0.65rem;
+    font-size: 0.57rem;
     font-weight: 800;
-    letter-spacing: 0.7px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
 }
-.qualification-chapter-row {
-    min-height: 68px;
+
+.history-chapter-row {
+    min-height: 53px;
     border-top: 1px solid rgba(255, 255, 255, 0.045);
-    font-size: 0.82rem;
+    color: #ddd;
+    font-size: 0.72rem;
 }
-.qualification-chapter-row:hover {
+
+.history-chapter-row:hover {
     background: rgba(255, 255, 255, 0.018);
 }
-.qualification-chapter-name {
+
+.history-chapter-name {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     min-width: 0;
 }
-.qualification-chapter-name img {
-    width: 70px;
-    height: 40px;
-    flex: 0 0 70px;
+
+.history-chapter-name img {
+    width: 52px;
+    height: 32px;
+    flex: 0 0 52px;
     object-fit: cover;
-    background: #202020;
-    border-radius: 6px;
+    background: #222;
+    border-radius: 5px;
 }
-.qualification-chapter-name span {
+
+.history-chapter-name span {
+    min-width: 0;
     color: #eee;
     overflow-wrap: anywhere;
 }
-.qualification-chapter-row .blue,
-.qualification-campaign-total .blue {
-    color: #0066b9;
+
+.history-chapter-row .blue,
+.history-chapter-total .blue {
+    color: var(--color-blue);
     font-weight: 800;
 }
-.qualification-chapter-row .red,
-.qualification-campaign-total .red {
-    color: #8a0000;
+
+.history-chapter-row .red,
+.history-chapter-total .red {
+    color: var(--color-red);
     font-weight: 800;
 }
-.chapter-draw {
+
+.history-chapter-row .chapter-draw,
+.history-chapter-total .chapter-draw {
     color: #aaa;
     font-weight: 800;
 }
-.qualification-campaign-total {
-    min-height: 54px;
+
+
+/* Gesamtsumme der Kampagne */
+
+.history-chapter-total {
+    min-height: 48px;
     background: rgba(255, 255, 255, 0.025);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    font-size: 0.82rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
+    font-size: 0.72rem;
 }
-.qualification-campaign-total strong:first-child {
+
+.history-chapter-total strong:first-child {
+    color: #fff;
     text-transform: uppercase;
     letter-spacing: 0.4px;
 }
-.qualification-campaign-winner {
+
+
+/* Kampagnensieger */
+
+.history-campaign-winner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
-    margin: 0 18px 16px;
-    padding: 15px 18px;
+    gap: 12px;
+    margin: 0 12px 12px;
+    padding: 11px 13px;
     background: rgba(255, 91, 0, 0.055);
     border: 1px solid rgba(255, 91, 0, 0.18);
-    border-radius: 9px;
+    border-radius: 7px;
 }
-.qualification-campaign-winner span {
-    color: #999;
-    font-size: 0.67rem;
+
+.history-campaign-winner span {
+    color: var(--color-muted);
+    font-size: 0.59rem;
     font-weight: 800;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.7px;
 }
-.qualification-campaign-winner strong {
+
+.history-campaign-winner strong {
     color: var(--color-orange);
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     font-weight: 900;
     text-align: right;
 }
+
+
+/* =========================================================
+   7.7 RESPONSIVE – TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .history-campaign-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .history-campaign-card {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 760px) {
+
+    .history-section {
+        padding: 42px 18px;
+    }
+
+    .history-match-collapsed {
+        min-height: 180px;
+        padding: 18px 18px 14px;
+    }
+
+    .history-match-faceoff {
+        grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .history-match-team > strong {
+        font-size: 0.95rem;
+    }
+
+    .history-match-total {
+        font-size: 0.95rem;
+    }
+
+    .history-match-teams {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .history-expanded-center {
+        grid-row: 1;
+        padding: 3px 0;
+    }
+
+    .history-team-card.blue {
+        grid-row: 2;
+    }
+
+    .history-team-card.red {
+        grid-row: 3;
+    }
+
+    .history-campaign-section {
+        padding: 18px 16px 20px;
+    }
+
+    .history-campaign-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   7.8 RESPONSIVE – SMARTPHONES
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .history-section {
+        padding: 35px 15px;
+    }
+
+    .history-match-collapsed {
+        min-height: 165px;
+        padding: 16px 14px 13px;
+        gap: 12px;
+    }
+
+    .history-match-top {
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .history-match-kicker {
+        font-size: 0.57rem;
+    }
+
+    .history-match-date {
+        font-size: 0.65rem;
+        text-align: right;
+    }
+
+    .history-match-faceoff {
+        grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr);
+        gap: 8px;
+        min-height: 58px;
+    }
+
+    .history-match-team > strong {
+        font-size: 0.78rem;
+    }
+
+    .history-match-total {
+        font-size: 0.85rem;
+    }
+
+    .history-match-total small {
+        font-size: 0.52rem;
+    }
+
+    .history-match-vs {
+        font-size: 0.78rem;
+    }
+
+    .history-match-footer {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .history-campaign-count {
+        font-size: 0.6rem;
+    }
+
+    .history-campaign-preview-list {
+        flex: 1 1 100%;
+        order: 1;
+        gap: 10px;
+    }
+
+    .history-campaign-preview img,
+    .history-campaign-preview-placeholder {
+        width: 42px;
+        height: 28px;
+        flex-basis: 42px;
+    }
+
+    .history-campaign-preview span {
+        font-size: 0.62rem;
+    }
+
+    .history-expand-indicator {
+        margin-left: auto;
+    }
+
+    .history-team-card {
+        padding: 14px;
+    }
+
+    .history-team-header {
+        gap: 9px;
+        margin-bottom: 14px;
+    }
+
+    .history-team-logo,
+    .history-team-logo-placeholder {
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
+    }
+
+    .history-player-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .history-player img,
+    .history-player-placeholder {
+        width: 30px;
+        height: 30px;
+        flex-basis: 30px;
+    }
+
+    .history-player span {
+        font-size: 0.7rem;
+    }
+
+    .history-campaign-section {
+        padding: 16px 12px;
+    }
+
+    .history-campaign-header {
+        padding: 12px;
+    }
+
+    .history-campaign-cover,
+    .history-campaign-cover-placeholder {
+        width: 82px;
+        height: 50px;
+        flex-basis: 82px;
+    }
+
+    .history-campaign-meta strong {
+        font-size: 0.9rem;
+    }
+
+    .history-campaign-scores {
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .history-campaign-score-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+    }
+
+    .history-campaign-score-heading span {
+        font-size: 0.63rem;
+    }
+
+    .history-campaign-score-heading strong {
+        font-size: 0.95rem;
+    }
+
+    .history-chapter-heading,
+    .history-chapter-row,
+    .history-chapter-total {
+        min-width: 500px;
+        gap: 6px;
+        padding: 9px 8px;
+    }
+
+    .history-chapter-heading {
+        font-size: 0.54rem;
+    }
+
+    .history-chapter-row {
+        font-size: 0.68rem;
+    }
+
+    .history-chapter-name {
+        gap: 7px;
+    }
+
+    .history-chapter-name img {
+        width: 46px;
+        height: 29px;
+        flex-basis: 46px;
+    }
+
+    .history-campaign-winner {
+        margin: 0 8px 10px;
+        padding: 10px;
+    }
+
+}
+
+@media (max-width: 400px) {
+
+    .history-match-faceoff {
+        grid-template-columns: minmax(0, 1fr) 26px minmax(0, 1fr);
+        gap: 6px;
+    }
+
+    .history-match-team > strong {
+        font-size: 0.72rem;
+    }
+
+    .history-match-total {
+        font-size: 0.78rem;
+    }
+
+    .history-campaign-preview-list {
+        gap: 8px;
+    }
+
+    .history-campaign-preview {
+        gap: 5px;
+    }
+
+    .history-campaign-preview span {
+        font-size: 0.58rem;
+    }
+
+}
+
 
 /* =========================================================
    8. LAN-FINALE / QUALIFIKATION

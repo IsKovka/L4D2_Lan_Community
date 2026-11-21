@@ -1786,22 +1786,21 @@ function renderSchedule() {
 }
 
 
+
 /* =========================================================
-   15. SPIELER IN DER MATCH-HISTORY
+   15. SPIELER UND TEAMKARTEN IN DER MATCH-HISTORY
 ========================================================= */
+
+// Spieleraufstellung eines Teams rendern.
 
 function renderHistoryPlayers(team) {
 
-    if (!team || !team.players.length) {
+    if (!team || !team.players || team.players.length === 0) {
 
         return `
-
             <span class="history-no-players">
-
                 Keine Spielerdaten verfügbar
-
             </span>
-
         `;
 
     }
@@ -1811,27 +1810,21 @@ function renderHistoryPlayers(team) {
         const imagePath = getPlayerImage(playerName);
 
         const avatar = imagePath
-
             ? `
-
                 <img
-
                     src="${escapeHTML(imagePath)}"
-
                     alt="${escapeHTML(playerName)}"
-
                     loading="lazy"
-
                     onerror="this.style.display='none'"
-
                 >
-
             `
-
-            : "";
+            : `
+                <span class="history-player-placeholder">
+                    ${escapeHTML(playerName.charAt(0).toUpperCase())}
+                </span>
+            `;
 
         return `
-
             <div class="history-player">
 
                 ${avatar}
@@ -1839,7 +1832,6 @@ function renderHistoryPlayers(team) {
                 <span>${escapeHTML(playerName)}</span>
 
             </div>
-
         `;
 
     }).join("");
@@ -1847,75 +1839,123 @@ function renderHistoryPlayers(team) {
 }
 
 
-function renderHistoryRosters(
+// Eine Teamkarte für die geöffnete Match-History rendern.
+// Enthält Teamlogo, Teamnamen, Match-Gesamtpunkte und Spieler.
 
-    blueTeam,
+function renderHistoryTeamCard(team, teamName, totalPoints, color) {
 
-    redTeam,
+    const logoPath = getTeamLogo(team);
 
-    blueName,
-
-    redName,
-
-    bluePoints,
-
-    redPoints
-
-) {
+    const logoHTML = logoPath
+        ? `
+            <img
+                class="history-team-logo"
+                src="${escapeHTML(logoPath)}"
+                alt="${escapeHTML(teamName)}"
+                loading="lazy"
+                onerror="this.style.display='none'"
+            >
+        `
+        : `
+            <span class="history-team-logo-placeholder">
+                ${escapeHTML(teamName.charAt(0).toUpperCase())}
+            </span>
+        `;
 
     return `
+        <div class="history-team-card ${color}">
 
-        <div class="history-rosters">
+            <div class="history-team-header">
 
-            <div class="history-roster blue">
+                ${logoHTML}
 
-                <div class="history-roster-header">
+                <div class="history-team-title">
 
-                    <strong>${escapeHTML(blueName)}</strong>
+                    <strong>${escapeHTML(teamName)}</strong>
 
-                    <span class="history-roster-score">
-
-                        ${formatPoints(bluePoints)}
-
+                    <span class="history-team-total">
+                        ${formatPoints(totalPoints)}
+                        <small>MATCHPUNKTE</small>
                     </span>
-
-                </div>
-
-                <div class="history-player-list">
-
-                    ${renderHistoryPlayers(blueTeam)}
 
                 </div>
 
             </div>
 
-            <div class="history-roster red">
+            <div class="history-player-list">
 
-                <div class="history-roster-header">
-
-                    <strong>${escapeHTML(redName)}</strong>
-
-                    <span class="history-roster-score">
-
-                        ${formatPoints(redPoints)}
-
-                    </span>
-
-                </div>
-
-                <div class="history-player-list">
-
-                    ${renderHistoryPlayers(redTeam)}
-
-                </div>
+                ${renderHistoryPlayers(team)}
 
             </div>
 
         </div>
-
     `;
 
 }
+
+
+// Beide Teamkarten mit VS und Spieldatum in der Mitte.
+// Die Match-Gesamtsummen stehen jeweils unter dem Teamnamen.
+
+function renderHistoryRosters(
+    blueTeam,
+    redTeam,
+    blueName,
+    redName,
+    bluePoints,
+    redPoints,
+    matchDate
+) {
+
+    const date = getDateParts(matchDate);
+
+    const dateHTML = date.year
+        ? `
+            <strong>${date.day}</strong>
+            <span>${date.month}</span>
+            <small>${date.year}</small>
+        `
+        : `
+            <strong>--</strong>
+            <span>DATUM</span>
+            <small>UNBEKANNT</small>
+        `;
+
+    return `
+        <div class="history-match-teams">
+
+            ${renderHistoryTeamCard(
+                blueTeam,
+                blueName,
+                bluePoints,
+                "blue"
+            )}
+
+            <div class="history-expanded-center">
+
+                <span class="history-expanded-vs">
+                    VS
+                </span>
+
+                <div class="history-expanded-date">
+                    ${dateHTML}
+                </div>
+
+            </div>
+
+            ${renderHistoryTeamCard(
+                redTeam,
+                redName,
+                redPoints,
+                "red"
+            )}
+
+        </div>
+    `;
+
+}
+
+
 
 
 /* =========================================================
@@ -1944,15 +1984,349 @@ function getCampaignImageNumber(campaignID) {
 }
 
 
-function renderMatchHistory() {
+// Kleine Kampagnenvorschau für die geschlossene Matchkarte.
 
-    const container = document.getElementById(
+function renderHistoryCampaignPreview(campaign, index) {
 
-        "matchHistoryContainer"
+    const coverHTML = campaign.cover
+        ? `
+            <img
+                src="${escapeHTML(campaign.cover)}"
+                alt="${escapeHTML(campaign.campaignName)}"
+                loading="lazy"
+                onerror="this.style.display='none'"
+            >
+        `
+        : `
+            <span class="history-campaign-preview-placeholder">
+                ${String(index + 1).padStart(2, "0")}
+            </span>
+        `;
+
+    return `
+        <div class="history-campaign-preview">
+
+            ${coverHTML}
+
+            <span>
+                ${escapeHTML(campaign.campaignName)}
+            </span>
+
+        </div>
+    `;
+
+}
+
+
+// Vollständige Kampagnenkarte mit:
+//
+// - Kampagnencover und Titel
+// - Kampagnensummen beider Teams
+// - Fortschrittsbalken
+// - Kapitelübersicht
+// - Gesamtsumme und Kampagnensieger
+//
+// Die Kapitelübersicht ist direkt sichtbar.
+// Es gibt keine zusätzliche Aufklappfunktion.
+
+function renderHistoryCampaignCard(
+    campaign,
+    blueName,
+    redName,
+    index
+) {
+
+    const maxTotal = campaign.chapters.reduce(
+
+        (sum, chapter) => sum + chapter.maxPoints,
+
+        0
 
     );
 
+
+    const blueProgress = maxTotal > 0
+        ? Math.min(100, campaign.blueTotal / maxTotal * 100)
+        : 0;
+
+    const redProgress = maxTotal > 0
+        ? Math.min(100, campaign.redTotal / maxTotal * 100)
+        : 0;
+
+
+    // Kampagnensieger bestimmen.
+
+    let campaignWinner = "UNENTSCHIEDEN";
+
+    if (campaign.blueTotal > campaign.redTotal) {
+
+        campaignWinner = blueName;
+
+    } else if (campaign.redTotal > campaign.blueTotal) {
+
+        campaignWinner = redName;
+
+    }
+
+
+    // Kapitelzeilen erzeugen.
+
+    const chapterRows = campaign.chapters.map(
+
+        (chapter, chapterIndex) => {
+
+            const chapterImage = campaign.imageNumber
+                ? `../../0allgemein/Kampagnencover/${campaign.imageNumber}_${chapterIndex + 1}.png`
+                : "";
+
+            const diff = chapter.bluePoints - chapter.redPoints;
+
+            const diffClass = diff > 0
+                ? "blue"
+                : diff < 0
+                    ? "red"
+                    : "chapter-draw";
+
+            return `
+                <div class="history-chapter-row">
+
+                    <div class="history-chapter-name">
+
+                        ${chapterImage ? `
+                            <img
+                                src="${escapeHTML(chapterImage)}"
+                                alt=""
+                                loading="lazy"
+                                onerror="this.style.display='none'"
+                            >
+                        ` : ""}
+
+                        <span>
+                            ${escapeHTML(chapter.chapter)}
+                        </span>
+
+                    </div>
+
+                    <span class="history-chapter-max">
+                        ${formatPoints(chapter.maxPoints)}
+                    </span>
+
+                    <span class="blue">
+                        ${formatPoints(chapter.bluePoints)}
+                    </span>
+
+                    <span class="red">
+                        ${formatPoints(chapter.redPoints)}
+                    </span>
+
+                    <span class="${diffClass}">
+                        ${formatPoints(Math.abs(diff))}
+                    </span>
+
+                </div>
+            `;
+
+        }
+
+    ).join("");
+
+
+    // Kampagnencover.
+
+    const coverHTML = campaign.cover
+        ? `
+            <img
+                class="history-campaign-cover"
+                src="${escapeHTML(campaign.cover)}"
+                alt="${escapeHTML(campaign.campaignName)}"
+                loading="lazy"
+                onerror="this.style.display='none'"
+            >
+        `
+        : `
+            <div class="history-campaign-cover-placeholder">
+                ${String(index + 1).padStart(2, "0")}
+            </div>
+        `;
+
+
+    return `
+        <article class="history-campaign-card">
+
+            <!-- KAMPAGNENKOPF -->
+
+            <div class="history-campaign-header">
+
+                <div class="history-campaign-title">
+
+                    ${coverHTML}
+
+                    <div class="history-campaign-meta">
+
+                        <strong>
+                            ${escapeHTML(campaign.campaignName)}
+                        </strong>
+
+                        <span>
+                            ${campaign.chapters.length} Kapitel
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- KAMPAGNENSUMMEN -->
+
+            <div class="history-campaign-scores">
+
+                <div class="history-campaign-team-score blue">
+
+                    <div class="history-campaign-score-heading">
+
+                        <span>${escapeHTML(blueName)}</span>
+
+                        <strong>
+                            ${formatPoints(campaign.blueTotal)}
+                        </strong>
+
+                    </div>
+
+                    <div class="history-campaign-progress">
+
+                        <div
+                            class="history-campaign-progress-fill blue"
+                            style="width:${blueProgress}%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="history-campaign-team-score red">
+
+                    <div class="history-campaign-score-heading">
+
+                        <span>${escapeHTML(redName)}</span>
+
+                        <strong>
+                            ${formatPoints(campaign.redTotal)}
+                        </strong>
+
+                    </div>
+
+                    <div class="history-campaign-progress">
+
+                        <div
+                            class="history-campaign-progress-fill red"
+                            style="width:${redProgress}%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- KAPITELÜBERSICHT – DIREKT SICHTBAR -->
+
+            <div class="history-chapter-table">
+
+                <div class="history-chapter-heading">
+
+                    <span>KAPITEL</span>
+
+                    <span>MAX.</span>
+
+                    <span>${escapeHTML(blueName)}</span>
+
+                    <span>${escapeHTML(redName)}</span>
+
+                    <span>DIFF.</span>
+
+                </div>
+
+                ${chapterRows}
+
+
+                <!-- GESAMT -->
+
+                <div class="history-chapter-total">
+
+                    <strong>GESAMT</strong>
+
+                    <strong>
+                        ${formatPoints(maxTotal)}
+                    </strong>
+
+                    <strong class="blue">
+                        ${formatPoints(campaign.blueTotal)}
+                    </strong>
+
+                    <strong class="red">
+                        ${formatPoints(campaign.redTotal)}
+                    </strong>
+
+                    <strong class="${
+                        campaign.blueTotal > campaign.redTotal
+                            ? "blue"
+                            : campaign.redTotal > campaign.blueTotal
+                                ? "red"
+                                : "chapter-draw"
+                    }">
+
+                        ${formatPoints(
+
+                            Math.abs(
+
+                                campaign.blueTotal - campaign.redTotal
+
+                            )
+
+                        )}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- KAMPAGNENSIEGER -->
+
+            <div class="history-campaign-winner">
+
+                <span>KAMPAGNENSIEGER</span>
+
+                <strong>
+                    ${escapeHTML(campaignWinner)}
+                </strong>
+
+            </div>
+
+        </article>
+    `;
+
+}
+
+
+// Gesamte Match-History rendern.
+
+function renderMatchHistory() {
+
+    const container = document.getElementById(
+        "matchHistoryContainer"
+    );
+
     if (!container) return;
+
+
+    // Nur Begegnungen übernehmen, bei denen beide Kampagnen
+    // vollständig abgeschlossen sind.
 
     const sortedMatches = [...spielplan]
 
@@ -1990,10 +2364,12 @@ function renderMatchHistory() {
 
         });
 
+
+    // Leerer Zustand.
+
     if (sortedMatches.length === 0) {
 
         container.innerHTML = `
-
             <div class="empty-results">
 
                 <div class="empty-results-icon">—</div>
@@ -2001,24 +2377,26 @@ function renderMatchHistory() {
                 <h3>NOCH KEINE ABGESCHLOSSENEN BEGEGNUNGEN</h3>
 
                 <p>
-
                     Sobald beide Kampagnen einer Begegnung abgeschlossen sind,
-
                     erscheinen hier die Ergebnisse.
-
                 </p>
 
             </div>
-
         `;
 
         return;
 
     }
 
+
     container.innerHTML = sortedMatches.map((match, index) => {
 
         const roundNumber = sortedMatches.length - index;
+
+        const matchID = clean(match.Match_ID);
+
+
+        // Teams und Namen.
 
         const blueTeam = findTeam(match.Team_Blau);
 
@@ -2028,11 +2406,13 @@ function renderMatchHistory() {
 
         const redName = redTeam?.name || match.Team_Rot;
 
-        const completedCampaigns =
 
-            getCompletedCampaignsForMatch(clean(match.Match_ID));
+        // Match-Gesamtsummen aus allen abgeschlossenen Kampagnen.
 
         const matchData = getMatchData(match);
+
+
+        // Vollständige Teamkarten für die geöffnete Ansicht.
 
         const playersHTML = renderHistoryRosters(
 
@@ -2046,11 +2426,21 @@ function renderMatchHistory() {
 
             matchData.blueTotal,
 
-            matchData.redTotal
+            matchData.redTotal,
+
+            match.Datum
 
         );
 
-        const campaignHTML = completedCampaigns.map(item => {
+
+        // Abgeschlossene Kampagnen aufbereiten.
+
+        const completedCampaigns =
+
+            getCompletedCampaignsForMatch(matchID);
+
+
+        const campaigns = completedCampaigns.map(item => {
 
             const campaign = calculateCampaign(item.rows);
 
@@ -2060,371 +2450,216 @@ function renderMatchHistory() {
 
             );
 
-            const campaignCover = imageNumber
+            return {
 
-                ? `../../0allgemein/Kampagnencover/${imageNumber}_0.png`
+                ...campaign,
 
-                : "";
+                imageNumber,
 
-            const maxTotal = campaign.chapters.reduce(
+                cover: imageNumber
 
-                (sum, chapter) => sum + chapter.maxPoints,
+                    ? `../../0allgemein/Kampagnencover/${imageNumber}_0.png`
 
-                0
+                    : null
 
-            );
+            };
 
-            const blueProgress = maxTotal > 0
+        });
 
-                ? Math.min(100, campaign.blueTotal / maxTotal * 100)
 
-                : 0;
+        // Kleine Kampagnenvorschau für die geschlossene Karte.
 
-            const redProgress = maxTotal > 0
+        const previewHTML = campaigns
 
-                ? Math.min(100, campaign.redTotal / maxTotal * 100)
+            .map(renderHistoryCampaignPreview)
 
-                : 0;
+            .join("");
 
-            let campaignWinner = "UNENTSCHIEDEN";
 
-            if (campaign.blueTotal > campaign.redTotal) {
+        // Kampagnenkarten mit jeweils vollständiger Kapitelübersicht.
 
-                campaignWinner = blueName;
+        const campaignHTML = campaigns.map(
 
-            }
+            (campaign, campaignIndex) =>
 
-            if (campaign.redTotal > campaign.blueTotal) {
+                renderHistoryCampaignCard(
 
-                campaignWinner = redName;
+                    campaign,
 
-            }
+                    blueName,
 
-            const chapterRows = campaign.chapters.map(
+                    redName,
 
-                (chapter, chapterIndex) => {
+                    campaignIndex
 
-                    const chapterImage = imageNumber
+                )
 
-                        ? `../../0allgemein/Kampagnencover/${imageNumber}_${chapterIndex + 1}.png`
+        ).join("");
 
-                        : "";
 
-                    const diff =
-
-                        chapter.bluePoints - chapter.redPoints;
-
-                    return `
-
-                        <div class="qualification-chapter-row">
-
-                            <div class="qualification-chapter-name">
-
-                                ${chapterImage ? `
-
-                                    <img
-
-                                        src="${escapeHTML(chapterImage)}"
-
-                                        alt=""
-
-                                        loading="lazy"
-
-                                        onerror="this.style.display='none'"
-
-                                    >
-
-                                ` : ""}
-
-                                <span>
-
-                                    ${escapeHTML(chapter.chapter)}
-
-                                </span>
-
-                            </div>
-
-                            <span class="qualification-chapter-max">
-
-                                ${formatPoints(chapter.maxPoints)}
-
-                            </span>
-
-                            <span class="blue">
-
-                                ${formatPoints(chapter.bluePoints)}
-
-                            </span>
-
-                            <span class="red">
-
-                                ${formatPoints(chapter.redPoints)}
-
-                            </span>
-
-                            <span class="${
-
-                                diff > 0
-
-                                    ? "blue"
-
-                                    : diff < 0
-
-                                        ? "red"
-
-                                        : "chapter-draw"
-
-                            }">
-
-                                ${formatPoints(Math.abs(diff))}
-
-                            </span>
-
-                        </div>
-
-                    `;
-
-                }
-
-            ).join("");
-
-            return `
-
-                <details class="campaign-details">
-
-                    <summary class="qualification-campaign-header">
-
-                        <div class="qualification-campaign-left">
-
-                            ${campaignCover ? `
-
-                                <img
-
-                                    class="qualification-campaign-cover"
-
-                                    src="${escapeHTML(campaignCover)}"
-
-                                    alt=""
-
-                                    loading="lazy"
-
-                                    onerror="this.style.display='none'"
-
-                                >
-
-                            ` : ""}
-
-                            <div class="qualification-campaign-meta">
-
-                                <strong>
-
-                                    ${escapeHTML(campaign.campaignName)}
-
-                                </strong>
-
-                                <span>
-
-                                    ${campaign.chapters.length} Kapitel
-
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                        <div class="qualification-campaign-results">
-
-                            <div class="qualification-campaign-team blue">
-
-                                <span>${escapeHTML(blueName)}</span>
-
-                                <strong>
-
-                                    ${formatPoints(campaign.blueTotal)}
-
-                                </strong>
-
-                                <div class="qualification-progress">
-
-                                    <div
-
-                                        class="qualification-progress-blue"
-
-                                        style="width:${blueProgress}%">
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="qualification-campaign-team red">
-
-                                <span>${escapeHTML(redName)}</span>
-
-                                <strong>
-
-                                    ${formatPoints(campaign.redTotal)}
-
-                                </strong>
-
-                                <div class="qualification-progress">
-
-                                    <div
-
-                                        class="qualification-progress-red"
-
-                                        style="width:${redProgress}%">
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </summary>
-
-                    <div class="qualification-chapter-table">
-
-                        <div class="qualification-chapter-heading">
-
-                            <span>KAPITEL</span>
-
-                            <span>MAX.</span>
-
-                            <span>${escapeHTML(blueName)}</span>
-
-                            <span>${escapeHTML(redName)}</span>
-
-                            <span>DIFF.</span>
-
-                        </div>
-
-                        ${chapterRows}
-
-                        <div class="qualification-campaign-total">
-
-                            <strong>GESAMT</strong>
-
-                            <strong>
-
-                                ${formatPoints(maxTotal)}
-
-                            </strong>
-
-                            <strong class="blue">
-
-                                ${formatPoints(campaign.blueTotal)}
-
-                            </strong>
-
-                            <strong class="red">
-
-                                ${formatPoints(campaign.redTotal)}
-
-                            </strong>
-
-                            <strong class="${
-
-                                campaign.blueTotal > campaign.redTotal
-
-                                    ? "blue"
-
-                                    : campaign.redTotal > campaign.blueTotal
-
-                                        ? "red"
-
-                                        : "chapter-draw"
-
-                            }">
-
-                                ${formatPoints(
-
-                                    Math.abs(
-
-                                        campaign.blueTotal - campaign.redTotal
-
-                                    )
-
-                                )}
-
-                            </strong>
-
-                        </div>
-
-                        <div class="qualification-campaign-winner">
-
-                            <span>KAMPAGNENSIEGER</span>
-
-                            <strong>
-
-                                ${escapeHTML(campaignWinner)}
-
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-                </details>
-
-            `;
-
-        }).join("");
+        // Geschlossene und geöffnete Ansicht.
 
         return `
+            <details
+                class="history-match-card"
+                data-match-id="${escapeHTML(matchID)}"
+            >
 
-            <details class="history-card">
+                <summary class="history-match-summary">
 
-                <summary>
+                    <!-- GESCHLOSSENE ANSICHT -->
 
-                    <div class="history-summary-heading">
+                    <div class="history-match-collapsed">
 
-                        <div class="history-summary-main">
+                        <div class="history-match-top">
 
-                            <strong>RUNDE ${roundNumber}</strong>
+                            <span class="history-match-kicker">
 
-                            <span>
+                                MATCH ${String(roundNumber).padStart(2, "0")}
+
+                                / SPRINGFEVER 2027
+
+                            </span>
+
+                            <span class="history-match-date">
 
                                 ${escapeHTML(formatDate(match.Datum))}
 
-                                · ${escapeHTML(match.Match_ID)}
-
                             </span>
+
+                        </div>
+
+
+                        <div class="history-match-faceoff">
+
+                            <div class="history-match-team blue">
+
+                                <strong>
+                                    ${escapeHTML(blueName)}
+                                </strong>
+
+                                <span class="history-match-total">
+                                    ${formatPoints(matchData.blueTotal)}
+                                    <small>PUNKTE</small>
+                                </span>
+
+                            </div>
+
+
+                            <div class="history-match-vs">
+                                VS
+                            </div>
+
+
+                            <div class="history-match-team red">
+
+                                <strong>
+                                    ${escapeHTML(redName)}
+                                </strong>
+
+                                <span class="history-match-total">
+                                    ${formatPoints(matchData.redTotal)}
+                                    <small>PUNKTE</small>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="history-match-footer">
+
+                            <span class="history-match-code sr-only">
+                                ${escapeHTML(matchID)}
+                            </span>
+
+                            <span class="history-campaign-count">
+                                ${campaigns.length} KAMPAGNEN
+                            </span>
+
+                            <div class="history-campaign-preview-list">
+
+                                ${previewHTML}
+
+                            </div>
+
+                            <span class="history-expand-indicator"></span>
 
                         </div>
 
                     </div>
 
-                    ${playersHTML}
+
+                    <!-- SCHMALE LEISTE IM GEÖFFNETEN ZUSTAND -->
+
+                    <div class="history-match-open-label">
+
+                        <span class="history-expand-indicator"></span>
+
+                    </div>
 
                 </summary>
 
-                <div class="history-content">
 
-                    <div class="history-campaigns">
+                <!-- GEÖFFNETE ANSICHT -->
 
-                        <div class="qualification-campaign-section-label">
+                <div class="history-match-expanded">
+
+                    <!-- TEAMS, MATCHSUMMEN UND SPIELER -->
+
+                    ${playersHTML}
+
+
+                    <!-- BEIDE KAMPAGNEN NEBENEINANDER -->
+
+                    <div class="history-campaign-section">
+
+                        <div class="history-campaign-section-heading">
 
                             KAMPAGNENÜBERSICHT
 
                         </div>
 
-                        ${campaignHTML}
+                        <div class="history-campaign-grid">
+
+                            ${campaignHTML}
+
+                        </div>
 
                     </div>
 
                 </div>
 
             </details>
-
         `;
 
     }).join("");
 
+
+    // Wie bei den anstehenden Begegnungen:
+    // Klick in den geöffneten Karteninhalt schließt die Karte.
+    // Klick auf die Summary-Leiste übernimmt das native Verhalten.
+
+    container.onclick = function(event) {
+
+        const card = event.target.closest(
+            ".history-match-card[open]"
+        );
+
+        if (!card) return;
+
+        if (event.target.closest(".history-match-summary")) {
+
+            return;
+
+        }
+
+        card.open = false;
+
+    };
+
 }
+
 
 
 /* =========================================================
