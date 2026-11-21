@@ -3250,12 +3250,12 @@ footer {
 /* Geschlossener und geöffneter Kopf */
 
 .schedule-match-summary {
-    position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 110px minmax(0, 1fr);
+    grid-template-columns: 58px minmax(0, 1fr) 42px minmax(0, 1fr);
+    grid-template-rows: 58px auto;
     align-items: center;
-    gap: 20px;
-    padding: 24px 28px 0;
+    column-gap: 16px;
+    padding: 12px 24px 0;
     cursor: pointer;
     list-style: none;
 }

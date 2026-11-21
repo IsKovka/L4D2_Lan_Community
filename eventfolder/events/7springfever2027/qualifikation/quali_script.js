@@ -1480,8 +1480,11 @@ function renderSeasonProgress() {
     );
 
     if (countElement) {
-        countElement.textContent = completedMatches;
-    }
+
+    countElement.textContent =
+        `${completedMatches} / ${TOTAL_MATCHES} BEGEGNUNGEN`;
+
+}
 
     if (progressElement) {
         const percentage = Math.min(
@@ -1491,94 +1494,6 @@ function renderSeasonProgress() {
 
         progressElement.style.width = percentage + "%";
     }
-}
-
-
-/* =========================================================
-   18. ABGESCHLOSSENE BEGEGNUNGEN
-========================================================= */
-
-function renderCompletedMatchCount() {
-    const element = document.getElementById(
-        "completedMatchCount"
-    );
-
-    if (!element) return;
-
-    let completedMatches = 0;
-
-    spielplan.forEach(match => {
-        const completedCampaigns =
-            getCompletedCampaignsForMatch(clean(match.Match_ID));
-
-        if (completedCampaigns.length >= CAMPAIGNS_PER_MATCH) {
-            completedMatches++;
-        }
-    });
-
-    element.textContent =
-        `${completedMatches} / ${TOTAL_MATCHES} BEGEGNUNGEN`;
-}
-
-
-/* =========================================================
-   19. NÄCHSTE BEGEGNUNG
-========================================================= */
-
-function renderNextMatch() {
-    const dateElement = document.getElementById(
-        "nextMatchDate"
-    );
-
-    const teamsElement = document.getElementById(
-        "nextMatchTeams"
-    );
-
-    if (!dateElement || !teamsElement) return;
-
-    const sortedMatches = [...spielplan].sort((a, b) => {
-        const dateA = parseDate(a.Datum);
-        const dateB = parseDate(b.Datum);
-
-        if (!dateA || !dateB) return 0;
-
-        return dateA - dateB;
-    });
-
-    const nextMatch = sortedMatches.find(match => {
-        const completedCampaigns =
-            getCompletedCampaignsForMatch(clean(match.Match_ID));
-
-        return completedCampaigns.length < CAMPAIGNS_PER_MATCH;
-    });
-
-    if (!nextMatch) {
-        dateElement.textContent = "ABGESCHLOSSEN";
-        teamsElement.textContent =
-            "Alle Begegnungen wurden abgeschlossen.";
-        return;
-    }
-
-    const blueTeam = findTeam(nextMatch.Team_Blau);
-    const redTeam = findTeam(nextMatch.Team_Rot);
-
-    const blueName = blueTeam?.name || nextMatch.Team_Blau;
-    const redName = redTeam?.name || nextMatch.Team_Rot;
-
-    const date = parseDate(nextMatch.Datum);
-
-    if (date) {
-        dateElement.textContent =
-            date.toLocaleDateString("de-DE", {
-                day: "2-digit",
-                month: "2-digit"
-            });
-    } else {
-        dateElement.textContent = clean(nextMatch.Datum);
-    }
-
-    teamsElement.textContent =
-        `${blueName} vs. ${redName}`;
 }
 
 
@@ -1640,79 +1555,11 @@ function renderLastUpdate() {
    22. GESAMTE SEITE AKTUALISIEREN
 ========================================================= */
 
-function renderTeamOverview() {
-
-    const container = document.getElementById("teamOverviewContainer");
-
-    if (!container) return;
-
-    const uniqueTeams = getUniqueTeams();
-
-    if (uniqueTeams.length === 0) {
-        container.innerHTML = `
-            <div class="empty-results">
-                <h3>KEINE TEAMS GEFUNDEN</h3>
-                <p>Die Teamdaten konnten nicht geladen werden.</p>
-            </div>
-        `;
-        return;
-    }
-
-    container.innerHTML = uniqueTeams.map(team => {
-
-        const playersHTML = team.players.map(playerName => {
-
-            const imagePath = getPlayerImage(playerName);
-
-            const avatar = imagePath
-                ? `
-                    <img
-                        src="${escapeHTML(imagePath)}"
-                        alt="${escapeHTML(playerName)}"
-                        loading="lazy"
-                        onerror="this.style.display='none'"
-                    >
-                `
-                : `
-                    <div class="team-player-placeholder">
-                        ${escapeHTML(playerName.charAt(0).toUpperCase())}
-                    </div>
-                `;
-
-            return `
-                <div class="team-player">
-                    ${avatar}
-                    <span>${escapeHTML(playerName)}</span>
-                </div>
-            `;
-
-        }).join("");
-
-        return `
-            <article class="team-overview-card">
-
-                <h3>${escapeHTML(team.name)}</h3>
-
-                <div class="team-player-list">
-                    ${playersHTML}
-                </div>
-
-            </article>
-        `;
-
-    }).join("");
-
-}
-
 function renderPage() {
     renderRanking();
     renderSchedule();
     renderMatchHistory();
-
     renderSeasonProgress();
-    renderCompletedMatchCount();
-    renderNextMatch();
-
     renderFinalists();
     renderLastUpdate();
 }
