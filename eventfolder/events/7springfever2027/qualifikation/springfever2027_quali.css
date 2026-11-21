@@ -691,26 +691,61 @@ nav {
 /* Team-Aufstellung in der Vorschau */
 
 .schedule-dossier-faceoff {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr);
-    align-items: center;
-    gap: 20px;
-    padding: 4px 0;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
 }
 
 .schedule-dossier-team {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: 70px;
     display: flex;
-    flex-direction: column;
-    gap: 3px;
-    min-width: 0;
+    align-items: center;
 }
 
 .schedule-dossier-team.blue {
+    justify-content: flex-start;
     text-align: left;
 }
 
 .schedule-dossier-team.red {
+    justify-content: flex-end;
     text-align: right;
+}
+
+.schedule-dossier-team > strong {
+    position: relative;
+    z-index: 2;
+    font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+    font-weight: 900;
+}
+
+.schedule-dossier-watermark {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+
+    width: 190px;
+    height: 145px;
+
+    object-fit: contain;
+    object-position: center;
+
+    opacity: 0.12;
+    filter: saturate(0.65);
+
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.schedule-dossier-team.blue .schedule-dossier-watermark {
+    left: 0;
+}
+
+.schedule-dossier-team.red .schedule-dossier-watermark {
+    right: 0;
 }
 
 .schedule-dossier-team small {
@@ -745,39 +780,58 @@ nav {
 
 /* Untere Informationszeile */
 
+.schedule-match-id.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 .schedule-dossier-footer {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 18px;
     min-width: 0;
     padding-top: 13px;
     border-top: 1px solid var(--color-border);
 }
 
-.schedule-match-id {
-    flex-shrink: 0;
-    color: #999;
-    font-size: 0.67rem;
-    font-weight: 800;
-    letter-spacing: 0.5px;
+.schedule-campaign-count {
+    flex: 0 0 auto;
+    color: var(--color-orange);
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
 }
 
 .schedule-dossier-campaigns {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 13px;
+    gap: 14px;
     min-width: 0;
 }
 
 .schedule-preview-campaign {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
     min-width: 0;
 }
 
-.schedule-preview-cover,
+.schedule-preview-cover {
+    width: 48px;
+    height: 31px;
+    flex: 0 0 48px;
+    object-fit: cover;
+    border-radius: 4px;
+}
 .schedule-preview-placeholder {
     width: 48px;
     height: 31px;
@@ -812,31 +866,61 @@ nav {
 }
 
 .schedule-expand-indicator {
-    width: 28px;
-    height: 28px;
-    flex: 0 0 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+
+    display: grid;
+    place-items: center;
+
     margin-left: auto;
 
-    border: 1px solid rgba(255, 91, 0, 0.25);
+    border: 1px solid rgba(255, 91, 0, 0.35);
     border-radius: 50%;
 
     transition:
-        transform 0.25s,
-        background 0.25s;
+        background 0.25s,
+        border-color 0.25s;
 }
 
 .schedule-expand-indicator::before {
     content: "+";
+
+    display: block;
+
     color: var(--color-orange);
-    font-size: 1.15rem;
-    font-weight: 500;
+    font-family: Arial, sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1;
+
+    transform: translateY(-1px);
 }
 
 .schedule-match-card:hover .schedule-expand-indicator {
+    background: rgba(255, 91, 0, 0.10);
+    border-color: var(--color-orange);
+}
+
+.schedule-summary-open-label {
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.schedule-match-card[open] .schedule-summary-open-label {
+    display: flex;
+}
+
+.schedule-match-card[open] .schedule-expand-indicator {
+    margin: 0;
     background: rgba(255, 91, 0, 0.08);
+}
+
+.schedule-match-card[open] .schedule-expand-indicator::before {
+    content: "−";
+    font-size: 20px;
+    transform: translateY(-1px);
 }
 
 
@@ -2256,6 +2340,37 @@ footer {
         flex-basis: 120px;
     }
 
+    .schedule-dossier-watermark {
+        width: 125px;
+        height: 105px;
+        opacity: 0.09;
+    }
+
+    .schedule-team-watermark {
+        width: 150px;
+        height: 130px;
+        opacity: 0.08;
+    }
+
+    .schedule-dossier-footer {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .schedule-campaign-count {
+        order: 0;
+    }
+
+    .schedule-dossier-campaigns {
+        order: 1;
+        flex: 1 1 100%;
+        gap: 10px;
+    }
+
+    .schedule-expand-indicator {
+        margin-left: auto;
+    }
+
 }
 
 @media (max-width: 400px) {
@@ -2291,4 +2406,5 @@ footer {
     .history-player-list {
         grid-template-columns: 1fr;
     }
+
 }

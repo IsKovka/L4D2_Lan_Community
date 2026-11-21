@@ -799,6 +799,16 @@ function renderSchedulePlayers(team) {
 function renderScheduleTeam(team, fallbackName, color) {
     const teamName = team?.name || fallbackName || "Team";
     const logoPath = getTeamLogo(team);
+    const watermarkHTML = logoPath
+    ? `
+        <img
+            class="schedule-team-watermark"
+            src="${escapeHTML(logoPath)}"
+            alt=""
+            aria-hidden="true"
+        >
+    `
+    : "";
 
     const logoHTML = logoPath
         ? `
@@ -818,6 +828,7 @@ function renderScheduleTeam(team, fallbackName, color) {
 
     return `
         <div class="schedule-team-card ${color}">
+         ${watermarkHTML}
             <div class="schedule-team-header">
                 ${logoHTML}
 
@@ -978,6 +989,30 @@ function renderSchedule() {
         const blueName = blueTeam?.name || match.Team_Blau;
         const redName = redTeam?.name || match.Team_Rot;
 
+        const blueLogoPath = getTeamLogo(blueTeam);
+        const redLogoPath = getTeamLogo(redTeam);
+
+        const blueWatermark = blueLogoPath
+            ? `
+                <img
+                class="schedule-dossier-watermark"
+                src="${escapeHTML(blueLogoPath)}"
+                alt=""
+                aria-hidden="true"
+                >
+            `
+            : "";
+
+const redWatermark = redLogoPath
+    ? `
+        <img
+            class="schedule-dossier-watermark"
+            src="${escapeHTML(redLogoPath)}"
+            alt=""
+            aria-hidden="true"
+        >
+    `
+    : "";
 
         // Datum aufbereiten
 
@@ -1030,7 +1065,10 @@ function renderSchedule() {
         // Kompakte, geschlossene Ansicht
 
         return `
-            <details class="schedule-match-card">
+            <details
+    class="schedule-match-card"
+    data-match-id="${escapeHTML(match.Match_ID)}"
+>
 
                 <summary class="schedule-match-summary">
 
@@ -1052,67 +1090,57 @@ function renderSchedule() {
 
                         <div class="schedule-dossier-faceoff">
 
-                            <div class="schedule-dossier-team blue">
+    <div class="schedule-dossier-team blue">
 
-                                <small>TEAM BLUE</small>
+        ${blueWatermark}
 
-                                <strong>
-                                    ${escapeHTML(blueName)}
-                                </strong>
+        <strong>
+            ${escapeHTML(blueName)}
+        </strong>
 
-                            </div>
-
-
-                            <div class="schedule-dossier-vs">
-                                VS
-                            </div>
+    </div>
 
 
-                            <div class="schedule-dossier-team red">
+    <div class="schedule-dossier-vs">
+        VS
+    </div>
 
-                                <small>TEAM RED</small>
 
-                                <strong>
-                                    ${escapeHTML(redName)}
-                                </strong>
+    <div class="schedule-dossier-team red">
 
-                            </div>
+        ${redWatermark}
 
-                        </div>
+        <strong>
+            ${escapeHTML(redName)}
+        </strong>
+
+    </div>
+
+</div>
 
 
                         <div class="schedule-dossier-footer">
 
-                            <span class="schedule-match-id">
-                                ${escapeHTML(match.Match_ID)}
-                            </span>
+    <!-- Match-ID bleibt als Datenattribut erhalten -->
+    <span class="schedule-match-id sr-only">
+        ${escapeHTML(match.Match_ID)}
+    </span>
 
+    <!-- Kampagnenanzahl zuerst -->
+    <span class="schedule-campaign-count">
+        ${campaigns.length} KAMPAGNEN
+    </span>
 
-                            <div class="schedule-dossier-campaigns">
+    <!-- Danach die Cover und Namen -->
+    <div class="schedule-dossier-campaigns">
 
-                                ${previewCampaigns}
+        ${previewCampaigns}
 
-                                <span class="schedule-campaign-count">
-                                    ${campaignCount}
-                                </span>
+    </div>
 
-                            </div>
+    <span class="schedule-expand-indicator"></span>
 
-
-                            <span class="schedule-expand-indicator"></span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="schedule-summary-open-label">
-
-                        <span>BEGEGNUNG SCHLIESSEN</span>
-
-                        <span class="schedule-expand-indicator"></span>
-
-                    </div>
+</div>
 
                 </summary>
 
