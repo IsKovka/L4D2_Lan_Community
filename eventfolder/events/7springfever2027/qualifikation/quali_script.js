@@ -72,7 +72,7 @@ const PLAYER_IMAGES = {
 
     "kenji": "Kenji.png",
 
-    "twarisch52": "Twarish52.png",
+    "twarisch52": "Twarisch52.png",
 
     "jabawoozee": "Jabawoozee.png",
 

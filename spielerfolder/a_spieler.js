@@ -367,7 +367,7 @@ const players = {
     serbia4life88: {
 
         name: "Serbia4Life88",
-        image: "spielerfolder/serbia4life88.png",
+        image: "spielerfolder/Serbia4life88.png",
         role: "Wiedergeburt",
         trophies: 1,
         eventsPlayed: 1,
@@ -395,7 +395,7 @@ const players = {
     Kenji: {
 
         name: "Kenji",
-        image: "spielerfolder/kenji.png",
+        image: "spielerfolder/Kenji.png",
         role: "",
         trophies: 0,
         eventsPlayed: 0,
@@ -418,7 +418,7 @@ const players = {
      Twarisch52: {
 
         name: "Twarisch52",
-        image: "spielerfolder/twarisch52.png",
+        image: "spielerfolder/Twarisch52.png",
         role: "",
         trophies: 0,
         eventsPlayed: 0,
