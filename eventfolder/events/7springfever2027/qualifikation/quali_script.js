@@ -58,13 +58,9 @@ const PLAYER_IMAGES = {
 
     "schokk": "SchoKK.png",
 
-    "serbia": "serbia4life88.png",
-
     "serbia4life88": "serbia4life88.png",
 
     "salomon sunday": "Salomon.png",
-
-    "salomon": "Salomon.png",
 
     "chester244": "Chester244.png",
 
@@ -72,13 +68,13 @@ const PLAYER_IMAGES = {
 
     "kovka": "Is_Kovka.png",
 
-    "is_kovka": "Is_Kovka.png",
-
     "cete": "Cete.png",
 
-    "jabawoozee": "Jabawoozee.png",
+    "kenji": "Kenji.png",
 
-    "jaba": "Jabawoozee.png",
+    "twarisch52": "Twarish52.png",
+
+    "jabawoozee": "Jabawoozee.png",
 
     "psytech": "Psytech.png"
 
