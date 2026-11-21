@@ -1068,6 +1068,7 @@ nav {
 
 
 
+
 /* =========================================================
    7. VERGANGENE BEGEGNUNGEN – MATCH HISTORY
 ========================================================= */
@@ -1140,10 +1141,76 @@ nav {
 }
 
 .history-match-collapsed {
+    position: relative;
+    isolation: isolate;
     display: grid;
     gap: 15px;
+    overflow: hidden;
     min-height: 190px;
     padding: 20px 24px 15px;
+}
+
+
+/* ---------------------------------------------------------
+   TEAMLOGOS ALS WASSERZEICHEN
+   Jeweils eine Hälfte der gesamten geschlossenen Karte.
+   Dauerhaft sichtbar, kein Hover-Effekt.
+--------------------------------------------------------- */
+
+.history-match-watermarks {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    display: block;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.history-match-watermark {
+    position: absolute;
+    top: 50%;
+    width: 50%;
+    height: 88%;
+    max-width: none;
+    padding: 12px 28px;
+
+    display: block;
+
+    object-fit: contain;
+    object-position: center;
+
+    opacity: 0.12;
+    filter: grayscale(1) brightness(1.12);
+
+    transform: translateY(-50%);
+    transition: none;
+    visibility: visible;
+
+    pointer-events: none;
+}
+
+/* Blaues Team links */
+
+.history-match-watermark.blue {
+    left: 0;
+    right: auto;
+}
+
+/* Rotes Team rechts */
+
+.history-match-watermark.red {
+    left: auto;
+    right: 0;
+}
+
+
+/* Alle Informationen liegen über den Wasserzeichen */
+
+.history-match-top,
+.history-match-faceoff,
+.history-match-footer {
+    position: relative;
+    z-index: 1;
 }
 
 
@@ -1247,7 +1314,7 @@ nav {
 }
 
 
-/* Match-ID bleibt verfügbar, wird aber nicht dargestellt. */
+/* Match-ID bleibt verfügbar, wird aber nicht dargestellt */
 
 .history-match-code.sr-only {
     position: absolute;
@@ -1870,35 +1937,6 @@ nav {
 }
 
 
-/* Kampagnensieger */
-
-.history-campaign-winner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    margin: 0 12px 12px;
-    padding: 11px 13px;
-    background: rgba(255, 91, 0, 0.055);
-    border: 1px solid rgba(255, 91, 0, 0.18);
-    border-radius: 7px;
-}
-
-.history-campaign-winner span {
-    color: var(--color-muted);
-    font-size: 0.59rem;
-    font-weight: 800;
-    letter-spacing: 0.7px;
-}
-
-.history-campaign-winner strong {
-    color: var(--color-orange);
-    font-size: 0.75rem;
-    font-weight: 900;
-    text-align: right;
-}
-
-
 /* =========================================================
    7.7 RESPONSIVE – TABLET
 ========================================================= */
@@ -1926,16 +1964,18 @@ nav {
         padding: 18px 18px 14px;
     }
 
+    .history-match-watermark {
+        height: 84%;
+        padding: 12px 20px;
+        opacity: 0.105;
+    }
+
     .history-match-faceoff {
         grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1fr);
         gap: 12px;
     }
 
     .history-match-team > strong {
-        font-size: 0.95rem;
-    }
-
-    .history-match-total {
         font-size: 0.95rem;
     }
 
@@ -1983,6 +2023,12 @@ nav {
         min-height: 165px;
         padding: 16px 14px 13px;
         gap: 12px;
+    }
+
+    .history-match-watermark {
+        height: 80%;
+        padding: 8px 10px;
+        opacity: 0.09;
     }
 
     .history-match-top {
@@ -2147,11 +2193,6 @@ nav {
         flex-basis: 46px;
     }
 
-    .history-campaign-winner {
-        margin: 0 8px 10px;
-        padding: 10px;
-    }
-
 }
 
 @media (max-width: 400px) {
@@ -2182,6 +2223,7 @@ nav {
     }
 
 }
+
 
 
 /* =========================================================

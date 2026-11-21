@@ -1958,6 +1958,7 @@ function renderHistoryRosters(
 
 
 
+
 /* =========================================================
    16. MATCH-HISTORY – KAMPAGNEN UND KAPITEL
 ========================================================= */
@@ -2024,7 +2025,7 @@ function renderHistoryCampaignPreview(campaign, index) {
 // - Kampagnensummen beider Teams
 // - Fortschrittsbalken
 // - Kapitelübersicht
-// - Gesamtsumme und Kampagnensieger
+// - Gesamtsumme
 //
 // Die Kapitelübersicht ist direkt sichtbar.
 // Es gibt keine zusätzliche Aufklappfunktion.
@@ -2052,21 +2053,6 @@ function renderHistoryCampaignCard(
     const redProgress = maxTotal > 0
         ? Math.min(100, campaign.redTotal / maxTotal * 100)
         : 0;
-
-
-    // Kampagnensieger bestimmen.
-
-    let campaignWinner = "UNENTSCHIEDEN";
-
-    if (campaign.blueTotal > campaign.redTotal) {
-
-        campaignWinner = blueName;
-
-    } else if (campaign.redTotal > campaign.blueTotal) {
-
-        campaignWinner = redName;
-
-    }
 
 
     // Kapitelzeilen erzeugen.
@@ -2295,19 +2281,6 @@ function renderHistoryCampaignCard(
 
             </div>
 
-
-            <!-- KAMPAGNENSIEGER -->
-
-            <div class="history-campaign-winner">
-
-                <span>KAMPAGNENSIEGER</span>
-
-                <strong>
-                    ${escapeHTML(campaignWinner)}
-                </strong>
-
-            </div>
-
         </article>
     `;
 
@@ -2407,6 +2380,36 @@ function renderMatchHistory() {
         const redName = redTeam?.name || match.Team_Rot;
 
 
+        // Teamlogos für die geschlossene Ansicht.
+
+        const blueLogoPath = getTeamLogo(blueTeam);
+
+        const redLogoPath = getTeamLogo(redTeam);
+
+
+        const watermarkHTML = `
+            <div class="history-match-watermarks" aria-hidden="true">
+
+                ${blueLogoPath ? `
+                    <img
+                        class="history-match-watermark blue"
+                        src="${escapeHTML(blueLogoPath)}"
+                        alt=""
+                    >
+                ` : ""}
+
+                ${redLogoPath ? `
+                    <img
+                        class="history-match-watermark red"
+                        src="${escapeHTML(redLogoPath)}"
+                        alt=""
+                    >
+                ` : ""}
+
+            </div>
+        `;
+
+
         // Match-Gesamtsummen aus allen abgeschlossenen Kampagnen.
 
         const matchData = getMatchData(match);
@@ -2476,7 +2479,7 @@ function renderMatchHistory() {
             .join("");
 
 
-        // Kampagnenkarten mit jeweils vollständiger Kapitelübersicht.
+        // Kampagnenkarten mit vollständiger Kapitelübersicht.
 
         const campaignHTML = campaigns.map(
 
@@ -2510,6 +2513,8 @@ function renderMatchHistory() {
                     <!-- GESCHLOSSENE ANSICHT -->
 
                     <div class="history-match-collapsed">
+
+                        ${watermarkHTML}
 
                         <div class="history-match-top">
 
@@ -2636,7 +2641,6 @@ function renderMatchHistory() {
     }).join("");
 
 
-    // Wie bei den anstehenden Begegnungen:
     // Klick in den geöffneten Karteninhalt schließt die Karte.
     // Klick auf die Summary-Leiste übernimmt das native Verhalten.
 
@@ -2659,6 +2663,7 @@ function renderMatchHistory() {
     };
 
 }
+
 
 
 
