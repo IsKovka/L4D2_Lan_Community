@@ -36,7 +36,7 @@ html {
     scroll-padding-top: 90px;
 }
 body {
-    font-family: "Segoe UI", sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background: var(--color-bg);
     color: var(--color-white);
     overflow-x: hidden;
@@ -58,50 +58,95 @@ button {
     cursor: pointer;
 }
 
-/* ===================================
+/* =========================================================
    NAVIGATION
-   Identisch mit den anderen Seiten
-=================================== */
+========================================================= */
 
 nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
     width: 100%;
     height: 76px;
+
     background: rgba(8, 8, 8, 0.96);
     border-bottom: 1px solid var(--color-border);
-    position: relative;
-    z-index: 100;
+
     backdrop-filter: blur(12px);
 }
 
 .nav-container {
-    max-width: var(--content-width);
+    width: 100%;
+    max-width: 1200px;
     height: 100%;
+
     margin: 0 auto;
     padding: 0 25px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 24px;
+}
+
+/* Logo */
+
+.logo {
+    flex: 0 0 auto;
+    min-width: 0;
+}
+
+.logo a {
+    display: block;
 }
 
 .logo img {
+    display: block;
+
     width: 145px;
+    max-height: 58px;
     height: auto;
+
+    object-fit: contain;
 }
+
+/* Navigationslinks */
 
 .nav-links {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+
     gap: 35px;
+    margin-left: auto;
+
+    flex: 0 0 auto;
+
+    list-style: none;
+}
+
+.nav-links li {
     list-style: none;
 }
 
 .nav-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 38px;
+
     color: #aaa;
+
     font-size: 13px;
     font-weight: 700;
+
     letter-spacing: 0.8px;
     text-transform: uppercase;
+
+    white-space: nowrap;
+
     transition: color 0.2s ease;
 }
 
