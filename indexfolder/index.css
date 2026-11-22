@@ -1,9 +1,7 @@
-
 /* =========================================================
    L4D2 LAN – STARTSEITE
    Designsystem angelehnt an Springfever 2027 Qualification
 ========================================================= */
-
 
 /* =========================================================
    1. GLOBAL
@@ -61,7 +59,6 @@ button,
 input {
     font: inherit;
 }
-
 
 /* =========================================================
    NAVIGATION
@@ -160,7 +157,6 @@ nav {
     color: var(--color-orange);
 }
 
-
 /* =========================================================
    3. HERO
 ========================================================= */
@@ -253,7 +249,6 @@ nav {
     text-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
 }
 
-
 /* =========================================================
    4. COUNTDOWN
 ========================================================= */
@@ -299,7 +294,6 @@ nav {
     text-align: center;
     line-height: 1.4;
 }
-
 
 /* =========================================================
    5. MATCH CARD
@@ -390,7 +384,6 @@ nav {
     margin-bottom: 18px;
 }
 
-
 /* =========================================================
    6. BUTTONS
 ========================================================= */
@@ -427,7 +420,6 @@ nav {
     background: #e64f00;
     transform: translateY(-2px);
 }
-
 
 /* =========================================================
    7. STATISTICS
@@ -510,7 +502,6 @@ nav {
     text-transform: uppercase;
 }
 
-
 /* =========================================================
    8. DASHBOARD
 ========================================================= */
@@ -537,7 +528,6 @@ nav {
 .events-panel {
     grid-column: 1 / -1;
 }
-
 
 /* =========================================================
    9. PANELS
@@ -596,7 +586,6 @@ nav {
 .panel-header a:hover {
     color: #ff7840;
 }
-
 
 /* =========================================================
    10. NEWS
@@ -666,7 +655,6 @@ nav {
 
     overflow-wrap: anywhere;
 }
-
 
 /* =========================================================
    11. HIGHLIGHTS – YOUTUBE
@@ -803,7 +791,6 @@ nav {
     line-height: 1.6;
 }
 
-
 /* =========================================================
    12. EVENTS & LANs
 ========================================================= */
@@ -838,7 +825,6 @@ nav {
     border-left: 1px solid var(--color-border);
     padding-left: 25px;
 }
-
 
 /* =========================================================
    13. EVENT LIST
@@ -917,7 +903,6 @@ nav {
     font-weight: 800;
 }
 
-
 /* =========================================================
    14. QUALIFICATION BUTTON
 ========================================================= */
@@ -930,7 +915,6 @@ nav {
 
     font-size: 10px;
 }
-
 
 /* =========================================================
    15. FOOTER
@@ -955,7 +939,6 @@ footer p {
     letter-spacing: 0.5px;
 }
 
-
 /* =========================================================
    16. RESPONSIVE – TABLET
 ========================================================= */
@@ -977,9 +960,7 @@ footer p {
 
     .event-group + .event-group {
         border-left: none;
-
         border-top: 1px solid var(--color-border);
-
         padding-left: 0;
         padding-top: 25px;
     }
@@ -997,7 +978,6 @@ footer p {
     }
 }
 
-
 /* =========================================================
    17. RESPONSIVE – SMARTPHONE
 ========================================================= */
@@ -1007,32 +987,72 @@ footer p {
     /* NAVIGATION */
 
     nav {
-        height: auto;
-        min-height: 76px;
+        position: static;
+        top: auto;
+        height: 64px;
+        min-height: 64px;
     }
 
     .nav-container {
-        flex-direction: column;
-        justify-content: center;
+        width: 100%;
+        height: 64px;
+        padding: 0 14px;
 
-        gap: 12px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
 
-        padding: 12px 16px;
+        gap: 8px;
+    }
+
+    .logo {
+        flex: 0 1 auto;
+        min-width: 0;
+    }
+
+    .logo a {
+        display: block;
     }
 
     .logo img {
-        width: 125px;
+        display: block;
+        width: clamp(88px, 24vw, 112px);
+        max-height: 44px;
+        height: auto;
+        object-fit: contain;
     }
 
     .nav-links {
-        gap: 20px;
+        display: flex;
+        flex: 0 0 auto;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: center;
 
-        flex-wrap: wrap;
-        justify-content: center;
+        gap: clamp(7px, 2vw, 12px);
+        margin-left: auto;
+
+        list-style: none;
+    }
+
+    .nav-links li {
+        flex: 0 0 auto;
+        list-style: none;
     }
 
     .nav-links a {
-        font-size: 11px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 34px;
+
+        font-size: 10px;
+        letter-spacing: 0.35px;
+        white-space: nowrap;
     }
 
 
@@ -1040,9 +1060,7 @@ footer p {
 
     .hero {
         min-height: 0;
-
         padding: 65px 16px 55px;
-
         background-size: cover;
         background-position: center center;
     }
@@ -1050,14 +1068,12 @@ footer p {
     .hero h1 {
         font-size: clamp(30px, 8vw, 42px);
         letter-spacing: -1px;
-
         margin-bottom: 25px;
     }
 
     .hero-subtitle {
         font-size: 11px;
         letter-spacing: 2px;
-
         margin-bottom: 14px;
     }
 
@@ -1066,12 +1082,9 @@ footer p {
 
     .countdown-box {
         width: 100%;
-
         flex-wrap: wrap;
         justify-content: center;
-
         gap: 8px;
-
         padding: 13px 15px;
         margin-bottom: 22px;
     }
@@ -1089,9 +1102,7 @@ footer p {
 
     .match-card {
         flex-direction: row;
-
         gap: 8px;
-
         padding: 18px 12px;
     }
 
@@ -1103,7 +1114,6 @@ footer p {
     .team-card img {
         width: 65px;
         height: 65px;
-
         padding: 3px;
     }
 
@@ -1123,9 +1133,7 @@ footer p {
 
     .primary-btn {
         min-height: 34px;
-
         padding: 0 10px;
-
         font-size: 9px;
     }
 
@@ -1134,11 +1142,8 @@ footer p {
 
     .stats-section {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-
         gap: 12px;
-
         padding: 0 16px;
-
         margin-top: -18px;
         margin-bottom: 60px;
     }
@@ -1163,7 +1168,6 @@ footer p {
 
     .dashboard {
         padding: 0 16px 60px;
-
         gap: 15px;
     }
 
@@ -1191,7 +1195,6 @@ footer p {
 
     .news-item {
         flex-direction: column;
-
         gap: 12px;
     }
 
@@ -1209,7 +1212,6 @@ footer p {
 
     .event-item {
         flex-direction: column;
-
         gap: 12px;
     }
 
@@ -1236,7 +1238,6 @@ footer p {
     .highlight-play {
         width: 48px;
         height: 48px;
-
         font-size: 20px;
     }
 
@@ -1256,20 +1257,35 @@ footer p {
     }
 }
 
-
 /* =========================================================
    18. RESPONSIVE – KLEINE SMARTPHONES
 ========================================================= */
 
 @media (max-width: 480px) {
 
+    /* NAVIGATION */
+
+    .nav-container {
+        padding: 0 10px;
+        gap: 6px;
+    }
+
+    .logo img {
+        width: clamp(82px, 22vw, 105px);
+        max-height: 42px;
+    }
+
     .nav-links {
-        gap: 14px;
+        gap: clamp(7px, 2vw, 10px);
     }
 
     .nav-links a {
         font-size: 10px;
+        letter-spacing: 0.2px;
     }
+
+
+    /* HERO */
 
     .hero {
         padding: 50px 12px 45px;
@@ -1279,6 +1295,9 @@ footer p {
         font-size: 30px;
     }
 
+
+    /* COUNTDOWN */
+
     .countdown-box {
         width: 100%;
     }
@@ -1286,6 +1305,9 @@ footer p {
     #countdown {
         font-size: 17px;
     }
+
+
+    /* MATCH CARD */
 
     .match-card {
         padding: 15px 8px;
@@ -1310,6 +1332,9 @@ footer p {
         padding: 0 8px;
     }
 
+
+    /* STATISTICS */
+
     .stats-section {
         gap: 10px;
     }
@@ -1327,6 +1352,9 @@ footer p {
         font-size: 8px;
     }
 
+
+    /* PANELS */
+
     .panel {
         padding: 16px;
     }
@@ -1335,10 +1363,16 @@ footer p {
         font-size: 15px;
     }
 
+
+    /* EVENTS UND NEWS */
+
     .event-item img,
     .news-item img {
         height: 145px;
     }
+
+
+    /* QUALIFICATION */
 
     .qualification-btn {
         font-size: 9px;
@@ -1356,11 +1390,8 @@ footer p {
     *::before,
     *::after {
         scroll-behavior: auto !important;
-
         transition-duration: 0.01ms !important;
-
         animation-duration: 0.01ms !important;
-
         animation-iteration-count: 1 !important;
     }
 }

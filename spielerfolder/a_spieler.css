@@ -1,6 +1,7 @@
-
 /* ===================================
+
    GLOBAL / DESIGN SYSTEM
+
 =================================== */
 
 :root {
@@ -8,18 +9,13 @@
     --color-bg-soft: #101010;
     --color-card: #151515;
     --color-card-light: #1c1c1c;
-
     --color-orange: #ff5b00;
-
     --color-white: #f5f5f5;
     --color-text: #d0d0d0;
     --color-muted: #888888;
-
     --color-border: rgba(255, 255, 255, 0.09);
-
     --color-blue: #0066b9;
     --color-red: #8a0000;
-
     --content-width: 1200px;
     --section-spacing: 90px;
 }
@@ -57,10 +53,11 @@ button {
     font: inherit;
 }
 
-
 /* ===================================
+
    NAVIGATION
    Identisch mit den anderen Seiten
+
 =================================== */
 
 nav {
@@ -78,7 +75,6 @@ nav {
     height: 100%;
     margin: 0 auto;
     padding: 0 25px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -106,40 +102,37 @@ nav {
 }
 
 .nav-links a:hover,
+
 .nav-links a.active {
     color: var(--color-orange);
 }
 
-
 /* ===================================
+
    HERO
+
 =================================== */
 
 .spieler-hero {
     position: relative;
     min-height: 340px;
-
     display: flex;
     align-items: center;
-
     background:
         linear-gradient(
             rgba(0, 0, 0, 0.55),
             rgba(0, 0, 0, 0.8)
         ),
         url("spieler-hero.png");
-
     background-size: cover;
     background-position: center 20%;
     background-repeat: no-repeat;
-
     border-bottom: 1px solid var(--color-border);
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-
     background:
         linear-gradient(
             90deg,
@@ -151,7 +144,6 @@ nav {
 .hero-content {
     position: relative;
     z-index: 2;
-
     width: 100%;
     max-width: var(--content-width);
     margin: 0 auto;
@@ -179,9 +171,10 @@ nav {
     line-height: 1.6;
 }
 
-
 /* ===================================
+
    SPIELER SECTION
+
 =================================== */
 
 .spieler-section {
@@ -217,7 +210,6 @@ nav {
     top: 4px;
     bottom: 4px;
     width: 4px;
-
     background: var(--color-orange);
     border-radius: 4px;
 }
@@ -232,9 +224,10 @@ nav {
     padding: 6px 10px;
 }
 
-
 /* ===================================
+
    SPIELER LAYOUT
+
 =================================== */
 
 .spieler-layout {
@@ -251,31 +244,27 @@ nav {
     min-width: 0;
 }
 
-
 /* ===================================
+
    SPIELER CARDS
+
 =================================== */
 
 .spieler-card {
     display: flex;
     align-items: center;
     gap: 12px;
-
     min-width: 0;
     min-height: 85px;
     padding: 12px;
-
     background: linear-gradient(
         180deg,
         var(--color-card),
         #101010
     );
-
     border: 1px solid var(--color-border);
     border-radius: 10px;
-
     cursor: pointer;
-
     transition:
         transform 0.2s ease,
         border-color 0.2s ease,
@@ -296,7 +285,6 @@ nav {
         #20150f,
         #15100d
     );
-
     box-shadow: 0 0 20px rgba(255, 91, 0, 0.1);
 }
 
@@ -304,9 +292,7 @@ nav {
     width: 52px;
     height: 52px;
     flex-shrink: 0;
-
     margin: 0;
-
     object-fit: cover;
     border-radius: 50%;
     border: 2px solid rgba(255, 91, 0, 0.65);
@@ -332,10 +318,10 @@ nav {
     margin-top: 6px;
     font-size: 12px;
 }
-
-
 /* ===================================
+
    PLAYER DETAIL CONTAINER
+
 =================================== */
 
 #playerDetail {
@@ -348,23 +334,20 @@ nav {
     display: flex;
     flex-direction: column;
     gap: 25px;
-
     padding: 25px;
-
     border-radius: 13px;
-
     background: linear-gradient(
         180deg,
         var(--color-card),
         #0d0d0d
     );
-
     border: 1px solid var(--color-border);
 }
 
-
 /* ===================================
+
    PLAYER PROFILE
+
 =================================== */
 
 .player-left {
@@ -378,7 +361,6 @@ nav {
     width: 115px;
     height: 115px;
     flex-shrink: 0;
-
     object-fit: cover;
     border-radius: 50%;
     border: 3px solid var(--color-orange);
@@ -414,9 +396,10 @@ nav {
     align-items: flex-start;
 }
 
-
 /* ===================================
+
    PLAYER TROPHIES
+
 =================================== */
 
 .player-trophies {
@@ -429,16 +412,15 @@ nav {
 .trophy-icon {
     width: 19px;
     height: 19px;
-
     object-fit: contain;
-
     border: none !important;
     border-radius: 0 !important;
 }
 
-
 /* ===================================
+
    PLAYER FACTS
+
 =================================== */
 
 .player-facts {
@@ -450,9 +432,7 @@ nav {
 
 .fact-box {
     min-width: 0;
-
     padding: 15px;
-
     background: rgba(255, 255, 255, 0.025);
     border: 1px solid var(--color-border);
     border-radius: 9px;
@@ -478,24 +458,21 @@ nav {
     grid-column: span 2;
 }
 
-
 /* ===================================
+
    WINS SLIDER
+
 =================================== */
 
 .wins-slider {
     display: flex;
     gap: 12px;
-
     width: 100%;
     min-width: 0;
-
     overflow-x: auto;
     overflow-y: hidden;
-
     padding-bottom: 10px;
     margin-top: 12px;
-
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 91, 0, 0.4) #111;
@@ -503,14 +480,11 @@ nav {
 
 .win-card {
     position: relative;
-
     flex: 0 0 165px;
     height: 105px;
-
     overflow: hidden;
     border-radius: 8px;
     border: 1px solid var(--color-border);
-
     transition: border-color 0.2s ease;
 }
 
@@ -522,7 +496,6 @@ nav {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
     transition: transform 0.3s ease;
 }
 
@@ -535,23 +508,20 @@ nav {
     left: 0;
     right: 0;
     bottom: 0;
-
     padding: 25px 10px 9px;
-
     color: var(--color-white);
     font-size: 11px;
     font-weight: 700;
     line-height: 1.3;
-
     background: linear-gradient(
         transparent,
         rgba(0, 0, 0, 0.95)
     );
 }
-
-
 /* ===================================
+
    SCROLLBAR WINS
+
 =================================== */
 
 .wins-slider::-webkit-scrollbar {
@@ -572,9 +542,10 @@ nav {
     background: rgba(255, 91, 0, 0.65);
 }
 
-
 /* ===================================
+
    HALL OF FAME
+
 =================================== */
 
 .hall-of-fame {
@@ -590,10 +561,8 @@ nav {
 .section-title h2 {
     position: relative;
     display: inline-block;
-
     font-size: 28px;
     font-weight: 700;
-
     padding-left: 16px;
     margin-bottom: 10px;
 }
@@ -605,7 +574,6 @@ nav {
     top: 4px;
     bottom: 4px;
     width: 4px;
-
     background: var(--color-orange);
     border-radius: 4px;
 }
@@ -622,27 +590,23 @@ nav {
     gap: 20px;
 }
 
-
 /* ===================================
+
    HALL OF FAME CARDS
+
 =================================== */
 
 .hof-card {
     position: relative;
-
     padding: 25px 18px;
-
     text-align: center;
-
     background: linear-gradient(
         180deg,
         var(--color-card),
         #101010
     );
-
     border: 1px solid var(--color-border);
     border-radius: 13px;
-
     transition:
         transform 0.2s ease,
         border-color 0.2s ease;
@@ -661,17 +625,13 @@ nav {
     position: absolute;
     top: 14px;
     left: 14px;
-
     width: 34px;
     height: 34px;
-
     border-radius: 50%;
     background: var(--color-card-light);
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-size: 13px;
     font-weight: 700;
     color: var(--color-orange);
@@ -685,9 +645,7 @@ nav {
 .hof-card > img {
     width: 105px;
     height: 105px;
-
     margin: 0 auto 15px;
-
     object-fit: cover;
     border-radius: 50%;
     border: 2px solid rgba(255, 91, 0, 0.65);
@@ -711,37 +669,32 @@ nav {
 .hof-trophy-icon {
     width: 23px;
     height: 23px;
-
     object-fit: contain;
-
     border: none !important;
     border-radius: 0 !important;
 }
 
-
 /* ===================================
+
    FOOTER
+
 =================================== */
 
 footer {
     padding: 30px 20px;
-
     text-align: center;
-
     color: var(--color-muted);
     background: #050505;
-
     border-top: 1px solid var(--color-border);
     font-size: 13px;
 }
-
-
 /* ===================================
+
    RESPONSIVE 1100px
+
 =================================== */
 
 @media (max-width: 1100px) {
-
     .spieler-layout {
         grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
         gap: 18px;
@@ -762,16 +715,15 @@ footer {
     .hof-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
 }
 
-
 /* ===================================
+
    RESPONSIVE 900px
+
 =================================== */
 
 @media (max-width: 900px) {
-
     .spieler-layout {
         grid-template-columns: 1fr;
         gap: 25px;
@@ -793,16 +745,14 @@ footer {
     .hof-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
 }
-
-
 /* ===================================
+
    RESPONSIVE 650px
+
 =================================== */
 
 @media (max-width: 650px) {
-
     /* NAVIGATION */
 
     nav {
@@ -831,7 +781,6 @@ footer {
         width: 140px;
     }
 
-
     /* HERO */
 
     .spieler-hero {
@@ -852,7 +801,6 @@ footer {
         font-size: 15px;
     }
 
-
     /* SECTION */
 
     .spieler-section {
@@ -866,7 +814,6 @@ footer {
     .spieler-title h2 {
         font-size: 23px;
     }
-
 
     /* PLAYER GRID */
 
@@ -889,7 +836,6 @@ footer {
     .spieler-card h3 {
         font-size: 12px;
     }
-
 
     /* PLAYER DETAIL */
 
@@ -922,7 +868,6 @@ footer {
         justify-content: center;
     }
 
-
     /* FACTS */
 
     .player-facts {
@@ -933,13 +878,11 @@ footer {
         grid-column: auto;
     }
 
-
     /* WINS */
 
     .win-card {
         flex: 0 0 150px;
     }
-
 
     /* HALL OF FAME */
 
@@ -968,16 +911,15 @@ footer {
     .hof-card h3 {
         font-size: 14px;
     }
-
 }
 
-
 /* ===================================
+
    RESPONSIVE 480px
+
 =================================== */
 
 @media (max-width: 480px) {
-
     .hero-content h1 {
         font-size: 1.9rem;
     }
@@ -1038,16 +980,15 @@ footer {
         left: 10px;
         font-size: 11px;
     }
-
 }
 
-
 /* ===================================
+
    REDUCED MOTION
+
 =================================== */
 
 @media (prefers-reduced-motion: reduce) {
-
     *,
     *::before,
     *::after {
@@ -1055,5 +996,4 @@ footer {
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
     }
-
 }

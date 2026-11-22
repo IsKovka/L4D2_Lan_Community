@@ -1,12 +1,15 @@
-
 /* =========================================================
+
    L4D2 LAN – MAIN EVENT DESIGN
+
    Einheitliches Design für alle Hauptevents
+
 ========================================================= */
 
-
 /* =========================================================
+
    1. GLOBAL
+
 ========================================================= */
 
 :root {
@@ -14,17 +17,13 @@
     --color-bg-soft: #101010;
     --color-card: #151515;
     --color-card-light: #1c1c1c;
-
     --color-orange: #ff5b00;
     --color-white: #f5f5f5;
     --color-text: #d0d0d0;
     --color-muted: #888888;
-
     --color-border: rgba(255, 255, 255, 0.09);
-
     --color-blue: #0066b9;
     --color-red: #8a0000;
-
     --content-width: 1200px;
 }
 
@@ -60,22 +59,20 @@ button {
     font: inherit;
 }
 
-
 /* =========================================================
+
    NAVIGATION
+
 ========================================================= */
 
 nav {
     position: sticky;
     top: 0;
     z-index: 1000;
-
     width: 100%;
     height: 76px;
-
     background: rgba(8, 8, 8, 0.96);
     border-bottom: 1px solid var(--color-border);
-
     backdrop-filter: blur(12px);
 }
 
@@ -83,10 +80,8 @@ nav {
     width: 100%;
     max-width: var(--content-width);
     height: 100%;
-
     margin: 0 auto;
     padding: 0 25px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -106,11 +101,9 @@ nav {
 
 .logo img {
     display: block;
-
     width: 145px;
     max-height: 58px;
     height: auto;
-
     object-fit: contain;
 }
 
@@ -120,12 +113,9 @@ nav {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
     gap: 35px;
     margin-left: auto;
-
     flex: 0 0 auto;
-
     list-style: none;
 }
 
@@ -137,97 +127,77 @@ nav {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     min-height: 38px;
-
     color: #aaa;
-
     font-size: 13px;
     font-weight: 700;
-
     letter-spacing: 0.8px;
     text-transform: uppercase;
-
     white-space: nowrap;
-
     transition: color 0.2s ease;
 }
 
 .nav-links a:hover,
+
 .nav-links a.active {
     color: var(--color-orange);
 }
 
-
 /* =========================================================
+
    3. HERO
+
 ========================================================= */
 
 .hero {
     position: relative;
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
     padding: 40px 20px 60px;
-
     overflow: hidden;
 }
 
 .hero-content {
     width: 100%;
     max-width: var(--content-width);
-
     margin: 0 auto;
 }
 
 .hero h1 {
     text-align: center;
-
     color: white;
-
     font-size: clamp(42px, 6vw, 76px);
     font-weight: 900;
-
     line-height: 1;
     letter-spacing: -2px;
-
     margin-bottom: 25px;
 }
 
-
 /* =========================================================
+
    4. SCOREBOARD
+
 ========================================================= */
 
 .scoreboard {
     max-width: 1100px;
-
     background: rgba(0, 0, 0, 0.78);
     backdrop-filter: blur(12px);
-
     border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 14px;
-
     padding: 25px 40px;
-
     display: grid;
     grid-template-columns: 1fr auto 1fr;
-
     align-items: center;
-
     margin: 0 auto 25px;
 }
 
 .score-team {
     display: grid;
-
     grid-template-columns: 100px 220px;
-
     align-items: center;
     justify-content: center;
-
     gap: 20px;
 }
 
@@ -237,39 +207,30 @@ nav {
 
 .score-team:last-child {
     justify-self: start;
-
     grid-template-columns: 220px 100px;
 }
 
 .team-logo {
     width: 95px;
     height: 95px;
-
     object-fit: contain;
 }
 
 .score-team-name {
     width: 220px;
-
     text-align: center;
-
     color: #aaa;
-
     font-size: 13px;
     font-weight: 800;
-
     letter-spacing: 1px;
     text-transform: uppercase;
 }
 
 .score-team-points {
     width: 220px;
-
     text-align: center;
-
     font-size: 48px;
     font-weight: 900;
-
     line-height: 1.1;
 }
 
@@ -283,139 +244,115 @@ nav {
 
 .versus {
     color: white;
-
     font-size: 45px;
     font-weight: 900;
-
     letter-spacing: -2px;
 }
-
-
 /* =========================================================
+
    5. ROSTER
+
 ========================================================= */
 
 .roster-wrapper {
     display: grid;
-
     grid-template-columns: 1fr 250px 1fr;
-
     gap: 40px;
-
     align-items: center;
 }
 
 .roster {
     background: rgba(0, 0, 0, 0.78);
     backdrop-filter: blur(12px);
-
     border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 13px;
-
     padding: 25px;
 }
 
 .roster-left .player-left,
+
 .roster-right .player-right {
     min-height: 70px;
 }
 
 .player-left {
     display: flex;
-
     justify-content: flex-end;
     align-items: center;
-
     gap: 15px;
-
     margin-bottom: 10px;
 }
 
 .player-right {
     display: flex;
-
     align-items: center;
-
     gap: 15px;
-
     margin-bottom: 10px;
 }
 
 .player-left:last-child,
+
 .player-right:last-child {
     margin-bottom: 0;
 }
 
 .player-left img,
+
 .player-right img {
     width: 55px;
     height: 55px;
-
     flex-shrink: 0;
-
     border-radius: 50%;
     object-fit: cover;
-
     border: 1px solid rgba(255, 255, 255, 0.12);
     background: #292929;
 }
 
 .player-left span,
+
 .player-right span {
     color: #ddd;
-
     font-size: 13px;
     font-weight: 700;
 }
 
 .roster-vs {
     color: var(--color-orange);
-
     font-size: 85px;
     font-weight: 900;
-
     text-align: center;
     letter-spacing: -5px;
 }
 
-
 /* =========================================================
+
    6. KPI CARDS
+
 ========================================================= */
 
 .stats-grid {
     max-width: 1100px;
-
     margin: 30px auto;
-
     padding: 0 25px;
-
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-
     gap: 18px;
 }
 
 .stat-card {
     position: relative;
     isolation: isolate;
-
     overflow: hidden;
-
     background:
         linear-gradient(
             145deg,
             #171717,
             #0d0d0d
         );
-
     border: 1px solid var(--color-border);
     border-radius: 13px;
-
     padding: 26px;
-
     min-height: 250px;
-
     display: flex;
     flex-direction: column;
 }
@@ -424,19 +361,13 @@ nav {
 
 .stat-bg-icon {
     position: absolute;
-
     top: 50%;
     right: -40px;
-
     transform: translateY(-70%);
-
     width: 220px;
     height: 220px;
-
     object-fit: contain;
-
     opacity: 0.35;
-
     pointer-events: none;
     z-index: 1;
 }
@@ -446,12 +377,9 @@ nav {
 .stat-title {
     position: relative;
     z-index: 2;
-
     color: #999;
-
     font-size: 10px;
     font-weight: 800;
-
     letter-spacing: 1.2px;
     text-transform: uppercase;
 }
@@ -461,15 +389,11 @@ nav {
 .stat-score {
     position: relative;
     z-index: 2;
-
     margin-top: 15px;
-
     font-size: 48px;
     font-weight: 900;
-
     display: flex;
     align-items: center;
-
     gap: 12px;
 }
 
@@ -486,12 +410,9 @@ nav {
 .stat-subtitle {
     position: relative;
     z-index: 2;
-
     color: #777;
-
     font-size: 11px;
     font-weight: 600;
-
     margin-top: 8px;
 }
 
@@ -500,29 +421,22 @@ nav {
 .battle-bar {
     position: relative;
     z-index: 2;
-
     display: flex;
-
     height: 7px;
-
     margin-top: 25px;
-
     overflow: hidden;
-
     border-radius: 999px;
     background: #252525;
 }
 
 .battle-left {
     background: var(--color-blue);
-
     box-shadow:
         0 0 12px rgba(0, 102, 185, 0.4);
 }
 
 .battle-right {
     background: var(--color-red);
-
     box-shadow:
         0 0 12px rgba(138, 0, 0, 0.4);
 }
@@ -530,12 +444,9 @@ nav {
 .battle-footer {
     position: relative;
     z-index: 2;
-
     display: flex;
     justify-content: space-between;
-
     margin-top: 10px;
-
     color: #888;
     font-size: 11px;
 }
@@ -545,9 +456,7 @@ nav {
 .difference-value {
     position: relative;
     z-index: 2;
-
     margin-top: 20px;
-
     font-size: 48px;
     font-weight: 900;
 }
@@ -555,11 +464,8 @@ nav {
 .difference-text {
     position: relative;
     z-index: 2;
-
     margin-top: 10px;
-
     color: #ccc;
-
     font-size: 14px;
     font-weight: 700;
 }
@@ -567,9 +473,7 @@ nav {
 .difference-percent {
     position: relative;
     z-index: 2;
-
     margin-top: 8px;
-
     font-size: 24px;
     font-weight: 900;
 }
@@ -577,82 +481,70 @@ nav {
 .difference-subtitle {
     position: relative;
     z-index: 2;
-
     margin-top: auto;
-
     color: #777;
     font-size: 11px;
 }
 
-
 /* =========================================================
+
    7. CHART PANEL
+
 ========================================================= */
 
 .chart-panel {
     max-width: 1100px;
-
     margin: 0 auto 30px;
-
     padding: 0 25px;
 }
 
 .chart-panel h2 {
     color: #aaa;
-
     font-size: 12px;
     font-weight: 900;
-
     letter-spacing: 1.2px;
     text-transform: uppercase;
-
     margin-bottom: 15px;
 }
 
 .chart-wrapper {
     height: 260px;
-
     background:
         linear-gradient(
             145deg,
             #171717,
             #0d0d0d
         );
-
     border: 1px solid var(--color-border);
     border-radius: 13px;
-
     padding: 25px;
 }
 
-
 /* =========================================================
+
    8. CAMPAIGN SECTION
+
 ========================================================= */
 
 .campaign-section {
     max-width: 1100px;
-
     margin: 0 auto;
-
     padding: 0 25px 60px;
 }
 
 .campaign-section h2 {
     color: white;
-
     font-size: 25px;
     font-weight: 900;
-
     letter-spacing: -0.5px;
     text-transform: uppercase;
-
     margin-bottom: 22px;
 }
 
-
 /* =========================================================
+
    9. CAMPAIGN CARD
+
 ========================================================= */
 
 .campaign-card {
@@ -662,14 +554,10 @@ nav {
             #151515,
             #0c0c0c
         );
-
     border: 1px solid var(--color-border);
     border-radius: 13px;
-
     overflow: hidden;
-
     margin-bottom: 12px;
-
     transition: border-color 0.2s ease;
 }
 
@@ -677,24 +565,19 @@ nav {
     border-color: rgba(255, 255, 255, 0.17);
 }
 
-
 /* =========================================================
+
    10. CAMPAIGN HEADER
+
 ========================================================= */
 
 .campaign-header {
     display: grid;
-
     grid-template-columns: 320px minmax(0, 1fr);
-
     align-items: center;
-
     gap: 40px;
-
     padding: 24px 30px;
-
     cursor: pointer;
-
     transition: background 0.2s ease;
 }
 
@@ -702,31 +585,25 @@ nav {
     background: rgba(255, 255, 255, 0.025);
 }
 
-
 /* =========================================================
+
    11. CAMPAIGN COVER AND NAME
+
 ========================================================= */
 
 .campaign-left {
     display: flex;
-
     align-items: center;
-
     gap: 18px;
-
     min-width: 0;
 }
 
 .campaign-cover {
     width: 100px;
     height: 60px;
-
     flex-shrink: 0;
-
     object-fit: cover;
-
     border-radius: 7px;
-
     background: #222;
 }
 
@@ -736,87 +613,66 @@ nav {
 
 .campaign-meta h3 {
     color: white;
-
     font-size: 16px;
     font-weight: 900;
-
     line-height: 1.3;
-
     margin-bottom: 6px;
 }
 
 .campaign-meta span {
     color: #777;
-
     font-size: 11px;
     font-weight: 600;
 }
-
-
 /* =========================================================
+
    12. CAMPAIGN RESULTS
+
 ========================================================= */
 
 .campaign-results {
     display: grid;
-
     grid-template-columns:
         48px
         minmax(0, 1fr)
         minmax(0, 1fr)
         48px;
-
     align-items: center;
-
     gap: 20px;
 }
 
 .team-result {
     width: 100%;
-
     display: flex;
     flex-direction: column;
-
     align-items: center;
-
     gap: 8px;
 }
 
 .result-top {
     width: 220px;
-
     display: grid;
-
     grid-template-columns:
         70px
         minmax(0, 1fr);
-
     align-items: center;
 }
 
 .team-label {
     color: #aaa;
-
     font-size: 12px;
     font-weight: 900;
-
     line-height: 1;
-
     text-align: left;
 }
 
 .score-value {
     min-width: 110px;
-
     color: white;
-
     font-size: 21px;
     font-weight: 900;
-
     line-height: 1;
-
     text-align: right;
-
     font-variant-numeric: tabular-nums;
 }
 
@@ -833,9 +689,7 @@ nav {
 .progress {
     width: 220px;
     height: 4px;
-
     background: #292929;
-
     border-radius: 999px;
     overflow: hidden;
 }
@@ -850,14 +704,14 @@ nav {
     background: var(--color-red);
 }
 
-
 /* =========================================================
+
    13. VIDEO BUTTONS
+
 ========================================================= */
 
 .campaign-actions {
     display: flex;
-
     justify-content: center;
     align-items: center;
 }
@@ -865,21 +719,14 @@ nav {
 .campaign-video-btn {
     width: 48px;
     height: 40px;
-
     display: inline-flex;
-
     justify-content: center;
     align-items: center;
-
     padding: 0;
-
     color: white;
-
     border-radius: 7px;
-
     font-size: 14px;
     font-weight: 900;
-
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
@@ -891,7 +738,6 @@ nav {
 
 .campaign-video-btn-blue:hover {
     transform: translateY(-2px);
-
     box-shadow:
         0 0 15px rgba(0, 102, 185, 0.4);
 }
@@ -902,49 +748,46 @@ nav {
 
 .campaign-video-btn-red:hover {
     transform: translateY(-2px);
-
     box-shadow:
         0 0 15px rgba(168, 0, 0, 0.4);
 }
 
 .campaign-video-pending {
     display: block;
-
     width: 48px;
     height: 40px;
 }
 
-
 /* =========================================================
+
    14. CAMPAIGN BODY
+
 ========================================================= */
 
 .campaign-body {
     max-height: 2000px;
-
     overflow: hidden;
-
     border-top: 1px solid var(--color-border);
-
     transition: max-height 0.35s ease;
 }
 
 .campaign-body.collapsed {
     max-height: 0;
-
     border-top: none;
 }
 
-
 /* =========================================================
+
    15. CHAPTER TABLE
+
 ========================================================= */
 
 .chapter-header,
+
 .chapter-row,
+
 .campaign-total {
     display: grid;
-
     grid-template-columns:
         80px
         2fr
@@ -952,7 +795,6 @@ nav {
         0.8fr
         0.8fr
         0.8fr;
-
     align-items: center;
 }
 
@@ -960,15 +802,11 @@ nav {
 
 .chapter-header {
     padding: 14px 20px;
-
     color: #777;
-
     font-size: 9px;
     font-weight: 900;
-
     letter-spacing: 0.8px;
     text-transform: uppercase;
-
     border-bottom: 1px solid var(--color-border);
 }
 
@@ -976,14 +814,10 @@ nav {
 
 .chapter-row {
     padding: 14px 20px;
-
     color: #ccc;
-
     font-size: 12px;
     font-weight: 600;
-
     border-top: 1px solid rgba(255, 255, 255, 0.04);
-
     transition: background 0.2s ease;
 }
 
@@ -994,9 +828,7 @@ nav {
 .chapter-row img {
     width: 70px;
     height: 40px;
-
     object-fit: cover;
-
     border-radius: 5px;
 }
 
@@ -1004,20 +836,15 @@ nav {
 
 .campaign-total {
     padding: 18px 20px;
-
     background: rgba(255, 255, 255, 0.025);
-
     border-top: 1px solid var(--color-border);
-
     color: white;
-
     font-size: 12px;
     font-weight: 900;
 }
 
 .total-label {
     color: white;
-
     text-transform: uppercase;
     letter-spacing: 0.8px;
 }
@@ -1042,95 +869,75 @@ nav {
     font-weight: 900;
 }
 
-
 /* =========================================================
+
    16. FOOTER
+
 ========================================================= */
 
 footer {
     max-width: 1100px;
-
     margin: 0 auto;
-
     padding: 25px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     gap: 15px;
-
     color: #666;
-
     font-size: 10px;
     font-weight: 600;
-
     letter-spacing: 0.5px;
-
     border-top: 1px solid var(--color-border);
 }
-
-
 /* =========================================================
+
    17. TABLET
+
 ========================================================= */
 
 @media (max-width: 1000px) {
-
     .scoreboard {
         padding: 22px;
     }
-
     .score-team {
         grid-template-columns: 75px 170px;
         gap: 12px;
     }
-
     .score-team:last-child {
         grid-template-columns: 170px 75px;
     }
-
     .team-logo {
         width: 75px;
         height: 75px;
     }
-
     .score-team-name,
     .score-team-points {
         width: 170px;
     }
-
     .score-team-points {
         font-size: 38px;
     }
-
     .roster-wrapper {
         grid-template-columns: 1fr 150px 1fr;
         gap: 20px;
     }
-
     .roster-vs {
         font-size: 65px;
     }
-
     .campaign-header {
         grid-template-columns: 1fr;
         gap: 22px;
     }
-
     .campaign-results {
         gap: 15px;
     }
-
     .result-top,
     .progress {
         width: 100%;
     }
-
     .score-value {
         min-width: 0;
     }
-
     .chapter-header,
     .chapter-row,
     .campaign-total {
@@ -1143,348 +950,250 @@ footer {
             0.8fr;
     }
 }
-
-
 /* =========================================================
+
    18. MOBILE
+
 ========================================================= */
 
 @media (max-width: 768px) {
-
     /* NAVIGATION */
-
     nav {
         height: auto;
     }
-
     .nav-container {
         min-height: 76px;
-
         flex-direction: column;
-
         justify-content: center;
-
         gap: 12px;
-
         padding: 12px 15px;
     }
-
     .logo img {
         width: 125px;
     }
-
     .nav-links {
         justify-content: center;
         flex-wrap: wrap;
-
         gap: 18px;
     }
-
     .nav-links a {
         font-size: 11px;
         letter-spacing: 0.5px;
     }
-
-
     /* HERO */
-
     .hero {
         padding: 30px 12px 35px;
     }
-
     .hero h1 {
         font-size: clamp(32px, 9vw, 48px);
-
         letter-spacing: -1px;
-
         margin-bottom: 18px;
     }
-
-
     /* SCOREBOARD */
-
     .scoreboard {
         grid-template-columns: 1fr auto 1fr;
-
         padding: 14px 10px;
-
         gap: 5px;
     }
-
     .score-team {
         display: flex;
-
         align-items: center;
-
         gap: 7px;
-
         width: 100%;
         min-width: 0;
     }
-
     .score-team:first-child {
         justify-content: flex-start;
     }
-
     .score-team:last-child {
         justify-content: flex-end;
     }
-
     .score-team-name,
     .score-team-points {
         width: auto;
         text-align: center;
     }
-
     .team-logo {
         width: 40px;
         height: 40px;
     }
-
     .score-team-name {
         font-size: 9px;
         letter-spacing: 0;
         white-space: nowrap;
     }
-
     .score-team-points {
         font-size: 21px;
     }
-
     .versus {
         font-size: 20px;
         letter-spacing: -1px;
     }
-
-
     /* ROSTER */
-
     .roster-wrapper {
         grid-template-columns: 1fr 1fr;
-
         gap: 10px;
     }
-
     .roster-vs {
         display: none;
     }
-
     .roster {
         padding: 10px 8px;
     }
-
     .roster-left .player-left,
     .roster-right .player-right {
         min-height: 48px;
     }
-
     .player-left,
     .player-right {
         gap: 6px;
     }
-
     .player-left span,
     .player-right span {
         font-size: 10px;
         line-height: 1.2;
     }
-
     .player-left img,
     .player-right img {
         width: 34px;
         height: 34px;
     }
-
-
     /* KPI */
-
     .stats-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-
         gap: 8px;
-
         margin: 20px auto;
-
         padding: 0 10px;
     }
-
     .stat-card {
         min-height: 145px;
-
         padding: 12px 9px;
-
         border-radius: 10px;
     }
-
     .stat-title {
         font-size: 8px;
         letter-spacing: 0.4px;
     }
-
     .stat-score {
         font-size: clamp(17px, 4vw, 25px);
         gap: 4px;
-
         margin-top: 12px;
     }
-
     .stat-subtitle {
         font-size: 8px;
         margin-top: 5px;
     }
-
     .battle-bar {
         height: 5px;
         margin-top: 16px;
     }
-
     .battle-footer {
         font-size: 8px;
         margin-top: 7px;
     }
-
     .difference-value {
         font-size: clamp(18px, 4vw, 25px);
         margin-top: 18px;
     }
-
     .difference-text {
         font-size: 9px;
         line-height: 1.3;
     }
-
     .difference-percent {
         font-size: 15px;
     }
-
     .stat-bg-icon {
         width: 90px;
         height: 90px;
-
         right: -20px;
-
         opacity: 0.25;
     }
-
-
     /* CHART */
-
     .chart-panel {
         margin-bottom: 25px;
         padding: 0 12px;
     }
-
     .chart-panel h2 {
         font-size: 10px;
         margin-bottom: 12px;
     }
-
     .chart-wrapper {
         height: 220px;
         padding: 12px;
     }
-
-
     /* CAMPAIGNS */
-
     .campaign-section {
         padding: 0 12px 40px;
     }
-
     .campaign-section h2 {
         font-size: 19px;
         margin-bottom: 16px;
     }
-
     .campaign-card {
         border-radius: 10px;
     }
-
     .campaign-header {
         grid-template-columns: 1fr;
-
         gap: 16px;
-
         padding: 16px 12px;
     }
-
     .campaign-left {
         gap: 12px;
     }
-
     .campaign-cover {
         width: 80px;
         height: 50px;
     }
-
     .campaign-meta h3 {
         font-size: 14px;
-
         overflow: hidden;
         text-overflow: ellipsis;
     }
-
     .campaign-meta span {
         font-size: 10px;
     }
-
-
     /* CAMPAIGN RESULTS – MOBILE */
-
     .campaign-results {
         grid-template-columns:
             48px
             minmax(0, 1fr);
-
         gap: 12px;
     }
-
     .campaign-results .campaign-actions-blue {
         grid-column: 1;
         grid-row: 1;
     }
-
     .campaign-results .team-result-blue {
         grid-column: 2;
         grid-row: 1;
     }
-
     .campaign-results .team-result-red {
         grid-column: 2;
         grid-row: 2;
     }
-
     .campaign-results .campaign-actions-red {
         grid-column: 1;
         grid-row: 2;
     }
-
     .result-top {
         width: 100%;
         grid-template-columns: 70px minmax(0, 1fr);
     }
-
     .team-label {
         font-size: 11px;
     }
-
     .score-value {
         font-size: 18px;
     }
-
     .progress {
         width: 100%;
     }
-
     .campaign-video-btn,
     .campaign-video-pending {
         width: 42px;
         height: 36px;
     }
-
-
     /* CHAPTER TABLE */
-
     .chapter-header,
     .chapter-row,
     .campaign-total {
@@ -1495,158 +1204,123 @@ footer {
             0.75fr
             0.75fr
             0.75fr;
-
         gap: 6px;
-
         padding: 9px 8px;
     }
-
     /* Max-Punkte-Spalte ausblenden */
-
     .chapter-header span:nth-child(3),
     .chapter-row span:nth-child(3),
     .campaign-total span:nth-child(3) {
         display: none;
     }
-
     .chapter-header {
         font-size: 7px;
         letter-spacing: 0;
     }
-
     .chapter-row {
         font-size: 9px;
     }
-
     .chapter-row img {
         width: 48px;
         height: 30px;
     }
-
     .chapter-row span:nth-child(2) {
         font-size: 9px;
         line-height: 1.2;
     }
-
     .chapter-row span:nth-child(4),
     .chapter-row span:nth-child(5),
     .chapter-row span:nth-child(6) {
         font-size: 9px;
     }
-
     .campaign-total {
         font-size: 9px;
     }
-
     .campaign-total .total-label {
         font-size: 9px;
     }
-
-
     /* FOOTER */
-
     footer {
         padding: 20px 15px;
-
         font-size: 9px;
     }
 }
 
-
 /* =========================================================
+
    19. SMALL MOBILE
+
 ========================================================= */
 
 @media (max-width: 420px) {
-
     .nav-links {
         gap: 13px;
     }
-
     .nav-links a {
         font-size: 10px;
     }
-
     .scoreboard {
         padding: 12px 6px;
     }
-
     .team-logo {
         width: 32px;
         height: 32px;
     }
-
     .score-team {
         gap: 4px;
     }
-
     .score-team-name {
         font-size: 8px;
     }
-
     .score-team-points {
         font-size: 18px;
     }
-
     .versus {
         font-size: 17px;
     }
-
     .roster {
         padding: 8px 6px;
     }
-
     .player-left span,
     .player-right span {
         font-size: 9px;
     }
-
     .player-left img,
     .player-right img {
         width: 29px;
         height: 29px;
     }
-
     .stats-grid {
         gap: 6px;
         padding: 0 7px;
     }
-
     .stat-card {
         padding: 10px 7px;
         min-height: 135px;
     }
-
     .stat-title {
         font-size: 7px;
     }
-
     .stat-score {
         font-size: 17px;
     }
-
     .difference-value {
         font-size: 18px;
     }
-
     .difference-text {
         font-size: 8px;
     }
-
     .difference-percent {
         font-size: 13px;
     }
-
     .campaign-results {
         gap: 8px;
     }
-
     .campaign-video-btn,
     .campaign-video-pending {
         width: 36px;
         height: 34px;
     }
-
     .chapter-header,
     .chapter-row,
     .campaign-total {
@@ -1657,18 +1331,14 @@ footer {
             0.75fr
             0.75fr
             0.75fr;
-
         gap: 4px;
-
         padding-left: 6px;
         padding-right: 6px;
     }
-
     .chapter-row img {
         width: 40px;
         height: 27px;
     }
-
     .chapter-row span:nth-child(2),
     .chapter-row span:nth-child(4),
     .chapter-row span:nth-child(5),
