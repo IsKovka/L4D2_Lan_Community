@@ -2225,6 +2225,8 @@ footer {
     font-size: 0.85rem;
     line-height: 1.6;
 }
+
+
 /* =========================================================
    10. RESPONSIVE – TABLET
    Reihenfolge nach Breakpoints
@@ -2252,7 +2254,7 @@ footer {
         gap: 1.5rem;
     }
 
-    /* Rangliste: vier Daten-Spalten wie im HTML */
+    /* Rangliste */
 
     .ranking-table-header,
     .ranking-row {
@@ -2269,6 +2271,7 @@ footer {
         gap: 20px;
     }
 }
+
 
 /* =========================================================
    10.2 TABLET – 900px
@@ -2298,6 +2301,7 @@ footer {
         gap: 22px;
     }
 }
+
 
 /* =========================================================
    10.3 TABLET – 760px
@@ -2358,6 +2362,7 @@ footer {
         grid-template-columns: 1fr;
     }
 
+
     /* Anstehende Begegnungen */
 
     .schedule-section {
@@ -2410,9 +2415,10 @@ footer {
         flex-basis: 42px;
     }
 }
+
+
 /* =========================================================
    11. RESPONSIVE – SMARTPHONES
-   Reihenfolge nach Breakpoints
 ========================================================= */
 
 /* =========================================================
@@ -2421,26 +2427,80 @@ footer {
 
 @media (max-width: 700px) {
 
-    /* Navigation */
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    nav {
+        position: static;
+        top: auto;
+        height: 64px;
+        min-height: 64px;
+    }
 
     .nav-container {
-        padding: 10px 18px;
-        flex-direction: column;
-        gap: 12px;
+        width: 100%;
+        height: 64px;
+        padding: 0 14px;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+
+        gap: 8px;
+    }
+
+    .logo {
+        flex: 0 1 auto;
+        min-width: 0;
+    }
+
+    .logo a {
+        display: block;
     }
 
     .logo img {
-        width: 135px;
+        display: block;
+        width: clamp(88px, 24vw, 112px);
+        max-height: 44px;
+        height: auto;
+        object-fit: contain;
     }
 
     .nav-links {
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 18px;
-        font-size: 0.8rem;
+        display: flex;
+        flex: 0 0 auto;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: center;
+
+        gap: clamp(7px, 2vw, 12px);
+        margin-left: auto;
     }
 
-    /* Hero */
+    .nav-links li {
+        flex: 0 0 auto;
+    }
+
+    .nav-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 34px;
+
+        font-size: 0.65rem;
+        letter-spacing: 0.35px;
+        white-space: nowrap;
+    }
+
+
+    /* =====================================================
+       HERO
+    ===================================================== */
 
     .season-hero {
         min-height: 400px;
@@ -2465,10 +2525,13 @@ footer {
         font-size: 0.85rem;
     }
 
-    /* Rangliste */
+
+    /* =====================================================
+       AKTUELLE RANGLISTE
+    ===================================================== */
 
     .ranking-card {
-        overflow-x: auto;
+        overflow: hidden;
     }
 
     .ranking-table-header {
@@ -2476,37 +2539,136 @@ footer {
     }
 
     .ranking-row {
-        grid-template-columns: 35px minmax(0, 1fr) auto;
-        gap: 12px;
-        padding: 17px 14px;
+        display: grid;
+        grid-template-columns: 30px minmax(0, 1fr) 48px;
+        grid-template-rows: auto auto;
+        align-items: start;
+
+        gap: 10px 8px;
+        padding: 16px 12px;
     }
 
+    /* Platzierung links */
+
     .ranking-position {
+        grid-column: 1;
         grid-row: 1 / 3;
+        align-self: center;
+        justify-content: center;
+        padding: 0;
     }
+
+    .position-number {
+        font-size: 1.1rem;
+    }
+
+    /* Teamlogo und Teamdaten */
 
     .ranking-team {
         grid-column: 2;
         grid-row: 1;
-        gap: 14px;
+        display: grid;
+        grid-template-columns: 48px minmax(0, 1fr);
+        align-items: start;
+        gap: 8px;
+
+        min-width: 0;
+        min-height: 0;
     }
 
     .ranking-team-logo {
-        width: 58px;
-        height: 58px;
-        flex-basis: 58px;
+        width: 48px;
+        height: 48px;
+        flex-basis: 48px;
+        align-self: center;
     }
+
+    .ranking-team-info {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .ranking-team-info > strong {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 0.82rem;
+        line-height: 1.2;
+    }
+
+    /* Spieler in zwei kompakten Spalten */
+
+    .ranking-player-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: center;
+
+        column-gap: 7px;
+        row-gap: 10px;
+
+        width: 100%;
+    }
+
+    .ranking-player {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        width: 100%;
+        min-width: 0;
+        white-space: normal;
+    }
+
+    .ranking-player img,
+    .ranking-player-placeholder {
+        width: 26px;
+        height: 26px;
+        flex: 0 0 26px;
+    }
+
+    .ranking-player span {
+        display: block;
+        min-width: 0;
+        font-size: 0.61rem;
+        line-height: 1.2;
+        overflow-wrap: anywhere;
+    }
+
+    /* Begegnungen und Punkte rechts */
 
     .ranking-games {
         grid-column: 2;
         grid-row: 2;
+
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        gap: 7px;
+
+        margin-left: 56px;
+        margin-top: 2px;
+    }
+
+    .ranking-games strong {
+        font-size: 0.8rem;
+    }
+
+    .ranking-games span {
+        font-size: 0.62rem;
     }
 
     .ranking-points {
         grid-column: 3;
         grid-row: 1;
+        align-self: start;
+
+        padding-top: 3px;
+
+        font-size: 0.9rem;
         text-align: right;
-        font-size: 0.95rem;
+    }
+
+    .ranking-points span {
+        font-size: 0.55rem;
     }
 
     .ranking-status-cell {
@@ -2515,24 +2677,15 @@ footer {
         justify-content: flex-end;
     }
 
-    .ranking-team strong {
-        font-size: 0.9rem;
-    }
-
-    .ranking-team span {
-        font-size: 0.65rem;
-    }
-
-    .position-number {
-        font-size: 1.1rem;
-    }
-
     .ranking-footer {
         padding: 14px;
         font-size: 0.68rem;
     }
 
-    /* Match-History */
+
+    /* =====================================================
+       MATCH-HISTORY
+    ===================================================== */
 
     .history-card > summary {
         gap: 10px;
@@ -2574,7 +2727,10 @@ footer {
         font-size: 0.7rem;
     }
 
-    /* Kampagnen und Kapitel */
+
+    /* =====================================================
+       MATCH-HISTORY – KAMPAGNEN UND KAPITEL
+    ===================================================== */
 
     .campaign-details > summary {
         padding: 13px;
@@ -2627,24 +2783,282 @@ footer {
         padding: 12px;
     }
 
-    /* Finale */
+
+    /* =====================================================
+       ANSTEHENDE BEGEGNUNGEN – GESCHLOSSENE KARTEN
+    ===================================================== */
+
+    .schedule-section {
+        padding: 35px 15px;
+    }
+
+    .schedule-summary-collapsed {
+        min-height: 180px;
+        padding: 16px 14px 13px;
+        gap: 12px;
+    }
+
+    .schedule-dossier-top {
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .schedule-dossier-kicker {
+        font-size: 0.57rem;
+    }
+
+    .schedule-dossier-date {
+        font-size: 0.65rem;
+        text-align: right;
+    }
+
+    .schedule-dossier-watermark {
+        width: 50%;
+        height: 82%;
+        padding: 8px 10px;
+        opacity: 0.09;
+    }
+
+    .schedule-dossier-faceoff {
+        grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr);
+        gap: 8px;
+        min-height: 58px;
+    }
+
+    .schedule-dossier-team strong {
+        font-size: 0.78rem;
+    }
+
+    .schedule-dossier-vs {
+        font-size: 0.78rem;
+    }
+
+    .schedule-dossier-footer {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .schedule-dossier-campaigns {
+        flex: 1 1 100%;
+        order: 1;
+        gap: 10px;
+    }
+
+    .schedule-campaign-count {
+        order: 0;
+    }
+
+    .schedule-preview-cover,
+    .schedule-preview-placeholder {
+        width: 42px;
+        height: 28px;
+        flex-basis: 42px;
+    }
+
+    .schedule-preview-name {
+        font-size: 0.62rem;
+    }
+
+    .schedule-expand-indicator {
+        margin-left: auto;
+    }
+
+
+    /* =====================================================
+       ANSTEHENDE BEGEGNUNGEN – GEÖFFNETE KARTEN
+    ===================================================== */
+
+    .schedule-match-teams {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: stretch;
+        gap: 9px;
+        padding: 14px 10px;
+    }
+
+    /* VS und Datum als gemeinsame Kopfzeile */
+
+    .schedule-expanded-center {
+        grid-column: 1 / -1;
+        grid-row: 1;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+
+        padding: 0 0 5px;
+    }
+
+    .schedule-expanded-vs {
+        font-size: 0.85rem;
+        letter-spacing: 1.5px;
+    }
+
+    .schedule-expanded-date {
+        width: 58px;
+        min-height: 58px;
+        border-radius: 8px;
+    }
+
+    .schedule-expanded-date strong {
+        font-size: 1.3rem;
+    }
+
+    .schedule-expanded-date span {
+        font-size: 0.62rem;
+    }
+
+    .schedule-expanded-date small {
+        font-size: 0.54rem;
+    }
+
+    /* Teamkarten nebeneinander */
+
+    .schedule-team-card.blue {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .schedule-team-card.red {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .schedule-team-card {
+        min-width: 0;
+        padding: 10px 8px;
+    }
+
+    .schedule-team-header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+
+        margin-bottom: 12px;
+        text-align: center;
+    }
+
+    .schedule-team-logo,
+    .schedule-team-logo-placeholder {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+    }
+
+    .schedule-team-name {
+        font-size: 0.72rem;
+        line-height: 1.2;
+        text-align: center;
+        overflow-wrap: anywhere;
+    }
+
+    /* Spieler innerhalb der Teamkarten */
+
+    .schedule-player-list {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .schedule-player {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        min-width: 0;
+    }
+
+    .schedule-player img,
+    .schedule-player-placeholder {
+        width: 27px;
+        height: 27px;
+        flex: 0 0 27px;
+    }
+
+    .schedule-player span {
+        min-width: 0;
+        font-size: 0.64rem;
+        line-height: 1.2;
+        overflow-wrap: anywhere;
+    }
+
+
+    /* =====================================================
+       ANSTEHENDE BEGEGNUNGEN – KAMPAGNEN
+    ===================================================== */
+
+    .schedule-match-campaigns {
+        padding: 16px 12px;
+    }
+
+    .schedule-campaign-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+    }
+
+    .schedule-campaign-card {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+
+        min-width: 0;
+        padding: 9px;
+    }
+
+    .schedule-campaign-cover,
+    .schedule-campaign-placeholder {
+        width: 100%;
+        height: 62px;
+        flex: 0 0 62px;
+    }
+
+    .schedule-campaign-info {
+        min-width: 0;
+    }
+
+    .schedule-campaign-info strong {
+        display: block;
+        font-size: 0.72rem;
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+    }
+
+
+    /* =====================================================
+       LAN-FINALE
+    ===================================================== */
 
     .final-section {
-        min-height: 430px;
+        min-height: 0;
         padding: 60px 18px;
     }
 
     .final-qualification {
-        grid-template-columns: 1fr;
-        gap: 15px;
-        padding: 20px;
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+        align-items: center;
+        gap: 10px;
+        padding: 18px 12px;
     }
 
-    .final-vs {
-        font-size: 1.1rem;
+    .final-qualification-team {
+        min-width: 0;
+        text-align: center;
+    }
+
+    .final-qualification-team span {
+        font-size: 0.58rem;
+        letter-spacing: 0.5px;
     }
 
     .final-qualification-team strong {
+        font-size: 0.9rem;
+        overflow-wrap: anywhere;
+    }
+
+    .final-vs {
         font-size: 1rem;
     }
 
@@ -2653,7 +3067,10 @@ footer {
         letter-spacing: 2px;
     }
 
-    /* Sektionsüberschriften und Footer */
+
+    /* =====================================================
+       SEKTIONSÜBERSCHRIFTEN UND FOOTER
+    ===================================================== */
 
     .section-heading {
         align-items: flex-start;
@@ -2671,13 +3088,16 @@ footer {
     }
 }
 
+
 /* =========================================================
    11.2 SMARTPHONES – 600px
 ========================================================= */
 
 @media (max-width: 600px) {
 
-    /* Vergangene Begegnungen */
+    /* =====================================================
+       MATCH-HISTORY
+    ===================================================== */
 
     .history-section {
         padding: 35px 15px;
@@ -2793,6 +3213,11 @@ footer {
         font-size: 0.7rem;
     }
 
+
+    /* =====================================================
+       MATCH-HISTORY – KAMPAGNEN
+    ===================================================== */
+
     .history-campaign-section {
         padding: 16px 12px;
     }
@@ -2857,15 +3282,31 @@ footer {
         flex-basis: 46px;
     }
 
-    /* Rangliste */
+
+    /* =====================================================
+       RANGLISTE
+    ===================================================== */
 
     .ranking-player-list {
-        grid-template-columns:
-            var(--ranking-player-col-all, max-content);
-        row-gap: 10px;
+        column-gap: 5px;
+        row-gap: 8px;
     }
 
-    /* Match-History-Kampagnen */
+    .ranking-player img,
+    .ranking-player-placeholder {
+        width: 24px;
+        height: 24px;
+        flex-basis: 24px;
+    }
+
+    .ranking-player span {
+        font-size: 0.58rem;
+    }
+
+
+    /* =====================================================
+       MATCH-HISTORY – QUALIFIKATIONSKAMPAGNEN
+    ===================================================== */
 
     .qualification-campaign-results {
         gap: 14px;
@@ -2917,7 +3358,10 @@ footer {
         font-size: 0.67rem;
     }
 
-    /* Anstehende Begegnungen */
+
+    /* =====================================================
+       ANSTEHENDE BEGEGNUNGEN – GESCHLOSSENE KARTEN
+    ===================================================== */
 
     .schedule-section {
         padding: 35px 15px;
@@ -2994,57 +3438,213 @@ footer {
         margin-left: auto;
     }
 
+
+    /* =====================================================
+       ANSTEHENDE BEGEGNUNGEN – GEÖFFNETE KARTEN
+    ===================================================== */
+
     .schedule-match-teams {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        padding: 14px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        padding: 12px 9px;
     }
 
     .schedule-expanded-center {
+        grid-column: 1 / -1;
         grid-row: 1;
-        padding: 4px 0;
+        gap: 12px;
+        padding: 0 0 4px;
     }
 
     .schedule-team-card.blue {
+        grid-column: 1;
         grid-row: 2;
     }
 
     .schedule-team-card.red {
-        grid-row: 3;
+        grid-column: 2;
+        grid-row: 2;
     }
 
     .schedule-team-card {
-        padding: 14px;
+        padding: 9px 7px;
+    }
+
+    .schedule-team-logo,
+    .schedule-team-logo-placeholder {
+        width: 30px;
+        height: 30px;
+        flex-basis: 30px;
+    }
+
+    .schedule-team-name {
+        font-size: 0.66rem;
     }
 
     .schedule-player-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
     }
 
+    .schedule-player img,
+    .schedule-player-placeholder {
+        width: 24px;
+        height: 24px;
+        flex-basis: 24px;
+    }
+
+    .schedule-player span {
+        font-size: 0.59rem;
+    }
+
+
+    /* =====================================================
+       ANSTEHENDE BEGEGNUNGEN – KAMPAGNEN
+    ===================================================== */
+
     .schedule-campaign-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
     }
 
     .schedule-match-campaigns {
-        padding: 16px 14px;
+        padding: 14px 10px;
+    }
+
+    .schedule-campaign-card {
+        padding: 7px;
     }
 
     .schedule-campaign-cover,
     .schedule-campaign-placeholder {
-        width: 120px;
-        height: 68px;
-        flex-basis: 120px;
+        width: 100%;
+        height: 52px;
+        flex-basis: 52px;
+    }
+
+    .schedule-campaign-info strong {
+        font-size: 0.65rem;
     }
 }
 
+
 /* =========================================================
-   11.3 SMALL SMARTPHONES – 400px
+   11.3 KLEINE SMARTPHONES – 400px
 ========================================================= */
 
 @media (max-width: 400px) {
 
-    /* Match-History */
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    .nav-container {
+        padding: 0 10px;
+        gap: 6px;
+    }
+
+    .logo img {
+        width: 82px;
+        max-height: 40px;
+    }
+
+    .nav-links {
+        gap: 7px;
+    }
+
+    .nav-links a {
+        font-size: 0.58rem;
+        letter-spacing: 0.1px;
+    }
+
+
+    /* =====================================================
+       HERO-METADATEN
+    ===================================================== */
+
+    .season-meta {
+        gap: 18px;
+    }
+
+    .meta-label {
+        font-size: 0.6rem;
+    }
+
+    .meta-item strong {
+        font-size: 0.78rem;
+    }
+
+
+    /* =====================================================
+       RANGLISTE
+    ===================================================== */
+
+    .ranking-row {
+        grid-template-columns: 25px minmax(0, 1fr) 42px;
+        gap: 8px 5px;
+        padding: 14px 9px;
+    }
+
+    .ranking-team {
+        grid-template-columns: 40px minmax(0, 1fr);
+        gap: 6px;
+    }
+
+    .ranking-team-logo {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+    }
+
+    .ranking-team-info > strong {
+        font-size: 0.76rem;
+        margin-bottom: 8px;
+    }
+
+    .ranking-player-list {
+        column-gap: 4px;
+        row-gap: 8px;
+    }
+
+    .ranking-player {
+        gap: 4px;
+    }
+
+    .ranking-player img,
+    .ranking-player-placeholder {
+        width: 22px;
+        height: 22px;
+        flex-basis: 22px;
+    }
+
+    .ranking-player span {
+        font-size: 0.55rem;
+    }
+
+    .ranking-games {
+        margin-left: 46px;
+    }
+
+    .ranking-games strong {
+        font-size: 0.74rem;
+    }
+
+    .ranking-games span {
+        font-size: 0.58rem;
+    }
+
+    .ranking-points {
+        font-size: 0.78rem;
+    }
+
+    .ranking-points span {
+        font-size: 0.5rem;
+    }
+
+
+    /* =====================================================
+       MATCH-HISTORY
+    ===================================================== */
 
     .history-match-faceoff {
         grid-template-columns: minmax(0, 1fr) 26px minmax(0, 1fr);
@@ -3071,39 +3671,80 @@ footer {
         font-size: 0.58rem;
     }
 
-    /* Navigation und Hero-Metadaten */
-
-    .nav-links {
-        gap: 12px;
-        font-size: 0.72rem;
+    .history-player-list {
+        grid-template-columns: 1fr;
     }
 
-    .season-meta {
-        gap: 18px;
+
+    /* =====================================================
+       GEÖFFNETE BEGEGNUNGEN
+    ===================================================== */
+
+    .schedule-match-teams {
+        gap: 6px;
+        padding: 10px 7px;
     }
 
-    .meta-label {
-        font-size: 0.6rem;
+    .schedule-team-card {
+        padding: 8px 6px;
     }
 
-    .meta-item strong {
-        font-size: 0.78rem;
+    .schedule-team-name {
+        font-size: 0.62rem;
     }
 
-    /* Rangliste */
-
-    .ranking-row {
-        grid-template-columns: 30px minmax(0, 1fr) auto;
+    .schedule-player-list {
         gap: 7px;
     }
 
-    .ranking-points {
-        font-size: 0.95rem;
+    .schedule-player img,
+    .schedule-player-placeholder {
+        width: 22px;
+        height: 22px;
+        flex-basis: 22px;
     }
 
-    /* Match-History */
+    .schedule-player span {
+        font-size: 0.55rem;
+    }
 
-    .history-player-list {
-        grid-template-columns: 1fr;
+    .schedule-campaign-grid {
+        gap: 6px;
+    }
+
+    .schedule-campaign-card {
+        padding: 6px;
+    }
+
+    .schedule-campaign-cover,
+    .schedule-campaign-placeholder {
+        height: 46px;
+        flex-basis: 46px;
+    }
+
+    .schedule-campaign-info strong {
+        font-size: 0.61rem;
+    }
+
+
+    /* =====================================================
+       LAN-FINALE
+    ===================================================== */
+
+    .final-qualification {
+        gap: 6px;
+        padding: 15px 8px;
+    }
+
+    .final-qualification-team span {
+        font-size: 0.52rem;
+    }
+
+    .final-qualification-team strong {
+        font-size: 0.76rem;
+    }
+
+    .final-vs {
+        font-size: 0.9rem;
     }
 }

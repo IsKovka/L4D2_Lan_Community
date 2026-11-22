@@ -312,6 +312,10 @@ nav {
         #0d0d0d
     );
 
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+
     border: 1px solid var(--color-border);
     border-radius: 13px;
     overflow: hidden;
@@ -332,6 +336,12 @@ nav {
     transform: translateY(-5px);
     border-color: rgba(255, 91, 0, 0.4);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.event-card:focus-visible,
+.archive-card:focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 4px;
 }
 
 .featured {
@@ -614,36 +624,84 @@ footer {
 
 @media (max-width: 650px) {
 
-    /* NAVIGATION */
+
+      /* =====================================================
+       NAVIGATION
+    ===================================================== */
 
     nav {
-        height: auto;
-        min-height: 76px;
+        position: static;
+        top: auto;
+        height: 64px;
+        min-height: 64px;
     }
 
     .nav-container {
-        flex-direction: column;
-        justify-content: center;
-        gap: 12px;
-        padding: 12px 15px;
+        width: 100%;
+        height: 64px;
+        padding: 0 14px;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 8px;
+    }
+
+    .logo {
+        flex: 0 1 auto;
+        min-width: 0;
+    }
+
+    .logo a {
+        display: block;
     }
 
     .logo img {
-        width: 140px;
+        display: block;
+        width: clamp(88px, 24vw, 112px);
+        max-height: 44px;
+        height: auto;
+        object-fit: contain;
     }
 
     .nav-links {
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: flex;
+        flex: 0 0 auto;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: center;
+
+        gap: clamp(7px, 2vw, 12px);
+        margin-left: auto;
+
+        list-style: none;
+    }
+
+    .nav-links li {
+        flex: 0 0 auto;
+        list-style: none;
     }
 
     .nav-links a {
-        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 34px;
+
+        font-size: 10px;
+        letter-spacing: 0.35px;
+        white-space: nowrap;
     }
 
 
-    /* HERO */
+    /* =====================================================
+       HERO
+    ===================================================== */
 
     .events-hero {
         min-height: 320px;
@@ -659,7 +717,9 @@ footer {
     }
 
 
-    /* SECTIONS */
+    /* =====================================================
+       SECTIONS
+    ===================================================== */
 
     .events-wrapper {
         padding: 65px 15px;
@@ -670,20 +730,27 @@ footer {
     }
 
     .section-header {
-        padding: 0 5px;
+        padding: 0 13px;
         margin-bottom: 25px;
 
-        flex-direction: column;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+
         gap: 12px;
-        text-align: center;
+        text-align: left;
     }
 
     .section-header h2 {
         font-size: 23px;
+        padding-left: 16px;
     }
 
 
-    /* EVENT GRIDS */
+    /* =====================================================
+       EVENT GRIDS
+    ===================================================== */
 
     .events-grid,
     .archive-grid {
@@ -692,7 +759,9 @@ footer {
     }
 
 
-    /* EVENT CARDS */
+    /* =====================================================
+       EVENT CARDS
+    ===================================================== */
 
     .event-image {
         height: 200px;
@@ -732,6 +801,35 @@ footer {
 
 @media (max-width: 480px) {
 
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    .nav-container {
+        padding: 0 10px;
+        gap: 6px;
+    }
+
+    .logo img {
+        width: clamp(82px, 22vw, 105px);
+        max-height: 42px;
+    }
+
+    .nav-links {
+        gap: clamp(7px, 2vw, 10px);
+    }
+
+    .nav-links a {
+        font-size: 10px;
+        letter-spacing: 0.2px;
+    }
+
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
     .events-hero {
         min-height: 280px;
     }
@@ -743,6 +841,11 @@ footer {
     .events-hero p {
         font-size: 14px;
     }
+
+
+    /* =====================================================
+       EVENT CARDS
+    ===================================================== */
 
     .event-image {
         height: 175px;
